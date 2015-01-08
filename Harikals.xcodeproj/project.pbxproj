@@ -22,6 +22,7 @@
 		957B639E1B247840003AA201 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957B639D1B247840003AA201 /* Images.xcassets */; };
 		957B63A11B247840003AA201 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957B639F1B247840003AA201 /* LaunchScreen.xib */; };
 		957B63AD1B247840003AA201 /* HarikalsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63AC1B247840003AA201 /* HarikalsTests.m */; };
+		959B2C991A5F13610009C77D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B2C981A5F13610009C77D /* MenuCell.m */; };
 		95A5E76C1B2700C300B6E978 /* CardsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A5E76A1B2700C300B6E978 /* CardsVC.m */; };
 		95A5E76D1B2700C300B6E978 /* CardsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A5E76B1B2700C300B6E978 /* CardsVC.xib */; };
 		95AE071E1B25F38200184007 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE07191B25F38200184007 /* RECommonFunctions.m */; };
@@ -89,6 +90,8 @@
 		957B63A61B247840003AA201 /* HarikalsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarikalsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		957B63AB1B247840003AA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957B63AC1B247840003AA201 /* HarikalsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HarikalsTests.m; sourceTree = "<group>"; };
+		959B2C971A5F13610009C77D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
+		959B2C981A5F13610009C77D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		95A5E7691B2700C300B6E978 /* CardsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardsVC.h; sourceTree = "<group>"; };
 		95A5E76A1B2700C300B6E978 /* CardsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardsVC.m; sourceTree = "<group>"; };
 		95A5E76B1B2700C300B6E978 /* CardsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardsVC.xib; sourceTree = "<group>"; };
@@ -316,6 +319,8 @@
 				95AE07231B25F5BD00184007 /* MenuViewController.m */,
 				95AE07281B25F8E800184007 /* LeftMenuViewController.h */,
 				95AE07251B25F8C600184007 /* LeftMenuViewController.m */,
+				959B2C971A5F13610009C77D /* MenuCell.h */,
+				959B2C981A5F13610009C77D /* MenuCell.m */,
 			);
 			name = "Menu Root";
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 				95AE07241B25F5BD00184007 /* MenuViewController.m in Sources */,
 				95511E1F1B2853A300AD40C6 /* ApplicationsVC.m in Sources */,
 				95B77BB11B25B3360081E694 /* IntroductionVC.m in Sources */,
+				959B2C991A5F13610009C77D /* MenuCell.m in Sources */,
 				95511E1C1B28353800AD40C6 /* FavourCell.m in Sources */,
 				95511E231B286CA200AD40C6 /* ChatVC.m in Sources */,
 				95AE071F1B25F38200184007 /* RESideMenu.m in Sources */,

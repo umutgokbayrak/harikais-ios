@@ -40,10 +40,10 @@
     mainTableView.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
 }
 
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (mainTableView.visibleCells.count) {
+
+    if (!_fromDetail) {
         [mainTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
 }
@@ -105,7 +105,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 139;
+    return indexPath.row % 2 == 0 ? 139 : 112;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -114,7 +114,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myChatCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indexPath.row % 2 == 0 ? @"myChatCell" : @"otherChatCell"];
     
     return cell;
 }

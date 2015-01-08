@@ -27,7 +27,9 @@
 #import "UIViewController+RESideMenu.h"
 #import "RECommonFunctions.h"
 
-@interface RESideMenu ()
+@interface RESideMenu () {
+    UIPanGestureRecognizer *panGestureRecognizer;
+}
 
 @property (strong, readwrite, nonatomic) UIImageView *backgroundImageView;
 @property (assign, readwrite, nonatomic) BOOL visible;
@@ -238,7 +240,7 @@
     
     if (self.panGestureEnabled) {
         self.view.multipleTouchEnabled = NO;
-        UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
+        panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
         panGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:panGestureRecognizer];
     }
@@ -529,6 +531,7 @@
     IF_IOS7_OR_GREATER(
        if (self.interactivePopGestureRecognizerEnabled && [self.contentViewController isKindOfClass:[UINavigationController class]]) {
            UINavigationController *navigationController = (UINavigationController *)self.contentViewController;
+           
            if (navigationController.viewControllers.count > 1 && navigationController.interactivePopGestureRecognizer.enabled) {
                return NO;
            }
@@ -541,6 +544,12 @@
             return YES;
         } else {
             return NO;
+        }
+    } else {
+        if ([gestureRecognizer isEqual:panGestureRecognizer]) {
+            CGPoint point1 = [touch locationInView:self.view];
+            if (self.view.frame.size.width - point1.x > 60) return NO;
+            
         }
     }
     

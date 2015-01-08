@@ -35,7 +35,7 @@
     //set up data
     self.wrap = NO;
     self.items = [NSMutableArray array];
-    for (int i = 0; i < 70; i++)
+    for (int i = 0; i < 10; i++)
     {
         [self.items addObject:@(i)];
     }

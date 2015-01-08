@@ -95,7 +95,10 @@
 @end
 
 
-@interface iCarousel ()
+@interface iCarousel () <UIScrollViewDelegate, UIGestureRecognizerDelegate> {
+    CGFloat viewWidth;
+    UIScrollView *mainScrollView;
+}
 
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) NSMutableDictionary *itemViews;
@@ -150,39 +153,42 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     
     _contentView = [[UIView alloc] initWithFrame:self.bounds];
     
-    
-#ifdef ICAROUSEL_IOS
-    
     _contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     //add pan gesture recogniser
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPan:)];
-    panGesture.delegate = (id <UIGestureRecognizerDelegate>)self;
-    [_contentView addGestureRecognizer:panGesture];
-    
+//    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPan:)];
+//    panGesture.delegate = (id <UIGestureRecognizerDelegate>)self;
+//    [_contentView addGestureRecognizer:panGesture];
+//
     //add tap gesture recogniser
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
     tapGesture.delegate = (id <UIGestureRecognizerDelegate>)self;
     [_contentView addGestureRecognizer:tapGesture];
 
-    
+    mainScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    mainScrollView.delegate = self;
+    mainScrollView.pagingEnabled = YES;
+    mainScrollView.showsHorizontalScrollIndicator = NO;
+    viewWidth = self.frame.size.width;
+
+
     //set up accessibility
     self.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction;
     self.isAccessibilityElement = YES;
-    
-#else
-    
-    [_contentView setWantsLayer:YES];
-    
-#endif
-    
+
     [self addSubview:_contentView];
+    [self addSubview:mainScrollView];
+    mainScrollView.userInteractionEnabled = NO;
+    [_contentView addGestureRecognizer:mainScrollView.panGestureRecognizer];
     
     if (_dataSource)
     {
         [self reloadData];
     }
 }
+
+
+
 
 #ifndef USING_CHAMELEON
 
@@ -223,6 +229,14 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
 {   
     [self stopAnimation];
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    _scrollOffset = scrollView.contentOffset.x / viewWidth;
+//    _scrollOffset = offset;
+    [self didScroll];
+
+}
+
 
 - (void)setDataSource:(id<iCarouselDataSource>)dataSource
 {
@@ -574,6 +588,8 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
 {
     //calculate relative position
     CGFloat offset = index - _scrollOffset;
+    //TODO:Remove NSLog
+//    NSLog(@"%f", _scrollOffset);
 //    if (_wrapEnabled)
 //    {
 //        if (offset > _numberOfItems/2.0)
@@ -1175,6 +1191,8 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     //get number of items and placeholders
     _numberOfVisibleItems = 0;
     _numberOfItems = [_dataSource numberOfItemsInCarousel:self];
+    
+    [mainScrollView setContentSize:CGSizeMake(viewWidth * _numberOfItems, 100)];
     _numberOfPlaceholders = [_dataSource numberOfPlaceholdersInCarousel:self];
 
     //reset view pools
@@ -1604,6 +1622,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
         CGFloat time = MIN(_scrollDuration, currentTime - _startTime);
         CGFloat acceleration = -_startVelocity/_scrollDuration;
         CGFloat distance = _startVelocity * time + 0.5 * acceleration * pow(time, 2.0);
+#pragma mark - here
         _scrollOffset = _startOffset + distance;
         [self didScroll];
         if (fabs(time - _scrollDuration) < FLOAT_ERROR_MARGIN)

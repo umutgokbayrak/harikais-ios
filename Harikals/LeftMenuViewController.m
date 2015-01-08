@@ -9,7 +9,7 @@
 #import "LeftMenuViewController.h"
 #import "UIViewController+RESideMenu.h"
 #import "FavouriteVC.h"
-
+#import "MenuCell.h"
 
 @interface LeftMenuViewController () {
     
@@ -38,7 +38,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MenuCell *cell = (MenuCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell hideTint:NO];
+    
     FavouriteVC *messageVC;
     switch (indexPath.row) {
         case 0:
@@ -76,6 +78,11 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    MenuCell *cell = (MenuCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell hideTint:YES];
+}
+
 #pragma mark -
 #pragma mark UITableView Datasource
 
@@ -92,7 +99,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellsIDsArray[indexPath.row]];
+    MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:cellsIDsArray[indexPath.row]];
     return cell;
 }
 
