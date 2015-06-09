@@ -1,0 +1,45 @@
+PODS:
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - Bolts/Tasks (1.2.0)
+  - IOSLinkedInAPI (2.0.0):
+    - AFNetworking (>= 2.0.0)
+  - Parse (1.7.4):
+    - Bolts/Tasks (>= 1.1.5)
+  - PFLinkedInUtils (0.1.5):
+    - IOSLinkedInAPI (~> 2.0)
+    - Parse (~> 1.6)
+  - UIViewPlusPosition (0.0.1)
+
+DEPENDENCIES:
+  - PFLinkedInUtils
+  - UIViewPlusPosition (~> 0.0)
+
+SPEC CHECKSUMS:
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  IOSLinkedInAPI: d0adc664472d471b0df9b2aad92a2d82de926c40
+  Parse: 6ca512c6e860b66739c95151b2f76ac4712b7842
+  PFLinkedInUtils: 1b0506f1901072b46c0de4d496f81d82d33ba61d
+  UIViewPlusPosition: 56c99fd247aa0674b3a3fcfd1f5b92a1fa0d0d55
+
+COCOAPODS: 0.37.2
