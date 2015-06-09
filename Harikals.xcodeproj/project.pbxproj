@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		950EF4E433AE1F1D57358545 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4A32F333D1D7CF497CE895 /* libPods.a */; };
 		95511E111B2719CA00AD40C6 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E101B2719CA00AD40C6 /* iCarousel.m */; };
+		95511E141B2770B400AD40C6 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E131B2770B400AD40C6 /* LoginVC.m */; };
 		957B63931B247840003AA201 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63921B247840003AA201 /* main.m */; };
 		957B63961B247840003AA201 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63951B247840003AA201 /* AppDelegate.m */; };
 		957B63991B247840003AA201 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63981B247840003AA201 /* ViewController.m */; };
@@ -54,6 +55,8 @@
 		6A4A32F333D1D7CF497CE895 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		95511E0F1B2719CA00AD40C6 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		95511E101B2719CA00AD40C6 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		95511E121B2770B400AD40C6 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		95511E131B2770B400AD40C6 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		957B638D1B247840003AA201 /* Harikals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Harikals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		957B63911B247840003AA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957B63921B247840003AA201 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -156,9 +159,9 @@
 				95AE07161B25F35D00184007 /* Introduction VC */,
 				95AE07171B25F38200184007 /* RESideMenu */,
 				95AE07291B25F9F600184007 /* Menu Root */,
-				95AE07251B25F8C600184007 /* LeftMenuViewController.m */,
 				95A5E76E1B2700D200B6E978 /* Cards Controller */,
-				95AE07281B25F8E800184007 /* LeftMenuViewController.h */,
+				95511E121B2770B400AD40C6 /* LoginVC.h */,
+				95511E131B2770B400AD40C6 /* LoginVC.m */,
 			);
 			path = Harikals;
 			sourceTree = "<group>";
@@ -237,6 +240,8 @@
 			children = (
 				95AE07221B25F5BD00184007 /* MenuViewController.h */,
 				95AE07231B25F5BD00184007 /* MenuViewController.m */,
+				95AE07281B25F8E800184007 /* LeftMenuViewController.h */,
+				95AE07251B25F8C600184007 /* LeftMenuViewController.m */,
 			);
 			name = "Menu Root";
 			sourceTree = "<group>";
@@ -436,6 +441,7 @@
 			files = (
 				95AE07271B25F8C600184007 /* LeftMenuViewController.m in Sources */,
 				957B63991B247840003AA201 /* ViewController.m in Sources */,
+				95511E141B2770B400AD40C6 /* LoginVC.m in Sources */,
 				95A5E76C1B2700C300B6E978 /* CardsVC.m in Sources */,
 				95AE071E1B25F38200184007 /* RECommonFunctions.m in Sources */,
 				95511E111B2719CA00AD40C6 /* iCarousel.m in Sources */,

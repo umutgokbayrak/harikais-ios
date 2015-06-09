@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OIV-DS-XMH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bL3-LM-O75">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -108,10 +108,9 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="poX-GH-H2s">
-                                <rect key="frame" x="19" y="28" width="282" height="85"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="98"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="282" id="AJj-Bm-iZR"/>
-                                    <constraint firstAttribute="height" constant="85" id="IBL-Pm-OJm"/>
+                                    <constraint firstAttribute="height" constant="98" id="IBL-Pm-OJm"/>
                                 </constraints>
                                 <string key="text">Harikaiş'te bir CV hazırlamıyorsunuz! Yapmanız gereken tek şey; Linkedin hesabınızla giriş yapmak ve bir açık pozisyon önermemizi beklemek.</string>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
@@ -119,7 +118,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XwR-gf-hzK" userLabel="scroll-holder">
-                                <rect key="frame" x="59" y="127" width="202" height="314"/>
+                                <rect key="frame" x="59" y="145" width="202" height="314"/>
                                 <subviews>
                                     <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mzZ-RT-Oxm">
                                         <rect key="frame" x="0.0" y="0.0" width="202" height="314"/>
@@ -163,8 +162,10 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="60S-uj-mVF" firstAttribute="top" secondItem="R0G-xc-MQF" secondAttribute="bottom" id="9Pv-ce-G7A"/>
-                            <constraint firstItem="XwR-gf-hzK" firstAttribute="top" secondItem="fut-Yh-IbC" secondAttribute="bottom" constant="107" id="D52-6Y-6Gg"/>
+                            <constraint firstItem="XwR-gf-hzK" firstAttribute="top" secondItem="fut-Yh-IbC" secondAttribute="bottom" constant="125" id="D52-6Y-6Gg"/>
+                            <constraint firstAttribute="trailing" secondItem="poX-GH-H2s" secondAttribute="trailing" id="N0N-wg-qkl"/>
                             <constraint firstItem="poX-GH-H2s" firstAttribute="top" secondItem="fut-Yh-IbC" secondAttribute="bottom" constant="8" id="bRa-MQ-8vt"/>
+                            <constraint firstItem="poX-GH-H2s" firstAttribute="leading" secondItem="64t-Yn-XX9" secondAttribute="leading" id="css-um-eKX"/>
                             <constraint firstItem="R0G-xc-MQF" firstAttribute="leading" secondItem="64t-Yn-XX9" secondAttribute="leading" id="p8y-O0-odZ"/>
                             <constraint firstAttribute="centerX" secondItem="poX-GH-H2s" secondAttribute="centerX" id="pbX-rB-a2S"/>
                             <constraint firstAttribute="centerX" secondItem="XwR-gf-hzK" secondAttribute="centerX" id="rHv-OZ-L3b"/>
@@ -177,6 +178,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                         <outlet property="mainScrollView" destination="mzZ-RT-Oxm" id="5tI-5J-zvJ"/>
                         <outlet property="nextButton" destination="R0G-xc-MQF" id="Rqd-cK-9jU"/>
                         <outlet property="pageControl" destination="Pxp-tW-aLz" id="Y5a-1g-erd"/>
+                        <outlet property="topLabel" destination="poX-GH-H2s" id="plw-Gy-efL"/>
                         <segue destination="5r4-if-XDh" kind="push" identifier="loginSegue" id="uiR-gM-ecR"/>
                     </connections>
                 </viewController>
@@ -184,10 +186,10 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
             </objects>
             <point key="canvasLocation" x="1152" y="312"/>
         </scene>
-        <!--View Controller-->
+        <!--LoginVC-->
         <scene sceneID="ISO-z9-Aig">
             <objects>
-                <viewController id="5r4-if-XDh" sceneMemberID="viewController">
+                <viewController id="5r4-if-XDh" customClass="LoginVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GvH-ct-TtI"/>
                         <viewControllerLayoutGuide type="bottom" id="hvF-bm-Oud"/>
@@ -203,6 +205,9 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="goBack:" destination="5r4-if-XDh" eventType="touchUpInside" id="kia-4n-XGb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6o-JX-htB">
                                 <rect key="frame" x="0.0" y="448" width="320" height="60"/>
@@ -221,23 +226,33 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="sgP-Kd-pBJ">
                                 <rect key="frame" x="65" y="145" width="190" height="47"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="context-menu" translatesAutoresizingMaskIntoConstraints="NO" id="F4f-QC-nJx">
+                                <rect key="frame" x="45" y="397" width="230" height="47"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="rOC-Sx-wRh" secondAttribute="trailing" id="1tw-VG-FAV"/>
                             <constraint firstAttribute="centerX" secondItem="sgP-Kd-pBJ" secondAttribute="centerX" id="2tQ-TA-hNw"/>
                             <constraint firstItem="ltq-td-Chc" firstAttribute="leading" secondItem="5no-j0-3QL" secondAttribute="leading" id="4Zq-tc-Gy7"/>
+                            <constraint firstItem="A6o-JX-htB" firstAttribute="top" secondItem="F4f-QC-nJx" secondAttribute="bottom" constant="4" id="5YN-BS-G7e"/>
                             <constraint firstItem="A6o-JX-htB" firstAttribute="leading" secondItem="5no-j0-3QL" secondAttribute="leading" id="AYd-zI-ujM"/>
                             <constraint firstItem="hvF-bm-Oud" firstAttribute="top" secondItem="rOC-Sx-wRh" secondAttribute="bottom" id="Erc-sd-9Tt"/>
                             <constraint firstAttribute="trailing" secondItem="ltq-td-Chc" secondAttribute="trailing" id="Gug-Az-uNv"/>
+                            <constraint firstAttribute="centerX" secondItem="F4f-QC-nJx" secondAttribute="centerX" id="Heu-2u-5d3"/>
                             <constraint firstItem="A6o-JX-htB" firstAttribute="top" secondItem="ltq-td-Chc" secondAttribute="bottom" id="RGQ-P1-bIy"/>
                             <constraint firstItem="rOC-Sx-wRh" firstAttribute="top" secondItem="A6o-JX-htB" secondAttribute="bottom" id="SIv-PP-Fhv"/>
                             <constraint firstItem="rOC-Sx-wRh" firstAttribute="leading" secondItem="5no-j0-3QL" secondAttribute="leading" id="dVK-hS-y1e"/>
                             <constraint firstAttribute="trailing" secondItem="A6o-JX-htB" secondAttribute="trailing" id="dyi-re-nTS"/>
-                            <constraint firstItem="sgP-Kd-pBJ" firstAttribute="top" secondItem="GvH-ct-TtI" secondAttribute="bottom" constant="125" id="n0s-2b-6As"/>
+                            <constraint firstAttribute="centerY" secondItem="sgP-Kd-pBJ" secondAttribute="centerY" constant="115.5" id="fDY-K9-RcR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vc8-gh-efg"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tipVerticalSpacing" destination="5YN-BS-G7e" id="xtW-ft-6cb"/>
+                        <outlet property="tooltipView" destination="F4f-QC-nJx" id="dax-SY-DXQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="puq-NS-xDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -300,7 +315,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAc-Ug-f8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2390" y="311"/>
+            <point key="canvasLocation" x="751" y="963"/>
         </scene>
         <!--CardsVC-->
         <scene sceneID="Ztg-Xn-CQZ">
@@ -310,7 +325,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rUK-6c-YfW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3374" y="311"/>
+            <point key="canvasLocation" x="1348" y="957"/>
         </scene>
         <!--Left Menu View Controller-->
         <scene sceneID="Y5P-Sm-3ak">
@@ -347,8 +362,8 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                         <color key="textColor" red="0.21960784310000001" green="0.27058823529999998" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Chief Technology Officer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWU-uX-NmL">
-                                        <rect key="frame" x="90" y="53" width="142" height="25"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chief Technology Officer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWU-uX-NmL">
+                                        <rect key="frame" x="90" y="59" width="114" height="14"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                         <color key="textColor" red="0.21960784310000001" green="0.27058823529999998" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -361,7 +376,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                     <constraint firstItem="XzD-WR-mKw" firstAttribute="leading" secondItem="Qsk-gb-YKL" secondAttribute="leading" constant="90" id="Q5t-jv-820"/>
                                     <constraint firstItem="Eum-vY-Fig" firstAttribute="leading" secondItem="qyB-3i-Xya" secondAttribute="trailing" constant="15" id="miH-6w-gUd"/>
                                     <constraint firstAttribute="height" constant="160" id="oZz-ym-g5q"/>
-                                    <constraint firstItem="OWU-uX-NmL" firstAttribute="top" secondItem="Eum-vY-Fig" secondAttribute="bottom" constant="-4" id="oob-FW-ENZ"/>
+                                    <constraint firstItem="OWU-uX-NmL" firstAttribute="top" secondItem="Eum-vY-Fig" secondAttribute="bottom" constant="2" id="oob-FW-ENZ"/>
                                     <constraint firstItem="qyB-3i-Xya" firstAttribute="leading" secondItem="Qsk-gb-YKL" secondAttribute="leading" constant="25" id="tt3-gM-JNA"/>
                                     <constraint firstItem="Eum-vY-Fig" firstAttribute="top" secondItem="qyB-3i-Xya" secondAttribute="top" constant="1" id="vTT-9f-K2Q"/>
                                     <constraint firstAttribute="bottom" secondItem="XzD-WR-mKw" secondAttribute="bottom" constant="23" id="wsg-ee-C73"/>
@@ -487,7 +502,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6d-MN-bmB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2410" y="990"/>
+            <point key="canvasLocation" x="771" y="1642"/>
         </scene>
         <!--Second Controller-->
         <scene sceneID="tq0-JH-mye">
@@ -512,7 +527,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elH-M8-U4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2937" y="992"/>
+            <point key="canvasLocation" x="1298" y="1644"/>
         </scene>
     </scenes>
     <resources>
@@ -521,6 +536,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
         <image name="bg-first" width="320" height="568"/>
         <image name="bg-login" width="320" height="448"/>
         <image name="button-bg" width="320" height="60"/>
+        <image name="context-menu" width="230" height="47"/>
         <image name="fill-green-button" width="95" height="30"/>
         <image name="gear-icon" width="16" height="16"/>
         <image name="lightning-icon" width="9" height="16"/>

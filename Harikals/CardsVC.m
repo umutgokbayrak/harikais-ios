@@ -72,9 +72,11 @@
     self.carousel.dataSource = self;
 
     self.carousel.type = iCarouselTypeInvertedTimeMachine;
+    self.carousel.bounceDistance = 0.3;
+    
+//    self.carousel.decelerationRate = 0.2;
 
-    
-    
+    self.carousel.ignorePerpendicularSwipes = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -218,7 +220,7 @@
         case iCarouselOptionVisibleItems:
         {
             if (option == iCarouselOptionVisibleItems) {
-                return 5;
+                return 7;
             }
             return value;
         }

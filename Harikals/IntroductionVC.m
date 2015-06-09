@@ -20,7 +20,10 @@
     NSInteger currentPage;
     __weak IBOutlet UIView *imagesContainer;
     
+    __weak IBOutlet UILabel *topLabel;
     NSInteger pageWidth;
+    
+    NSArray *topTexts;
 }
 
 @end
@@ -29,17 +32,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    mainScrollView.pagingEnabled = YES;
+    [self.view addGestureRecognizer:mainScrollView.panGestureRecognizer];
+    mainScrollView.userInteractionEnabled = NO;
+    
+    
+    topTexts = @[@"Harikaiş'te bir CV hazırlamıyorsunuz!\nYapmanız gereken tek şey; Linkedin\nhesabınızla giriş yapmak ve bir açık\npozisyon önermemizi beklemek.",
+                 @"Teklif ettiğimiz pozisyona hemen\nbaşvurabilir ve başvurunuzun\ndurumunu uygulama içerisinden takip\nedebilirsiniz.",
+                 @"Başvurunuz, yüzlerce adayın arasında\nkaybolmayacak! Çünkü, eşsiz eşleştirme\nmotorumuz ile pozisyonları sadece en\nuygun adaylara yönlendiriyoruz.",
+                 @"Eğer isterseniz başvurunuz öncesinde,\naçık pozisyonun İK sorumlusu ile anonim\nolarak mesajlaşabilir ve aklınızdaki tüm\nsoruları sorabilirsiniz.",
+                 @"Çalıştığınız işyerinin hiç bir şeyden haberi\nolmayacak... İş başvurularınızi yaptığınız\nfirma hariç hiç kimse buraya üye\nolduğunuzu dahi bilemez."];
+    
+}
+
+- (void)addImages {
+    
     UIImageView *imageview1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"screen-image-1"]];
     UIImageView *imageview2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"screen-image-2"]];
     UIImageView *imageview3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"screen-image-3"]];
     UIImageView *imageview4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"screen-image-4"]];
     UIImageView *imageview5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"screen-image-5"]];
     
-    
-    
     mainScrollView.showsHorizontalScrollIndicator = NO;
     mainScrollView.delegate = self;
-
+    
     imageview1.frameX = 12.0;
     imageview2.frameX = imageview1.frameRight + 24;
     imageview3.frameX = imageview2.frameRight + 24;
@@ -54,12 +71,13 @@
     
     imagesContainer.frameWidth = (imageview1.frameWidth + 24) * 5;
     mainScrollView.contentSize = CGSizeMake((imageview1.frameWidth + 24) * 5, imageview1.frameHeight - 100);
-    
-    mainScrollView.pagingEnabled = YES;
-    [self.view addGestureRecognizer:mainScrollView.panGestureRecognizer];
-    mainScrollView.userInteractionEnabled = NO;
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [mainScrollView scrollRectToVisible:CGRectMake(0, 0, pageWidth, 10) animated:NO];
+}
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -69,6 +87,7 @@
     pageControl.currentPage = page;
     currentPage = page;
     [self changeButtonStyle:page == 4];
+    [topLabel setText:topTexts[page]];
 }
 
 
@@ -84,6 +103,7 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    [self addImages];
     [self scrollViewDidScroll:mainScrollView];
     for (int i = 0; i < [pageControl.subviews count]; i++)
     {

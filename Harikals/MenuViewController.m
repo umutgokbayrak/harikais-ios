@@ -24,7 +24,7 @@
     self.menuPreferredStatusBarStyle = UIStatusBarStyleLightContent;
     self.contentViewShadowColor = [UIColor blackColor];
     self.contentViewShadowOffset = CGSizeMake(0, 0);
-    self.contentViewShadowOpacity = 0.6;
+    self.contentViewShadowOpacity = 0.3;
     self.contentViewShadowRadius = 12;
     self.contentViewShadowEnabled = YES;
     self.scaleMenuView = NO;

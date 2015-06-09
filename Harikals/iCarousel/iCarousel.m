@@ -164,6 +164,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
     tapGesture.delegate = (id <UIGestureRecognizerDelegate>)self;
     [_contentView addGestureRecognizer:tapGesture];
+
     
     //set up accessibility
     self.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction;
@@ -819,8 +820,10 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     CGFloat offset = [self offsetForItemAtIndex:index];
     
     //update alpha
-    view.superview.layer.opacity = [self alphaForItemWithOffset:offset];
+//    view.superview.layer.opacity = [self alphaForItemWithOffset:offset];
 
+    view.superview.layer.opacity = 1 - offset / 3.0;
+    
 #ifdef ICAROUSEL_IOS
     
     //center view
@@ -2018,9 +2021,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
                 return NO;
             }
         }
-    }
-    else if ([gesture isKindOfClass:[UIPanGestureRecognizer class]])
-    {
+    } else if ([gesture isKindOfClass:[UIPanGestureRecognizer class]]) {
         if (!_scrollEnabled)
         {
             return NO;
@@ -2133,7 +2134,9 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
                         else if ([self shouldScroll])
                         {
                             NSInteger direction = (int)(_startVelocity / fabs(_startVelocity));
+                            
                             [self scrollToItemAtIndex:self.currentItemIndex + direction animated:YES];
+
                         }
                         else
                         {
@@ -2176,6 +2179,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
         }
     }
 }
+
 
 #else
 

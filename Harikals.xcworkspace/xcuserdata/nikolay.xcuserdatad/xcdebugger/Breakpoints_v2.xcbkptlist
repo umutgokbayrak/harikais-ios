@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Harikals/iCarousel/iCarousel.m"
-            timestampString = "455553245.663978"
+            timestampString = "455576600.257657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "690"
-            endingLineNumber = "690"
+            startingLineNumber = "691"
+            endingLineNumber = "691"
             landmarkName = "-transformForItemViewWithOffset:"
             landmarkType = "5">
          </BreakpointContent>
