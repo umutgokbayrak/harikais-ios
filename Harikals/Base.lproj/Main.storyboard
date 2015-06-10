@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="gar-Nb-oVj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OIV-DS-XMH">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -17,7 +17,11 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
         </mutableArray>
+        <mutableArray key="OpenSans-Italic.ttf">
+            <string>OpenSans-Italic</string>
+        </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
@@ -678,6 +682,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                         <outlet property="emptylabel" destination="26c-Do-jTJ" id="0Wt-US-v5R"/>
                         <outlet property="firstalaButton" destination="a7n-Tk-qo3" id="w5y-DC-EG3"/>
                         <outlet property="mainTableView" destination="hSM-T2-5B4" id="ymk-55-KUa"/>
+                        <segue destination="UZ6-5R-pT6" kind="push" identifier="openChat" id="m9A-iD-PME"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elH-M8-U4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -806,25 +811,25 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 gün önce" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7z-bj-Jpb">
-                                                    <rect key="frame" x="186" y="31" width="63" height="17"/>
+                                                    <rect key="frame" x="206" y="31" width="63" height="17"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
                                                     <color key="textColor" red="0.6588235294" green="0.70588235290000001" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock-icon" translatesAutoresizingMaskIntoConstraints="NO" id="n8f-CL-sL7">
-                                                    <rect key="frame" x="258" y="34" width="11" height="11"/>
+                                                    <rect key="frame" x="186" y="34" width="11" height="11"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="A7z-bj-Jpb" firstAttribute="leading" secondItem="n8f-CL-sL7" secondAttribute="trailing" constant="9" id="FAG-eS-bCB"/>
                                                 <constraint firstItem="Pnn-dH-j3o" firstAttribute="top" secondItem="Uzm-jc-LrK" secondAttribute="bottom" constant="-2" id="LWW-aw-FYL"/>
                                                 <constraint firstItem="A7z-bj-Jpb" firstAttribute="top" secondItem="Pnn-dH-j3o" secondAttribute="bottom" constant="-1" id="SkB-Gl-MqX"/>
                                                 <constraint firstItem="Pnn-dH-j3o" firstAttribute="leading" secondItem="Uzm-jc-LrK" secondAttribute="leading" id="ZLK-Bc-KYw"/>
                                                 <constraint firstItem="Uzm-jc-LrK" firstAttribute="leading" secondItem="xG6-8H-qVI" secondAttribute="trailing" constant="13" id="ZQn-xi-g5v"/>
+                                                <constraint firstItem="Uzm-jc-LrK" firstAttribute="leading" secondItem="n8f-CL-sL7" secondAttribute="leading" id="add-dx-bcN"/>
                                                 <constraint firstItem="xG6-8H-qVI" firstAttribute="top" secondItem="e5Q-9U-z4x" secondAttribute="top" constant="1" id="dbR-ot-RVv"/>
-                                                <constraint firstItem="n8f-CL-sL7" firstAttribute="leading" secondItem="A7z-bj-Jpb" secondAttribute="trailing" constant="9" id="hTk-Fh-tOa"/>
                                                 <constraint firstItem="n8f-CL-sL7" firstAttribute="centerY" secondItem="A7z-bj-Jpb" secondAttribute="centerY" id="j5q-EI-fiU"/>
                                                 <constraint firstAttribute="centerX" secondItem="xG6-8H-qVI" secondAttribute="centerX" constant="-0.5" id="oIK-Z6-CTX"/>
-                                                <constraint firstItem="A7z-bj-Jpb" firstAttribute="leading" secondItem="Pnn-dH-j3o" secondAttribute="leading" id="qan-FE-KRp"/>
                                                 <constraint firstItem="Uzm-jc-LrK" firstAttribute="top" secondItem="xG6-8H-qVI" secondAttribute="top" constant="-1" id="vB9-vl-Gt2"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -874,16 +879,122 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
             </objects>
             <point key="canvasLocation" x="1368" y="1748"/>
         </scene>
+        <!--Trivia Software A.G-->
+        <scene sceneID="Yjo-mw-2HU">
+            <objects>
+                <viewController id="UZ6-5R-pT6" customClass="ChatVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W6A-tZ-aGP"/>
+                        <viewControllerLayoutGuide type="bottom" id="nn1-SP-nz1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HVI-St-z2P">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="108" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="y2D-mt-jvt">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="446"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="myChatCell" rowHeight="139" id="SWf-ka-goy">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SWf-ka-goy" id="RSd-1a-fus">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You, 03/14/2014" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXf-Tu-nP6">
+                                                    <rect key="frame" x="155" y="3" width="87" height="17"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Italic" family="Open Sans" pointSize="12"/>
+                                                    <color key="textColor" red="0.68627450980392157" green="0.68627450980392157" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cloud-me" translatesAutoresizingMaskIntoConstraints="NO" id="70Z-lR-5Gg">
+                                                    <rect key="frame" x="23" y="26" width="228" height="111"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="9mF-PO-XFM">
+                                                    <rect key="frame" x="255" y="25" width="45" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="45" id="OfJ-tc-uQJ"/>
+                                                        <constraint firstAttribute="height" constant="45" id="ham-kv-ClI"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" text="Merhaba bu iş tam zamanlı mıdır acaba? Part time bir pozisyon ise ilgileniyorum" translatesAutoresizingMaskIntoConstraints="NO" id="2f7-b3-iq6">
+                                                    <rect key="frame" x="32" y="27" width="199" height="106"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2f7-b3-iq6" firstAttribute="bottom" secondItem="70Z-lR-5Gg" secondAttribute="bottom" constant="-4" id="4S9-zD-wik"/>
+                                                <constraint firstItem="70Z-lR-5Gg" firstAttribute="leading" secondItem="RSd-1a-fus" secondAttribute="leading" constant="23" id="ArK-di-V1S"/>
+                                                <constraint firstItem="9mF-PO-XFM" firstAttribute="leading" secondItem="iXf-Tu-nP6" secondAttribute="trailing" constant="13" id="BEV-Zx-1uh"/>
+                                                <constraint firstItem="70Z-lR-5Gg" firstAttribute="top" secondItem="iXf-Tu-nP6" secondAttribute="bottom" constant="6" id="F56-Fu-5bB"/>
+                                                <constraint firstItem="9mF-PO-XFM" firstAttribute="leading" secondItem="70Z-lR-5Gg" secondAttribute="trailing" constant="4" id="QJN-AV-tjF"/>
+                                                <constraint firstItem="2f7-b3-iq6" firstAttribute="leading" secondItem="70Z-lR-5Gg" secondAttribute="leading" constant="9" id="WeG-sa-Wzh"/>
+                                                <constraint firstItem="2f7-b3-iq6" firstAttribute="top" secondItem="70Z-lR-5Gg" secondAttribute="top" constant="1" id="axT-yT-5KD"/>
+                                                <constraint firstAttribute="bottom" secondItem="70Z-lR-5Gg" secondAttribute="bottom" constant="1" id="fFa-RM-mOy"/>
+                                                <constraint firstItem="2f7-b3-iq6" firstAttribute="trailing" secondItem="70Z-lR-5Gg" secondAttribute="trailing" constant="-20" id="kJg-sb-9BB"/>
+                                                <constraint firstAttribute="trailing" secondItem="9mF-PO-XFM" secondAttribute="trailing" constant="20" id="rFY-0Z-rVB"/>
+                                                <constraint firstItem="9mF-PO-XFM" firstAttribute="top" secondItem="RSd-1a-fus" secondAttribute="top" constant="25" id="uyH-fH-TWz"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="otherChatCell" rowHeight="113" id="zWL-sP-Veo">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zWL-sP-Veo" id="eNz-BO-OjG">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="y2D-mt-jvt" firstAttribute="leading" secondItem="HVI-St-z2P" secondAttribute="leading" id="WTs-EY-034"/>
+                            <constraint firstItem="y2D-mt-jvt" firstAttribute="top" secondItem="W6A-tZ-aGP" secondAttribute="bottom" id="gWF-p5-Sf6"/>
+                            <constraint firstItem="nn1-SP-nz1" firstAttribute="top" secondItem="y2D-mt-jvt" secondAttribute="bottom" constant="58" id="uSx-PT-fGS"/>
+                            <constraint firstAttribute="trailing" secondItem="y2D-mt-jvt" secondAttribute="trailing" id="zUK-Rh-p45"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Trivia Software A.G" id="VYK-YG-ICV">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="Uvu-p6-ra6">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YIv-ce-DTC">
+                                <rect key="frame" x="16" y="11" width="14" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="back-arrow">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goBack:" destination="UZ6-5R-pT6" eventType="touchUpInside" id="n66-aC-t9K"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mainTableView" destination="y2D-mt-jvt" id="h0p-R7-njI"/>
+                        <outlet property="tableViewBottomSpacing" destination="uSx-PT-fGS" id="gFF-tA-fLI"/>
+                        <outlet property="tableViewTopSpacing" destination="gWF-p5-Sf6" id="BeE-Od-Dyi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mke-kb-kzC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1769" y="1740"/>
+        </scene>
     </scenes>
     <resources>
         <image name="apply-icon" width="15" height="15"/>
         <image name="avatar" width="50" height="50"/>
+        <image name="back-arrow" width="14" height="12"/>
         <image name="bg-first" width="320" height="568"/>
         <image name="bg-login" width="320" height="448"/>
         <image name="big-green-button-bg" width="170" height="41"/>
         <image name="button-bg" width="320" height="60"/>
         <image name="checkmark-icon" width="25" height="25"/>
         <image name="clock-icon" width="11" height="11"/>
+        <image name="cloud-me" width="228" height="111"/>
         <image name="context-menu" width="230" height="47"/>
         <image name="download-icon" width="108" height="91"/>
         <image name="dummy-fav" width="70" height="50"/>

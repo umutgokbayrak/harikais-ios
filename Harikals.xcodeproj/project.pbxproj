@@ -13,6 +13,8 @@
 		95511E181B28291700AD40C6 /* FavouriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E171B28291700AD40C6 /* FavouriteVC.m */; };
 		95511E1C1B28353800AD40C6 /* FavourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E1B1B28353800AD40C6 /* FavourCell.m */; };
 		95511E1F1B2853A300AD40C6 /* ApplicationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E1E1B2853A300AD40C6 /* ApplicationsVC.m */; };
+		95511E231B286CA200AD40C6 /* ChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E221B286CA100AD40C6 /* ChatVC.m */; };
+		95511E261B28758200AD40C6 /* ChatInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95511E251B28758200AD40C6 /* ChatInputView.xib */; };
 		957B63931B247840003AA201 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63921B247840003AA201 /* main.m */; };
 		957B63961B247840003AA201 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63951B247840003AA201 /* AppDelegate.m */; };
 		957B63991B247840003AA201 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63981B247840003AA201 /* ViewController.m */; };
@@ -66,6 +68,9 @@
 		95511E1B1B28353800AD40C6 /* FavourCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavourCell.m; sourceTree = "<group>"; };
 		95511E1D1B2853A300AD40C6 /* ApplicationsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationsVC.h; sourceTree = "<group>"; };
 		95511E1E1B2853A300AD40C6 /* ApplicationsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationsVC.m; sourceTree = "<group>"; };
+		95511E211B286CA100AD40C6 /* ChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatVC.h; sourceTree = "<group>"; };
+		95511E221B286CA100AD40C6 /* ChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatVC.m; sourceTree = "<group>"; };
+		95511E251B28758200AD40C6 /* ChatInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatInputView.xib; sourceTree = "<group>"; };
 		957B638D1B247840003AA201 /* Harikals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Harikals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		957B63911B247840003AA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957B63921B247840003AA201 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -165,6 +170,15 @@
 			name = "Applications VC";
 			sourceTree = "<group>";
 		};
+		95511E241B286CAC00AD40C6 /* Chat VC */ = {
+			isa = PBXGroup;
+			children = (
+				95511E211B286CA100AD40C6 /* ChatVC.h */,
+				95511E221B286CA100AD40C6 /* ChatVC.m */,
+			);
+			name = "Chat VC";
+			sourceTree = "<group>";
+		};
 		957B63841B247840003AA201 = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +215,7 @@
 				95511E151B2828D700AD40C6 /* Login VC */,
 				95511E191B28291D00AD40C6 /* Favourite VC */,
 				95511E201B2853A700AD40C6 /* Applications VC */,
+				95511E241B286CAC00AD40C6 /* Chat VC */,
 			);
 			path = Harikals;
 			sourceTree = "<group>";
@@ -270,6 +285,7 @@
 				957B639A1B247840003AA201 /* Main.storyboard */,
 				957B639D1B247840003AA201 /* Images.xcassets */,
 				957B639F1B247840003AA201 /* LaunchScreen.xib */,
+				95511E251B28758200AD40C6 /* ChatInputView.xib */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -413,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				957B639C1B247840003AA201 /* Main.storyboard in Resources */,
+				95511E261B28758200AD40C6 /* ChatInputView.xib in Resources */,
 				95B77BAE1B25AB780081E694 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				95A5E76D1B2700C300B6E978 /* CardsVC.xib in Resources */,
 				95B77BA81B25AB780081E694 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
@@ -490,6 +507,7 @@
 				95511E1F1B2853A300AD40C6 /* ApplicationsVC.m in Sources */,
 				95B77BB11B25B3360081E694 /* IntroductionVC.m in Sources */,
 				95511E1C1B28353800AD40C6 /* FavourCell.m in Sources */,
+				95511E231B286CA200AD40C6 /* ChatVC.m in Sources */,
 				95AE071F1B25F38200184007 /* RESideMenu.m in Sources */,
 				95AE07201B25F38200184007 /* UIViewController+RESideMenu.m in Sources */,
 				957B63931B247840003AA201 /* main.m in Sources */,
