@@ -1,13 +1,15 @@
 //
-//  DEMOLeftMenuViewController.m
-//  RESideMenuStoryboards
+//  LeftMenuViewController.m
+//  Harikals
 //
-//  Created by Roman Efimov on 10/9/13.
-//  Copyright (c) 2013 Roman Efimov. All rights reserved.
+//  Created by Nikolay Tabunchenko on 6/10/15.
+//  Copyright (c) 2015 tabunchenko. All rights reserved.
 //
 
 #import "LeftMenuViewController.h"
 #import "UIViewController+RESideMenu.h"
+#import "FavouriteVC.h"
+
 
 @interface LeftMenuViewController () {
     
@@ -37,6 +39,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    FavouriteVC *messageVC;
     switch (indexPath.row) {
         case 0:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"firstViewController"]]
@@ -48,6 +51,20 @@
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
+            
+        case 2:
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"applications"]]
+                                                         animated:YES];
+            [self.sideMenuViewController hideMenuViewController];
+            break;
+        case 3:
+            messageVC = [self.storyboard instantiateViewControllerWithIdentifier:@"secondViewController"];
+            messageVC.isMessageVC = YES;
+            messageVC.title = @"Mesajlar";
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:messageVC] animated:YES];
+            [self.sideMenuViewController hideMenuViewController];
+            break;
+
         default:
             break;
     }

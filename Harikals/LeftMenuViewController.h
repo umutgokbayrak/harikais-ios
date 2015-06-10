@@ -1,9 +1,9 @@
 //
-//  DEMOLeftMenuViewController.h
-//  RESideMenuStoryboards
+//  LeftMenuViewController.h
+//  Harikals
 //
-//  Created by Roman Efimov on 10/9/13.
-//  Copyright (c) 2013 Roman Efimov. All rights reserved.
+//  Created by Nikolay Tabunchenko on 6/10/15.
+//  Copyright (c) 2015 tabunchenko. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

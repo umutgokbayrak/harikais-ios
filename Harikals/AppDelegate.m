@@ -18,6 +18,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Parse setApplicationId:@"dw2swcvEwgmpLaBYrxeQhyDu8UrRyaI87MuLQozD" clientKey:@"tM1oZ8z0lgHpdDyPhKkPZW77IhbQklrce2gZ5Djs"];
     [PFLinkedInUtils initializeWithRedirectURL:@"http://www.rundewoo.com" clientId:@"77p3qgyayt2mjo" clientSecret:@"ZQ2HHMY2AdU1JmaX" state:@"aaaabbbbccccdddd" grantedAccess:@[@"r_emailaddress", @"r_basicprofile", @""] presentingViewController:nil];
+    
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Semibold" size:17.0]}];
+    
+//    [self.navigationController.navigationBar
+//     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Regular" size:17.0]}];
+    
     return YES;
 }
 

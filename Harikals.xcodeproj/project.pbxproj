@@ -10,6 +10,9 @@
 		950EF4E433AE1F1D57358545 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4A32F333D1D7CF497CE895 /* libPods.a */; };
 		95511E111B2719CA00AD40C6 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E101B2719CA00AD40C6 /* iCarousel.m */; };
 		95511E141B2770B400AD40C6 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E131B2770B400AD40C6 /* LoginVC.m */; };
+		95511E181B28291700AD40C6 /* FavouriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E171B28291700AD40C6 /* FavouriteVC.m */; };
+		95511E1C1B28353800AD40C6 /* FavourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E1B1B28353800AD40C6 /* FavourCell.m */; };
+		95511E1F1B2853A300AD40C6 /* ApplicationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E1E1B2853A300AD40C6 /* ApplicationsVC.m */; };
 		957B63931B247840003AA201 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63921B247840003AA201 /* main.m */; };
 		957B63961B247840003AA201 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63951B247840003AA201 /* AppDelegate.m */; };
 		957B63991B247840003AA201 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63981B247840003AA201 /* ViewController.m */; };
@@ -57,6 +60,12 @@
 		95511E101B2719CA00AD40C6 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		95511E121B2770B400AD40C6 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		95511E131B2770B400AD40C6 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		95511E161B28291700AD40C6 /* FavouriteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteVC.h; sourceTree = "<group>"; };
+		95511E171B28291700AD40C6 /* FavouriteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteVC.m; sourceTree = "<group>"; };
+		95511E1A1B28353800AD40C6 /* FavourCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavourCell.h; sourceTree = "<group>"; };
+		95511E1B1B28353800AD40C6 /* FavourCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavourCell.m; sourceTree = "<group>"; };
+		95511E1D1B2853A300AD40C6 /* ApplicationsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationsVC.h; sourceTree = "<group>"; };
+		95511E1E1B2853A300AD40C6 /* ApplicationsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationsVC.m; sourceTree = "<group>"; };
 		957B638D1B247840003AA201 /* Harikals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Harikals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		957B63911B247840003AA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957B63921B247840003AA201 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -127,6 +136,35 @@
 			path = iCarousel;
 			sourceTree = "<group>";
 		};
+		95511E151B2828D700AD40C6 /* Login VC */ = {
+			isa = PBXGroup;
+			children = (
+				95511E121B2770B400AD40C6 /* LoginVC.h */,
+				95511E131B2770B400AD40C6 /* LoginVC.m */,
+			);
+			name = "Login VC";
+			sourceTree = "<group>";
+		};
+		95511E191B28291D00AD40C6 /* Favourite VC */ = {
+			isa = PBXGroup;
+			children = (
+				95511E161B28291700AD40C6 /* FavouriteVC.h */,
+				95511E171B28291700AD40C6 /* FavouriteVC.m */,
+				95511E1A1B28353800AD40C6 /* FavourCell.h */,
+				95511E1B1B28353800AD40C6 /* FavourCell.m */,
+			);
+			name = "Favourite VC";
+			sourceTree = "<group>";
+		};
+		95511E201B2853A700AD40C6 /* Applications VC */ = {
+			isa = PBXGroup;
+			children = (
+				95511E1D1B2853A300AD40C6 /* ApplicationsVC.h */,
+				95511E1E1B2853A300AD40C6 /* ApplicationsVC.m */,
+			);
+			name = "Applications VC";
+			sourceTree = "<group>";
+		};
 		957B63841B247840003AA201 = {
 			isa = PBXGroup;
 			children = (
@@ -160,8 +198,9 @@
 				95AE07171B25F38200184007 /* RESideMenu */,
 				95AE07291B25F9F600184007 /* Menu Root */,
 				95A5E76E1B2700D200B6E978 /* Cards Controller */,
-				95511E121B2770B400AD40C6 /* LoginVC.h */,
-				95511E131B2770B400AD40C6 /* LoginVC.m */,
+				95511E151B2828D700AD40C6 /* Login VC */,
+				95511E191B28291D00AD40C6 /* Favourite VC */,
+				95511E201B2853A700AD40C6 /* Applications VC */,
 			);
 			path = Harikals;
 			sourceTree = "<group>";
@@ -444,10 +483,13 @@
 				95511E141B2770B400AD40C6 /* LoginVC.m in Sources */,
 				95A5E76C1B2700C300B6E978 /* CardsVC.m in Sources */,
 				95AE071E1B25F38200184007 /* RECommonFunctions.m in Sources */,
+				95511E181B28291700AD40C6 /* FavouriteVC.m in Sources */,
 				95511E111B2719CA00AD40C6 /* iCarousel.m in Sources */,
 				957B63961B247840003AA201 /* AppDelegate.m in Sources */,
 				95AE07241B25F5BD00184007 /* MenuViewController.m in Sources */,
+				95511E1F1B2853A300AD40C6 /* ApplicationsVC.m in Sources */,
 				95B77BB11B25B3360081E694 /* IntroductionVC.m in Sources */,
+				95511E1C1B28353800AD40C6 /* FavourCell.m in Sources */,
 				95AE071F1B25F38200184007 /* RESideMenu.m in Sources */,
 				95AE07201B25F38200184007 /* UIViewController+RESideMenu.m in Sources */,
 				957B63931B247840003AA201 /* main.m in Sources */,

@@ -8,6 +8,9 @@
 
 #import "FavourCell.h"
 
+
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+
 @implementation FavourCell
 
 - (void)awakeFromNib {
@@ -19,5 +22,6 @@
 
     // Configure the view for the selected state
 }
+
 
 @end

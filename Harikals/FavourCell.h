@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FavourCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 
 @end

@@ -8,7 +8,13 @@
 
 #import "ApplicationsVC.h"
 
-@interface ApplicationsVC ()
+@interface ApplicationsVC () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate> {
+    
+    __weak IBOutlet UIButton *firstalaButton;
+    __weak IBOutlet UILabel *emptyLabel;
+    __weak IBOutlet NSLayoutConstraint *lineTopSpacing;
+    __weak IBOutlet UITableView *mainTableView;
+}
 
 @end
 
@@ -16,22 +22,52 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    mainTableView.dataSource = self;
+    mainTableView.delegate = self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:71.0 / 255.0 green:160.0 / 255.0 blue:219.0 / 255.0 alpha:1.0]];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//-------------------------------------------------------------------------------------------------------------
+#pragma mark - UITableView Data Source Methods
+//-------------------------------------------------------------------------------------------------------------
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    emptyLabel.hidden = YES;
+    firstalaButton.hidden = YES;
+    tableView.scrollEnabled = YES;
+    
+    return 1;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell;
+    if (!indexPath.row) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"profileCell"];
+        return cell;
+    }
+    
+    cell = [tableView dequeueReusableCellWithIdentifier: indexPath.row % 2 == 0 ? @"leftAlignmentCell" : @"rightAlignmentCell"];
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!indexPath.row) return 125;
+    return 70;
+}
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    lineTopSpacing.constant = -scrollView.contentOffset.y + 50;
+}
 
 @end

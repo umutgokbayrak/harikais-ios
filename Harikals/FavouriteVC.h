@@ -10,4 +10,6 @@
 
 @interface FavouriteVC : UIViewController
 
+@property (nonatomic, assign) BOOL isMessageVC;
+
 @end
