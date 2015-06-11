@@ -3,7 +3,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Bold.ttf">
@@ -34,8 +36,14 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
+            <string>OpenSans</string>
+            <string>OpenSans</string>
+            <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
+            <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
@@ -58,7 +66,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="bg-first" translatesAutoresizingMaskIntoConstraints="NO" id="h1U-gy-MPm">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="bg-first" translatesAutoresizingMaskIntoConstraints="NO" id="h1U-gy-MPm">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcx-T7-vQj">
@@ -123,11 +131,11 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                         <viewControllerLayoutGuide type="bottom" id="60S-uj-mVF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="64t-Yn-XX9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="poX-GH-H2s">
-                                <rect key="frame" x="0.0" y="28" width="320" height="98"/>
+                                <rect key="frame" x="0.0" y="32" width="320" height="98"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="98" id="IBL-Pm-OJm"/>
                                 </constraints>
@@ -137,14 +145,13 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XwR-gf-hzK" userLabel="scroll-holder">
-                                <rect key="frame" x="59" y="145" width="202" height="314"/>
+                                <rect key="frame" x="59" y="101" width="202" height="314"/>
                                 <subviews>
                                     <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mzZ-RT-Oxm">
                                         <rect key="frame" x="0.0" y="0.0" width="202" height="314"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d8r-aJ-IWq">
-                                                <rect key="frame" x="0.0" y="0.0" width="202" height="314"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -162,7 +169,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0G-xc-MQF">
-                                <rect key="frame" x="0.0" y="508" width="320" height="60"/>
+                                <rect key="frame" x="0.0" y="420" width="320" height="60"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                 <state key="normal" title="DEVAM ET" backgroundImage="button-bg">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -172,19 +179,21 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                     <action selector="nextPressed:" destination="yg5-Pc-wlr" eventType="touchUpInside" id="hHf-76-GQv"/>
                                 </connections>
                             </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pxp-tW-aLz">
-                                <rect key="frame" x="111" y="470" width="98" height="37"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pxp-tW-aLz">
+                                <rect key="frame" x="125" y="382" width="71" height="37"/>
                                 <color key="pageIndicatorTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="currentPageIndicatorTintColor" red="0.28235294117647058" green="0.62745098039215685" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerY" secondItem="XwR-gf-hzK" secondAttribute="centerY" constant="-18" id="5a7-bj-FOP"/>
                             <constraint firstItem="60S-uj-mVF" firstAttribute="top" secondItem="R0G-xc-MQF" secondAttribute="bottom" id="9Pv-ce-G7A"/>
-                            <constraint firstItem="XwR-gf-hzK" firstAttribute="top" secondItem="fut-Yh-IbC" secondAttribute="bottom" constant="125" id="D52-6Y-6Gg"/>
                             <constraint firstAttribute="trailing" secondItem="poX-GH-H2s" secondAttribute="trailing" id="N0N-wg-qkl"/>
-                            <constraint firstItem="poX-GH-H2s" firstAttribute="top" secondItem="fut-Yh-IbC" secondAttribute="bottom" constant="8" id="bRa-MQ-8vt"/>
+                            <constraint firstItem="R0G-xc-MQF" firstAttribute="top" secondItem="Pxp-tW-aLz" secondAttribute="bottom" constant="1" id="VT4-8r-udN"/>
+                            <constraint firstItem="poX-GH-H2s" firstAttribute="top" secondItem="fut-Yh-IbC" secondAttribute="bottom" multiplier="1.2" constant="8" id="bRa-MQ-8vt"/>
                             <constraint firstItem="poX-GH-H2s" firstAttribute="leading" secondItem="64t-Yn-XX9" secondAttribute="leading" id="css-um-eKX"/>
+                            <constraint firstAttribute="centerX" secondItem="Pxp-tW-aLz" secondAttribute="centerX" id="nBO-2d-B3c"/>
                             <constraint firstItem="R0G-xc-MQF" firstAttribute="leading" secondItem="64t-Yn-XX9" secondAttribute="leading" id="p8y-O0-odZ"/>
                             <constraint firstAttribute="centerX" secondItem="poX-GH-H2s" secondAttribute="centerX" id="pbX-rB-a2S"/>
                             <constraint firstAttribute="centerX" secondItem="XwR-gf-hzK" secondAttribute="centerX" id="rHv-OZ-L3b"/>
@@ -192,12 +201,18 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Pek-9x-h5Z"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="heightConstraint1" destination="uiw-Mz-gyA" id="agf-Nk-19W"/>
+                        <outlet property="heightConstraint2" destination="BDz-pX-14O" id="IhI-ja-Is5"/>
                         <outlet property="imagesContainer" destination="d8r-aJ-IWq" id="cXT-Tx-ccJ"/>
                         <outlet property="mainScrollView" destination="mzZ-RT-Oxm" id="5tI-5J-zvJ"/>
                         <outlet property="nextButton" destination="R0G-xc-MQF" id="Rqd-cK-9jU"/>
                         <outlet property="pageControl" destination="Pxp-tW-aLz" id="Y5a-1g-erd"/>
                         <outlet property="topLabel" destination="poX-GH-H2s" id="plw-Gy-efL"/>
+                        <outlet property="topTextSpace" destination="bRa-MQ-8vt" id="WKl-aO-BvK"/>
+                        <outlet property="widthConstraint1" destination="vOr-v7-LgY" id="xDq-vR-1DS"/>
+                        <outlet property="widthConstraint2" destination="agg-Tz-UR3" id="a1c-va-mUD"/>
                         <segue destination="5r4-if-XDh" kind="push" identifier="loginSegue" id="uiR-gM-ecR"/>
                     </connections>
                 </viewController>
@@ -343,10 +358,155 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
             <objects>
                 <viewController storyboardIdentifier="firstViewController" id="bL3-LM-O75" customClass="CardsVC" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="tbx-2Q-ltS"/>
+                    <connections>
+                        <segue destination="0TO-f5-Tb5" kind="modal" identifier="detail" id="yYV-Ij-RIl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rUK-6c-YfW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1348" y="957"/>
+        </scene>
+        <!--Detaylar-->
+        <scene sceneID="xOM-XJ-SQQ">
+            <objects>
+                <viewController storyboardIdentifier="detail" id="i7p-Sm-kXa" customClass="DetailVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NyG-sj-3L3"/>
+                        <viewControllerLayoutGuide type="bottom" id="6oH-ra-gaR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AfL-L1-hNl">
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trivia Software A.G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvn-gC-VA5">
+                                <rect key="frame" x="92" y="89" width="136" height="21"/>
+                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
+                                <color key="textColor" red="0.32941176470588235" green="0.41176470588235292" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Backend Java Developer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGc-f8-HCO">
+                                <rect key="frame" x="102" y="110" width="116" height="14"/>
+                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
+                                <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="poV-Oo-VgA">
+                                <rect key="frame" x="0.0" y="64" width="320" height="449"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="khv-FW-i2m">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                            </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yys-Pz-ynb">
+                                <rect key="frame" x="0.0" y="513" width="320" height="55"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fA-e3-566">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="55"/>
+                                        <color key="backgroundColor" red="0.27843137254901962" green="0.62745098039215685" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="3fA-e3-566" secondAttribute="height" multiplier="16:11" id="guX-zo-gl6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
+                                        <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-28"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="-11" maxX="-69" maxY="0.0"/>
+                                        <state key="normal" title="Mesaj Gönder" image="message-tab-icon">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GLp-9t-gWW">
+                                        <rect key="frame" x="80" y="0.0" width="80" height="55"/>
+                                        <color key="backgroundColor" red="0.53333333333333333" green="0.75294117647058822" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
+                                        <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-28"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="-11" maxX="-44" maxY="0.0"/>
+                                        <state key="normal" title="İşe Başvur" image="apply-tab-icon">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nt-d7-Iim">
+                                        <rect key="frame" x="160" y="0.0" width="80" height="55"/>
+                                        <color key="backgroundColor" red="0.59215686274509804" green="0.46666666666666667" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
+                                        <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-28"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="-11" maxX="-69" maxY="0.0"/>
+                                        <state key="normal" title="Favorilere Ekle" image="CC299CEF-50B2-440D-95CF-BC7CB8DB5E3B">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ubt-Jl-e8B">
+                                        <rect key="frame" x="240" y="0.0" width="80" height="55"/>
+                                        <color key="backgroundColor" red="0.92941176470588238" green="0.44313725490196076" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
+                                        <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-28"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="-11" maxX="-77" maxY="0.0"/>
+                                        <state key="normal" title="Arkadaşını Öner" image="friend-tab-icon">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Ubt-Jl-e8B" firstAttribute="top" secondItem="Yys-Pz-ynb" secondAttribute="top" id="EOM-q0-Gbq"/>
+                                    <constraint firstItem="GLp-9t-gWW" firstAttribute="leading" secondItem="3fA-e3-566" secondAttribute="trailing" id="F1Q-9e-ESC"/>
+                                    <constraint firstItem="Ubt-Jl-e8B" firstAttribute="width" secondItem="GLp-9t-gWW" secondAttribute="width" id="IK1-11-BTj"/>
+                                    <constraint firstItem="3fA-e3-566" firstAttribute="leading" secondItem="Yys-Pz-ynb" secondAttribute="leading" id="KW9-gr-ws7"/>
+                                    <constraint firstAttribute="bottom" secondItem="3fA-e3-566" secondAttribute="bottom" id="Md7-tN-K3U"/>
+                                    <constraint firstAttribute="bottom" secondItem="GLp-9t-gWW" secondAttribute="bottom" id="NvV-h9-sAl"/>
+                                    <constraint firstItem="Ubt-Jl-e8B" firstAttribute="width" secondItem="3Nt-d7-Iim" secondAttribute="width" id="Ny5-o3-bWz"/>
+                                    <constraint firstItem="3fA-e3-566" firstAttribute="top" secondItem="Yys-Pz-ynb" secondAttribute="top" id="dEt-7B-6Sx"/>
+                                    <constraint firstItem="3Nt-d7-Iim" firstAttribute="leading" secondItem="GLp-9t-gWW" secondAttribute="trailing" id="gva-5p-U7u"/>
+                                    <constraint firstItem="Ubt-Jl-e8B" firstAttribute="width" secondItem="3fA-e3-566" secondAttribute="width" id="hjd-qf-r2e"/>
+                                    <constraint firstAttribute="bottom" secondItem="3Nt-d7-Iim" secondAttribute="bottom" id="oN1-fd-CyY"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ubt-Jl-e8B" secondAttribute="bottom" id="ocm-Cz-lAh"/>
+                                    <constraint firstItem="GLp-9t-gWW" firstAttribute="top" secondItem="Yys-Pz-ynb" secondAttribute="top" id="qn9-DG-aI8"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ubt-Jl-e8B" secondAttribute="trailing" id="uuv-2L-37Y"/>
+                                    <constraint firstItem="3Nt-d7-Iim" firstAttribute="top" secondItem="Yys-Pz-ynb" secondAttribute="top" id="xCe-xt-7Ye"/>
+                                    <constraint firstItem="Ubt-Jl-e8B" firstAttribute="leading" secondItem="3Nt-d7-Iim" secondAttribute="trailing" id="zUG-72-VOW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Yys-Pz-ynb" firstAttribute="leading" secondItem="poV-Oo-VgA" secondAttribute="leading" id="12S-T9-e2G"/>
+                            <constraint firstItem="Yys-Pz-ynb" firstAttribute="bottom" secondItem="6oH-ra-gaR" secondAttribute="top" id="2rQ-sX-nNm"/>
+                            <constraint firstItem="Yys-Pz-ynb" firstAttribute="leading" secondItem="AfL-L1-hNl" secondAttribute="leading" id="Dae-oF-EWk"/>
+                            <constraint firstItem="poV-Oo-VgA" firstAttribute="top" secondItem="NyG-sj-3L3" secondAttribute="bottom" id="FK0-dY-lY0"/>
+                            <constraint firstItem="Yys-Pz-ynb" firstAttribute="trailing" secondItem="poV-Oo-VgA" secondAttribute="trailing" id="L1U-Ux-dUt"/>
+                            <constraint firstAttribute="trailing" secondItem="Yys-Pz-ynb" secondAttribute="trailing" id="MOG-qL-uXJ"/>
+                            <constraint firstItem="Yys-Pz-ynb" firstAttribute="top" secondItem="poV-Oo-VgA" secondAttribute="bottom" id="Zrz-Nc-ksM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detaylar" id="7KP-Jj-U0d">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="X3o-2P-PHg">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8hp-1V-XiC">
+                                <rect key="frame" x="16" y="11" width="18" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="close-icon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissSelf:" destination="i7p-Sm-kXa" eventType="touchUpInside" id="TUW-Va-RLl"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="barApplyButton" destination="GLp-9t-gWW" id="JRN-Rq-0VV"/>
+                        <outlet property="barFavouriteButton" destination="3Nt-d7-Iim" id="zzU-e2-cgk"/>
+                        <outlet property="barFriendButton" destination="Ubt-Jl-e8B" id="XiQ-RK-4KG"/>
+                        <outlet property="barMessageButton" destination="3fA-e3-566" id="h1V-Eu-oDN"/>
+                        <segue destination="UZ6-5R-pT6" kind="push" identifier="openChat" id="5yt-Ho-V5F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ybq-Ke-shN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2366" y="963"/>
         </scene>
         <!--Left Menu View Controller-->
         <scene sceneID="Y5P-Sm-3ak">
@@ -624,8 +784,8 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                                     <color key="textColor" red="0.31764705879999999" green="0.4039215686" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2 hours ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvb-hw-bMC">
-                                                    <rect key="frame" x="84" y="35" width="97" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 hours ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvb-hw-bMC">
+                                                    <rect key="frame" x="84" y="35" width="67" height="17"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                                     <color key="textColor" red="0.59607843140000005" green="0.64705882349999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -701,8 +861,8 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="vertical-line" translatesAutoresizingMaskIntoConstraints="NO" id="etH-SV-yYo">
-                                <rect key="frame" x="160" y="93" width="1" height="200"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vertical-line" translatesAutoresizingMaskIntoConstraints="NO" id="etH-SV-yYo">
+                                <rect key="frame" x="160" y="93" width="1" height="411"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDg-Zp-id5">
                                 <rect key="frame" x="75" y="219" width="170" height="41"/>
@@ -749,8 +909,8 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mD2-EG-CG9" id="Tak-if-Ntt">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="checkmark-icon" translatesAutoresizingMaskIntoConstraints="NO" id="CLw-yc-YaH">
-                                                    <rect key="frame" x="148" y="2" width="25" height="25"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark-icon" translatesAutoresizingMaskIntoConstraints="NO" id="CLw-yc-YaH">
+                                                    <rect key="frame" x="148" y="1" width="25" height="25"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Master Software" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hnp-D9-v1g">
                                                     <rect key="frame" x="39" y="0.0" width="96" height="17"/>
@@ -888,10 +1048,10 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                         <viewControllerLayoutGuide type="bottom" id="nn1-SP-nz1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HVI-St-z2P">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="108" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="y2D-mt-jvt">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="108" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="y2D-mt-jvt">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="446"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -901,14 +1061,14 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SWf-ka-goy" id="RSd-1a-fus">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You, 03/14/2014" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXf-Tu-nP6">
-                                                    <rect key="frame" x="155" y="3" width="87" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You, 03/14/2014" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXf-Tu-nP6">
+                                                    <rect key="frame" x="155" y="4" width="87" height="17"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Italic" family="Open Sans" pointSize="12"/>
                                                     <color key="textColor" red="0.68627450980392157" green="0.68627450980392157" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cloud-me" translatesAutoresizingMaskIntoConstraints="NO" id="70Z-lR-5Gg">
-                                                    <rect key="frame" x="23" y="26" width="228" height="111"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud-me" translatesAutoresizingMaskIntoConstraints="NO" id="70Z-lR-5Gg">
+                                                    <rect key="frame" x="23" y="27" width="228" height="111"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="9mF-PO-XFM">
                                                     <rect key="frame" x="255" y="25" width="45" height="45"/>
@@ -917,8 +1077,8 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                                         <constraint firstAttribute="height" constant="45" id="ham-kv-ClI"/>
                                                     </constraints>
                                                 </imageView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" text="Merhaba bu iş tam zamanlı mıdır acaba? Part time bir pozisyon ise ilgileniyorum" translatesAutoresizingMaskIntoConstraints="NO" id="2f7-b3-iq6">
-                                                    <rect key="frame" x="32" y="27" width="199" height="106"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" text="Merhaba bu iş tam zamanlı mıdır acaba? Part time bir pozisyon ise ilgileniyorum" translatesAutoresizingMaskIntoConstraints="NO" id="2f7-b3-iq6">
+                                                    <rect key="frame" x="32" y="28" width="199" height="106"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
@@ -981,11 +1141,97 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mke-kb-kzC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1769" y="1740"/>
+            <point key="canvasLocation" x="2180" y="1864"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xtZ-lC-9ka">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0TO-f5-Tb5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="J5W-mm-1GW"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wyn-WB-XFh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="i7p-Sm-kXa" kind="relationship" relationship="rootViewController" id="dlx-Zx-HNi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lim-55-Ima" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1834" y="963"/>
         </scene>
     </scenes>
     <resources>
+        <image name="CC299CEF-50B2-440D-95CF-BC7CB8DB5E3B" width="16" height="13">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
+GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
+c1dOU0NvbG9ygAKADRIgwAAAgAOAC1h7MTYsIDEzfdIVChYYWk5TLm9iamVjdHOhF4AEgArSFQoaHaIb
+HIAFgAaACRAA0iAKISJfEBROU1RJRkZSZXByZXNlbnRhdGlvboAHgAhPEQuuTU0AKgAAA0gAAAAAAAAA
+AEpKSkrIyMjI7u7u7pOTk5MaGhoaAAAAAAAAAAAaGhoak5OTk+7u7u7IyMjISkpKSgAAAAAAAAAAAgIC
+AoCAgID4+Pj4////////////////1tbW1i4uLi4uLi4u1tbW1v////////////////j4+PiAgICAAgIC
+AlVVVVX9/f39///////////////////////////Y2NjY2NjY2P///////////////////////////f39
+/VVVVVXZ2dnZ////////////////////////////////////////////////////////////////////
+///////Z2dnZ7Ozs7P//////////////////////////////////////////////////////////////
+////////////7Ozs7Hl5eXn/////////////////////////////////////////////////////////
+/////////////////3l5eXkLCwsLs7Ozs///////////////////////////////////////////////
+/////////////////7Ozs7MLCwsLAAAAABoaGhrJycnJ////////////////////////////////////
+/////////////////8nJyckaGhoaAAAAAAAAAAAAAAAAIyMjI83Nzc3/////////////////////////
+/////////////////83Nzc0jIyMjAAAAAAAAAAAAAAAAAAAAAAAAAAAhISEhyMjIyP//////////////
+/////////////////8jIyMghISEhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABsbGxu8vLy8////
+/////////////////7y8vLwbGxsbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERER
+Eaqqqqr//////////6qqqqoRERERAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAJCQkJrq6urq6urq4JCQkJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4BAAADAAAAAQAQAAAB
+AQADAAAAAQANAAABAgADAAAABAAAA/YBAwADAAAAAQABAAABBgADAAAAAQACAAABEQAEAAAAAQAAAAgB
+EgADAAAAAQABAAABFQADAAAAAQAEAAABFgADAAAAAQANAAABFwAEAAAAAQAAA0ABHAADAAAAAQABAAAB
+UgADAAAAAQABAAABUwADAAAABAAAA/6HcwAHAAAHqAAABAYAAAAAAAgACAAIAAgAAQABAAEAAQAAB6hh
+cHBsAiAAAG1udHJSR0IgWFlaIAfZAAIAGQALABoAC2Fjc3BBUFBMAAAAAGFwcGwAAAAAAAAAAAAAAAAA
+AAAAAAD21gABAAAAANMtYXBwbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAC2Rlc2MAAAEIAAAAb2RzY20AAAF4AAAFbGNwcnQAAAbkAAAAOHd0cHQAAAccAAAAFHJYWVoA
+AAcwAAAAFGdYWVoAAAdEAAAAFGJYWVoAAAdYAAAAFHJUUkMAAAdsAAAADmNoYWQAAAd8AAAALGJUUkMA
+AAdsAAAADmdUUkMAAAdsAAAADmRlc2MAAAAAAAAAFEdlbmVyaWMgUkdCIFByb2ZpbGUAAAAAAAAAAAAA
+ABRHZW5lcmljIFJHQiBQcm9maWxlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAABtbHVjAAAAAAAAAB4AAAAMc2tTSwAAACgAAAF4aHJIUgAAACgAAAGgY2FFUwAAACQA
+AAHIcHRCUgAAACYAAAHsdWtVQQAAACoAAAISZnJGVQAAACgAAAI8emhUVwAAABYAAAJkaXRJVAAAACgA
+AAJ6bmJOTwAAACYAAAKia29LUgAAABYAAALIY3NDWgAAACIAAALeaGVJTAAAAB4AAAMAZGVERQAAACwA
+AAMeaHVIVQAAACgAAANKc3ZTRQAAACYAAAKiemhDTgAAABYAAANyamFKUAAAABoAAAOIcm9STwAAACQA
+AAOiZWxHUgAAACIAAAPGcHRQTwAAACYAAAPobmxOTAAAACgAAAQOZXNFUwAAACYAAAPodGhUSAAAACQA
+AAQ2dHJUUgAAACIAAARaZmlGSQAAACgAAAR8cGxQTAAAACwAAASkcnVSVQAAACIAAATQYXJFRwAAACYA
+AATyZW5VUwAAACYAAAUYZGFESwAAAC4AAAU+AFYBYQBlAG8AYgBlAGMAbgD9ACAAUgBHAEIAIABwAHIA
+bwBmAGkAbABHAGUAbgBlAHIAaQENAGsAaQAgAFIARwBCACAAcAByAG8AZgBpAGwAUABlAHIAZgBpAGwA
+IABSAEcAQgAgAGcAZQBuAOgAcgBpAGMAUABlAHIAZgBpAGwAIABSAEcAQgAgAEcAZQBuAOkAcgBpAGMA
+bwQXBDAEMwQwBDsETAQ9BDgEOQAgBD8EQAQ+BEQEMAQ5BDsAIABSAEcAQgBQAHIAbwBmAGkAbAAgAGcA
+6QBuAOkAcgBpAHEAdQBlACAAUgBWAEKQGnUoACAAUgBHAEIAIIJyX2ljz4/wAFAAcgBvAGYAaQBsAG8A
+IABSAEcAQgAgAGcAZQBuAGUAcgBpAGMAbwBHAGUAbgBlAHIAaQBzAGsAIABSAEcAQgAtAHAAcgBvAGYA
+aQBsx3y8GAAgAFIARwBCACDVBLhc0wzHfABPAGIAZQBjAG4A/QAgAFIARwBCACAAcAByAG8AZgBpAGwF
+5AXoBdUF5AXZBdwAIABSAEcAQgAgBdsF3AXcBdkAQQBsAGwAZwBlAG0AZQBpAG4AZQBzACAAUgBHAEIA
+LQBQAHIAbwBmAGkAbADBAGwAdABhAGwA4QBuAG8AcwAgAFIARwBCACAAcAByAG8AZgBpAGxmbpAaACAA
+UgBHAEIAIGPPj/Blh072TgCCLAAgAFIARwBCACAw1zDtMNUwoTCkMOsAUAByAG8AZgBpAGwAIABSAEcA
+QgAgAGcAZQBuAGUAcgBpAGMDkwO1A70DuQO6A8wAIAPAA8EDvwPGA68DuwAgAFIARwBCAFAAZQByAGYA
+aQBsACAAUgBHAEIAIABnAGUAbgDpAHIAaQBjAG8AQQBsAGcAZQBtAGUAZQBuACAAUgBHAEIALQBwAHIA
+bwBmAGkAZQBsDkIOGw4jDkQOHw4lDkwAIABSAEcAQgAgDhcOMQ5IDicORA4bAEcAZQBuAGUAbAAgAFIA
+RwBCACAAUAByAG8AZgBpAGwAaQBZAGwAZQBpAG4AZQBuACAAUgBHAEIALQBwAHIAbwBmAGkAaQBsAGkA
+VQBuAGkAdwBlAHIAcwBhAGwAbgB5ACAAcAByAG8AZgBpAGwAIABSAEcAQgQeBDEESQQ4BDkAIAQ/BEAE
+PgREBDgEOwRMACAAUgBHAEIGRQZEBkEAIAYqBjkGMQZKBkEAIABSAEcAQgAgBicGRAY5BicGRQBHAGUA
+bgBlAHIAaQBjACAAUgBHAEIAIABQAHIAbwBmAGkAbABlAEcAZQBuAGUAcgBlAGwAIABSAEcAQgAtAGIA
+ZQBzAGsAcgBpAHYAZQBsAHMAZXRleHQAAAAAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJp
+Z2h0cyByZXNlcnZlZC4AWFlaIAAAAAAAAPNSAAEAAAABFs9YWVogAAAAAAAAdE0AAD3uAAAD0FhZWiAA
+AAAAAABadQAArHMAABc0WFlaIAAAAAAAACgaAAAVnwAAuDZjdXJ2AAAAAAAAAAEBzQAAc2YzMgAAAAAA
+AQxCAAAF3v//8yYAAAeSAAD9kf//+6L///2jAAAD3AAAwGzSJSYnKFokY2xhc3NuYW1lWCRjbGFzc2Vz
+XxAQTlNCaXRtYXBJbWFnZVJlcKMpKitfEBBOU0JpdG1hcEltYWdlUmVwWk5TSW1hZ2VSZXBYTlNPYmpl
+Y3TSJSYtLldOU0FycmF5oi0r0iUmMDFeTlNNdXRhYmxlQXJyYXmjMC0r0zM0CjU2N1dOU1doaXRlXE5T
+Q29sb3JTcGFjZUQwIDAAEAOADNIlJjk6V05TQ29sb3KiOSvSJSY8PVdOU0ltYWdlojwrXxAPTlNLZXll
+ZEFyY2hpdmVy0UBBVHJvb3SAAQAIABEAGgAjAC0AMgA3AEYATABXAF4AZQByAHkAgQCDAIUAigCMAI4A
+lwCcAKcAqQCrAK0AsgC1ALcAuQC7AL0AwgDZANsA3QyPDJQMnwyoDLsMvwzSDN0M5gzrDPMM9gz7DQoN
+Dg0VDR0NKg0vDTENMw04DUANQw1IDVANUw1lDWgNbQAAAAAAAAIBAAAAAAAAAEIAAAAAAAAAAAAAAAAA
+AA1vA
+</mutableData>
+        </image>
         <image name="apply-icon" width="15" height="15"/>
+        <image name="apply-tab-icon" width="17" height="17"/>
         <image name="avatar" width="50" height="50"/>
         <image name="back-arrow" width="14" height="12"/>
         <image name="bg-first" width="320" height="568"/>
@@ -994,11 +1240,13 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
         <image name="button-bg" width="320" height="60"/>
         <image name="checkmark-icon" width="25" height="25"/>
         <image name="clock-icon" width="11" height="11"/>
+        <image name="close-icon" width="15" height="15"/>
         <image name="cloud-me" width="228" height="111"/>
         <image name="context-menu" width="230" height="47"/>
         <image name="download-icon" width="108" height="91"/>
         <image name="dummy-fav" width="70" height="50"/>
         <image name="fill-green-button" width="95" height="30"/>
+        <image name="friend-tab-icon" width="17" height="17"/>
         <image name="gear-icon" width="16" height="16"/>
         <image name="lightning-icon" width="9" height="16"/>
         <image name="linkedin-button" width="320" height="60"/>
@@ -1007,6 +1255,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
         <image name="menu-button" width="17" height="13"/>
         <image name="menu-logo" width="112" height="28"/>
         <image name="message-icon" width="14" height="15"/>
+        <image name="message-tab-icon" width="19" height="15"/>
         <image name="vertical-line" width="1" height="1"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -1015,6 +1264,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="5yt-Ho-V5F"/>
         <segue reference="dFy-gq-o27"/>
     </inferredMetricsTieBreakers>
 </document>

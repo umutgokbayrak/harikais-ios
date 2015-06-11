@@ -154,7 +154,7 @@
 //        view.contentMode = UIViewContentModeCenter;
         label = [[UILabel alloc] initWithFrame:view.bounds];
         label.backgroundColor = [UIColor clearColor];
-        label.textAlignment = UITextAlignmentCenter;
+        label.textAlignment = NSTextAlignmentCenter;
         label.font = [label.font fontWithSize:50];
         label.tag = 1;
         [view addSubview:label];
@@ -233,6 +233,8 @@
 - (void)carousel:(__unused iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
     NSNumber *item = (self.items)[(NSUInteger)index];
     NSLog(@"Tapped view number: %@", item);
+    
+    [self performSegueWithIdentifier:@"detail" sender:nil];
 }
 
 - (void)carouselCurrentItemIndexDidChange:(__unused iCarousel *)carousel {

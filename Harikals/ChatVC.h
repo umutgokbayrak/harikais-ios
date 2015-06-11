@@ -11,4 +11,6 @@
 @interface ChatVC : UIViewController
 @property (readwrite, retain) UIView *inputAccessoryView;
 
+@property (nonatomic, assign) BOOL fromDetail;
+
 @end

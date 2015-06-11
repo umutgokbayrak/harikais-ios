@@ -24,6 +24,15 @@
     NSInteger pageWidth;
     
     NSArray *topTexts;
+    
+    __weak IBOutlet NSLayoutConstraint *topTextSpace;
+    CGFloat adjustingValue;
+    __weak IBOutlet NSLayoutConstraint *heightConstraint1;
+    
+    __weak IBOutlet NSLayoutConstraint *widthConstraint1;
+    
+    __weak IBOutlet NSLayoutConstraint *heightConstraint2;
+    __weak IBOutlet NSLayoutConstraint *widthConstraint2;
 }
 
 @end
@@ -32,12 +41,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    adjustingValue = 24.0;
     mainScrollView.pagingEnabled = YES;
     [self.view addGestureRecognizer:mainScrollView.panGestureRecognizer];
     mainScrollView.userInteractionEnabled = NO;
     
     
+    if ([UIScreen mainScreen].bounds.size.height == 480) {
+        topTextSpace.constant = -15;
+        pageControl.hidden = YES;
+        topLabel.font  = [UIFont fontWithName:@"OpenSans" size:13.0];
+    }
+
     topTexts = @[@"Harikaiş'te bir CV hazırlamıyorsunuz!\nYapmanız gereken tek şey; Linkedin\nhesabınızla giriş yapmak ve bir açık\npozisyon önermemizi beklemek.",
                  @"Teklif ettiğimiz pozisyona hemen\nbaşvurabilir ve başvurunuzun\ndurumunu uygulama içerisinden takip\nedebilirsiniz.",
                  @"Başvurunuz, yüzlerce adayın arasında\nkaybolmayacak! Çünkü, eşsiz eşleştirme\nmotorumuz ile pozisyonları sadece en\nuygun adaylara yönlendiriyoruz.",
@@ -48,6 +63,8 @@
 
 - (void)addImages {
     
+
+    
     UIImageView *imageview1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"screen-image-1"]];
     UIImageView *imageview2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"screen-image-2"]];
     UIImageView *imageview3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"screen-image-3"]];
@@ -57,11 +74,11 @@
     mainScrollView.showsHorizontalScrollIndicator = NO;
     mainScrollView.delegate = self;
     
-    imageview1.frameX = 12.0;
-    imageview2.frameX = imageview1.frameRight + 24;
-    imageview3.frameX = imageview2.frameRight + 24;
-    imageview4.frameX = imageview3.frameRight + 24;
-    imageview5.frameX = imageview4.frameRight + 24;
+    imageview1.frameX = adjustingValue / 2.0;
+    imageview2.frameX = imageview1.frameRight + adjustingValue;
+    imageview3.frameX = imageview2.frameRight + adjustingValue;
+    imageview4.frameX = imageview3.frameRight + adjustingValue;
+    imageview5.frameX = imageview4.frameRight + adjustingValue;
     
     [imagesContainer addSubview:imageview1];
     [imagesContainer addSubview:imageview2];
@@ -69,8 +86,9 @@
     [imagesContainer addSubview:imageview4];
     [imagesContainer addSubview:imageview5];
     
-    imagesContainer.frameWidth = (imageview1.frameWidth + 24) * 5;
-    mainScrollView.contentSize = CGSizeMake((imageview1.frameWidth + 24) * 5, imageview1.frameHeight - 100);
+    imagesContainer.frameWidth = (imageview1.frameWidth + adjustingValue) * 5;
+    imagesContainer.frameHeight = imageview1.frameHeight;
+    mainScrollView.contentSize = CGSizeMake((imageview1.frameWidth + adjustingValue) * 5, imageview1.frameHeight - 100);
 }
 
 

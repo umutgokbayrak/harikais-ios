@@ -29,6 +29,8 @@
 		95AE07201B25F38200184007 /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE071D1B25F38200184007 /* UIViewController+RESideMenu.m */; };
 		95AE07241B25F5BD00184007 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE07231B25F5BD00184007 /* MenuViewController.m */; };
 		95AE07271B25F8C600184007 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE07251B25F8C600184007 /* LeftMenuViewController.m */; };
+		95B645431B29FE86009F1696 /* DetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B645421B29FE86009F1696 /* DetailVC.m */; };
+		95B645451B2A05BA009F1696 /* ModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95B645441B2A05BA009F1696 /* ModalView.xib */; };
 		95B77BA31B25AB780081E694 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95B77B971B25AB780081E694 /* OpenSans-Bold.ttf */; };
 		95B77BA41B25AB780081E694 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95B77B981B25AB780081E694 /* OpenSans-BoldItalic.ttf */; };
 		95B77BA51B25AB780081E694 /* OpenSans-CondLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95B77B991B25AB780081E694 /* OpenSans-CondLight.ttf */; };
@@ -97,6 +99,9 @@
 		95AE07231B25F5BD00184007 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		95AE07251B25F8C600184007 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
 		95AE07281B25F8E800184007 /* LeftMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
+		95B645411B29FE86009F1696 /* DetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailVC.h; sourceTree = "<group>"; };
+		95B645421B29FE86009F1696 /* DetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailVC.m; sourceTree = "<group>"; };
+		95B645441B2A05BA009F1696 /* ModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModalView.xib; sourceTree = "<group>"; };
 		95B77B971B25AB780081E694 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		95B77B981B25AB780081E694 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		95B77B991B25AB780081E694 /* OpenSans-CondLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-CondLight.ttf"; sourceTree = "<group>"; };
@@ -216,6 +221,8 @@
 				95511E191B28291D00AD40C6 /* Favourite VC */,
 				95511E201B2853A700AD40C6 /* Applications VC */,
 				95511E241B286CAC00AD40C6 /* Chat VC */,
+				95B645411B29FE86009F1696 /* DetailVC.h */,
+				95B645421B29FE86009F1696 /* DetailVC.m */,
 			);
 			path = Harikals;
 			sourceTree = "<group>";
@@ -286,6 +293,7 @@
 				957B639D1B247840003AA201 /* Images.xcassets */,
 				957B639F1B247840003AA201 /* LaunchScreen.xib */,
 				95511E251B28758200AD40C6 /* ChatInputView.xib */,
+				95B645441B2A05BA009F1696 /* ModalView.xib */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -432,6 +440,7 @@
 				95511E261B28758200AD40C6 /* ChatInputView.xib in Resources */,
 				95B77BAE1B25AB780081E694 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				95A5E76D1B2700C300B6E978 /* CardsVC.xib in Resources */,
+				95B645451B2A05BA009F1696 /* ModalView.xib in Resources */,
 				95B77BA81B25AB780081E694 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				95B77BAB1B25AB780081E694 /* OpenSans-LightItalic.ttf in Resources */,
 				957B63A11B247840003AA201 /* LaunchScreen.xib in Resources */,
@@ -500,6 +509,7 @@
 				95511E141B2770B400AD40C6 /* LoginVC.m in Sources */,
 				95A5E76C1B2700C300B6E978 /* CardsVC.m in Sources */,
 				95AE071E1B25F38200184007 /* RECommonFunctions.m in Sources */,
+				95B645431B29FE86009F1696 /* DetailVC.m in Sources */,
 				95511E181B28291700AD40C6 /* FavouriteVC.m in Sources */,
 				95511E111B2719CA00AD40C6 /* iCarousel.m in Sources */,
 				957B63961B247840003AA201 /* AppDelegate.m in Sources */,
