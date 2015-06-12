@@ -472,17 +472,6 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     fadeRange = [self valueForOption:iCarouselOptionFadeRange withDefault:fadeRange];
     fadeMinAlpha = [self valueForOption:iCarouselOptionFadeMinAlpha withDefault:fadeMinAlpha];
 
-//#ifdef ICAROUSEL_MACOS
-//    
-//    if (_vertical)
-//    {
-//        //invert
-//        offset = -offset;
-//    }
-//    
-//#endif
-
-//    offset = - offset;
     
     CGFloat factor = 0.0;
     if (offset > fadeMax) {
@@ -506,196 +495,24 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     transform = CATransform3DTranslate(transform, -_viewpointOffset.width, -_viewpointOffset.height, 0.0);
 
     //perform transform
-    switch (_type)
-    {
-        case iCarouselTypeCustom:
-        {
-            return [_delegate carousel:self itemTransformForOffset:offset baseTransform:transform];
-        }
-        case iCarouselTypeLinear:
-        {
-            CGFloat spacing = [self valueForOption:iCarouselOptionSpacing withDefault:1.0];
-            if (_vertical)
-            {
-                return CATransform3DTranslate(transform, 0.0, offset * _itemWidth * spacing, 0.0);
-            }
-            else
-            {
-                return CATransform3DTranslate(transform, offset * _itemWidth * spacing, 0.0, 0.0);
-            }
-        }
-        case iCarouselTypeRotary:
-        case iCarouselTypeInvertedRotary:
-        {
-            CGFloat count = [self circularCarouselItemCount];
-            CGFloat spacing = [self valueForOption:iCarouselOptionSpacing withDefault:1.0];
-            CGFloat arc = [self valueForOption:iCarouselOptionArc withDefault:M_PI * 2.0];
-            CGFloat radius = [self valueForOption:iCarouselOptionRadius withDefault:MAX(_itemWidth * spacing / 2.0, _itemWidth * spacing / 2.0 / tanf(arc/2.0/count))];
-            CGFloat angle = [self valueForOption:iCarouselOptionAngle withDefault:offset / count * arc];
-            
-            if (_type == iCarouselTypeInvertedRotary)
-            {
-                radius = -radius;
-                angle = -angle;
-            }
-            
-            if (_vertical)
-            {
-                return CATransform3DTranslate(transform, 0.0, radius * sin(angle), radius * cos(angle) - radius);
-            }
-            else
-            {
-                return CATransform3DTranslate(transform, radius * sin(angle), 0.0, radius * cos(angle) - radius);
-            }
-        }
-        case iCarouselTypeCylinder:
-        case iCarouselTypeInvertedCylinder:
-        {
-            CGFloat count = [self circularCarouselItemCount];
-            CGFloat spacing = [self valueForOption:iCarouselOptionSpacing withDefault:1.0];
-            CGFloat arc = [self valueForOption:iCarouselOptionArc withDefault:M_PI * 2.0];
-            CGFloat radius = [self valueForOption:iCarouselOptionRadius withDefault:MAX(0.01, _itemWidth * spacing / 2.0 / tanf(arc/2.0/count))];
-            CGFloat angle = [self valueForOption:iCarouselOptionAngle withDefault:offset / count * arc];
-            
-            if (_type == iCarouselTypeInvertedCylinder)
-            {
-                radius = -radius;
-                angle = -angle;
-            }
-            
-            if (_vertical)
-            {
-                transform = CATransform3DTranslate(transform, 0.0, 0.0, -radius);
-                transform = CATransform3DRotate(transform, angle, -1.0, 0.0, 0.0);
-                return CATransform3DTranslate(transform, 0.0, 0.0, radius + 0.01);
-            }
-            else
-            {
-                transform = CATransform3DTranslate(transform, 0.0, 0.0, -radius);
-                transform = CATransform3DRotate(transform, angle, 0.0, 1.0, 0.0);
-                return CATransform3DTranslate(transform, 0.0, 0.0, radius + 0.01);
-            }
-        }
-        case iCarouselTypeWheel:
-        case iCarouselTypeInvertedWheel:
-        {
-            CGFloat count = [self circularCarouselItemCount];
-            CGFloat spacing = [self valueForOption:iCarouselOptionSpacing withDefault:1.0];
-            CGFloat arc = [self valueForOption:iCarouselOptionArc withDefault:M_PI * 2.0];
-            CGFloat radius = [self valueForOption:iCarouselOptionRadius withDefault:_itemWidth * spacing * count / arc];
-            CGFloat angle = [self valueForOption:iCarouselOptionAngle withDefault:arc / count];
-            
-            if (_type == iCarouselTypeInvertedWheel)
-            {
-                radius = -radius;
-                angle = -angle;
-            }
-            
-            if (_vertical)
-            {
-                transform = CATransform3DTranslate(transform, -radius, 0.0, 0.0);
-                transform = CATransform3DRotate(transform, angle * offset, 0.0, 0.0, 1.0);
-                return CATransform3DTranslate(transform, radius, 0.0, offset * 0.01);
-            }
-            else
-            {
-                transform = CATransform3DTranslate(transform, 0.0, radius, 0.0);
-                transform = CATransform3DRotate(transform, angle * offset, 0.0, 0.0, 1.0);
-                return CATransform3DTranslate(transform, 0.0, -radius, offset * 0.01);
-            }
-        }
-        case iCarouselTypeCoverFlow:
-        case iCarouselTypeCoverFlow2:
-        {
-            CGFloat tilt = [self valueForOption:iCarouselOptionTilt withDefault:0.9f];
-            CGFloat spacing = [self valueForOption:iCarouselOptionSpacing withDefault:0.25];
-            CGFloat clampedOffset = MAX(-1.0, MIN(1.0, offset));
-
-            if (_type == iCarouselTypeCoverFlow2)
-            {
-                if (_toggle > 0.0)
-                {
-                    if (offset <= -0.5)
-                    {
-                        clampedOffset = -1.0;
-                    }
-                    else if (offset <= 0.5)
-                    {
-                        clampedOffset = -_toggle;
-                    }
-                    else if (offset <= 1.5)
-                    {
-                        clampedOffset = 1.0 - _toggle;
-                    }
-                }
-                else
-                {
-                    if (offset > 0.5)
-                    {
-                        clampedOffset = 1.0;
-                    }
-                    else if (offset > -0.5)
-                    {
-                        clampedOffset = -_toggle;
-                    }
-                    else if (offset > -1.5)
-                    {
-                        clampedOffset = - 1.0 - _toggle;
-                    }
-                }
-            }
-            
-            CGFloat x = (clampedOffset * 0.5 * tilt + offset * spacing) * _itemWidth;
-            CGFloat z = fabs(clampedOffset) * -_itemWidth * 0.5;
-            
-            if (_vertical)
-            {
-                transform = CATransform3DTranslate(transform, 0.0, x, z);
-                return CATransform3DRotate(transform, -clampedOffset * M_PI_2 * tilt, -1.0, 0.0, 0.0);
-            }
-            else
-            {
-                transform = CATransform3DTranslate(transform, x, 0.0, z);
-                return CATransform3DRotate(transform, -clampedOffset * M_PI_2 * tilt, 0.0, 1.0, 0.0);
-            }
-        }
-        case iCarouselTypeTimeMachine:
-        case iCarouselTypeInvertedTimeMachine:
-        {
-            CGFloat tilt = [self valueForOption:iCarouselOptionTilt withDefault:0.3f];
-            CGFloat spacing = [self valueForOption:iCarouselOptionSpacing withDefault:1.0];
-            
-            if (_type == iCarouselTypeInvertedTimeMachine)
-            {
-                tilt = -tilt;
-                offset = -offset;
-            }
-            
-            if (_vertical)
-            {
-                
-#ifdef ICAROUSEL_MACOS
-                
-                //invert again
-                tilt = -tilt;
-                offset = -offset;
-                
-#endif
-                return CATransform3DTranslate(transform, 0.0, offset * _itemWidth * tilt, offset * _itemWidth * spacing);
-            }
-            else {
-                
-                if (offset <= 0) {
-                    return CATransform3DTranslate(transform, offset * _itemWidth * tilt, 0.0, offset * _itemWidth * spacing);
-                } else {
-                    
-                    CATransform3D rotateTransform = CATransform3DRotate(transform, offset / 5.0 , 0, 0, -1);
-                    CATransform3D moveTransform = CATransform3DTranslate(transform, offset * _itemWidth * tilt * 4, 0.0, offset * _itemWidth * spacing / 2.0);
-                    return CATransform3DConcat(rotateTransform, moveTransform);
-                }
-            }
-        }
+//    CGFloat tilt = -[self valueForOption:iCarouselOptionTilt withDefault:0.3f];
+//    CGFloat spacing = [self valueForOption:iCarouselOptionSpacing withDefault:1.0];
+    
+    CGFloat tilt = -0.3f;
+    CGFloat spacing = 0.75f;
+    
+    
+    offset = -offset;
+    
+    if (offset <= 0) {
+        return CATransform3DTranslate(transform, offset * _itemWidth * tilt, 0.0, offset * _itemWidth * spacing);
+    } else {
+        
+        CATransform3D rotateTransform = CATransform3DRotate(transform, offset / 5.0 , 0, 0, -1);
+        CATransform3D moveTransform = CATransform3DTranslate(transform, offset * _itemWidth * tilt * 4, 0.0, offset * _itemWidth * spacing / 2.0);
+        return CATransform3DConcat(rotateTransform, moveTransform);
     }
+    
 }
 
 NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *self)
@@ -711,14 +528,14 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     if (difference == 0.0)
     {
         CATransform3D t3 = [self currentItemView].superview.layer.transform;
-        if (self.vertical)
-        {
-            CGFloat y1 = t1.m12 + t1.m22 + t1.m32 + t1.m42;
-            CGFloat y2 = t2.m12 + t2.m22 + t2.m32 + t2.m42;
-            CGFloat y3 = t3.m12 + t3.m22 + t3.m32 + t3.m42;
-            difference = fabs(y2 - y3) - fabs(y1 - y3);
-        }
-        else
+//        if (self.vertical)
+//        {
+//            CGFloat y1 = t1.m12 + t1.m22 + t1.m32 + t1.m42;
+//            CGFloat y2 = t2.m12 + t2.m22 + t2.m32 + t2.m42;
+//            CGFloat y3 = t3.m12 + t3.m22 + t3.m32 + t3.m42;
+//            difference = fabs(y2 - y3) - fabs(y1 - y3);
+//        }
+//        else
         {
             CGFloat x1 = t1.m11 + t1.m21 + t1.m31 + t1.m41;
             CGFloat x2 = t2.m11 + t2.m21 + t2.m31 + t2.m41;
@@ -757,27 +574,27 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
 {
     //calculate relative position
     CGFloat offset = index - _scrollOffset;
-    if (_wrapEnabled)
-    {
-        if (offset > _numberOfItems/2.0)
-        {
-            offset -= _numberOfItems;
-        }
-        else if (offset < -_numberOfItems/2.0)
-        {
-            offset += _numberOfItems;
-        }
-    }
-    
-#ifdef ICAROUSEL_MACOS
-    
-    if (_vertical)
-    {
-        //invert transform
-        offset = -offset;
-    }
-    
-#endif
+//    if (_wrapEnabled)
+//    {
+//        if (offset > _numberOfItems/2.0)
+//        {
+//            offset -= _numberOfItems;
+//        }
+//        else if (offset < -_numberOfItems/2.0)
+//        {
+//            offset += _numberOfItems;
+//        }
+//    }
+//    
+//#ifdef ICAROUSEL_MACOS
+//    
+//    if (_vertical)
+//    {
+//        //invert transform
+//        offset = -offset;
+//    }
+//    
+//#endif
     
     return offset;
 }
@@ -871,33 +688,35 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     view.superview.layer.transform = transform;
     
     //backface culling
-    BOOL showBackfaces = view.layer.doubleSided;
-    if (showBackfaces)
-    {
-        switch (_type)
-        {
-            case iCarouselTypeInvertedCylinder:
-            {
-                showBackfaces = NO;
-                break;
-            }
-            case iCarouselTypeCoverFlow:
-            case iCarouselTypeCoverFlow2:
-            case iCarouselTypeCustom:
-            case iCarouselTypeCylinder:
-            case iCarouselTypeRotary:
-            case iCarouselTypeInvertedRotary:
-            case iCarouselTypeWheel:
-            case iCarouselTypeInvertedWheel:
-            case iCarouselTypeLinear:
-            case iCarouselTypeTimeMachine:
-            case iCarouselTypeInvertedTimeMachine:
-            {
-                showBackfaces = NO;
-                break;
-            }
-        }
-    }
+    BOOL showBackfaces;
+//    if (showBackfaces)
+//    {
+//        switch (_type)
+//        {
+//            case iCarouselTypeInvertedCylinder:
+//            {
+//                showBackfaces = NO;
+//                break;
+//            }
+//            case iCarouselTypeCoverFlow:
+//            case iCarouselTypeCoverFlow2:
+//            case iCarouselTypeCustom:
+//            case iCarouselTypeCylinder:
+//            case iCarouselTypeRotary:
+//            case iCarouselTypeInvertedRotary:
+//            case iCarouselTypeWheel:
+//            case iCarouselTypeInvertedWheel:
+//            case iCarouselTypeLinear:
+//            case iCarouselTypeTimeMachine:
+//            case iCarouselTypeInvertedTimeMachine:
+//            {
+//                showBackfaces = NO;
+//                break;
+//            }
+//        }
+//    }
+//    
+    showBackfaces = NO;
     showBackfaces = !![self valueForOption:iCarouselOptionShowBackfaces withDefault:showBackfaces];
     
     //we can't just set the layer.doubleSided property because it doesn't block interaction

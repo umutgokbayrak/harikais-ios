@@ -8,7 +8,7 @@
 
 #import "CardsVC.h"
 #import <UIView+Position.h>
-
+#import "CardView.h"
 
 @interface CardsVC () <UIScrollViewDelegate, iCarouselDataSource, iCarouselDelegate> {
 
@@ -143,24 +143,23 @@
 
 - (UIView *)carousel:(__unused iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
-    UILabel *label = nil;
+
     
     //create new view if no view is available for recycling
     if (view == nil) {
         view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"temp-placeholder"]];
-        ((UIImageView *)view).image = [UIImage imageNamed:@"temp-placeholder"];
-        view.frameWidth *= 1.2;
-        view.frameHeight *= 1.2;
-//        view.contentMode = UIViewContentModeCenter;
-        label = [[UILabel alloc] initWithFrame:view.bounds];
-        label.backgroundColor = [UIColor clearColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [label.font fontWithSize:50];
-        label.tag = 1;
-        [view addSubview:label];
+//        ((UIImageView *)view).image = [UIImage imageNamed:@"temp-placeholder"];
+        
+        view = [[NSBundle mainBundle] loadNibNamed:@"CardView" owner:self options:nil][0];
+        
+        
+        view.frameWidth = 267;
+        view.frameHeight = 450;
+
+
     } else {
         //get a reference to the label in the recycled view
-        label = (UILabel *)[view viewWithTag:1];
+
     }
     
     //set item label
@@ -168,9 +167,21 @@
     //views outside of the `if (view == nil) {...}` check otherwise
     //you'll get weird issues with carousel item content appearing
     //in the wrong place in the carousel
-    label.text = [self.items[(NSUInteger)index] stringValue];
+
     
     return view;
+}
+
+- (UIImage *)renderedImageFromView:(UIView *)view {
+    
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0);
+    
+    [view drawViewHierarchyInRect:self.view.bounds afterScreenUpdates:YES];
+    
+    UIImage *copied = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return copied;
 }
 
 - (NSInteger)numberOfPlaceholdersInCarousel:(__unused iCarousel *)carousel {
@@ -220,7 +231,7 @@
         case iCarouselOptionVisibleItems:
         {
             if (option == iCarouselOptionVisibleItems) {
-                return 7;
+                return 5;
             }
             return value;
         }

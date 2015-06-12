@@ -44,6 +44,9 @@
 		95B77BAD1B25AB780081E694 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95B77BA11B25AB780081E694 /* OpenSans-Semibold.ttf */; };
 		95B77BAE1B25AB780081E694 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95B77BA21B25AB780081E694 /* OpenSans-SemiboldItalic.ttf */; };
 		95B77BB11B25B3360081E694 /* IntroductionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B77BB01B25B3360081E694 /* IntroductionVC.m */; };
+		95D7753C1B2B41FF006D501F /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D7753B1B2B41FF006D501F /* SettingsVC.m */; };
+		95D775401B2B58E5006D501F /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D7753F1B2B58E5006D501F /* CardView.m */; };
+		95D775421B2B58FB006D501F /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D775411B2B58FB006D501F /* CardView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +119,11 @@
 		95B77BA21B25AB780081E694 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		95B77BAF1B25B3360081E694 /* IntroductionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionVC.h; sourceTree = "<group>"; };
 		95B77BB01B25B3360081E694 /* IntroductionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionVC.m; sourceTree = "<group>"; };
+		95D7753A1B2B41FF006D501F /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
+		95D7753B1B2B41FF006D501F /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
+		95D7753E1B2B58E5006D501F /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
+		95D7753F1B2B58E5006D501F /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
+		95D775411B2B58FB006D501F /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,8 +229,8 @@
 				95511E191B28291D00AD40C6 /* Favourite VC */,
 				95511E201B2853A700AD40C6 /* Applications VC */,
 				95511E241B286CAC00AD40C6 /* Chat VC */,
-				95B645411B29FE86009F1696 /* DetailVC.h */,
-				95B645421B29FE86009F1696 /* DetailVC.m */,
+				95D775391B2B41DE006D501F /* Detail VC */,
+				95D7753D1B2B567C006D501F /* Settings VC */,
 			);
 			path = Harikals;
 			sourceTree = "<group>";
@@ -256,6 +264,8 @@
 		95A5E76E1B2700D200B6E978 /* Cards Controller */ = {
 			isa = PBXGroup;
 			children = (
+				95D7753E1B2B58E5006D501F /* CardView.h */,
+				95D7753F1B2B58E5006D501F /* CardView.m */,
 				95511E0E1B2719CA00AD40C6 /* iCarousel */,
 				95A5E7691B2700C300B6E978 /* CardsVC.h */,
 				95A5E76A1B2700C300B6E978 /* CardsVC.m */,
@@ -294,6 +304,7 @@
 				957B639F1B247840003AA201 /* LaunchScreen.xib */,
 				95511E251B28758200AD40C6 /* ChatInputView.xib */,
 				95B645441B2A05BA009F1696 /* ModalView.xib */,
+				95D775411B2B58FB006D501F /* CardView.xib */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -335,6 +346,24 @@
 				95B77BA21B25AB780081E694 /* OpenSans-SemiboldItalic.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		95D775391B2B41DE006D501F /* Detail VC */ = {
+			isa = PBXGroup;
+			children = (
+				95B645411B29FE86009F1696 /* DetailVC.h */,
+				95B645421B29FE86009F1696 /* DetailVC.m */,
+			);
+			name = "Detail VC";
+			sourceTree = "<group>";
+		};
+		95D7753D1B2B567C006D501F /* Settings VC */ = {
+			isa = PBXGroup;
+			children = (
+				95D7753A1B2B41FF006D501F /* SettingsVC.h */,
+				95D7753B1B2B41FF006D501F /* SettingsVC.m */,
+			);
+			name = "Settings VC";
 			sourceTree = "<group>";
 		};
 		A3A474DE6945B0272138849B /* Frameworks */ = {
@@ -442,6 +471,7 @@
 				95A5E76D1B2700C300B6E978 /* CardsVC.xib in Resources */,
 				95B645451B2A05BA009F1696 /* ModalView.xib in Resources */,
 				95B77BA81B25AB780081E694 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				95D775421B2B58FB006D501F /* CardView.xib in Resources */,
 				95B77BAB1B25AB780081E694 /* OpenSans-LightItalic.ttf in Resources */,
 				957B63A11B247840003AA201 /* LaunchScreen.xib in Resources */,
 				95B77BA91B25AB780081E694 /* OpenSans-Italic.ttf in Resources */,
@@ -509,9 +539,11 @@
 				95511E141B2770B400AD40C6 /* LoginVC.m in Sources */,
 				95A5E76C1B2700C300B6E978 /* CardsVC.m in Sources */,
 				95AE071E1B25F38200184007 /* RECommonFunctions.m in Sources */,
+				95D7753C1B2B41FF006D501F /* SettingsVC.m in Sources */,
 				95B645431B29FE86009F1696 /* DetailVC.m in Sources */,
 				95511E181B28291700AD40C6 /* FavouriteVC.m in Sources */,
 				95511E111B2719CA00AD40C6 /* iCarousel.m in Sources */,
+				95D775401B2B58E5006D501F /* CardView.m in Sources */,
 				957B63961B247840003AA201 /* AppDelegate.m in Sources */,
 				95AE07241B25F5BD00184007 /* MenuViewController.m in Sources */,
 				95511E1F1B2853A300AD40C6 /* ApplicationsVC.m in Sources */,

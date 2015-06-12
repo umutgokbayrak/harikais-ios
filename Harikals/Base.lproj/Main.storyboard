@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OIV-DS-XMH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="gar-Nb-oVj">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -42,6 +42,9 @@
             <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
+            <string>OpenSans-Semibold</string>
+            <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
@@ -347,6 +350,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                         <segue destination="bL3-LM-O75" kind="relationship" relationship="rootViewController" id="ZT4-jO-vVL"/>
                         <segue destination="2oJ-ZP-d5u" kind="push" identifier="Message" id="dFy-gq-o27"/>
                         <segue destination="cqo-r8-aFR" kind="push" identifier="third" id="Wm7-G2-XeU"/>
+                        <segue destination="VRS-mN-wmv" kind="push" identifier="settings" id="9bm-Ji-jfR"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAc-Ug-f8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -378,25 +382,87 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trivia Software A.G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvn-gC-VA5">
-                                <rect key="frame" x="92" y="89" width="136" height="21"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
-                                <color key="textColor" red="0.32941176470588235" green="0.41176470588235292" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Backend Java Developer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGc-f8-HCO">
-                                <rect key="frame" x="102" y="110" width="116" height="14"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="poV-Oo-VgA">
                                 <rect key="frame" x="0.0" y="64" width="320" height="449"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="khv-FW-i2m">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="khv-FW-i2m">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="439"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Trivia Software A.G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvn-gC-VA5">
+                                                <rect key="frame" x="92" y="15" width="136" height="21"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
+                                                <color key="textColor" red="0.32941176470588235" green="0.41176470588235292" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Backend Java Developer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGc-f8-HCO">
+                                                <rect key="frame" x="102" y="41" width="116" height="14"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
+                                                <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="photo-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="BdC-jV-Edj">
+                                                <rect key="frame" x="27" y="67" width="267" height="164"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pin-icon" translatesAutoresizingMaskIntoConstraints="NO" id="7iS-EB-TAi">
+                                                <rect key="frame" x="27" y="245" width="8" height="11"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="İstanbul, Anadolu Yakası" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxh-Hh-nLw">
+                                                <rect key="frame" x="49" y="242" width="154" height="18"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="13"/>
+                                                <color key="textColor" red="0.078431372549019607" green="0.10588235294117647" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="money-bag-small" translatesAutoresizingMaskIntoConstraints="NO" id="NDE-5Q-gCf">
+                                                <rect key="frame" x="27" y="269" width="12" height="13"/>
+                                            </imageView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44M-EQ-w4D">
+                                                <rect key="frame" x="27" y="295" width="267" height="128"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="128" id="A1A-qP-1l1"/>
+                                                </constraints>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2000TL - 2500TL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vw4-kZ-lUq">
+                                                <rect key="frame" x="49" y="268" width="92" height="17"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="NDE-5Q-gCf" firstAttribute="top" secondItem="7iS-EB-TAi" secondAttribute="bottom" constant="13" id="1O7-KV-1ki"/>
+                                            <constraint firstAttribute="trailing" secondItem="44M-EQ-w4D" secondAttribute="trailing" constant="26" id="3SI-gX-fPm"/>
+                                            <constraint firstAttribute="centerX" secondItem="Dvn-gC-VA5" secondAttribute="centerX" id="4tI-AA-jYi"/>
+                                            <constraint firstItem="Vw4-kZ-lUq" firstAttribute="leading" secondItem="NDE-5Q-gCf" secondAttribute="leading" constant="22" id="5pX-Ku-Z6M"/>
+                                            <constraint firstAttribute="trailing" secondItem="BdC-jV-Edj" secondAttribute="trailing" constant="26" id="Aur-nq-ASM"/>
+                                            <constraint firstItem="7iS-EB-TAi" firstAttribute="top" secondItem="BdC-jV-Edj" secondAttribute="bottom" constant="14" id="Awc-d8-Rvy"/>
+                                            <constraint firstItem="44M-EQ-w4D" firstAttribute="leading" secondItem="khv-FW-i2m" secondAttribute="leading" constant="27" id="BbS-hF-GqJ"/>
+                                            <constraint firstItem="BdC-jV-Edj" firstAttribute="top" secondItem="qGc-f8-HCO" secondAttribute="bottom" constant="12" id="Iif-mo-JY2"/>
+                                            <constraint firstItem="Dvn-gC-VA5" firstAttribute="centerX" secondItem="qGc-f8-HCO" secondAttribute="centerX" id="Qrx-8v-TUE"/>
+                                            <constraint firstItem="nxh-Hh-nLw" firstAttribute="centerY" secondItem="7iS-EB-TAi" secondAttribute="centerY" constant="0.5" id="aDN-xh-mDV"/>
+                                            <constraint firstItem="44M-EQ-w4D" firstAttribute="top" secondItem="Vw4-kZ-lUq" secondAttribute="bottom" constant="10" id="eXK-xu-yHl"/>
+                                            <constraint firstItem="7iS-EB-TAi" firstAttribute="leading" secondItem="BdC-jV-Edj" secondAttribute="leading" id="eqj-Bm-GHW"/>
+                                            <constraint firstItem="BdC-jV-Edj" firstAttribute="leading" secondItem="khv-FW-i2m" secondAttribute="leading" constant="27" id="esr-4h-j5Z"/>
+                                            <constraint firstItem="nxh-Hh-nLw" firstAttribute="leading" secondItem="7iS-EB-TAi" secondAttribute="trailing" constant="14" id="fqh-DJ-uvB"/>
+                                            <constraint firstItem="NDE-5Q-gCf" firstAttribute="leading" secondItem="7iS-EB-TAi" secondAttribute="leading" id="gfP-UF-zp6"/>
+                                            <constraint firstItem="Vw4-kZ-lUq" firstAttribute="centerY" secondItem="NDE-5Q-gCf" secondAttribute="centerY" constant="0.5" id="jAd-rb-Xku"/>
+                                            <constraint firstItem="Dvn-gC-VA5" firstAttribute="top" secondItem="khv-FW-i2m" secondAttribute="top" constant="15" id="lq7-yi-HnO"/>
+                                            <constraint firstItem="qGc-f8-HCO" firstAttribute="top" secondItem="Dvn-gC-VA5" secondAttribute="bottom" constant="5" id="qJW-I8-9OC"/>
+                                            <constraint firstAttribute="bottom" secondItem="44M-EQ-w4D" secondAttribute="bottom" constant="10" id="vuP-c3-9j1"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="khv-FW-i2m" firstAttribute="leading" secondItem="poV-Oo-VgA" secondAttribute="leading" id="6U9-6I-6Hf"/>
+                                    <constraint firstAttribute="bottom" secondItem="khv-FW-i2m" secondAttribute="bottom" constant="10" id="InR-QB-xKE"/>
+                                    <constraint firstAttribute="trailing" secondItem="khv-FW-i2m" secondAttribute="trailing" id="KZy-45-C2q"/>
+                                    <constraint firstItem="khv-FW-i2m" firstAttribute="top" secondItem="poV-Oo-VgA" secondAttribute="top" id="Uuh-LW-RnL"/>
+                                    <constraint firstAttribute="centerX" secondItem="khv-FW-i2m" secondAttribute="centerX" id="kqJ-AU-Cw4"/>
+                                </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yys-Pz-ynb">
                                 <rect key="frame" x="0.0" y="513" width="320" height="55"/>
@@ -432,7 +498,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                         <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-28"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="-11" maxX="-69" maxY="0.0"/>
-                                        <state key="normal" title="Favorilere Ekle" image="CC299CEF-50B2-440D-95CF-BC7CB8DB5E3B">
+                                        <state key="normal" title="Favorilere Ekle" image="CDB46671-5265-497D-9F01-B6AAE338F9FB">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -479,6 +545,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                             <constraint firstItem="Yys-Pz-ynb" firstAttribute="trailing" secondItem="poV-Oo-VgA" secondAttribute="trailing" id="L1U-Ux-dUt"/>
                             <constraint firstAttribute="trailing" secondItem="Yys-Pz-ynb" secondAttribute="trailing" id="MOG-qL-uXJ"/>
                             <constraint firstItem="Yys-Pz-ynb" firstAttribute="top" secondItem="poV-Oo-VgA" secondAttribute="bottom" id="Zrz-Nc-ksM"/>
+                            <constraint firstItem="khv-FW-i2m" firstAttribute="width" secondItem="AfL-L1-hNl" secondAttribute="width" id="omt-bf-tjh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Detaylar" id="7KP-Jj-U0d">
@@ -849,6 +916,85 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
             </objects>
             <point key="canvasLocation" x="998" y="1750"/>
         </scene>
+        <!--Ayarlar-->
+        <scene sceneID="f6K-Q6-uuM">
+            <objects>
+                <viewController restorationIdentifier="settings" storyboardIdentifier="settings" id="VRS-mN-wmv" customClass="SettingsVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kaw-Ry-qyL"/>
+                        <viewControllerLayoutGuide type="bottom" id="1no-8a-P4h"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1D4-P9-ml4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OD2-Yy-n9O">
+                                <rect key="frame" x="7" y="10" width="306" height="79"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bildirim Mesajları" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFQ-rq-E6y">
+                                        <rect key="frame" x="15" y="29" width="136" height="21"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
+                                        <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="79" id="M0M-Uq-BUN"/>
+                                    <constraint firstItem="AFQ-rq-E6y" firstAttribute="leading" secondItem="OD2-Yy-n9O" secondAttribute="leading" constant="15" id="hU7-yW-IHK"/>
+                                    <constraint firstAttribute="centerY" secondItem="AFQ-rq-E6y" secondAttribute="centerY" id="oMP-YE-zNN"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5bK-SA-jI7">
+                                <rect key="frame" x="7" y="111" width="306" height="79"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="money-bag-icon" translatesAutoresizingMaskIntoConstraints="NO" id="x0w-uU-hIN">
+                                        <rect key="frame" x="13" y="29" width="20" height="22"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="79" id="jbX-sM-tKB"/>
+                                    <constraint firstItem="x0w-uU-hIN" firstAttribute="leading" secondItem="5bK-SA-jI7" secondAttribute="leading" constant="13" id="nLv-C5-9Ic"/>
+                                    <constraint firstAttribute="centerY" secondItem="x0w-uU-hIN" secondAttribute="centerY" constant="-0.5" id="w9h-cD-Yf5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OD2-Yy-n9O" firstAttribute="top" secondItem="kaw-Ry-qyL" secondAttribute="bottom" constant="10" id="4rg-JV-VjU"/>
+                            <constraint firstItem="OD2-Yy-n9O" firstAttribute="leading" secondItem="1D4-P9-ml4" secondAttribute="leading" constant="7" id="CAB-FG-avA"/>
+                            <constraint firstItem="OD2-Yy-n9O" firstAttribute="height" secondItem="5bK-SA-jI7" secondAttribute="height" id="e8k-JS-ZNZ"/>
+                            <constraint firstAttribute="trailing" secondItem="OD2-Yy-n9O" secondAttribute="trailing" constant="7" id="iPi-lV-zk2"/>
+                            <constraint firstItem="OD2-Yy-n9O" firstAttribute="leading" secondItem="5bK-SA-jI7" secondAttribute="leading" id="rAG-VO-nHg"/>
+                            <constraint firstItem="OD2-Yy-n9O" firstAttribute="trailing" secondItem="5bK-SA-jI7" secondAttribute="trailing" id="rEg-gU-189"/>
+                            <constraint firstItem="5bK-SA-jI7" firstAttribute="top" secondItem="OD2-Yy-n9O" secondAttribute="bottom" constant="22" id="vqx-B4-lLh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Ayarlar" id="Hh5-0d-i7s">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="Z3w-8q-cj4">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jdr-xX-ZKt">
+                                <rect key="frame" x="16" y="11" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="menu-button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="presentLeftMenuViewController:" destination="VRS-mN-wmv" eventType="touchUpInside" id="PmX-hU-71F"/>
+                                </connections>
+                            </button>
+                            <color key="tintColor" red="0.2784313725" green="0.62745098040000002" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="middleHolder" destination="5bK-SA-jI7" id="H17-sA-x0r"/>
+                        <outlet property="topHolder" destination="OD2-Yy-n9O" id="caO-IA-Zav"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ERb-Bm-n7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1787" y="1748"/>
+        </scene>
         <!--Başvurular-->
         <scene sceneID="k9c-7p-UpV">
             <objects>
@@ -1061,7 +1207,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SWf-ka-goy" id="RSd-1a-fus">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You, 03/14/2014" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXf-Tu-nP6">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You, 03/14/2014" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXf-Tu-nP6">
                                                     <rect key="frame" x="155" y="4" width="87" height="17"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Italic" family="Open Sans" pointSize="12"/>
                                                     <color key="textColor" red="0.68627450980392157" green="0.68627450980392157" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
@@ -1165,7 +1311,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
         </scene>
     </scenes>
     <resources>
-        <image name="CC299CEF-50B2-440D-95CF-BC7CB8DB5E3B" width="16" height="13">
+        <image name="CDB46671-5265-497D-9F01-B6AAE338F9FB" width="16" height="13">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -1256,6 +1402,10 @@ AA1vA
         <image name="menu-logo" width="112" height="28"/>
         <image name="message-icon" width="14" height="15"/>
         <image name="message-tab-icon" width="19" height="15"/>
+        <image name="money-bag-icon" width="20" height="22"/>
+        <image name="money-bag-small" width="12" height="13"/>
+        <image name="photo-placeholder" width="267" height="164"/>
+        <image name="pin-icon" width="8" height="11"/>
         <image name="vertical-line" width="1" height="1"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
