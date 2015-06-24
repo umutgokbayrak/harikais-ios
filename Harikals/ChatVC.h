@@ -13,4 +13,6 @@
 
 @property (nonatomic, assign) BOOL fromDetail;
 
+@property (nonatomic, strong) NSDictionary *dataDictionary;
+
 @end

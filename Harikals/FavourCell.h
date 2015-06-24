@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface FavourCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+
+- (void)configureFavourite:(NSDictionary *)favouriteObject;
+- (void)configureChat:(NSDictionary *)chatObject;
+
+
 
 @end

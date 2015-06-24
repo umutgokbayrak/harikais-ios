@@ -10,4 +10,6 @@
 
 @interface CardView : UIView
 
+- (void)configureViewWithJob:(NSDictionary *)jobDictionary;
+
 @end

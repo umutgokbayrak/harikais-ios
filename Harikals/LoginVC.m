@@ -7,6 +7,8 @@
 //
 
 #import "LoginVC.h"
+#import <PFLinkedInUtils.h>
+
 
 @interface LoginVC () {
     __weak IBOutlet NSLayoutConstraint *tipVerticalSpacing;
@@ -20,7 +22,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self animateTip];
+    
+    if ([PFUser currentUser][@"linkedInUser"] && [[PFUser currentUser][@"username"] length]) {
+        [self performSegueWithIdentifier:@"noAnim" sender:nil];
+    }
+  
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self animateTip];  
+}
+
+- (IBAction)loginPressed:(id)sender {
+//    spinner
+    
+    [PFLinkedInUtils logInWithBlock:^(PFUser *user, NSError *error) {
+        if (user) {
+            [self performSegueWithIdentifier:@"login" sender:nil];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Opps..." message:error.description delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+            [alert show];
+        }
+        
+        
+        
+//        [PFLinkedInUtils.linkedInHttpClient GET:@"companies" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            NSLog(@"Response JSON: %@", responseObject);
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            NSLog(@"Error: %@", error);
+//        }];
+    }];
 }
 
 

@@ -1192,7 +1192,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     _numberOfVisibleItems = 0;
     _numberOfItems = [_dataSource numberOfItemsInCarousel:self];
     
-    [mainScrollView setContentSize:CGSizeMake(viewWidth * _numberOfItems, 100)];
+    [mainScrollView setContentSize:CGSizeMake(viewWidth * (_numberOfItems + 1), 100)];
     _numberOfPlaceholders = [_dataSource numberOfPlaceholdersInCarousel:self];
 
     //reset view pools

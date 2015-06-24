@@ -10,6 +10,8 @@
 #import "UIViewController+RESideMenu.h"
 #import "FavouriteVC.h"
 #import "MenuCell.h"
+#import <Parse.h>
+
 
 @interface LeftMenuViewController () {
     
@@ -31,6 +33,16 @@
     
     mainTableView.dataSource = self;
     mainTableView.delegate = self;
+    
+//    [PFCloud callFunctionInBackground:@"config" withParameters:nil block:^(id object, NSError *error) {
+//        
+//    }];
+    [mainTableView reloadData];
+    
+}
+
+- (IBAction)profileButtonPressed:(id)sender {
+    
 }
 
 #pragma mark -

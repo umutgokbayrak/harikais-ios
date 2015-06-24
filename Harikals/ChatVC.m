@@ -7,17 +7,24 @@
 //
 
 #import "ChatVC.h"
+#import "ChatCell.h"
+
 
 @interface ChatVC () <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource> {
     __weak IBOutlet UITextField *inputTextField;
     
-//    __weak IBOutlet NSLayoutConstraint *inputBottomSpacing;
     __weak IBOutlet UITableView *mainTableView;
     
     __weak IBOutlet UIView *inputVuew;
     __weak IBOutlet NSLayoutConstraint *tableViewBottomSpacing;
     
     __weak IBOutlet NSLayoutConstraint *tableViewTopSpacing;
+    
+    CGFloat myWidth;
+    CGFloat otherWidth;
+    
+    UITextView *dummyTextView;
+    NSString *inputText;
 }
 
 @end
@@ -27,6 +34,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    inputText = @"Merhaba bu \nMerhaba bu";
+    
+    [self loadDummyTextView];
     [[NSBundle mainBundle] loadNibNamed:@"ChatInputView" owner:self options:nil];
     inputTextField.delegate = self;
     
@@ -38,15 +48,31 @@
     mainTableView.dataSource = self;
 
     mainTableView.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
+    
+    
+    myWidth = 199;
+    otherWidth = 229;
+    
+}
+
+- (void)loadDummyTextView {
+    dummyTextView = [[UITextView alloc] init];
+    dummyTextView.font = [UIFont fontWithName:@"OpenSans" size:15.0];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+
+}
+
+-(void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
     if (!_fromDetail) {
         [mainTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
 }
+
 
 - (BOOL)canBecomeFirstResponder {
     return YES;
@@ -76,10 +102,6 @@
 }
 
 
-
-
-
-
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
 
     return YES;
@@ -105,7 +127,10 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.row % 2 == 0 ? 139 : 112;
+//    BOOL isMine = data[]
+    dummyTextView.text = inputText;
+    CGFloat resultHeight = [dummyTextView sizeThatFits:CGSizeMake(indexPath.row % 2 == 0 ? myWidth : otherWidth, FLT_MAX)].height;
+    return MAX((resultHeight + 33), 74);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -114,8 +139,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indexPath.row % 2 == 0 ? @"myChatCell" : @"otherChatCell"];
-    
+    ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:indexPath.row % 2 == 0 ? @"myChatCell" : @"otherChatCell"];
+    cell.messageTextView.text = inputText;
     return cell;
 }
 

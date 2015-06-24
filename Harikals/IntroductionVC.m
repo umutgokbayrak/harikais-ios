@@ -8,7 +8,7 @@
 
 #import "IntroductionVC.h"
 #import <UIView+Position.h>
-
+#import <Parse.h>
 
 @import QuartzCore;
 
@@ -41,6 +41,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([PFUser currentUser][@"linkedInUser"] && [[PFUser currentUser][@"username"] length]) {
+        [self performSegueWithIdentifier:@"noAnim" sender:nil];
+    }
+    
     adjustingValue = 24.0;
     mainScrollView.pagingEnabled = YES;
     [self.view addGestureRecognizer:mainScrollView.panGestureRecognizer];
@@ -137,7 +141,7 @@
 }
 
 - (IBAction)nextPressed:(UIButton *)sender {
-    if (currentPage == 4) {
+    if (currentPage >= 4) {
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     } else {
         [mainScrollView scrollRectToVisible:CGRectMake(pageWidth * (currentPage + 1), 0, pageWidth, 10) animated:YES];

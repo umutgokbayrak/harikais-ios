@@ -8,15 +8,16 @@
 
 #import "FavouriteVC.h"
 #import "FavourCell.h"
-
+#import <Parse.h>
+#import "ChatVC.h"
 
 @interface FavouriteVC () <UITableViewDelegate, UITableViewDataSource> {
     
     __weak IBOutlet UITableView *mainTableView;
     
-    NSMutableArray *favouriteData;
+    NSMutableArray *dataArray;
     UITableViewCell *footer;
-    
+    CALayer *topBorder;
     
     __weak IBOutlet UILabel *emptylabel;
     __weak IBOutlet UIButton *firstalaButton;
@@ -28,30 +29,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    favouriteData = [NSMutableArray array];
-    
-    if (_isMessageVC) {
-        emptylabel.text = @"Hiç mesajınız yok";
-        firstalaButton.hidden = YES;
-    }
-    
+    dataArray = [NSMutableArray array];
 
-    
     mainTableView.separatorColor = [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
     
     footer = [mainTableView dequeueReusableCellWithIdentifier:@"footer"];
     
-    CALayer *topBorder = [CALayer layer];
+    topBorder = [CALayer layer];
     topBorder.frame = CGRectMake(0.0f, 0, 1000, 1.5);
     topBorder.backgroundColor = [UIColor colorWithRed:245.0 / 255.0 green:245.0 / 255.0 blue:245.0 / 255.0 alpha:1.0].CGColor;
     
     [footer.layer addSublayer:topBorder];
     
-    [favouriteData addObject:@"a"];
-    [favouriteData addObject:@"b"];
-    
     mainTableView.dataSource = self;
     mainTableView.delegate = self;
+    
+    
+    if (_isMessageVC) {
+        emptylabel.text = @"Hiç mesajınız yok";
+        firstalaButton.hidden = YES;
+        [self loadChats];
+    } else {
+        [self loadFavourites];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -61,6 +61,33 @@
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:71.0 / 255.0 green:160.0 / 255.0 blue:219.0 / 255.0 alpha:1.0]];
 }
 
+- (void)loadFavourites {
+    [PFCloud callFunctionInBackground:@"favorites" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
+        if (receivedItems.count && !error) {
+            [dataArray removeAllObjects];
+            [dataArray addObjectsFromArray:receivedItems];
+        } else {
+            //TODO:Remove NSLog
+            NSLog(@"favs ERROR %@", error);
+        }
+        
+        [mainTableView reloadData];
+    }];
+}
+
+- (void)loadChats {
+    [PFCloud callFunctionInBackground:@"chats" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
+        if (receivedItems.count && !error) {
+            [dataArray removeAllObjects];
+            [dataArray addObjectsFromArray:receivedItems];
+        } else {
+            //TODO:Remove NSLog
+            NSLog(@"chats ERROR %@", error);
+        }
+        
+        [mainTableView reloadData];
+    }];
+}
 
 //-------------------------------------------------------------------------------------------------------------
 #pragma mark - UITableView Data Source Methods
@@ -70,13 +97,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (!favouriteData.count) {
-        mainTableView.hidden = YES;
-    }
-    return favouriteData.count;
+
+    mainTableView.hidden = !dataArray.count;
+
+    return dataArray.count;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    topBorder.frame = CGRectMake(0.0f, 0, 1000, 1.5);
     return footer;
 }
 
@@ -87,6 +115,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FavourCell *cell = [tableView dequeueReusableCellWithIdentifier:_isMessageVC ? @"dialogCell" : @"favouriteCell"];
     
+    if (_isMessageVC) {
+        [cell configureChat:dataArray[indexPath.row]];
+    } else {
+        [cell configureFavourite:dataArray[indexPath.row]];
+    }
+    
     return cell;
 }
 
@@ -95,20 +129,28 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return  2 ;
+    return  2;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [favouriteData removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+        [dataArray removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
     }
 }
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_isMessageVC) {
-        [self performSegueWithIdentifier:@"openChat" sender:nil];
+        [self performSegueWithIdentifier:@"openChat" sender:dataArray[indexPath.row]];
+    }
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"openChat"]) {
+        ChatVC *chatVC = segue.destinationViewController;
+        chatVC.dataDictionary = sender;
     }
 }
 

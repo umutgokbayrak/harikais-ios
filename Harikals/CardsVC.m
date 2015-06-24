@@ -9,9 +9,11 @@
 #import "CardsVC.h"
 #import <UIView+Position.h>
 #import "CardView.h"
+#import <Parse.h>
 
 @interface CardsVC () <UIScrollViewDelegate, iCarouselDataSource, iCarouselDelegate> {
-
+    __weak IBOutlet UIView *emptyHolderView;
+    
 }
 
 @property (nonatomic, assign) BOOL wrap;
@@ -35,10 +37,7 @@
     //set up data
     self.wrap = NO;
     self.items = [NSMutableArray array];
-    for (int i = 0; i < 10; i++)
-    {
-        [self.items addObject:@(i)];
-    }
+
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -56,11 +55,8 @@
 }
 
 - (void)dealloc {
-    //it's a good idea to set these to nil here to avoid
-    //sending messages to a deallocated viewcontroller
     carousel.delegate = nil;
     carousel.dataSource = nil;
-    
 }
 
 
@@ -70,14 +66,26 @@
     [super viewDidLoad];
     self.carousel.delegate = self;
     self.carousel.dataSource = self;
-
     self.carousel.type = iCarouselTypeInvertedTimeMachine;
-    self.carousel.bounceDistance = 0.3;
-    
-//    self.carousel.decelerationRate = 0.2;
-
     self.carousel.ignorePerpendicularSwipes = YES;
+    
+    [self loadJobs];
 }
+
+- (void)loadJobs {
+    [PFCloud callFunctionInBackground:@"jobs" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
+        if (receivedItems.count && !error) {
+            [self.items removeAllObjects];
+            [self.items addObjectsFromArray:receivedItems];
+        } else {
+            //TODO:Remove NSLog
+            NSLog(@"JOBS ERROR %@", error);
+        }
+        
+        [carousel reloadData];
+    }];
+}
+
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -141,22 +149,15 @@
     return (NSInteger)[self.items count];
 }
 
-- (UIView *)carousel:(__unused iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
-{
-
-    
-    //create new view if no view is available for recycling
+- (UIView *)carousel:(__unused iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(CardView *)view {
     if (view == nil) {
-        view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"temp-placeholder"]];
-//        ((UIImageView *)view).image = [UIImage imageNamed:@"temp-placeholder"];
-        
         view = [[NSBundle mainBundle] loadNibNamed:@"CardView" owner:self options:nil][0];
-        
-        
+        [view configureViewWithJob:self.items[index]];
+    
         view.frameWidth = 267;
         view.frameHeight = 450;
-
-
+        //TODO:Remove NSLog
+        NSLog(@"view loaded");
     } else {
         //get a reference to the label in the recycled view
 
@@ -189,7 +190,7 @@
     return 0;
 }
 
-- (UIView *)carousel:(__unused iCarousel *)carousel placeholderViewAtIndex:(NSInteger)index reusingView:(UIView *)view {
+- (UIView *)carousel:(__unused iCarousel *)carousel placeholderViewAtIndex:(NSInteger)index reusingView:(CardView *)view {
     return view;
 }
 
@@ -240,6 +241,12 @@
 
 #pragma mark -
 #pragma mark iCarousel taps
+
+- (void)carouselDidScroll:(iCarousel *)_carousel {
+    CGFloat alpha = self.items.count - _carousel.scrollOffset;
+    emptyHolderView.alpha = 1 - alpha;
+    
+}
 
 - (void)carousel:(__unused iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
     NSNumber *item = (self.items)[(NSUInteger)index];
