@@ -7,7 +7,6 @@
 //
 
 #import "CardView.h"
-#import "SPCacheManager.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface CardView () {
@@ -18,15 +17,14 @@
     
     __weak IBOutlet UILabel *locationLabel;
     __weak IBOutlet UIImageView *photoImageView;
-    __weak IBOutlet UITextView *infoTextView;
-    
+
     __weak IBOutlet UILabel *codeLabel;
 }
 
 @end
 
 @implementation CardView
-
+@synthesize infoTextView;
 //{
 //    company =     {
 //        info = "Trivia Software bla ipsum dolor sit amet, consectetur adipiscing elit. Sed vel risus mi, sit amet porta sem. Vivamus sed ornare libero. Maecenas nec velit diam, commodo viverra enim. ";
@@ -81,12 +79,20 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     photoImageView.image = image;
                 });
+                
             }
+            if ([self.delegate respondsToSelector:@selector(updateImage:forJobId:)]) {
+                [self.delegate updateImage:image forJobId:jobDictionary[@"id"]];
+            }
+
         }];
         job = jobDictionary;
     }
-    
 
 }
+
+
+    
+
 
 @end

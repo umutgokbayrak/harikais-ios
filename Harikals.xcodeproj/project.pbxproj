@@ -15,9 +15,6 @@
 		95511E1F1B2853A300AD40C6 /* ApplicationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E1E1B2853A300AD40C6 /* ApplicationsVC.m */; };
 		95511E231B286CA200AD40C6 /* ChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E221B286CA100AD40C6 /* ChatVC.m */; };
 		95511E261B28758200AD40C6 /* ChatInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95511E251B28758200AD40C6 /* ChatInputView.xib */; };
-		9578F6371B38474100A02A5C /* CacheInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9578F6321B38474100A02A5C /* CacheInfo.m */; };
-		9578F6381B38474100A02A5C /* CacheModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9578F6331B38474100A02A5C /* CacheModel.xcdatamodeld */; };
-		9578F6391B38474100A02A5C /* SPCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9578F6361B38474100A02A5C /* SPCacheManager.m */; };
 		95790DB01B32C3140024EA3E /* PushNoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95790DAF1B32C3140024EA3E /* PushNoAnimationSegue.m */; };
 		957B63931B247840003AA201 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63921B247840003AA201 /* main.m */; };
 		957B63961B247840003AA201 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63951B247840003AA201 /* AppDelegate.m */; };
@@ -26,6 +23,7 @@
 		957B639E1B247840003AA201 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957B639D1B247840003AA201 /* Images.xcassets */; };
 		957B63A11B247840003AA201 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957B639F1B247840003AA201 /* LaunchScreen.xib */; };
 		957B63AD1B247840003AA201 /* HarikalsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 957B63AC1B247840003AA201 /* HarikalsTests.m */; };
+		959890E71B3C0E3400551F60 /* DropdownModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 959890E61B3C0E3400551F60 /* DropdownModel.m */; };
 		959B2C991A5F13610009C77D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B2C981A5F13610009C77D /* MenuCell.m */; };
 		95A5E76C1B2700C300B6E978 /* CardsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A5E76A1B2700C300B6E978 /* CardsVC.m */; };
 		95A5E76D1B2700C300B6E978 /* CardsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A5E76B1B2700C300B6E978 /* CardsVC.xib */; };
@@ -83,11 +81,6 @@
 		95511E211B286CA100AD40C6 /* ChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatVC.h; sourceTree = "<group>"; };
 		95511E221B286CA100AD40C6 /* ChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatVC.m; sourceTree = "<group>"; };
 		95511E251B28758200AD40C6 /* ChatInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatInputView.xib; sourceTree = "<group>"; };
-		9578F6311B38474100A02A5C /* CacheInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheInfo.h; sourceTree = "<group>"; };
-		9578F6321B38474100A02A5C /* CacheInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheInfo.m; sourceTree = "<group>"; };
-		9578F6341B38474100A02A5C /* CacheModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CacheModel.xcdatamodel; sourceTree = "<group>"; };
-		9578F6351B38474100A02A5C /* SPCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCacheManager.h; sourceTree = "<group>"; };
-		9578F6361B38474100A02A5C /* SPCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCacheManager.m; sourceTree = "<group>"; };
 		95790DAE1B32C3140024EA3E /* PushNoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNoAnimationSegue.h; sourceTree = "<group>"; };
 		95790DAF1B32C3140024EA3E /* PushNoAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNoAnimationSegue.m; sourceTree = "<group>"; };
 		957B638D1B247840003AA201 /* Harikals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Harikals.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +96,8 @@
 		957B63A61B247840003AA201 /* HarikalsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarikalsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		957B63AB1B247840003AA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957B63AC1B247840003AA201 /* HarikalsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HarikalsTests.m; sourceTree = "<group>"; };
+		959890E51B3C0E3400551F60 /* DropdownModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropdownModel.h; sourceTree = "<group>"; };
+		959890E61B3C0E3400551F60 /* DropdownModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropdownModel.m; sourceTree = "<group>"; };
 		959B2C971A5F13610009C77D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		959B2C981A5F13610009C77D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		95A5E7691B2700C300B6E978 /* CardsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardsVC.h; sourceTree = "<group>"; };
@@ -216,18 +211,6 @@
 			name = "Chat VC";
 			sourceTree = "<group>";
 		};
-		9578F6301B38473400A02A5C /* Cache manager */ = {
-			isa = PBXGroup;
-			children = (
-				9578F6311B38474100A02A5C /* CacheInfo.h */,
-				9578F6321B38474100A02A5C /* CacheInfo.m */,
-				9578F6331B38474100A02A5C /* CacheModel.xcdatamodeld */,
-				9578F6351B38474100A02A5C /* SPCacheManager.h */,
-				9578F6361B38474100A02A5C /* SPCacheManager.m */,
-			);
-			name = "Cache manager";
-			sourceTree = "<group>";
-		};
 		957B63841B247840003AA201 = {
 			isa = PBXGroup;
 			children = (
@@ -251,7 +234,6 @@
 		957B638F1B247840003AA201 /* Harikals */ = {
 			isa = PBXGroup;
 			children = (
-				9578F6301B38473400A02A5C /* Cache manager */,
 				95B77B961B25AAE50081E694 /* Fonts */,
 				95B77B951B25A8F40081E694 /* App Delegate */,
 				957B63971B247840003AA201 /* ViewController.h */,
@@ -403,6 +385,8 @@
 			children = (
 				95D7753A1B2B41FF006D501F /* SettingsVC.h */,
 				95D7753B1B2B41FF006D501F /* SettingsVC.m */,
+				959890E51B3C0E3400551F60 /* DropdownModel.h */,
+				959890E61B3C0E3400551F60 /* DropdownModel.m */,
 			);
 			name = "Settings VC";
 			sourceTree = "<group>";
@@ -588,17 +572,15 @@
 				95D775401B2B58E5006D501F /* CardView.m in Sources */,
 				957B63961B247840003AA201 /* AppDelegate.m in Sources */,
 				95790DB01B32C3140024EA3E /* PushNoAnimationSegue.m in Sources */,
-				9578F6371B38474100A02A5C /* CacheInfo.m in Sources */,
-				9578F6391B38474100A02A5C /* SPCacheManager.m in Sources */,
 				95AE07241B25F5BD00184007 /* MenuViewController.m in Sources */,
 				95511E1F1B2853A300AD40C6 /* ApplicationsVC.m in Sources */,
 				95B77BB11B25B3360081E694 /* IntroductionVC.m in Sources */,
+				959890E71B3C0E3400551F60 /* DropdownModel.m in Sources */,
 				959B2C991A5F13610009C77D /* MenuCell.m in Sources */,
 				95511E1C1B28353800AD40C6 /* FavourCell.m in Sources */,
 				95511E231B286CA200AD40C6 /* ChatVC.m in Sources */,
 				95AE071F1B25F38200184007 /* RESideMenu.m in Sources */,
 				95AE07201B25F38200184007 /* UIViewController+RESideMenu.m in Sources */,
-				9578F6381B38474100A02A5C /* CacheModel.xcdatamodeld in Sources */,
 				957B63931B247840003AA201 /* main.m in Sources */,
 				95BE31321B39665D0091E052 /* ChatCell.m in Sources */,
 			);
@@ -807,19 +789,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		9578F6331B38474100A02A5C /* CacheModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				9578F6341B38474100A02A5C /* CacheModel.xcdatamodel */,
-			);
-			currentVersion = 9578F6341B38474100A02A5C /* CacheModel.xcdatamodel */;
-			path = CacheModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 957B63851B247840003AA201 /* Project object */;
 }

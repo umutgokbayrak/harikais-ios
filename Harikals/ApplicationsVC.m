@@ -32,6 +32,13 @@
     mainTableView.delegate = self;
     [self loadApplications];
     profileCell = [mainTableView dequeueReusableCellWithIdentifier:@"profileCell"];
+    
+    [firstalaButton addTarget:self action:@selector(presentCards) forControlEvents:UIControlEventTouchUpInside];
+    [self.view bringSubviewToFront:firstalaButton];
+}
+
+- (void)presentCards {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"presentCards" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -61,14 +68,14 @@
 #pragma mark - UITableView Data Source Methods
 //-------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    emptyLabel.hidden = YES;
-    firstalaButton.hidden = YES;
-    tableView.scrollEnabled = YES;
-    
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    emptyLabel.hidden = dataArray.count;
+    firstalaButton.hidden = dataArray.count;
+    tableView.scrollEnabled = dataArray.count;
+    
     return dataArray.count + 1;
 }
 

@@ -11,7 +11,7 @@
 #import "FavouriteVC.h"
 #import "MenuCell.h"
 #import <Parse.h>
-
+#import <PFLinkedInUtils.h>
 
 @interface LeftMenuViewController () {
     
@@ -34,15 +34,53 @@
     mainTableView.dataSource = self;
     mainTableView.delegate = self;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentCards) name:@"presentCards" object:nil];
+    
 //    [PFCloud callFunctionInBackground:@"config" withParameters:nil block:^(id object, NSError *error) {
 //        
 //    }];
     [mainTableView reloadData];
+//    [self getProfile];
+}
+
+- (void)getProfile {
+    //        [NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~?oauth2_access_token=%@&format=json", accessToken]
     
+//    PFObject *linkedInUser = [PFUser currentUser][@"linkedInUser"];
+//    [linkedInUser fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//        NSString *accessToken = object[@"accessToken"];
+//        
+//    [PFLinkedInUtils.linkedInHttpClient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            //            NSLog(@"Response JSON: %@", responseObject);
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            //            NSLog(@"Error: %@", error);
+//        }];
+//    }];
+    
+
+//    [PFLinkedInUtils.linkedInHttpClient getAuthorizationCode:^(NSString *authorizationCode) {
+//    NSString *code = @"AQT2NBTs6cfe9Ek4hOKAjypzco6CAXwuQKNkAGWsB7e9gs0cWv4ga8UgyvlMk5hvRauRatiyVfO3BpMgJb64AxuCVC1zWgRPArvaCdp2RBl80C9gcac";
+//        [PFLinkedInUtils.linkedInHttpClient getAccessToken:code success:^(NSDictionary *accessTokenDictionary) {
+//            
+//        } failure:^(NSError *accessTokenError) {
+//            
+//        }];
+//    } cancel:^{
+////
+//    } failure:^(NSError *authorizationCodeError) {
+////
+//    }];
+//    
 }
 
 - (IBAction)profileButtonPressed:(id)sender {
-    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat: @"https://touch.www.linkedin.com/#you"]]];
+}
+
+- (void)presentCards {
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"firstViewController"]]
+                                                 animated:YES];
+    [self.sideMenuViewController hideMenuViewController];
 }
 
 #pragma mark -

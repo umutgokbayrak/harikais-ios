@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -7,13 +7,16 @@
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
+            <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChatVC">
             <connections>
-                <outlet property="inputTextField" destination="uwK-in-LPy" id="yQ8-Gc-cVV"/>
+                <outlet property="inputTextView" destination="bfV-p5-XKE" id="sj6-aw-8tn"/>
                 <outlet property="inputVuew" destination="iN0-l3-epB" id="j8Y-7P-3gs"/>
+                <outlet property="placeHolderLabel" destination="Tm1-nA-Wtr" id="7EH-yB-NLi"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -39,23 +42,42 @@
                                 <action selector="sendPressed:" destination="-1" eventType="touchUpInside" id="WY4-H0-utU"/>
                             </connections>
                         </button>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="    Anlaşıldı, iyi günler dilerim" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uwK-in-LPy">
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ay-pr-W86">
                             <rect key="frame" x="10" y="9" width="230" height="40"/>
+                            <subviews>
+                                <textView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bfV-p5-XKE">
+                                    <rect key="frame" x="11" y="0.0" width="219" height="40"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Anlaşıldı, iyi günler dilerim" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tm1-nA-Wtr">
+                                    <rect key="frame" x="16" y="10" width="198" height="20"/>
+                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
+                            <constraints>
+                                <constraint firstItem="bfV-p5-XKE" firstAttribute="top" secondItem="7ay-pr-W86" secondAttribute="top" id="4Bg-Jx-WN2"/>
+                                <constraint firstAttribute="trailing" secondItem="bfV-p5-XKE" secondAttribute="trailing" id="NWh-s2-ngw"/>
+                                <constraint firstItem="bfV-p5-XKE" firstAttribute="leading" secondItem="7ay-pr-W86" secondAttribute="leading" constant="11" id="c9L-DS-tOa"/>
+                                <constraint firstItem="Tm1-nA-Wtr" firstAttribute="leading" secondItem="7ay-pr-W86" secondAttribute="leading" constant="16" id="l4p-dw-PC1"/>
+                                <constraint firstAttribute="bottom" secondItem="bfV-p5-XKE" secondAttribute="bottom" id="oez-di-ZC4"/>
+                                <constraint firstItem="Tm1-nA-Wtr" firstAttribute="top" secondItem="7ay-pr-W86" secondAttribute="top" constant="10" id="rNq-J4-g6Q"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.82745098039999998" green="0.82745098039999998" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="RRl-Ya-8Z7" firstAttribute="leading" secondItem="7ay-pr-W86" secondAttribute="trailing" constant="10" id="37C-NK-j6X"/>
                         <constraint firstAttribute="trailing" secondItem="RRl-Ya-8Z7" secondAttribute="trailing" id="Bf8-w3-lNZ"/>
-                        <constraint firstItem="uwK-in-LPy" firstAttribute="leading" secondItem="1E7-DE-0dq" secondAttribute="leading" constant="10" id="OZN-bi-Uds"/>
-                        <constraint firstAttribute="height" constant="58" id="Y11-1I-qE9"/>
+                        <constraint firstItem="7ay-pr-W86" firstAttribute="leading" secondItem="1E7-DE-0dq" secondAttribute="leading" constant="10" id="M0F-GM-hzl"/>
                         <constraint firstAttribute="bottom" secondItem="RRl-Ya-8Z7" secondAttribute="bottom" id="cb8-pG-4Z6"/>
+                        <constraint firstItem="7ay-pr-W86" firstAttribute="top" secondItem="1E7-DE-0dq" secondAttribute="top" constant="9" id="jjb-x7-vf9"/>
                         <constraint firstItem="RRl-Ya-8Z7" firstAttribute="top" secondItem="1E7-DE-0dq" secondAttribute="top" id="lHk-kf-lSH"/>
-                        <constraint firstItem="uwK-in-LPy" firstAttribute="top" secondItem="1E7-DE-0dq" secondAttribute="top" constant="9" id="sZ9-tj-RjP"/>
-                        <constraint firstItem="RRl-Ya-8Z7" firstAttribute="leading" secondItem="uwK-in-LPy" secondAttribute="trailing" constant="10" id="ulf-GM-QAG"/>
-                        <constraint firstAttribute="bottom" secondItem="uwK-in-LPy" secondAttribute="bottom" constant="9" id="zYR-xs-zZv"/>
+                        <constraint firstAttribute="bottom" secondItem="7ay-pr-W86" secondAttribute="bottom" constant="9" id="yQL-Y1-2Q4"/>
                     </constraints>
                 </view>
             </subviews>
@@ -70,4 +92,9 @@
             <point key="canvasLocation" x="-1" y="-117"/>
         </view>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

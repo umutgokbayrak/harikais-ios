@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A75D1CCC-4063-438D-81EE-BE86B0B85A30</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Harikals</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>53648B2206EE7393E8B1FDCC4955BFA431F549A9</key>
+		<string>https://bitbucket.org/umutgokbayrak/harikais-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Harikals.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>53648B2206EE7393E8B1FDCC4955BFA431F549A9</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/umutgokbayrak/harikais-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>53648B2206EE7393E8B1FDCC4955BFA431F549A9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>53648B2206EE7393E8B1FDCC4955BFA431F549A9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>harikais-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>

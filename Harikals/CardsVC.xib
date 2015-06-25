@@ -15,6 +15,7 @@
             <connections>
                 <outlet property="carousel" destination="JDz-3U-UVu" id="e88-VY-ib8"/>
                 <outlet property="emptyHolderView" destination="BXH-6X-MZ0" id="ebI-XZ-xfo"/>
+                <outlet property="logoImageView" destination="b3M-r9-UWe" id="Xjl-Ya-mbC"/>
                 <outlet property="menuButton" destination="aix-WD-YiD" id="pwt-vz-h8O"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -34,11 +35,11 @@
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="download-icon" id="pmQ-4D-FcZ">
                             <rect key="frame" x="80" y="143" width="108" height="91"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZF3-C2-0pt">
                             <rect key="frame" x="0.0" y="267" width="268" height="131"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <string key="text">Herşey yolunda… Şu an yapmanız
 gereken tek şey, size yeni iş fırsatları
 önermemizi beklemek.  
@@ -51,7 +52,7 @@ notification) ile gönderilecektir.</string>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yeni Fırsatlar Bekleniyor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KOq-6G-Blp">
                             <rect key="frame" x="0.0" y="75" width="268" height="22"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
                             <color key="textColor" red="0.2196078431372549" green="0.27058823529411763" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>

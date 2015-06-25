@@ -52,6 +52,11 @@
     } else {
         [self loadFavourites];
     }
+    [firstalaButton addTarget:self action:@selector(presentCards) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)presentCards {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"presentCards" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

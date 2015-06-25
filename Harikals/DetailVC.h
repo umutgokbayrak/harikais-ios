@@ -10,4 +10,8 @@
 
 @interface DetailVC : UIViewController
 
+- (void)setData:(NSMutableDictionary *)dataDictionary;
+
+- (void)updateImage:(UIImage *)image;
+
 @end

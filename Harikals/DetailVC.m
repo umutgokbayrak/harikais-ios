@@ -8,10 +8,9 @@
 
 #import "DetailVC.h"
 #import "ChatVC.h"
-
+#import <UIImageView+WebCache.h>
 
 @interface DetailVC () {
-
 
     IBOutlet UIView *emailModalView;
     IBOutlet UIView *messageModalView;
@@ -25,10 +24,24 @@
     __weak IBOutlet UIButton *barFriendButton;
     __weak IBOutlet UIButton *barFavouriteButton;
     
+    UIImage *mainImage;
+
     BOOL isFavourite;
     
     UIImage *loveImage;
     UIImage *loveImageSelected;
+    
+    NSMutableDictionary *data;
+
+    __weak IBOutlet UIScrollView *mainScrollView;
+    __weak IBOutlet UIImageView *companyImageView;
+    __weak IBOutlet UILabel *companyNameLabel;
+    __weak IBOutlet UILabel *positionLabel;
+    __weak IBOutlet UITextView *mainTextView;
+    __weak IBOutlet UILabel *pricingLabel;
+    __weak IBOutlet UILabel *locationLabel;
+    
+    __weak IBOutlet NSLayoutConstraint *textHeightContraint;
     
 }
 
@@ -44,6 +57,9 @@
     [barFavouriteButton addTarget:self action:@selector(markAsFavourite) forControlEvents:UIControlEventTouchUpInside];
     [barFriendButton addTarget:self action:@selector(showFriendModal) forControlEvents:UIControlEventTouchUpInside];
     [barMessageButton addTarget:self action:@selector(openDialog) forControlEvents:UIControlEventTouchUpInside];
+
+    mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width, mainScrollView.contentSize.height);
+    [mainScrollView setFrame:CGRectMake(0, 0, self.view.frame.size.width, mainScrollView.frame.size.height)];
     
     loveImage = [UIImage imageNamed:@"love-tab-icon"];
     loveImageSelected = [UIImage imageNamed:@"glowing-love"];
@@ -52,6 +68,52 @@
     [barFavouriteButton setTitleEdgeInsets:!isFavourite ? UIEdgeInsetsMake(0,-15, -28, 0) : UIEdgeInsetsMake(0, -39, 0, 0)];
     [barFavouriteButton setImageEdgeInsets:UIEdgeInsetsMake(-11, 0, 0, -69)];
     
+    
+    
+    [self setupContent];
+}
+
+- (void)setupContent {
+    NSDictionary *jobInfo = data[@"job"];
+    NSDictionary *companyInfo = data[@"company"];
+    
+    pricingLabel.text = [NSString stringWithFormat:@"Ücret Skalası: %@%@", jobInfo[@"salaryBegin"], jobInfo[@"salaryEnd"] ? [NSString stringWithFormat:@" - %@", jobInfo[@"salaryEnd"]]  : @""];
+    
+    positionLabel.text = jobInfo[@"position"];
+    companyNameLabel.text = companyInfo[@"name"];
+    locationLabel.text = companyInfo[@"location"];
+    
+    mainTextView.text = [NSString stringWithFormat:@"%@\n\n%@", companyInfo[@"info"], jobInfo[@"info"]];
+    
+    CGFloat textHeight = [mainTextView sizeThatFits:CGSizeMake(mainTextView.frame.size.width, FLT_MAX)].height;
+    
+    textHeightContraint.constant = textHeight;
+    
+//    infoTextView.font = [UIFont fontWithName:@"OpenSans-Light" size:10.0];
+    if (mainImage) {
+        companyImageView.image = mainImage;
+    } else {
+        
+        companyImageView.image = [UIImage imageNamed:@"company-placeholder"];
+    }
+}
+
+
+
+
+- (void)updateImage:(UIImage *)image {
+    mainImage = image;
+    if (image && companyImageView) {
+        companyImageView.image = image;
+    }
+}
+
+- (void)setData:(NSMutableDictionary *)dataDictionary {
+    data = dataDictionary;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
     
 }
 

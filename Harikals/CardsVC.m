@@ -10,10 +10,15 @@
 #import <UIView+Position.h>
 #import "CardView.h"
 #import <Parse.h>
+#import "DetailVC.h"
 
-@interface CardsVC () <UIScrollViewDelegate, iCarouselDataSource, iCarouselDelegate> {
+
+@interface CardsVC () <UIScrollViewDelegate, iCarouselDataSource, iCarouselDelegate, CardViewDelegate> {
     __weak IBOutlet UIView *emptyHolderView;
+    NSMutableDictionary *photoDictionary;
+    __weak IBOutlet UIImageView *logoImageView;
     
+    __weak DetailVC *presentedDetail;
 }
 
 @property (nonatomic, assign) BOOL wrap;
@@ -64,11 +69,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    photoDictionary = [NSMutableDictionary dictionary];
     self.carousel.delegate = self;
     self.carousel.dataSource = self;
     self.carousel.type = iCarouselTypeInvertedTimeMachine;
     self.carousel.ignorePerpendicularSwipes = YES;
+    UIImageView *roundedView = emptyHolderView.subviews[0];
+    roundedView.image = [roundedView.image resizableImageWithCapInsets:UIEdgeInsetsMake(40, 40, 40, 40)];
     
+    if ([UIScreen mainScreen].bounds.size.height == 480) {
+        roundedView.frameY = 43;
+        roundedView.frameHeight = self.view.frameHeight - roundedView.frameY - 50;
+        logoImageView.frameY += 8;
+    }
     [self loadJobs];
 }
 
@@ -86,6 +99,12 @@
     }];
 }
 
+- (void)updateImage:(UIImage *)image forJobId:(NSString *)jobId {
+    if (image) {
+        photoDictionary[jobId] = image;
+    }
+    [presentedDetail updateImage:photoDictionary[jobId]];
+}
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -139,7 +158,14 @@
     }
 }
 
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSMutableDictionary *)sender {
+    if ([segue.identifier isEqualToString:@"detail"]) {
+        DetailVC *detailVC = ((UINavigationController *)segue.destinationViewController).viewControllers[0];
+        presentedDetail = detailVC;
+        [presentedDetail updateImage:photoDictionary[sender[@"id"]]];
+        [detailVC setData:sender];
+    }
+}
 
 
 #pragma mark iCarousel methods
@@ -152,23 +178,21 @@
 - (UIView *)carousel:(__unused iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(CardView *)view {
     if (view == nil) {
         view = [[NSBundle mainBundle] loadNibNamed:@"CardView" owner:self options:nil][0];
-        [view configureViewWithJob:self.items[index]];
-    
+        view.delegate = self;
+        if ([UIScreen mainScreen].bounds.size.height == 480) {
+
+            view.frameY += 23;
+            view.frameHeight = 390;
+            view.infoTextView.frameHeight -= 37;
+        } else {
+            view.frameHeight = 450;
+        }
+        
         view.frameWidth = 267;
-        view.frameHeight = 450;
-        //TODO:Remove NSLog
-        NSLog(@"view loaded");
     } else {
-        //get a reference to the label in the recycled view
-
+        
     }
-    
-    //set item label
-    //remember to always set any properties of your carousel item
-    //views outside of the `if (view == nil) {...}` check otherwise
-    //you'll get weird issues with carousel item content appearing
-    //in the wrong place in the carousel
-
+    [view configureViewWithJob:self.items[index]];
     
     return view;
 }
@@ -252,11 +276,11 @@
     NSNumber *item = (self.items)[(NSUInteger)index];
     NSLog(@"Tapped view number: %@", item);
     
-    [self performSegueWithIdentifier:@"detail" sender:nil];
+    [self performSegueWithIdentifier:@"detail" sender:self.items[index]];
 }
 
 - (void)carouselCurrentItemIndexDidChange:(__unused iCarousel *)carousel {
-    NSLog(@"Index: %@", @(self.carousel.currentItemIndex));
+//    NSLog(@"Index: %@", @(self.carousel.currentItemIndex));
 }
 
 

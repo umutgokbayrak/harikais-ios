@@ -45,12 +45,12 @@
             [alert show];
         }
         
-        
-        
+////        [NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~?oauth2_access_token=%@&format=json", accessToken]
+//        
 //        [PFLinkedInUtils.linkedInHttpClient GET:@"companies" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            NSLog(@"Response JSON: %@", responseObject);
+////            NSLog(@"Response JSON: %@", responseObject);
 //        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            NSLog(@"Error: %@", error);
+////            NSLog(@"Error: %@", error);
 //        }];
     }];
 }
