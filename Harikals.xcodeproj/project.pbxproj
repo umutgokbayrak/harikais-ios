@@ -52,6 +52,8 @@
 		95D7753C1B2B41FF006D501F /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D7753B1B2B41FF006D501F /* SettingsVC.m */; };
 		95D775401B2B58E5006D501F /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D7753F1B2B58E5006D501F /* CardView.m */; };
 		95D775421B2B58FB006D501F /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D775411B2B58FB006D501F /* CardView.xib */; };
+		95D83BB01B419996005530F4 /* HKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D83BAF1B419996005530F4 /* HKTextField.m */; };
+		95D83BB31B419BF9005530F4 /* HKServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D83BB21B419BF9005530F4 /* HKServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +141,10 @@
 		95D7753E1B2B58E5006D501F /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
 		95D7753F1B2B58E5006D501F /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
 		95D775411B2B58FB006D501F /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
+		95D83BAE1B419996005530F4 /* HKTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKTextField.h; sourceTree = "<group>"; };
+		95D83BAF1B419996005530F4 /* HKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKTextField.m; sourceTree = "<group>"; };
+		95D83BB11B419BF9005530F4 /* HKServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKServer.h; sourceTree = "<group>"; };
+		95D83BB21B419BF9005530F4 /* HKServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKServer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +258,7 @@
 				95D7753D1B2B567C006D501F /* Settings VC */,
 				95790DAE1B32C3140024EA3E /* PushNoAnimationSegue.h */,
 				95790DAF1B32C3140024EA3E /* PushNoAnimationSegue.m */,
+				95D83BB41B419C03005530F4 /* Server API */,
 			);
 			path = Harikals;
 			sourceTree = "<group>";
@@ -387,8 +394,19 @@
 				95D7753B1B2B41FF006D501F /* SettingsVC.m */,
 				959890E51B3C0E3400551F60 /* DropdownModel.h */,
 				959890E61B3C0E3400551F60 /* DropdownModel.m */,
+				95D83BAE1B419996005530F4 /* HKTextField.h */,
+				95D83BAF1B419996005530F4 /* HKTextField.m */,
 			);
 			name = "Settings VC";
+			sourceTree = "<group>";
+		};
+		95D83BB41B419C03005530F4 /* Server API */ = {
+			isa = PBXGroup;
+			children = (
+				95D83BB11B419BF9005530F4 /* HKServer.h */,
+				95D83BB21B419BF9005530F4 /* HKServer.m */,
+			);
+			name = "Server API";
 			sourceTree = "<group>";
 		};
 		A3A474DE6945B0272138849B /* Frameworks */ = {
@@ -560,6 +578,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95AE07271B25F8C600184007 /* LeftMenuViewController.m in Sources */,
+				95D83BB01B419996005530F4 /* HKTextField.m in Sources */,
 				957B63991B247840003AA201 /* ViewController.m in Sources */,
 				95511E141B2770B400AD40C6 /* LoginVC.m in Sources */,
 				95A5E76C1B2700C300B6E978 /* CardsVC.m in Sources */,
@@ -567,6 +586,7 @@
 				95AE071E1B25F38200184007 /* RECommonFunctions.m in Sources */,
 				95D7753C1B2B41FF006D501F /* SettingsVC.m in Sources */,
 				95B645431B29FE86009F1696 /* DetailVC.m in Sources */,
+				95D83BB31B419BF9005530F4 /* HKServer.m in Sources */,
 				95511E181B28291700AD40C6 /* FavouriteVC.m in Sources */,
 				95511E111B2719CA00AD40C6 /* iCarousel.m in Sources */,
 				95D775401B2B58E5006D501F /* CardView.m in Sources */,

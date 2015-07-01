@@ -7,7 +7,7 @@
 //
 
 #import "MenuCell.h"
-
+#import <UIView+Position.h>
 @interface MenuCell () {
 
 }
@@ -18,7 +18,8 @@
 @synthesize tintView;
 
 - (void)awakeFromNib {
-    tintView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu-tint"]];
+    tintView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"menu-tint"] resizableImageWithCapInsets:UIEdgeInsetsMake(40, 40, 40, 40)]];
+    tintView.frameWidth = 400;
     [self.contentView insertSubview:tintView atIndex:0];
     tintView.alpha = 0.0;
 }

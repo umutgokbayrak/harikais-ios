@@ -10,6 +10,8 @@
 #import "FavourCell.h"
 #import <Parse.h>
 #import "ChatVC.h"
+#import "HKServer.h"
+
 
 @interface FavouriteVC () <UITableViewDelegate, UITableViewDataSource> {
     
@@ -21,6 +23,13 @@
     
     __weak IBOutlet UILabel *emptylabel;
     __weak IBOutlet UIButton *firstalaButton;
+    
+    UIActivityIndicatorView *spinner;
+    
+    __weak IBOutlet UIImageView *downloadIconImageView;
+    
+    __weak IBOutlet UILabel *emptyDescriptionLabel;
+    
 }
 
 @end
@@ -43,16 +52,31 @@
     
     mainTableView.dataSource = self;
     mainTableView.delegate = self;
-    
+    downloadIconImageView.hidden = YES;
+    firstalaButton.hidden = YES;
+    emptylabel.hidden = YES;
+    emptyDescriptionLabel.hidden = emptylabel.hidden;
+
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    spinner.center = self.view.center;
+    spinner.hidesWhenStopped = YES;
+    [spinner stopAnimating];
+    [self.view addSubview:spinner];
     
     if (_isMessageVC) {
+        downloadIconImageView.image = [UIImage imageNamed:@"big-chat-icon"];
+        
         emptylabel.text = @"Hiç mesajınız yok";
-        firstalaButton.hidden = YES;
+        emptyDescriptionLabel.text = @"Size önerdiğimiz fırsatların\niçerisinden o firmanın İK sorumlusu\nile yaptığınız yazışmalara\nburadan ulaşabilirsiniz.";
         [self loadChats];
     } else {
+        downloadIconImageView.image = [UIImage imageNamed:@"big-love-icon"];
+        emptyDescriptionLabel.text = @"Size önerdiğimiz fırsatları\nfavorilere eklediğinizde\nistediğiniz zaman buradan\nonlara erişebilirsiniz.";
+
         [self loadFavourites];
     }
     [firstalaButton addTarget:self action:@selector(presentCards) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 - (void)presentCards {
@@ -63,11 +87,12 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:71.0 / 255.0 green:160.0 / 255.0 blue:219.0 / 255.0 alpha:1.0]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0 / 255.0 green:50.0 / 255.0 blue:84.0 / 255.0 alpha:1.0]];
 }
 
 - (void)loadFavourites {
-    [PFCloud callFunctionInBackground:@"favorites" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
+    [spinner startAnimating];
+    [Server callFunctionInBackground:@"favorites" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [dataArray removeAllObjects];
             [dataArray addObjectsFromArray:receivedItems];
@@ -75,13 +100,14 @@
             //TODO:Remove NSLog
             NSLog(@"favs ERROR %@", error);
         }
-        
+        [spinner stopAnimating];
         [mainTableView reloadData];
     }];
 }
 
 - (void)loadChats {
-    [PFCloud callFunctionInBackground:@"chats" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
+    [spinner startAnimating];
+    [Server callFunctionInBackground:@"chats" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [dataArray removeAllObjects];
             [dataArray addObjectsFromArray:receivedItems];
@@ -89,7 +115,7 @@
             //TODO:Remove NSLog
             NSLog(@"chats ERROR %@", error);
         }
-        
+        [spinner stopAnimating];
         [mainTableView reloadData];
     }];
 }
@@ -102,8 +128,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (!spinner.isAnimating) {
+        mainTableView.hidden = !dataArray.count;
 
-    mainTableView.hidden = !dataArray.count;
+        firstalaButton.hidden = dataArray.count;
+        emptylabel.hidden = dataArray.count;
+        emptyDescriptionLabel.hidden = emptylabel.hidden;
+        downloadIconImageView.hidden = dataArray.count;
+    }
 
     return dataArray.count;
 }

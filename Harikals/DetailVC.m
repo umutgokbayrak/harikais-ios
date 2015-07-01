@@ -9,8 +9,9 @@
 #import "DetailVC.h"
 #import "ChatVC.h"
 #import <UIImageView+WebCache.h>
+#import <UIView+Position.h>
 
-@interface DetailVC () {
+@interface DetailVC () <UITextFieldDelegate, UITextViewDelegate> {
 
     IBOutlet UIView *emailModalView;
     IBOutlet UIView *messageModalView;
@@ -42,6 +43,12 @@
     __weak IBOutlet UILabel *locationLabel;
     
     __weak IBOutlet NSLayoutConstraint *textHeightContraint;
+    __weak IBOutlet UIView *messageHolderView;
+    
+    __weak IBOutlet UIView *emailHolderView;
+    
+    CGFloat baseTop;
+    
     
 }
 
@@ -68,6 +75,8 @@
     [barFavouriteButton setTitleEdgeInsets:!isFavourite ? UIEdgeInsetsMake(0,-15, -28, 0) : UIEdgeInsetsMake(0, -39, 0, 0)];
     [barFavouriteButton setImageEdgeInsets:UIEdgeInsetsMake(-11, 0, 0, -69)];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     
     [self setupContent];
@@ -121,14 +130,17 @@
     isFavourite = !isFavourite;
     [barFavouriteButton setImage:isFavourite ? loveImageSelected : loveImage forState:UIControlStateNormal];
     [barFavouriteButton setTitleEdgeInsets:!isFavourite ? UIEdgeInsetsMake(0, -15, -28, 0) : UIEdgeInsetsMake(0, -40, -28, 0)];
+    
 }
 
 - (void)showMessageModal {
+    messageHolderView.frameY = baseTop;
     [self.navigationController.view addSubview:messageModalView];
     [[[[UIApplication sharedApplication] delegate] window] setWindowLevel:UIWindowLevelStatusBar+1];
 }
 
 - (void)showFriendModal {
+    emailHolderView.frameY = baseTop;
     [self.navigationController.view addSubview:emailModalView];
     [[[[UIApplication sharedApplication] delegate] window] setWindowLevel:UIWindowLevelStatusBar+1];
 }
@@ -144,9 +156,51 @@
     }
 }
 
+- (void)keyboardWillChageFrame:(NSNotification *)notification {
+    CGRect keyboardEndFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyboardStartFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    CGFloat animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    
+    CGFloat delta = keyboardEndFrame.origin.y - keyboardStartFrame.origin.y;
+//    scrollViewBottomConstraint.constant = self.view.frame.size.height - keyboardEndFrame.origin.y;
+    
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+    
+    
+    [UIView animateWithDuration:animationDuration > 0 ? animationDuration : 0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        messageHolderView.frameY = fabs(delta) > 100 && delta > 0 ? baseTop : 30;
+        emailHolderView.frameY = fabs(delta) > 100 && delta > 0 ? baseTop : 30;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
 
 - (void)loadModalViews {
     [[NSBundle mainBundle] loadNibNamed:@"ModalView" owner:self options:nil];
+    
+    emailModalView.frame = [UIScreen mainScreen].bounds;
+    messageModalView.frame = [UIScreen mainScreen].bounds;
     
     UITapGestureRecognizer *hide1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideModals)];
     UITapGestureRecognizer *hide2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideModals)];
@@ -159,13 +213,16 @@
     
     messageTextView.layer.borderWidth = 0.5;
     messageTextView.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
-    
+    emailTextField.delegate = self;
+    messageTextView.delegate = self;
+    baseTop = messageHolderView.frameY;
 }
 
 - (void)hideModals {
     [emailModalView removeFromSuperview];
     [messageModalView removeFromSuperview];
     [[[[UIApplication sharedApplication] delegate] window] setWindowLevel:UIWindowLevelNormal];
+    [self.view endEditing:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -174,7 +231,7 @@
     self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
 
     self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:71.0 / 255.0 green:160.0 / 255.0 blue:219.0 / 255.0 alpha:1.0]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0 / 255.0 green:50.0 / 255.0 blue:84.0 / 255.0 alpha:1.0]];
 }
 
 

@@ -12,10 +12,13 @@
 #import "MenuCell.h"
 #import <Parse.h>
 #import <PFLinkedInUtils.h>
+#import "HKServer.h"
+
 
 @interface LeftMenuViewController () {
     
     __weak IBOutlet UITableView *mainTableView;
+    __weak IBOutlet UIImageView *bottomLogo;
     
     NSArray *cellsIDsArray;
 }
@@ -30,6 +33,10 @@
 {
     [super viewDidLoad];
     cellsIDsArray = @[@"cell1", @"cell2", @"cell3", @"cell4", @"cell5"];
+    
+    if ([UIScreen mainScreen].bounds.size.height == 480) {
+        bottomLogo.hidden = YES;
+    }
     
     mainTableView.dataSource = self;
     mainTableView.delegate = self;

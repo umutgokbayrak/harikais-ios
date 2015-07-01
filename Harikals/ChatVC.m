@@ -66,8 +66,19 @@
     mainTableView.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
     
     
-    myWidth = 199;
-    otherWidth = 229;
+    if ([UIScreen mainScreen].bounds.size.height == 480) {
+        myWidth = 199;
+        otherWidth = 229;
+    } else if ([UIScreen mainScreen].bounds.size.height == 667){
+        myWidth = 254;
+        otherWidth = 284;
+    } else if ([UIScreen mainScreen].bounds.size.height == 736){
+        myWidth = 293;
+        otherWidth = 323;
+    } else {
+        myWidth = 199;
+        otherWidth = 229;
+    }
     
 }
 
@@ -146,7 +157,7 @@
     NSIndexPath *indexpath = [NSIndexPath indexPathForRow:messagesArray.count - 1 inSection:0];
     [self textViewDidChange:inputTextView];
     [mainTableView insertRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationBottom];
-//    [mainTableView scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [mainTableView scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (IBAction)goBack:(id)sender {

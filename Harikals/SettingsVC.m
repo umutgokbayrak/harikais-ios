@@ -34,6 +34,8 @@
     
     __weak IBOutlet UITableView *dropdownTableView;
     
+    __weak IBOutlet NSLayoutConstraint *scrollViewBottomConstraint;
+    __weak IBOutlet UIScrollView *mainScrollView;
     
 }
 
@@ -56,22 +58,12 @@
     [selectedLocations addObject:@""];
     [selectedLocations addObject:@""];
     
-    middleHolder.layer.borderWidth = 0.5;
-    middleHolder.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
     middleHolder.layer.cornerRadius =  3;
-    
-    topHolder.layer.borderWidth = 0.5;
-    topHolder.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
     topHolder.layer.cornerRadius =  3;
-
-    lastHolder.layer.borderWidth = 0.5;
-    lastHolder.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
     lastHolder.layer.cornerRadius =  3;
     
     dropdownTableView.layer.borderWidth = 0.5;
     dropdownTableView.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
-
-    
 
     
     priceTextField.delegate = self;
@@ -80,7 +72,7 @@
     searchTextField.delegate = self;
     mainTableView.delegate = self;
     [self updateTableViewHeight];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     
     tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
@@ -156,12 +148,14 @@
             return NO;
         }
     } else {
+        
         [dropMenuOptions removeAllObjects];
         [dropMenuOptions addObject:@""];
         [dropMenuOptions addObject:@""];
         [dropMenuOptions addObject:@""];
         [dropMenuOptions addObject:@""];
         [self reloadDropMenu];
+
     }
     return  YES;
 }
@@ -182,7 +176,29 @@
     self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
     
     self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:71.0 / 255.0 green:160.0 / 255.0 blue:219.0 / 255.0 alpha:1.0]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0 / 255.0 green:50.0 / 255.0 blue:84.0 / 255.0 alpha:1.0]];
+}
+
+
+- (void)keyboardWillChageFrame:(NSNotification *)notification {
+    CGRect keyboardEndFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    CGFloat animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    
+    [self.view layoutIfNeeded];
+    
+    scrollViewBottomConstraint.constant = self.view.frame.size.height - keyboardEndFrame.origin.y;
+    
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+
+    
+    [UIView animateWithDuration:animationDuration > 0 ? animationDuration : 0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        
+    }];
+    
 }
 
 

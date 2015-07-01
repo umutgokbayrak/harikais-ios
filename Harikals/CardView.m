@@ -11,20 +11,12 @@
 
 @interface CardView () {
     NSDictionary *job;
-    
-    __weak IBOutlet UILabel *nameLabel;
-    __weak IBOutlet UILabel *positionLabel;
-    
-    __weak IBOutlet UILabel *locationLabel;
-    __weak IBOutlet UIImageView *photoImageView;
-
-    __weak IBOutlet UILabel *codeLabel;
 }
 
 @end
 
 @implementation CardView
-@synthesize infoTextView;
+@synthesize infoTextView, nameLabel, pinIcon, positionLabel, locationLabel, photoImageView, codeLabel;
 //{
 //    company =     {
 //        info = "Trivia Software bla ipsum dolor sit amet, consectetur adipiscing elit. Sed vel risus mi, sit amet porta sem. Vivamus sed ornare libero. Maecenas nec velit diam, commodo viverra enim. ";

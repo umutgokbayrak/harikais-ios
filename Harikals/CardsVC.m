@@ -11,14 +11,18 @@
 #import "CardView.h"
 #import <Parse.h>
 #import "DetailVC.h"
-
+#import "HKServer.h"
 
 @interface CardsVC () <UIScrollViewDelegate, iCarouselDataSource, iCarouselDelegate, CardViewDelegate> {
     __weak IBOutlet UIView *emptyHolderView;
     NSMutableDictionary *photoDictionary;
     __weak IBOutlet UIImageView *logoImageView;
+    __weak IBOutlet UIButton *messagesButton;
     
     __weak DetailVC *presentedDetail;
+    
+    __weak IBOutlet UIImageView *downloadIcon;
+    
 }
 
 @property (nonatomic, assign) BOOL wrap;
@@ -76,17 +80,40 @@
     self.carousel.ignorePerpendicularSwipes = YES;
     UIImageView *roundedView = emptyHolderView.subviews[0];
     roundedView.image = [roundedView.image resizableImageWithCapInsets:UIEdgeInsetsMake(40, 40, 40, 40)];
+
+    
     
     if ([UIScreen mainScreen].bounds.size.height == 480) {
         roundedView.frameY = 43;
         roundedView.frameHeight = self.view.frameHeight - roundedView.frameY - 50;
         logoImageView.frameY += 8;
+        messagesButton.frameY += 8;
+        emptyHolderView.frameY += 20;
+        downloadIcon.frameY += 45;
+        
+    } else if ([UIScreen mainScreen].bounds.size.height == 667){
+        emptyHolderView.frame = CGRectMake(0, 0, 317, 550);
+        emptyHolderView.center = self.view.center;
+        emptyHolderView.frameY += 10;
+        downloadIcon.frameY += 40;
+    } else if ([UIScreen mainScreen].bounds.size.height == 736){
+        emptyHolderView.frame = CGRectMake(0, 0, 342, 600);
+        emptyHolderView.center = self.view.center;
+        emptyHolderView.frameY += 10;
+        downloadIcon.frameY += 42;
+    } else {
+
     }
+    
+
+
+
+
     [self loadJobs];
 }
 
 - (void)loadJobs {
-    [PFCloud callFunctionInBackground:@"jobs" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"jobs" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [self.items removeAllObjects];
             [self.items addObjectsFromArray:receivedItems];
@@ -179,22 +206,49 @@
     if (view == nil) {
         view = [[NSBundle mainBundle] loadNibNamed:@"CardView" owner:self options:nil][0];
         view.delegate = self;
-        if ([UIScreen mainScreen].bounds.size.height == 480) {
+        [self configureCardView:view];
 
-            view.frameY += 23;
-            view.frameHeight = 390;
-            view.infoTextView.frameHeight -= 37;
-        } else {
-            view.frameHeight = 450;
-        }
-        
-        view.frameWidth = 267;
-    } else {
-        
     }
+    
     [view configureViewWithJob:self.items[index]];
     
     return view;
+}
+
+- (void)configureCardView:(CardView *)view {
+    if ([UIScreen mainScreen].bounds.size.height == 480) {
+        //4s
+        view.frameWidth = 267;
+        view.frameY += 23;
+        view.frameHeight = 390;
+        view.infoTextView.frameHeight -= 37;
+    } else if ([UIScreen mainScreen].bounds.size.height == 667) {
+        //6
+        view.frameHeight = 550;
+        view.frameWidth += 50;
+
+    } else if ([UIScreen mainScreen].bounds.size.height == 736) {
+        //6+
+        view.frameHeight = 600;
+        view.frameWidth += 75;
+    } else {
+        //5-5s
+        view.frameWidth = 267;
+        view.frameHeight = 450;
+    }
+    
+    view.photoImageView.frameHeight = view.photoImageView.frameWidth / 1.62;
+    view.pinIcon.frameY = view.photoImageView.frameBottom + 8;
+    view.locationLabel.frameY = view.photoImageView.frameBottom + 6;
+    view.lineView.frameY = view.locationLabel.frameBottom + 2;
+    view.lineView.frameHeight = 1.5;
+    
+    view.infoTextView.frameY = view.locationLabel.frameY + 20;
+    view.infoTextView.frameHeight = view.codeLabel.frameY  - view.infoTextView.frameY - 2;
+    
+    
+    
+//    1.62
 }
 
 - (UIImage *)renderedImageFromView:(UIView *)view {

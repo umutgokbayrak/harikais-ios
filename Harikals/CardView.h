@@ -18,7 +18,21 @@
 
 @property (nonatomic, weak) IBOutlet UITextView *infoTextView;
 
+@property (weak, nonatomic) IBOutlet UIView *lineView;
+
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *positionLabel;
+
+@property (nonatomic, weak) IBOutlet UILabel *locationLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *photoImageView;
+
+@property (nonatomic, weak) IBOutlet UILabel *codeLabel;
+
+@property (weak, nonatomic) IBOutlet UIImageView *pinIcon;
+
+
 @property (nonatomic, weak) id <CardViewDelegate> delegate;
 - (void)configureViewWithJob:(NSDictionary *)jobDictionary;
+
 
 @end

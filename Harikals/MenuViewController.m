@@ -31,7 +31,17 @@
     self.scaleBackgroundImageView = NO;
     self.fadeMenuView = NO;
     self.contentViewScaleValue = 0.87;
-    self.contentViewInPortraitOffsetCenterX = 80;
+    
+    if ([UIScreen mainScreen].bounds.size.height == 480) {
+        self.contentViewInPortraitOffsetCenterX = 80;
+    } else if ([UIScreen mainScreen].bounds.size.height == 667){
+        self.contentViewInPortraitOffsetCenterX = 100;
+    } else if ([UIScreen mainScreen].bounds.size.height == 736){
+        self.contentViewInPortraitOffsetCenterX = 110;
+    } else {
+        self.contentViewInPortraitOffsetCenterX = 80;
+    }
+
     self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentViewController"];
     self.leftMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftMenuViewController"];
 
