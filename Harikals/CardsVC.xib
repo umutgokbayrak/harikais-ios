@@ -75,13 +75,6 @@ Yeni iş fırsatları size bildirim (push notification) ile gönderilecektir.</s
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.20000000000000001" green="0.16862745098039217" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="J2t-G0-4iX">
-                    <rect key="frame" x="266" y="434" width="53" height="46"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                    <state key="normal" image="chat-icon2">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
                 <view contentMode="scaleToFill" id="JDz-3U-UVu" customClass="iCarousel">
                     <rect key="frame" x="0.0" y="23" width="320" height="457"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,6 +88,16 @@ Yeni iş fırsatları size bildirim (push notification) ile gönderilecektir.</s
                     </state>
                     <connections>
                         <action selector="presentLeftMenuViewController:" destination="-1" eventType="touchUpInside" id="hrf-FH-KUJ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="J2t-G0-4iX">
+                    <rect key="frame" x="266" y="434" width="53" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="chat-icon2">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="openChat:" destination="-1" eventType="touchUpInside" id="CVZ-kU-3s0"/>
                     </connections>
                 </button>
             </subviews>

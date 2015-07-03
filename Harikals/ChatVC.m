@@ -8,7 +8,9 @@
 
 #import "ChatVC.h"
 #import "ChatCell.h"
-
+#import "HKServer.h"
+#import <Parse.h>
+#import <UIImageView+WebCache.h>
 
 @interface ChatVC () <UITextViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     __weak IBOutlet UITextField *inputTextField;
@@ -33,25 +35,23 @@
     NSMutableArray *messagesArray;
     
     BOOL loaded;
+    
+    NSDateFormatter *formatter;
+    NSString *direction1ImagePath;
+    NSString *direction2ImagePath;
 }
 
 @end
 
 @implementation ChatVC
+@synthesize dataDictionary;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     messagesArray = [NSMutableArray array];
-    [messagesArray addObject:@{@"direction" : @1, @"message" : @"Merhaba bu \nMerhaba bu"}];
-    [messagesArray addObject:@{@"direction" : @2, @"message" : @"Merhaba bu \nMerhaba bu"}];
-    [messagesArray addObject:@{@"direction" : @2, @"message" : @"Merhaba bu \nMerhaba bu"}];
-    [messagesArray addObject:@{@"direction" : @1, @"message" : @"Merhaba bu \nMerhaba bu\nMerhaba bu\nMerhaba bu"}];
-    [messagesArray addObject:@{@"direction" : @1, @"message" : @"Merhaba bu \nMerhaba bu"}];
-    [messagesArray addObject:@{@"direction" : @2, @"message" : @"Merhaba bu \nMerhaba bu\nMerhaba bu\nMerhaba bu"}];
-    [messagesArray addObject:@{@"direction" : @2, @"message" : @"Merhaba bu \nMerhaba bu"}];
-    [messagesArray addObject:@{@"direction" : @1, @"message" : @"Merhaba bu \nMerhaba bu"}];
-    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/YYYY"];
     [self loadDummyTextView];
     [[NSBundle mainBundle] loadNibNamed:@"ChatInputView" owner:self options:nil];
     inputTextView.delegate = self;
@@ -63,7 +63,7 @@
     mainTableView.delegate = self;
     mainTableView.dataSource = self;
 
-    mainTableView.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
+    mainTableView.contentInset = UIEdgeInsetsMake(5, 0, 10, 0);
     
     
     if ([UIScreen mainScreen].bounds.size.height == 480) {
@@ -80,6 +80,24 @@
         otherWidth = 229;
     }
     
+    [self loadMessages];
+    
+}
+
+- (void)loadMessages {
+    [Server callFunctionInBackground:@"chatLog" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId],
+                                                                 @"jobId" : dataDictionary[@"companyId"] ? dataDictionary[@"companyId"] : dataDictionary[@"id"]} block:^(NSDictionary *receivedItems, NSError *error) {
+        if (receivedItems.count && !error) {
+            [messagesArray removeAllObjects];
+            direction1ImagePath = receivedItems[@"images"][@"direction1"];
+            direction2ImagePath = receivedItems[@"images"][@"direction2"];
+            [messagesArray addObjectsFromArray:receivedItems[@"messages"]];
+        } else {
+
+        }
+
+        [mainTableView reloadData];
+    }];
 }
 
 - (void)loadDummyTextView {
@@ -89,14 +107,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
-
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 -(void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    
-    [mainTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messagesArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:loaded];
+    if (messagesArray.count) {
+        [mainTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messagesArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:loaded];
+    }
     loaded = YES;
 }
 
@@ -153,11 +171,28 @@
 - (IBAction)sendPressed:(id)sender {
     NSString *text = inputTextView.text;
     inputTextView.text = @"";
-    [messagesArray addObject:@{@"direction" : @1, @"message" : text}];
-    NSIndexPath *indexpath = [NSIndexPath indexPathForRow:messagesArray.count - 1 inSection:0];
-    [self textViewDidChange:inputTextView];
-    [mainTableView insertRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationBottom];
-    [mainTableView scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    
+    
+    [Server callFunctionInBackground:@"sendMessage"
+                      withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId],
+                                       @"jobId" : dataDictionary[@"companyId"],
+                                       @"msg" : text}
+                               block:^(NSDictionary *receivedItems, NSError *error) {
+       if (receivedItems.count && !error) {
+           [messagesArray addObject:@{@"direction" : @1,
+                                      @"msg" : text,
+                                      @"from" : @"You",
+                                      @"date" : [formatter stringFromDate:[NSDate date]]
+                                      }];
+           NSIndexPath *indexpath = [NSIndexPath indexPathForRow:messagesArray.count - 1 inSection:0];
+           [self textViewDidChange:inputTextView];
+           [mainTableView insertRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationBottom];
+           [mainTableView scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+       } else {
+           //TODO:Remove NSLog
+           NSLog(@"failed to send message %@", error);
+       }
+    }];
 }
 
 - (IBAction)goBack:(id)sender {
@@ -173,7 +208,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    dummyTextView.text = messagesArray[indexPath.row][@"message"];
+    dummyTextView.text = messagesArray[indexPath.row][@"msg"];
     BOOL isMine = [messagesArray[indexPath.row][@"direction"] integerValue] % 2 != 0 ;
     
     dummyTextView.font = [UIFont fontWithName:@"OpenSans" size:isMine ? 16 : 15];
@@ -186,9 +221,24 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:[messagesArray[indexPath.row][@"direction"] integerValue] % 2 != 0 ? @"myChatCell" : @"otherChatCell"];
-    cell.messageTextView.text = messagesArray[indexPath.row][@"message"];
+    NSInteger direction = [messagesArray[indexPath.row][@"direction"] integerValue];
+    ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:direction % 2 != 0 ? @"myChatCell" : @"otherChatCell"];
+    cell.messageTextView.text = messagesArray[indexPath.row][@"msg"];
+    cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.size.width / 2.0;
 
+    cell.dateLabel.text = [NSString stringWithFormat:@"%@, %@", messagesArray[indexPath.row][@"from"], messagesArray[indexPath.row][@"date"]];
+    
+    
+    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:direction == 1 ? direction1ImagePath : direction2ImagePath]
+     placeholderImage:[UIImage imageNamed:@"avatar"]
+                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        if ([dataDict isEqual:favouriteObject]) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                avatarImageView.image = image;
+//            });
+//        }
+    }];
+    
     return cell;
 }
 

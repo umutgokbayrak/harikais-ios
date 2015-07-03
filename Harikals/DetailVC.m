@@ -10,12 +10,15 @@
 #import "ChatVC.h"
 #import <UIImageView+WebCache.h>
 #import <UIView+Position.h>
+#import "HKServer.h"
+#import <Parse.h>
 
-@interface DetailVC () <UITextFieldDelegate, UITextViewDelegate> {
+@interface DetailVC () <UITextFieldDelegate, UITextViewDelegate, UIWebViewDelegate> {
 
     IBOutlet UIView *emailModalView;
     IBOutlet UIView *messageModalView;
     
+    __weak IBOutlet UIWebView *contenWebView;
     
     __weak IBOutlet UITextView *messageTextView;
     __weak IBOutlet UITextField *emailTextField;
@@ -50,6 +53,7 @@
     CGFloat baseTop;
     
     
+    __weak IBOutlet UILabel *messagePlaceholderLabel;
 }
 
 @end
@@ -79,6 +83,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     
+    isFavourite = [data[@"flags"][@"favorited"] boolValue];
+    
+    [barFavouriteButton setImage:isFavourite ? loveImageSelected : loveImage forState:UIControlStateNormal];
+    [barFavouriteButton setTitleEdgeInsets:!isFavourite ? UIEdgeInsetsMake(0, -15, -28, 0) : UIEdgeInsetsMake(0, -40, -28, 0)];
+    
     [self setupContent];
 }
 
@@ -91,7 +100,7 @@
     positionLabel.text = jobInfo[@"position"];
     companyNameLabel.text = companyInfo[@"name"];
     locationLabel.text = companyInfo[@"location"];
-    
+    mainTextView.hidden = YES;
     mainTextView.text = [NSString stringWithFormat:@"%@\n\n%@", companyInfo[@"info"], jobInfo[@"info"]];
     
     CGFloat textHeight = [mainTextView sizeThatFits:CGSizeMake(mainTextView.frame.size.width, FLT_MAX)].height;
@@ -105,10 +114,29 @@
         
         companyImageView.image = [UIImage imageNamed:@"company-placeholder"];
     }
+    [self configureText:mainTextView.text];
 }
 
+- (void)configureText:(NSString *)text {
+    NSString *myDescriptionHTML = [NSString stringWithFormat:@"<html> \n"
+                                   "<head> \n"
+                                   "<style type=\"text/css\"> \n"
+                                   "body {font-family: \"%@\"; font-size: %@;}\n"
+                                   "</style> \n"
+                                   "</head> \n"
+                                   "<body>%@</body> \n"
+                                   "</html>", @"OpenSans-Light", @14, text];
 
+    [contenWebView loadHTMLString:myDescriptionHTML baseURL:nil];
+    contenWebView.delegate = self;
+    
+    
+//    textHeightContraint.constant = contenWebView.scrollView.contentSize.height;
+}
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    textHeightContraint.constant = contenWebView.scrollView.contentSize.height;
+}
 
 - (void)updateImage:(UIImage *)image {
     mainImage = image;
@@ -125,22 +153,96 @@
     [super viewDidLayoutSubviews];
     
 }
+- (IBAction)applyToJob:(UIButton *)sender {
+    sender.userInteractionEnabled = NO;
+    NSString *message = messageTextView.text;
+    [self hideModals];
+    [Server callFunctionInBackground:@"applyToJob" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"id"], @"message" : message} block:^(NSArray *receivedItems, NSError *error) {
+        if (receivedItems) {
+            //TODO:Remove NSLog
+            NSLog(@"%@", receivedItems);
+        } else {
+            //TODO:Remove NSLog
+            NSLog(@"%@", error);
+        }
+        sender.userInteractionEnabled = YES;
+    }];
+}
+
+- (IBAction)referFriend:(UIButton *)sender {
+    sender.userInteractionEnabled = NO;
+    NSString *message = emailTextField.text;
+    if ([self validateEmail:message]) {
+        [self hideModals];
+        
+        [Server callFunctionInBackground:@"referFriend" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"id"], @"friend" : message} block:^(NSArray *receivedItems, NSError *error) {
+            if (receivedItems) {
+                //TODO:Remove NSLog
+                NSLog(@"%@", receivedItems);
+            } else {
+                //TODO:Remove NSLog
+                NSLog(@"%@", error);
+            }
+            sender.userInteractionEnabled = YES;
+        }];
+    } else {
+        sender.userInteractionEnabled = YES;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid e-mail" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+- (BOOL)validateEmail:(NSString *)tempMail {
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stricterFilterString];
+    return [emailTest evaluateWithObject:tempMail];
+}
 
 - (void)markAsFavourite {
     isFavourite = !isFavourite;
     [barFavouriteButton setImage:isFavourite ? loveImageSelected : loveImage forState:UIControlStateNormal];
     [barFavouriteButton setTitleEdgeInsets:!isFavourite ? UIEdgeInsetsMake(0, -15, -28, 0) : UIEdgeInsetsMake(0, -40, -28, 0)];
+    barFavouriteButton.userInteractionEnabled = NO;
+    if (isFavourite) {
+        [Server callFunctionInBackground:@"addFavorite" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"id"]
+                                                                           } block:^(NSArray *receivedItems, NSError *error) {
+                                                                               if (receivedItems) {
+                                                                                   //TODO:Remove NSLog
+                                                                                   NSLog(@"%@", receivedItems);
+                                                                               } else {
+                                                                                   //TODO:Remove NSLog
+                                                                                   NSLog(@"%@", error);
+                                                                               }
+                                                                               barFavouriteButton.userInteractionEnabled = YES;
+                                                                           }];
+    } else {
+        [Server callFunctionInBackground:@"removeFavorite" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"id"]} block:^(NSArray *receivedItems, NSError *error) {
+            if (receivedItems) {
+                //TODO:Remove NSLog
+                NSLog(@"%@", receivedItems);
+            } else {
+                //TODO:Remove NSLog
+                NSLog(@"%@", error);
+            }
+            barFavouriteButton.userInteractionEnabled = YES;
+        }];
+    }
     
 }
 
 - (void)showMessageModal {
     messageHolderView.frameY = baseTop;
+    messagePlaceholderLabel.frame = messageTextView.frame;
+    messagePlaceholderLabel.frameX += 4;
+    messagePlaceholderLabel.hidden = NO;
+    messageTextView.text = @"";
     [self.navigationController.view addSubview:messageModalView];
     [[[[UIApplication sharedApplication] delegate] window] setWindowLevel:UIWindowLevelStatusBar+1];
 }
 
 - (void)showFriendModal {
     emailHolderView.frameY = baseTop;
+    emailTextField.text = @"";
     [self.navigationController.view addSubview:emailModalView];
     [[[[UIApplication sharedApplication] delegate] window] setWindowLevel:UIWindowLevelStatusBar+1];
 }
@@ -152,6 +254,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"openChat"]) {
         ChatVC *chat = segue.destinationViewController;
+        chat.dataDictionary = data;
         chat.fromDetail = YES;
     }
 }
@@ -187,7 +290,7 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-
+    messagePlaceholderLabel.hidden = textView.text.length;
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {

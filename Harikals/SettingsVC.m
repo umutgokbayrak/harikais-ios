@@ -9,7 +9,9 @@
 #import "SettingsVC.h"
 #import "DropdownModel.h"
 #import "DropdownModel.h"
-
+#import "HKServer.h"
+#import <Parse.h>
+#import "SettingsCell.h"
 
 @interface SettingsVC ()  <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>{
     
@@ -54,17 +56,13 @@
     dropdownTableView.dataSource = dropdownModel;
     dropdownModel.dataArray = dropMenuOptions;
     
-    [selectedLocations addObject:@""];
-    [selectedLocations addObject:@""];
-    [selectedLocations addObject:@""];
-    
     middleHolder.layer.cornerRadius =  3;
     topHolder.layer.cornerRadius =  3;
     lastHolder.layer.cornerRadius =  3;
     
     dropdownTableView.layer.borderWidth = 0.5;
     dropdownTableView.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
-
+    [notificationsSwitch addTarget:self action:@selector(changeNotifs:) forControlEvents:UIControlEventValueChanged];
     
     priceTextField.delegate = self;
     priceTextField.keyboardType = UIKeyboardTypeNumberPad;
@@ -74,11 +72,24 @@
     [self updateTableViewHeight];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
-    
+    [searchTextField addTarget:self   action:@selector(textFieldDidChange:)  forControlEvents:UIControlEventEditingChanged];
     tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     tap.delegate = self;
     [self.view addGestureRecognizer:tap];
     [self reloadDropMenu];
+}
+
+- (void)changeNotifs:(UISwitch *)notifsSwitch {
+    [Server callFunctionInBackground:@"updateNotification" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"notification" : notificationsSwitch.on ? @"true" : @"false"} block:^(NSArray *receivedItems, NSError *error) {
+        if (receivedItems) {
+            //TODO:Remove NSLog
+            NSLog(@"%@", receivedItems);
+        } else {
+            //TODO:Remove NSLog
+            NSLog(@"%@", error);
+        }
+        
+    }];
 }
 
 - (void)reloadDropMenu {
@@ -88,18 +99,34 @@
     tap.enabled = !dropMenuOptions.count;
 }
 
-- (void)removeRowAtIndexPath:(NSIndexPath *)indexPath{
-//    [CATransaction begin];
-    [selectedLocations removeObjectAtIndex:indexPath.row];
 
+- (void)auticompleteLocationWithText:(NSString *)text {
+    NSString *savedtext = [text copy];
+    if (!text.length) {
+        [dropMenuOptions removeAllObjects];
+        [self reloadDropMenu];
+    } else {
+        [Server callFunctionInBackground:@"autocompleteLocation" withParameters:@{@"str" : savedtext} block:^(NSArray *receivedItems, NSError *error) {
+            if (receivedItems) {
+                [dropMenuOptions removeAllObjects];
+                if ([savedtext isEqualToString:searchTextField.text]) {
+                    [dropMenuOptions addObjectsFromArray:receivedItems];
+                }
+                [self reloadDropMenu];
+                
+            } else {
+                //TODO:Remove NSLog
+                NSLog(@"%@", error);
+            }
+            
+        }];
+    }
+}
+
+- (void)removeRowAtIndexPath:(NSIndexPath *)indexPath{
+    [selectedLocations removeObjectAtIndex:indexPath.row];
     [self updateTableViewHeight];
-//    [mainTableView beginUpdates];
-//    [CATransaction setCompletionBlock: ^{
-//
-//    }];
     [mainTableView deleteRowsAtIndexPaths:@[indexPath]  withRowAnimation: UITableViewRowAnimationLeft];
-//    [mainTableView endUpdates];
-//    [CATransaction commit];
 }
 
 - (void)hideKeyboard {
@@ -114,6 +141,7 @@
 }
 
 - (void)updateTableViewHeight {
+
     tableViewHeightConstraint.constant = 50 * selectedLocations.count;
     [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [self.view layoutIfNeeded];
@@ -142,30 +170,56 @@
     return YES;
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([textField isEqual:priceTextField]) {
+        [Server callFunctionInBackground:@"updateSalary" withParameters:@{@"salary" : textField.text, @"userID" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
+            if (receivedItems) {
+                NSLog(@"salary %@", receivedItems);
+                
+            } else {
+                //TODO:Remove NSLog
+                NSLog(@"%@", error);
+            }
+            
+        }];
+    }
+}
+
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if ([textField isEqual:priceTextField]) {
         if (![self verifyPriceWithText:string]) {
             return NO;
         }
     } else {
-        
-        [dropMenuOptions removeAllObjects];
-        [dropMenuOptions addObject:@""];
-        [dropMenuOptions addObject:@""];
-        [dropMenuOptions addObject:@""];
-        [dropMenuOptions addObject:@""];
-        [self reloadDropMenu];
 
     }
     return  YES;
 }
 
+- (void)textFieldDidChange:(UITextField *)textField {
+    [self auticompleteLocationWithText:textField.text];
+}
+
 - (IBAction)addPressed:(id)sender {
     if (searchTextField.text.length) {
         searchTextField.text = @"";
-        [selectedLocations addObject:@""];
-        [mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:selectedLocations.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self updateTableViewHeight];
+        NSIndexPath *selectedIndexPath = [dropdownTableView indexPathForSelectedRow];
+        if (selectedIndexPath) {
+            NSString *location = dropMenuOptions[selectedIndexPath.row];
+            
+            [Server callFunctionInBackground:@"addNewLocation" withParameters:@{@"location" : location, @"userID" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
+                if (receivedItems) {
+                    [selectedLocations addObject:location];
+                    [mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:selectedLocations.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [self updateTableViewHeight];
+                } else {
+                    //TODO:Remove NSLog
+                    NSLog(@"%@", error);
+                }
+                
+            }];
+        }
     }
     [self hideKeyboard];
 }
@@ -217,7 +271,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settingsCell"];
+    SettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settingsCell"];
+    cell.locationLabel.text = selectedLocations[indexPath.row];
     
     return cell;
 }
@@ -228,8 +283,20 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSString *location = selectedLocations[indexPath.row];
         [self removeRowAtIndexPath:indexPath];
+        [Server callFunctionInBackground:@"deleteLocation" withParameters:@{@"location" : location, @"userID" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
+            if (receivedItems) {
 
+                
+            } else {
+                //TODO:Remove NSLog
+                NSLog(@"%@", error);
+            }
+            
+        }];
+        
+        
     }
 
 }

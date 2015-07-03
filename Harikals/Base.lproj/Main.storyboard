@@ -378,6 +378,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                     <navigationItem key="navigationItem" id="tbx-2Q-ltS"/>
                     <connections>
                         <segue destination="0TO-f5-Tb5" kind="modal" identifier="detail" id="yYV-Ij-RIl"/>
+                        <segue destination="UZ6-5R-pT6" kind="push" identifier="openChat" id="Ulm-vT-MJd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rUK-6c-YfW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -432,8 +433,8 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="money-bag-small" translatesAutoresizingMaskIntoConstraints="NO" id="NDE-5Q-gCf">
                                                 <rect key="frame" x="27" y="269" width="12" height="13"/>
                                             </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44M-EQ-w4D">
-                                                <rect key="frame" x="27" y="295" width="267" height="128"/>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44M-EQ-w4D">
+                                                <rect key="frame" x="21" y="295" width="278" height="128"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="128" id="A1A-qP-1l1"/>
@@ -448,18 +449,25 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VGg-Wf-gET">
+                                                <rect key="frame" x="21" y="295" width="278" height="128"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </webView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="NDE-5Q-gCf" firstAttribute="top" secondItem="7iS-EB-TAi" secondAttribute="bottom" constant="13" id="1O7-KV-1ki"/>
-                                            <constraint firstAttribute="trailing" secondItem="44M-EQ-w4D" secondAttribute="trailing" constant="26" id="3SI-gX-fPm"/>
+                                            <constraint firstItem="VGg-Wf-gET" firstAttribute="leading" secondItem="44M-EQ-w4D" secondAttribute="leading" id="3AN-PI-2Rs"/>
+                                            <constraint firstAttribute="trailing" secondItem="44M-EQ-w4D" secondAttribute="trailing" constant="21" id="3SI-gX-fPm"/>
                                             <constraint firstAttribute="centerX" secondItem="Dvn-gC-VA5" secondAttribute="centerX" id="4tI-AA-jYi"/>
                                             <constraint firstItem="BdC-jV-Edj" firstAttribute="leading" secondItem="khv-FW-i2m" secondAttribute="leading" constant="27" id="5oA-Ct-4Fw"/>
                                             <constraint firstItem="Vw4-kZ-lUq" firstAttribute="leading" secondItem="NDE-5Q-gCf" secondAttribute="leading" constant="22" id="5pX-Ku-Z6M"/>
+                                            <constraint firstItem="VGg-Wf-gET" firstAttribute="top" secondItem="44M-EQ-w4D" secondAttribute="top" id="8Xo-8q-tVk"/>
                                             <constraint firstItem="7iS-EB-TAi" firstAttribute="top" secondItem="BdC-jV-Edj" secondAttribute="bottom" constant="14" id="Awc-d8-Rvy"/>
-                                            <constraint firstItem="44M-EQ-w4D" firstAttribute="leading" secondItem="khv-FW-i2m" secondAttribute="leading" constant="27" id="BbS-hF-GqJ"/>
+                                            <constraint firstItem="44M-EQ-w4D" firstAttribute="leading" secondItem="khv-FW-i2m" secondAttribute="leading" constant="21" id="BbS-hF-GqJ"/>
                                             <constraint firstItem="BdC-jV-Edj" firstAttribute="top" secondItem="qGc-f8-HCO" secondAttribute="bottom" constant="12" id="Iif-mo-JY2"/>
                                             <constraint firstAttribute="centerX" secondItem="BdC-jV-Edj" secondAttribute="centerX" constant="-0.5" id="JPJ-WW-0Pd"/>
+                                            <constraint firstItem="VGg-Wf-gET" firstAttribute="trailing" secondItem="44M-EQ-w4D" secondAttribute="trailing" id="L3T-hd-PGO"/>
                                             <constraint firstItem="Dvn-gC-VA5" firstAttribute="centerX" secondItem="qGc-f8-HCO" secondAttribute="centerX" id="Qrx-8v-TUE"/>
                                             <constraint firstItem="nxh-Hh-nLw" firstAttribute="centerY" secondItem="7iS-EB-TAi" secondAttribute="centerY" constant="0.5" id="aDN-xh-mDV"/>
                                             <constraint firstItem="44M-EQ-w4D" firstAttribute="top" secondItem="Vw4-kZ-lUq" secondAttribute="bottom" constant="10" id="eXK-xu-yHl"/>
@@ -469,6 +477,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                             <constraint firstItem="Vw4-kZ-lUq" firstAttribute="centerY" secondItem="NDE-5Q-gCf" secondAttribute="centerY" constant="0.5" id="jAd-rb-Xku"/>
                                             <constraint firstItem="Dvn-gC-VA5" firstAttribute="top" secondItem="khv-FW-i2m" secondAttribute="top" constant="15" id="lq7-yi-HnO"/>
                                             <constraint firstAttribute="trailing" secondItem="BdC-jV-Edj" secondAttribute="trailing" constant="26" id="nEZ-Ls-ZwA"/>
+                                            <constraint firstItem="VGg-Wf-gET" firstAttribute="bottom" secondItem="44M-EQ-w4D" secondAttribute="bottom" id="phV-ja-2SP"/>
                                             <constraint firstItem="qGc-f8-HCO" firstAttribute="top" secondItem="Dvn-gC-VA5" secondAttribute="bottom" constant="5" id="qJW-I8-9OC"/>
                                             <constraint firstAttribute="bottom" secondItem="44M-EQ-w4D" secondAttribute="bottom" constant="10" id="vuP-c3-9j1"/>
                                         </constraints>
@@ -516,7 +525,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                         <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-28"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="-11" maxX="-69" maxY="0.0"/>
-                                        <state key="normal" title="Favorilere Ekle" image="31A9818F-3AD7-4150-9996-AC4766F5DFA7">
+                                        <state key="normal" title="Favorilere Ekle" image="DF21262A-42FC-4FFE-869E-8807D08EE050">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -587,6 +596,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                         <outlet property="barMessageButton" destination="3fA-e3-566" id="h1V-Eu-oDN"/>
                         <outlet property="companyImageView" destination="BdC-jV-Edj" id="YoP-7q-o9c"/>
                         <outlet property="companyNameLabel" destination="Dvn-gC-VA5" id="Axy-3J-AJ5"/>
+                        <outlet property="contenWebView" destination="VGg-Wf-gET" id="3Hf-IV-heO"/>
                         <outlet property="locationLabel" destination="nxh-Hh-nLw" id="8zc-dz-FsK"/>
                         <outlet property="mainScrollView" destination="poV-Oo-VgA" id="Mqj-1W-b5B"/>
                         <outlet property="mainTextView" destination="44M-EQ-w4D" id="c1k-a4-KDe"/>
@@ -992,7 +1002,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6a-Io-ECj">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="501"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="493"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OD2-Yy-n9O">
                                                 <rect key="frame" x="7" y="20" width="306" height="79"/>
@@ -1051,7 +1061,7 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOq-mo-mXN">
-                                                <rect key="frame" x="7" y="204" width="306" height="287"/>
+                                                <rect key="frame" x="7" y="204" width="306" height="279"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search-icon" translatesAutoresizingMaskIntoConstraints="NO" id="YJ6-o8-3KD">
                                                         <rect key="frame" x="23" y="30" width="12" height="14"/>
@@ -1080,13 +1090,13 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                                         </connections>
                                                     </button>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dPX-dL-j8B">
-                                                        <rect key="frame" x="8" y="63" width="290" height="200"/>
+                                                        <rect key="frame" x="8" y="55" width="290" height="200"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="200" id="KTg-UQ-4sK"/>
                                                         </constraints>
                                                         <prototypes>
-                                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingsCell" id="tAX-5M-N9t">
+                                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingsCell" id="tAX-5M-N9t" customClass="SettingsCell">
                                                                 <rect key="frame" x="0.0" y="0.0" width="290" height="44"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAX-5M-N9t" id="38L-cQ-Mzs">
@@ -1109,35 +1119,9 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                                                         <constraint firstAttribute="centerYWithinMargins" secondItem="Eja-3H-ygC" secondAttribute="centerYWithinMargins" id="aIj-w0-cue"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
-                                                            </tableViewCell>
-                                                        </prototypes>
-                                                    </tableView>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fXb-K2-Wkx">
-                                                        <rect key="frame" x="24" y="55" width="262" height="136"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="136" id="tdm-ld-tZo"/>
-                                                        </constraints>
-                                                        <prototypes>
-                                                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dropCell" rowHeight="35" id="EMX-bd-Awf">
-                                                                <rect key="frame" x="0.0" y="0.0" width="262" height="44"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
-                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EMX-bd-Awf" id="MTI-Xe-OOP">
-                                                                    <autoresizingMask key="autoresizingMask"/>
-                                                                    <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="drop menu option" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xch-aM-ah8">
-                                                                            <rect key="frame" x="21" y="6" width="137" height="21"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstItem="Xch-aM-ah8" firstAttribute="leading" secondItem="MTI-Xe-OOP" secondAttribute="leading" constant="21" id="RO0-Pk-yXs"/>
-                                                                        <constraint firstAttribute="centerYWithinMargins" secondItem="Xch-aM-ah8" secondAttribute="centerYWithinMargins" constant="0.5" id="yjK-x7-UQU"/>
-                                                                    </constraints>
-                                                                </tableViewCellContentView>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <connections>
+                                                                    <outlet property="locationLabel" destination="K3M-4w-vOV" id="LUo-lV-KOJ"/>
+                                                                </connections>
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>
@@ -1146,33 +1130,62 @@ Arzu ederseniz, nedir bu farklar size kısaca anlatalım. </string>
                                                 <constraints>
                                                     <constraint firstItem="R0b-OD-OR4" firstAttribute="top" secondItem="YJ6-o8-3KD" secondAttribute="bottom" constant="10" id="71N-GX-e4Q"/>
                                                     <constraint firstItem="YJ6-o8-3KD" firstAttribute="leading" secondItem="R0b-OD-OR4" secondAttribute="leading" id="BT7-ZY-INO"/>
-                                                    <constraint firstItem="R0b-OD-OR4" firstAttribute="leading" secondItem="fXb-K2-Wkx" secondAttribute="leading" constant="-1" id="EkW-ix-ACK"/>
                                                     <constraint firstItem="WNx-mG-9i8" firstAttribute="leading" secondItem="9RM-hK-S09" secondAttribute="trailing" constant="12" id="Fm5-LL-rNv"/>
                                                     <constraint firstItem="YJ6-o8-3KD" firstAttribute="leading" secondItem="fOq-mo-mXN" secondAttribute="leading" constant="23" id="Ftv-mr-zaK"/>
                                                     <constraint firstItem="9RM-hK-S09" firstAttribute="top" secondItem="fOq-mo-mXN" secondAttribute="top" constant="21" id="Hyg-Uw-3Gi"/>
-                                                    <constraint firstItem="dPX-dL-j8B" firstAttribute="top" secondItem="R0b-OD-OR4" secondAttribute="bottom" constant="8" id="K07-e5-1ni"/>
+                                                    <constraint firstItem="dPX-dL-j8B" firstAttribute="top" secondItem="R0b-OD-OR4" secondAttribute="bottom" id="K07-e5-1ni"/>
                                                     <constraint firstItem="WNx-mG-9i8" firstAttribute="top" secondItem="fOq-mo-mXN" secondAttribute="top" constant="20" id="Ocq-0g-52I"/>
                                                     <constraint firstItem="9RM-hK-S09" firstAttribute="centerY" secondItem="YJ6-o8-3KD" secondAttribute="centerY" constant="-1" id="V7A-bR-N6d"/>
                                                     <constraint firstItem="R0b-OD-OR4" firstAttribute="top" secondItem="9RM-hK-S09" secondAttribute="bottom" constant="3" id="VEH-1I-oGG"/>
                                                     <constraint firstAttribute="trailing" secondItem="WNx-mG-9i8" secondAttribute="trailing" constant="20" id="Zab-Dc-h1x"/>
-                                                    <constraint firstItem="R0b-OD-OR4" firstAttribute="trailing" secondItem="fXb-K2-Wkx" secondAttribute="trailing" id="aKv-41-79E"/>
                                                     <constraint firstAttribute="bottom" secondItem="dPX-dL-j8B" secondAttribute="bottom" constant="24" id="bh1-iC-nIT"/>
-                                                    <constraint firstItem="fXb-K2-Wkx" firstAttribute="top" secondItem="R0b-OD-OR4" secondAttribute="bottom" id="btX-BO-ohJ"/>
                                                     <constraint firstItem="dPX-dL-j8B" firstAttribute="leading" secondItem="fOq-mo-mXN" secondAttribute="leading" constant="8" id="btn-Ej-85A"/>
                                                     <constraint firstItem="9RM-hK-S09" firstAttribute="leading" secondItem="YJ6-o8-3KD" secondAttribute="trailing" constant="10" id="gKT-UM-51r"/>
                                                     <constraint firstItem="WNx-mG-9i8" firstAttribute="trailing" secondItem="R0b-OD-OR4" secondAttribute="trailing" id="kyX-Nj-6fq"/>
                                                     <constraint firstAttribute="trailing" secondItem="dPX-dL-j8B" secondAttribute="trailing" constant="8" id="nsS-e1-rdW"/>
                                                 </constraints>
                                             </view>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fXb-K2-Wkx">
+                                                <rect key="frame" x="29" y="259" width="262" height="136"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="136" id="tdm-ld-tZo"/>
+                                                </constraints>
+                                                <prototypes>
+                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dropCell" rowHeight="35" id="EMX-bd-Awf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="262" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EMX-bd-Awf" id="MTI-Xe-OOP">
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="drop menu option" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xch-aM-ah8">
+                                                                    <rect key="frame" x="21" y="6" width="137" height="21"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="Xch-aM-ah8" firstAttribute="leading" secondItem="MTI-Xe-OOP" secondAttribute="leading" constant="21" id="RO0-Pk-yXs"/>
+                                                                <constraint firstAttribute="centerYWithinMargins" secondItem="Xch-aM-ah8" secondAttribute="centerYWithinMargins" constant="0.5" id="yjK-x7-UQU"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="R0b-OD-OR4" firstAttribute="leading" secondItem="fXb-K2-Wkx" secondAttribute="leading" constant="1" id="0zn-Yi-7Gb"/>
                                             <constraint firstItem="OD2-Yy-n9O" firstAttribute="leading" secondItem="b6a-Io-ECj" secondAttribute="leading" constant="7" id="CSw-56-PmR"/>
                                             <constraint firstItem="OD2-Yy-n9O" firstAttribute="top" secondItem="b6a-Io-ECj" secondAttribute="top" constant="20" id="DVN-nW-upg"/>
                                             <constraint firstAttribute="bottom" secondItem="fOq-mo-mXN" secondAttribute="bottom" constant="10" id="NaS-nn-WgR"/>
                                             <constraint firstAttribute="trailing" secondItem="OD2-Yy-n9O" secondAttribute="trailing" constant="7" id="WcM-Dg-m5v"/>
                                             <constraint firstItem="5bK-SA-jI7" firstAttribute="leading" secondItem="b6a-Io-ECj" secondAttribute="leading" constant="7" id="cIH-TJ-Zgq"/>
+                                            <constraint firstItem="fXb-K2-Wkx" firstAttribute="top" secondItem="R0b-OD-OR4" secondAttribute="bottom" id="dDv-eZ-hJ7"/>
                                             <constraint firstAttribute="trailing" secondItem="fOq-mo-mXN" secondAttribute="trailing" constant="7" id="dKv-lb-JQj"/>
+                                            <constraint firstItem="R0b-OD-OR4" firstAttribute="trailing" secondItem="fXb-K2-Wkx" secondAttribute="trailing" constant="2" id="j7c-cY-cbo"/>
                                             <constraint firstItem="fOq-mo-mXN" firstAttribute="leading" secondItem="b6a-Io-ECj" secondAttribute="leading" constant="7" id="ntI-DG-8sz"/>
                                             <constraint firstItem="fOq-mo-mXN" firstAttribute="top" secondItem="5bK-SA-jI7" secondAttribute="bottom" constant="13" id="ofq-7B-Gm6"/>
                                             <constraint firstAttribute="trailing" secondItem="5bK-SA-jI7" secondAttribute="trailing" constant="7" id="uB4-6V-nvR"/>
@@ -1491,7 +1504,7 @@ yapmadınız. </string>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud-me" translatesAutoresizingMaskIntoConstraints="NO" id="70Z-lR-5Gg">
                                                     <rect key="frame" x="23" y="27" width="322" height="111"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="9mF-PO-XFM">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="9mF-PO-XFM">
                                                     <rect key="frame" x="349" y="25" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="OfJ-tc-uQJ"/>
@@ -1522,7 +1535,9 @@ yapmadınız. </string>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="avatarImageView" destination="9mF-PO-XFM" id="NKg-KT-cBn"/>
                                             <outlet property="cloudMeImageView" destination="70Z-lR-5Gg" id="eU6-Ad-O5h"/>
+                                            <outlet property="dateLabel" destination="iXf-Tu-nP6" id="mq5-3X-mAc"/>
                                             <outlet property="messageTextView" destination="2f7-b3-iq6" id="dkE-l9-17g"/>
                                         </connections>
                                     </tableViewCell>
@@ -1541,7 +1556,7 @@ yapmadınız. </string>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="other-cloud" translatesAutoresizingMaskIntoConstraints="NO" id="O4J-bt-A2j">
                                                     <rect key="frame" x="55" y="27" width="339" height="82"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="q08-WS-Dv6">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="q08-WS-Dv6">
                                                     <rect key="frame" x="8" y="27" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="hdV-mP-npa"/>
@@ -1572,7 +1587,9 @@ yapmadınız. </string>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="avatarImageView" destination="q08-WS-Dv6" id="OUF-Sl-JLi"/>
                                             <outlet property="cloudOtherImageView" destination="O4J-bt-A2j" id="Kfn-eO-ObJ"/>
+                                            <outlet property="dateLabel" destination="Ta0-go-M8Y" id="9Rq-0i-bua"/>
                                             <outlet property="messageTextView" destination="iTK-y8-wLc" id="wn6-Yc-yuj"/>
                                         </connections>
                                     </tableViewCell>
@@ -1610,7 +1627,7 @@ yapmadınız. </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mke-kb-kzC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2180" y="1864"/>
+            <point key="canvasLocation" x="2235" y="1832"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xtZ-lC-9ka">
@@ -1634,7 +1651,7 @@ yapmadınız. </string>
         </scene>
     </scenes>
     <resources>
-        <image name="31A9818F-3AD7-4150-9996-AC4766F5DFA7" width="16" height="13">
+        <image name="DF21262A-42FC-4FFE-869E-8807D08EE050" width="16" height="13">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -1742,10 +1759,10 @@ AA1vA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="msW-QM-sXF"/>
-        <segue reference="eYq-cX-74F"/>
         <segue reference="ND5-oD-DT2"/>
+        <segue reference="eYq-cX-74F"/>
+        <segue reference="msW-QM-sXF"/>
         <segue reference="dFy-gq-o27"/>
-        <segue reference="m9A-iD-PME"/>
+        <segue reference="Ulm-vT-MJd"/>
     </inferredMetricsTieBreakers>
 </document>

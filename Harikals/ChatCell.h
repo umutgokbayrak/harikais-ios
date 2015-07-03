@@ -14,5 +14,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *cloudMeImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *cloudOtherImageView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+
 
 @end

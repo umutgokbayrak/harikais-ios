@@ -49,6 +49,7 @@
 		95B77BB11B25B3360081E694 /* IntroductionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B77BB01B25B3360081E694 /* IntroductionVC.m */; };
 		95BE31321B39665D0091E052 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BE31311B39665D0091E052 /* ChatCell.m */; };
 		95CA93E91B387B9000AA9E04 /* ApplicationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CA93E81B387B9000AA9E04 /* ApplicationsCell.m */; };
+		95CD16651B46818C0004AEDD /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CD16641B46818C0004AEDD /* SettingsCell.m */; };
 		95D7753C1B2B41FF006D501F /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D7753B1B2B41FF006D501F /* SettingsVC.m */; };
 		95D775401B2B58E5006D501F /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D7753F1B2B58E5006D501F /* CardView.m */; };
 		95D775421B2B58FB006D501F /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D775411B2B58FB006D501F /* CardView.xib */; };
@@ -136,6 +137,8 @@
 		95BE31311B39665D0091E052 /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		95CA93E71B387B9000AA9E04 /* ApplicationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationsCell.h; sourceTree = "<group>"; };
 		95CA93E81B387B9000AA9E04 /* ApplicationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationsCell.m; sourceTree = "<group>"; };
+		95CD16631B46818C0004AEDD /* SettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCell.h; sourceTree = "<group>"; };
+		95CD16641B46818C0004AEDD /* SettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCell.m; sourceTree = "<group>"; };
 		95D7753A1B2B41FF006D501F /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
 		95D7753B1B2B41FF006D501F /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
 		95D7753E1B2B58E5006D501F /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
@@ -396,6 +399,8 @@
 				959890E61B3C0E3400551F60 /* DropdownModel.m */,
 				95D83BAE1B419996005530F4 /* HKTextField.h */,
 				95D83BAF1B419996005530F4 /* HKTextField.m */,
+				95CD16631B46818C0004AEDD /* SettingsCell.h */,
+				95CD16641B46818C0004AEDD /* SettingsCell.m */,
 			);
 			name = "Settings VC";
 			sourceTree = "<group>";
@@ -579,6 +584,7 @@
 			files = (
 				95AE07271B25F8C600184007 /* LeftMenuViewController.m in Sources */,
 				95D83BB01B419996005530F4 /* HKTextField.m in Sources */,
+				95CD16651B46818C0004AEDD /* SettingsCell.m in Sources */,
 				957B63991B247840003AA201 /* ViewController.m in Sources */,
 				95511E141B2770B400AD40C6 /* LoginVC.m in Sources */,
 				95A5E76C1B2700C300B6E978 /* CardsVC.m in Sources */,
@@ -681,6 +687,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "43726d38-0204-4100-b615-d16de879a50e";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -715,6 +722,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "43726d38-0204-4100-b615-d16de879a50e";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

@@ -11,6 +11,7 @@
 @protocol CardViewDelegate <NSObject>
 
 - (void)updateImage:(UIImage *)image forJobId:(NSString *)jobId;
+- (void)detailPressed;
 
 @end
 
@@ -33,6 +34,8 @@
 
 @property (nonatomic, weak) id <CardViewDelegate> delegate;
 - (void)configureViewWithJob:(NSDictionary *)jobDictionary;
+@property (weak, nonatomic) IBOutlet UIWebView *contentWebView;
 
+@property (weak, nonatomic) IBOutlet UIButton *detailarButton;
 
 @end

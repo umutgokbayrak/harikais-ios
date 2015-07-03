@@ -28,7 +28,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dropCell"];
-    
+    cell.textLabel.text = self.dataArray[indexPath.row];
     return cell;
 }
 

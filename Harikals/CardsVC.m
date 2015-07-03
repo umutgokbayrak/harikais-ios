@@ -12,6 +12,8 @@
 #import <Parse.h>
 #import "DetailVC.h"
 #import "HKServer.h"
+#import "ChatVC.h"
+
 
 @interface CardsVC () <UIScrollViewDelegate, iCarouselDataSource, iCarouselDelegate, CardViewDelegate> {
     __weak IBOutlet UIView *emptyHolderView;
@@ -104,13 +106,25 @@
     } else {
 
     }
-    
-
-
-
 
     [self loadJobs];
 }
+
+-(void)detailPressed {
+    NSInteger index = carousel.currentItemIndex;
+    NSNumber *item = (self.items)[(NSUInteger)index];
+    NSLog(@"Tapped view number: %@", item);
+    
+    [self performSegueWithIdentifier:@"detail" sender:self.items[index]];
+}
+
+
+- (IBAction)openChat:(id)sender {
+    [self performSegueWithIdentifier:@"openChat" sender:nil];
+}
+
+
+
 
 - (void)loadJobs {
     [Server callFunctionInBackground:@"jobs" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
@@ -135,7 +149,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidUnload
@@ -191,8 +205,16 @@
         presentedDetail = detailVC;
         [presentedDetail updateImage:photoDictionary[sender[@"id"]]];
         [detailVC setData:sender];
+    } else if ([segue.identifier isEqualToString:@"openChat"]) {
+        NSInteger index = carousel.currentItemIndex;
+        NSNumber *item = (self.items)[(NSUInteger)index];
+        NSLog(@"Tapped view number: %@", item);
+        ChatVC *chat = segue.destinationViewController;
+        chat.dataDictionary = self.items[index];
+        chat.fromDetail = YES;
     }
 }
+
 
 
 #pragma mark iCarousel methods
@@ -246,7 +268,8 @@
     view.infoTextView.frameY = view.locationLabel.frameY + 20;
     view.infoTextView.frameHeight = view.codeLabel.frameY  - view.infoTextView.frameY - 2;
     
-    
+    view.contentWebView.frame = view.infoTextView.frame;
+    [view.infoTextView removeFromSuperview];
     
 //    1.62
 }
@@ -323,18 +346,32 @@
 - (void)carouselDidScroll:(iCarousel *)_carousel {
     CGFloat alpha = self.items.count - _carousel.scrollOffset;
     emptyHolderView.alpha = 1 - alpha;
-    
+    messagesButton.alpha = alpha;
 }
 
-- (void)carousel:(__unused iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
-    NSNumber *item = (self.items)[(NSUInteger)index];
-    NSLog(@"Tapped view number: %@", item);
-    
-    [self performSegueWithIdentifier:@"detail" sender:self.items[index]];
-}
+//- (void)carousel:(__unused iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
+//    NSNumber *item = (self.items)[(NSUInteger)index];
+//    NSLog(@"Tapped view number: %@", item);
+//    
+//    [self performSegueWithIdentifier:@"detail" sender:self.items[index]];
+//}
 
 - (void)carouselCurrentItemIndexDidChange:(__unused iCarousel *)carousel {
-//    NSLog(@"Index: %@", @(self.carousel.currentItemIndex));
+    NSLog(@"Index: %@", @(self.carousel.currentItemIndex));
+    
+    if (self.carousel.currentItemIndex >= 0) {
+        [Server callFunctionInBackground:@"markJobAsSeen" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : self.items[self.carousel.currentItemIndex][@"id"]
+       } block:^(NSArray *receivedItems, NSError *error) {
+           if (receivedItems) {
+               //TODO:Remove NSLog
+               NSLog(@"%@", receivedItems);
+           } else {
+               //TODO:Remove NSLog
+               NSLog(@"%@", error);
+           }
+        }];
+        
+    }
 }
 
 

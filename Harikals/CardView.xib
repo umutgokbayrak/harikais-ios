@@ -55,7 +55,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" id="UEL-Yf-EOd">
-                    <rect key="frame" x="8" y="254" width="251" height="121"/>
+                    <rect key="frame" x="5" y="254" width="257" height="121"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -93,6 +93,11 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.078431372549019607" green="0.10588235294117647" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <webView contentMode="scaleToFill" id="vQn-fE-fqR">
+                    <rect key="frame" x="49" y="261" width="180" height="108"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </webView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -103,6 +108,8 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="codeLabel" destination="a7C-mp-Yf6" id="xyf-qn-iwf"/>
+                <outlet property="contentWebView" destination="vQn-fE-fqR" id="DR9-eT-Sbx"/>
+                <outlet property="detailarButton" destination="8fq-73-vyZ" id="x7U-tK-dPJ"/>
                 <outlet property="infoTextView" destination="UEL-Yf-EOd" id="l1p-rd-d9f"/>
                 <outlet property="lineView" destination="Q9a-hO-eNv" id="122-l5-R3o"/>
                 <outlet property="locationLabel" destination="czn-aQ-246" id="oc7-AX-PAz"/>

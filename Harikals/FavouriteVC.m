@@ -171,9 +171,45 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSDictionary *data = dataArray[indexPath.row];
         [dataArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        if (_isMessageVC) {
+            [self removeChatWithData:data];
+        } else {
+            [self removeFavouriteWithData:data];
+        }
+        
     }
+}
+
+
+- (void)removeFavouriteWithData:(NSDictionary *)data {
+    [Server callFunctionInBackground:@"deleteFavorite" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"favoriteId"]
+                                                                        } block:^(NSArray *receivedItems, NSError *error) {
+                                                                            if (receivedItems) {
+                                                                                //TODO:Remove NSLog
+                                                                                NSLog(@"%@", receivedItems);
+                                                                            } else {
+                                                                                //TODO:Remove NSLog
+                                                                                NSLog(@"%@", error);
+                                                                            }
+                                                                            
+                                                                        }];
+}
+
+- (void)removeChatWithData:(NSDictionary *)data {
+    [Server callFunctionInBackground:@"deleteChat" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"companyId"]
+                                                                    } block:^(NSArray *receivedItems, NSError *error) {
+                                                                        if (receivedItems) {
+                                                                            //TODO:Remove NSLog
+                                                                            NSLog(@"%@", receivedItems);
+                                                                        } else {
+                                                                            //TODO:Remove NSLog
+                                                                            NSLog(@"%@", error);
+                                                                        }
+                                                                        
+                                                                    }];
 }
 
 
