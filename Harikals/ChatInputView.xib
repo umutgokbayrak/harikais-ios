@@ -8,7 +8,9 @@
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
             <string>OpenSans</string>
-            <string>OpenSans</string>
+        </mutableArray>
+        <mutableArray key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -29,14 +31,15 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRl-Ya-8Z7">
                             <rect key="frame" x="250" y="0.0" width="70" height="58"/>
-                            <color key="backgroundColor" red="0.53333333329999999" green="0.75294117650000003" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.4392156862745098" green="0.72941176470588232" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="tIL-Hn-GjX"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
+                            <size key="titleShadowOffset" width="0.0" height="1"/>
                             <state key="normal" title="GÖNDER">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" red="0.1333333333" green="0.10980392160000001" blue="0.1960784314" alpha="0.5" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="sendPressed:" destination="-1" eventType="touchUpInside" id="WY4-H0-utU"/>
@@ -51,7 +54,7 @@
                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Anlaşıldı, iyi günler dilerim" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tm1-nA-Wtr">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Mesajınız" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tm1-nA-Wtr">
                                     <rect key="frame" x="16" y="10" width="198" height="20"/>
                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

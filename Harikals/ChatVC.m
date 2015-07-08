@@ -85,7 +85,7 @@
 }
 
 - (void)loadMessages {
-    [Server callFunctionInBackground:@"chatLog" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId],
+    [Server callFunctionInBackground:@"chatLog" withParameters:@{@"userId" : @"123",
                                                                  @"jobId" : dataDictionary[@"companyId"] ? dataDictionary[@"companyId"] : dataDictionary[@"id"]} block:^(NSDictionary *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [messagesArray removeAllObjects];
@@ -174,7 +174,7 @@
     
     
     [Server callFunctionInBackground:@"sendMessage"
-                      withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId],
+                      withParameters:@{@"userId" : @"123",
                                        @"jobId" : dataDictionary[@"companyId"],
                                        @"msg" : text}
                                block:^(NSDictionary *receivedItems, NSError *error) {

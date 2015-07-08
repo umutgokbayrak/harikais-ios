@@ -11,6 +11,9 @@
 @interface MenuCell : UITableViewCell
 @property (nonatomic, strong) UIImageView *tintView;
 
+@property (weak, nonatomic) IBOutlet UIView *counterView;
 - (void)hideTint:(BOOL)hide;
+
+
 
 @end

@@ -12,6 +12,8 @@
 #import "HKServer.h"
 #import <Parse.h>
 #import "SettingsCell.h"
+#import <UIView+Position.h>
+
 
 @interface SettingsVC ()  <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>{
     
@@ -51,6 +53,12 @@
     selectedLocations = [NSMutableArray array];
     dropMenuOptions = [NSMutableArray array];
     
+    if (Server.userInfoDictionary) {
+        [selectedLocations addObjectsFromArray:Server.userInfoDictionary[@"locations"]];
+        notificationsSwitch.on = [Server.userInfoDictionary[@"notifications"] integerValue];
+        priceTextField.text = [NSString stringWithFormat:@"%@",  Server.userInfoDictionary[@"minimumSalary"] ? Server.userInfoDictionary[@"minimumSalary"] : @""];
+    }
+    
     dropdownModel = [[DropdownModel alloc] init];
     dropdownTableView.delegate = dropdownModel;
     dropdownTableView.dataSource = dropdownModel;
@@ -69,6 +77,13 @@
     mainTableView.dataSource = self;
     searchTextField.delegate = self;
     mainTableView.delegate = self;
+    
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:priceTextField action:@selector(resignFirstResponder)];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    toolbar.items = [NSArray arrayWithObject:barButton];
+    
+    priceTextField.inputAccessoryView = toolbar;
+    
     [self updateTableViewHeight];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
@@ -80,7 +95,7 @@
 }
 
 - (void)changeNotifs:(UISwitch *)notifsSwitch {
-    [Server callFunctionInBackground:@"updateNotification" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"notification" : notificationsSwitch.on ? @"true" : @"false"} block:^(NSArray *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"updateNotification" withParameters:@{@"userId" : @"123", @"notification" : notificationsSwitch.on ? @"true" : @"false"} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems) {
             //TODO:Remove NSLog
             NSLog(@"%@", receivedItems);
@@ -94,6 +109,7 @@
 
 - (void)reloadDropMenu {
     [dropdownTableView reloadData];
+
     dropdownMenuHeight.constant = 35 * dropMenuOptions.count;
     dropdownTableView.hidden = !dropMenuOptions.count;
     tap.enabled = !dropMenuOptions.count;
@@ -113,7 +129,9 @@
                     [dropMenuOptions addObjectsFromArray:receivedItems];
                 }
                 [self reloadDropMenu];
-                
+                if (dropdownMenuHeight.constant > 10) {
+//                    [self scrollToBottom];
+                }
             } else {
                 //TODO:Remove NSLog
                 NSLog(@"%@", error);
@@ -121,6 +139,14 @@
             
         }];
     }
+}
+
+- (void)scrollToBottom {
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [mainScrollView setContentOffset:CGPointMake(0, dropdownTableView.frameY - 50)];
+        
+    } completion:^(BOOL finished) {
+    }];
 }
 
 - (void)removeRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -248,9 +274,9 @@
 
     
     [UIView animateWithDuration:animationDuration > 0 ? animationDuration : 0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [mainScrollView setContentOffset:CGPointMake(0, priceTextField.frameY + 50)];
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-        
     }];
     
 }

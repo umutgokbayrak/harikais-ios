@@ -15,6 +15,6 @@
 - (void)configureFavourite:(NSDictionary *)favouriteObject;
 - (void)configureChat:(NSDictionary *)chatObject;
 
-
+@property (weak, nonatomic) IBOutlet UIView *counterView;
 
 @end

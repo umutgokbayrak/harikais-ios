@@ -76,6 +76,7 @@ extern NSInteger const kPFErrorLinkedInInvalidSession;
  */
 + (void)logInWithBlock:(PFUserResultBlock)block;
 
+
 ///--------------------------------------
 /// @name Linking Users with LinkedIn
 ///--------------------------------------

@@ -48,14 +48,11 @@
         locationLabel.text = companyInfo[@"location"];
 
         [_contentWebView.scrollView scrollRectToVisible:CGRectZero animated:NO];
-//        infoTextView.text = [NSString stringWithFormat:@"%@\n\n%@", companyInfo[@"info"], jobInfo[@"info"]];
-//        infoTextView.text = jobDictionary[@"shortInfo"];
         [self configureText:jobDictionary[@"shortInfo"]];
         
-//        infoTextView.font = [UIFont fontWithName:@"OpenSans-Light" size:10.0];
         photoImageView.image = [UIImage imageNamed:@"company-placeholder"];
         
-        [photoImageView sd_setImageWithURL:[NSURL URLWithString:companyInfo[@"photoUrl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [photoImageView sd_setImageWithURL:[NSURL URLWithString:companyInfo[@"photoUrl"]] placeholderImage:[UIImage imageNamed:@"company-placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if ([job isEqual:jobDictionary]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     photoImageView.image = image;
@@ -89,11 +86,6 @@
 
     [_contentWebView loadHTMLString:myDescriptionHTML baseURL:nil];
 
-
-
-    
-    
-    //    textHeightContraint.constant = contenWebView.scrollView.contentSize.height;
 }
 
 

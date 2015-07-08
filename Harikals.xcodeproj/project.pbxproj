@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		950EF4E433AE1F1D57358545 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4A32F333D1D7CF497CE895 /* libPods.a */; };
+		951795CA1B4BC8EC00523D65 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 951795C91B4BC8EC00523D65 /* ProfileVC.m */; };
+		951795CE1B4BC91D00523D65 /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 951795CD1B4BC91D00523D65 /* ProfileCell.m */; };
 		95511E111B2719CA00AD40C6 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E101B2719CA00AD40C6 /* iCarousel.m */; };
 		95511E141B2770B400AD40C6 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E131B2770B400AD40C6 /* LoginVC.m */; };
 		95511E181B28291700AD40C6 /* FavouriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95511E171B28291700AD40C6 /* FavouriteVC.m */; };
@@ -27,11 +29,20 @@
 		959B2C991A5F13610009C77D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B2C981A5F13610009C77D /* MenuCell.m */; };
 		95A5E76C1B2700C300B6E978 /* CardsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A5E76A1B2700C300B6E978 /* CardsVC.m */; };
 		95A5E76D1B2700C300B6E978 /* CardsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A5E76B1B2700C300B6E978 /* CardsVC.xib */; };
+		95A94F341B205201004A2CE0 /* OptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A94F331B205201004A2CE0 /* OptionsVC.m */; };
+		95AA967F1B2062DF00FF0F81 /* SignInVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AA967E1B2062DF00FF0F81 /* SignInVC.m */; };
+		95AA96821B4C113C00FF0F81 /* FillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AA96811B4C113C00FF0F81 /* FillVC.m */; };
+		95AA96851B4C141100FF0F81 /* UIMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AA96841B4C141100FF0F81 /* UIMonthYearPicker.m */; };
+		95AA96881B4C285000FF0F81 /* OHActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AA96871B4C285000FF0F81 /* OHActionSheet.m */; };
+		95AAB2AE1B4D34990092CA62 /* InitialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AAB2AD1B4D34990092CA62 /* InitialVC.m */; };
+		95ADC6721B4954E400344BE9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95ADC6701B4954E400344BE9 /* Default@2x.png */; };
+		95ADC6731B4954E400344BE9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95ADC6711B4954E400344BE9 /* Default-568h@2x.png */; };
 		95AE071E1B25F38200184007 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE07191B25F38200184007 /* RECommonFunctions.m */; };
 		95AE071F1B25F38200184007 /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE071B1B25F38200184007 /* RESideMenu.m */; };
 		95AE07201B25F38200184007 /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE071D1B25F38200184007 /* UIViewController+RESideMenu.m */; };
 		95AE07241B25F5BD00184007 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE07231B25F5BD00184007 /* MenuViewController.m */; };
 		95AE07271B25F8C600184007 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE07251B25F8C600184007 /* LeftMenuViewController.m */; };
+		95AE22211B4A8F76001B26D3 /* FjallaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95AE22201B4A8F71001B26D3 /* FjallaOne-Regular.ttf */; };
 		95B645431B29FE86009F1696 /* DetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B645421B29FE86009F1696 /* DetailVC.m */; };
 		95B645451B2A05BA009F1696 /* ModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95B645441B2A05BA009F1696 /* ModalView.xib */; };
 		95B77BA31B25AB780081E694 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95B77B971B25AB780081E694 /* OpenSans-Bold.ttf */; };
@@ -71,6 +82,10 @@
 		29486ABA066670FC3B9C5709 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		504BA634EB605968241D5616 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6A4A32F333D1D7CF497CE895 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		951795C81B4BC8EC00523D65 /* ProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileVC.h; sourceTree = "<group>"; };
+		951795C91B4BC8EC00523D65 /* ProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileVC.m; sourceTree = "<group>"; };
+		951795CC1B4BC91D00523D65 /* ProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileCell.h; sourceTree = "<group>"; };
+		951795CD1B4BC91D00523D65 /* ProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileCell.m; sourceTree = "<group>"; };
 		95511E0F1B2719CA00AD40C6 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		95511E101B2719CA00AD40C6 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		95511E121B2770B400AD40C6 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
@@ -106,6 +121,20 @@
 		95A5E7691B2700C300B6E978 /* CardsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardsVC.h; sourceTree = "<group>"; };
 		95A5E76A1B2700C300B6E978 /* CardsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardsVC.m; sourceTree = "<group>"; };
 		95A5E76B1B2700C300B6E978 /* CardsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardsVC.xib; sourceTree = "<group>"; };
+		95A94F321B205201004A2CE0 /* OptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsVC.h; sourceTree = "<group>"; };
+		95A94F331B205201004A2CE0 /* OptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsVC.m; sourceTree = "<group>"; };
+		95AA967D1B2062DF00FF0F81 /* SignInVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInVC.h; sourceTree = "<group>"; };
+		95AA967E1B2062DF00FF0F81 /* SignInVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInVC.m; sourceTree = "<group>"; };
+		95AA96801B4C113C00FF0F81 /* FillVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FillVC.h; sourceTree = "<group>"; };
+		95AA96811B4C113C00FF0F81 /* FillVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FillVC.m; sourceTree = "<group>"; };
+		95AA96831B4C141100FF0F81 /* UIMonthYearPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMonthYearPicker.h; sourceTree = "<group>"; };
+		95AA96841B4C141100FF0F81 /* UIMonthYearPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMonthYearPicker.m; sourceTree = "<group>"; };
+		95AA96861B4C285000FF0F81 /* OHActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHActionSheet.h; sourceTree = "<group>"; };
+		95AA96871B4C285000FF0F81 /* OHActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHActionSheet.m; sourceTree = "<group>"; };
+		95AAB2AC1B4D34990092CA62 /* InitialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialVC.h; sourceTree = "<group>"; };
+		95AAB2AD1B4D34990092CA62 /* InitialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialVC.m; sourceTree = "<group>"; };
+		95ADC6701B4954E400344BE9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		95ADC6711B4954E400344BE9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		95AE07181B25F38200184007 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		95AE07191B25F38200184007 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		95AE071A1B25F38200184007 /* RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenu.h; sourceTree = "<group>"; };
@@ -116,6 +145,7 @@
 		95AE07231B25F5BD00184007 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		95AE07251B25F8C600184007 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
 		95AE07281B25F8E800184007 /* LeftMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
+		95AE22201B4A8F71001B26D3 /* FjallaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FjallaOne-Regular.ttf"; sourceTree = "<group>"; };
 		95B645411B29FE86009F1696 /* DetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailVC.h; sourceTree = "<group>"; };
 		95B645421B29FE86009F1696 /* DetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailVC.m; sourceTree = "<group>"; };
 		95B645441B2A05BA009F1696 /* ModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModalView.xib; sourceTree = "<group>"; };
@@ -169,6 +199,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		951795CB1B4BC90400523D65 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				95AA96861B4C285000FF0F81 /* OHActionSheet.h */,
+				95AA96871B4C285000FF0F81 /* OHActionSheet.m */,
+				95AA96831B4C141100FF0F81 /* UIMonthYearPicker.h */,
+				95AA96841B4C141100FF0F81 /* UIMonthYearPicker.m */,
+				951795C81B4BC8EC00523D65 /* ProfileVC.h */,
+				951795C91B4BC8EC00523D65 /* ProfileVC.m */,
+				951795CC1B4BC91D00523D65 /* ProfileCell.h */,
+				951795CD1B4BC91D00523D65 /* ProfileCell.m */,
+				95A94F321B205201004A2CE0 /* OptionsVC.h */,
+				95A94F331B205201004A2CE0 /* OptionsVC.m */,
+				95AA96801B4C113C00FF0F81 /* FillVC.h */,
+				95AA96811B4C113C00FF0F81 /* FillVC.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		95511E0E1B2719CA00AD40C6 /* iCarousel */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +232,8 @@
 			children = (
 				95511E121B2770B400AD40C6 /* LoginVC.h */,
 				95511E131B2770B400AD40C6 /* LoginVC.m */,
+				95AA967D1B2062DF00FF0F81 /* SignInVC.h */,
+				95AA967E1B2062DF00FF0F81 /* SignInVC.m */,
 			);
 			name = "Login VC";
 			sourceTree = "<group>";
@@ -243,6 +294,7 @@
 		957B638F1B247840003AA201 /* Harikals */ = {
 			isa = PBXGroup;
 			children = (
+				951795CB1B4BC90400523D65 /* Profile */,
 				95B77B961B25AAE50081E694 /* Fonts */,
 				95B77B951B25A8F40081E694 /* App Delegate */,
 				957B63971B247840003AA201 /* ViewController.h */,
@@ -259,9 +311,10 @@
 				95511E241B286CAC00AD40C6 /* Chat VC */,
 				95D775391B2B41DE006D501F /* Detail VC */,
 				95D7753D1B2B567C006D501F /* Settings VC */,
-				95790DAE1B32C3140024EA3E /* PushNoAnimationSegue.h */,
-				95790DAF1B32C3140024EA3E /* PushNoAnimationSegue.m */,
+				95AAB2AB1B4D34830092CA62 /* Segue */,
 				95D83BB41B419C03005530F4 /* Server API */,
+				95AAB2AC1B4D34990092CA62 /* InitialVC.h */,
+				95AAB2AD1B4D34990092CA62 /* InitialVC.m */,
 			);
 			path = Harikals;
 			sourceTree = "<group>";
@@ -304,6 +357,15 @@
 			name = "Cards Controller";
 			sourceTree = "<group>";
 		};
+		95AAB2AB1B4D34830092CA62 /* Segue */ = {
+			isa = PBXGroup;
+			children = (
+				95790DAE1B32C3140024EA3E /* PushNoAnimationSegue.h */,
+				95790DAF1B32C3140024EA3E /* PushNoAnimationSegue.m */,
+			);
+			name = Segue;
+			sourceTree = "<group>";
+		};
 		95AE07161B25F35D00184007 /* Introduction VC */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +391,8 @@
 		95AE07211B25F39100184007 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				95ADC6701B4954E400344BE9 /* Default@2x.png */,
+				95ADC6711B4954E400344BE9 /* Default-568h@2x.png */,
 				95A5E76B1B2700C300B6E978 /* CardsVC.xib */,
 				957B639A1B247840003AA201 /* Main.storyboard */,
 				957B639D1B247840003AA201 /* Images.xcassets */,
@@ -365,6 +429,7 @@
 		95B77B961B25AAE50081E694 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				95AE22201B4A8F71001B26D3 /* FjallaOne-Regular.ttf */,
 				95B77B971B25AB780081E694 /* OpenSans-Bold.ttf */,
 				95B77B981B25AB780081E694 /* OpenSans-BoldItalic.ttf */,
 				95B77B991B25AB780081E694 /* OpenSans-CondLight.ttf */,
@@ -513,11 +578,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95AE22211B4A8F76001B26D3 /* FjallaOne-Regular.ttf in Resources */,
 				957B639C1B247840003AA201 /* Main.storyboard in Resources */,
 				95511E261B28758200AD40C6 /* ChatInputView.xib in Resources */,
 				95B77BAE1B25AB780081E694 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				95A5E76D1B2700C300B6E978 /* CardsVC.xib in Resources */,
 				95B645451B2A05BA009F1696 /* ModalView.xib in Resources */,
+				95ADC6731B4954E400344BE9 /* Default-568h@2x.png in Resources */,
 				95B77BA81B25AB780081E694 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				95D775421B2B58FB006D501F /* CardView.xib in Resources */,
 				95B77BAB1B25AB780081E694 /* OpenSans-LightItalic.ttf in Resources */,
@@ -525,6 +592,7 @@
 				95B77BA91B25AB780081E694 /* OpenSans-Italic.ttf in Resources */,
 				95B77BA51B25AB780081E694 /* OpenSans-CondLight.ttf in Resources */,
 				95B77BA71B25AB780081E694 /* OpenSans-ExtraBold.ttf in Resources */,
+				95ADC6721B4954E400344BE9 /* Default@2x.png in Resources */,
 				95B77BA31B25AB780081E694 /* OpenSans-Bold.ttf in Resources */,
 				957B639E1B247840003AA201 /* Images.xcassets in Resources */,
 				95B77BA41B25AB780081E694 /* OpenSans-BoldItalic.ttf in Resources */,
@@ -582,10 +650,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				951795CA1B4BC8EC00523D65 /* ProfileVC.m in Sources */,
 				95AE07271B25F8C600184007 /* LeftMenuViewController.m in Sources */,
+				95AA96881B4C285000FF0F81 /* OHActionSheet.m in Sources */,
 				95D83BB01B419996005530F4 /* HKTextField.m in Sources */,
+				95AA96821B4C113C00FF0F81 /* FillVC.m in Sources */,
 				95CD16651B46818C0004AEDD /* SettingsCell.m in Sources */,
 				957B63991B247840003AA201 /* ViewController.m in Sources */,
+				95A94F341B205201004A2CE0 /* OptionsVC.m in Sources */,
 				95511E141B2770B400AD40C6 /* LoginVC.m in Sources */,
 				95A5E76C1B2700C300B6E978 /* CardsVC.m in Sources */,
 				95CA93E91B387B9000AA9E04 /* ApplicationsCell.m in Sources */,
@@ -593,8 +665,11 @@
 				95D7753C1B2B41FF006D501F /* SettingsVC.m in Sources */,
 				95B645431B29FE86009F1696 /* DetailVC.m in Sources */,
 				95D83BB31B419BF9005530F4 /* HKServer.m in Sources */,
+				95AA967F1B2062DF00FF0F81 /* SignInVC.m in Sources */,
 				95511E181B28291700AD40C6 /* FavouriteVC.m in Sources */,
 				95511E111B2719CA00AD40C6 /* iCarousel.m in Sources */,
+				95AA96851B4C141100FF0F81 /* UIMonthYearPicker.m in Sources */,
+				95AAB2AE1B4D34990092CA62 /* InitialVC.m in Sources */,
 				95D775401B2B58E5006D501F /* CardView.m in Sources */,
 				957B63961B247840003AA201 /* AppDelegate.m in Sources */,
 				95790DB01B32C3140024EA3E /* PushNoAnimationSegue.m in Sources */,
@@ -607,6 +682,7 @@
 				95511E231B286CA200AD40C6 /* ChatVC.m in Sources */,
 				95AE071F1B25F38200184007 /* RESideMenu.m in Sources */,
 				95AE07201B25F38200184007 /* UIViewController+RESideMenu.m in Sources */,
+				951795CE1B4BC91D00523D65 /* ProfileCell.m in Sources */,
 				957B63931B247840003AA201 /* main.m in Sources */,
 				95BE31321B39665D0091E052 /* ChatCell.m in Sources */,
 			);
@@ -687,7 +763,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "43726d38-0204-4100-b615-d16de879a50e";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -722,7 +798,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "43726d38-0204-4100-b615-d16de879a50e";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

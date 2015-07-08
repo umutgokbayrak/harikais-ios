@@ -31,6 +31,8 @@
     UIImage *mainImage;
 
     BOOL isFavourite;
+    BOOL isApplied;
+    
     
     UIImage *loveImage;
     UIImage *loveImageSelected;
@@ -84,6 +86,10 @@
     
     
     isFavourite = [data[@"flags"][@"favorited"] boolValue];
+    isApplied = [data[@"flags"][@"applied"] boolValue];
+    if (isApplied) {
+        [self setApplicationButtonDisabled];
+    }
     
     [barFavouriteButton setImage:isFavourite ? loveImageSelected : loveImage forState:UIControlStateNormal];
     [barFavouriteButton setTitleEdgeInsets:!isFavourite ? UIEdgeInsetsMake(0, -15, -28, 0) : UIEdgeInsetsMake(0, -40, -28, 0)];
@@ -114,24 +120,38 @@
         
         companyImageView.image = [UIImage imageNamed:@"company-placeholder"];
     }
-    [self configureText:mainTextView.text];
+    [self configureText:companyInfo[@"info"] secondText:jobInfo[@"info"]];
 }
 
-- (void)configureText:(NSString *)text {
+- (void)configureText:(NSString *)companyText  secondText:(NSString *)secondText {
+    NSString *firstHeader = @"<tag>Firma Hakkında:</tag><br>";
+    NSString *secondHeader = @"<tag>İş Hakkında:</tag><br>";
+    if ([[secondText substringWithRange:NSMakeRange(0, 3)] isEqualToString:@"<p>"]) {
+        secondText = [secondText substringWithRange:NSMakeRange(3, secondText.length - 3)];
+        secondHeader = [NSString stringWithFormat:@"<p>%@", secondHeader];
+    } else {
+        secondHeader = @"<tag>İş Hakkında:</tag><br>";
+    }
+    
+    NSString *resultString = [NSString stringWithFormat:@"%@%@%@%@", firstHeader, companyText, secondHeader, secondText];
+    
     NSString *myDescriptionHTML = [NSString stringWithFormat:@"<html> \n"
                                    "<head> \n"
                                    "<style type=\"text/css\"> \n"
+                                   
                                    "body {font-family: \"%@\"; font-size: %@;}\n"
+                                   "tag {font-family: \"OpenSans-Semibold\"; font-size: 13.0;}\n"
+                                   
                                    "</style> \n"
                                    "</head> \n"
+                                   
+                                   
                                    "<body>%@</body> \n"
-                                   "</html>", @"OpenSans-Light", @14, text];
+                                   "</html>", @"OpenSans-Light", @14, resultString];
 
     [contenWebView loadHTMLString:myDescriptionHTML baseURL:nil];
     contenWebView.delegate = self;
     
-    
-//    textHeightContraint.constant = contenWebView.scrollView.contentSize.height;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -153,19 +173,31 @@
     [super viewDidLayoutSubviews];
     
 }
+
+- (void)setApplicationButtonDisabled {
+    barApplyButton.backgroundColor = [UIColor colorWithRed:196.0 / 255.0 green:196.0 / 255.0 blue:196.0 / 255.0 alpha:1.0];
+    barApplyButton.userInteractionEnabled = NO;
+    [barApplyButton setTitle:@"Başvuruldu" forState:UIControlStateNormal];
+//    [barFavouriteButton setImageEdgeInsets:!isFavourite ? UIEdgeInsetsMake(-10, 0, 0, -52) : UIEdgeInsetsMake(-11, 0, 0, -44)];
+    [barApplyButton setImageEdgeInsets:UIEdgeInsetsMake(-11, 0, 0, -50)];
+}
+
 - (IBAction)applyToJob:(UIButton *)sender {
     sender.userInteractionEnabled = NO;
     NSString *message = messageTextView.text;
     [self hideModals];
-    [Server callFunctionInBackground:@"applyToJob" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"id"], @"message" : message} block:^(NSArray *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"applyToJob" withParameters:@{@"userId" : @"123", @"jobId" : data[@"id"], @"message" : message} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems) {
             //TODO:Remove NSLog
             NSLog(@"%@", receivedItems);
+            [self setApplicationButtonDisabled];
+            
         } else {
+            sender.userInteractionEnabled = YES;
             //TODO:Remove NSLog
             NSLog(@"%@", error);
         }
-        sender.userInteractionEnabled = YES;
+
     }];
 }
 
@@ -175,7 +207,7 @@
     if ([self validateEmail:message]) {
         [self hideModals];
         
-        [Server callFunctionInBackground:@"referFriend" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"id"], @"friend" : message} block:^(NSArray *receivedItems, NSError *error) {
+        [Server callFunctionInBackground:@"referFriend" withParameters:@{@"userId" : @"123", @"jobId" : data[@"id"], @"friend" : message} block:^(NSArray *receivedItems, NSError *error) {
             if (receivedItems) {
                 //TODO:Remove NSLog
                 NSLog(@"%@", receivedItems);
@@ -201,10 +233,12 @@
 - (void)markAsFavourite {
     isFavourite = !isFavourite;
     [barFavouriteButton setImage:isFavourite ? loveImageSelected : loveImage forState:UIControlStateNormal];
+    [barFavouriteButton setTitle:isFavourite ? @"Favori Sil" : @"Favori Ekle" forState:UIControlStateNormal];
     [barFavouriteButton setTitleEdgeInsets:!isFavourite ? UIEdgeInsetsMake(0, -15, -28, 0) : UIEdgeInsetsMake(0, -40, -28, 0)];
+    [barFavouriteButton setImageEdgeInsets:!isFavourite ? UIEdgeInsetsMake(-10, 0, 0, -52) : UIEdgeInsetsMake(-11, 0, 0, -44)];
     barFavouriteButton.userInteractionEnabled = NO;
     if (isFavourite) {
-        [Server callFunctionInBackground:@"addFavorite" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"id"]
+        [Server callFunctionInBackground:@"addFavorite" withParameters:@{@"userId" : @"123", @"jobId" : data[@"id"]
                                                                            } block:^(NSArray *receivedItems, NSError *error) {
                                                                                if (receivedItems) {
                                                                                    //TODO:Remove NSLog
@@ -216,7 +250,7 @@
                                                                                barFavouriteButton.userInteractionEnabled = YES;
                                                                            }];
     } else {
-        [Server callFunctionInBackground:@"removeFavorite" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"id"]} block:^(NSArray *receivedItems, NSError *error) {
+        [Server callFunctionInBackground:@"removeFavorite" withParameters:@{@"userId" : @"123", @"jobId" : data[@"id"]} block:^(NSArray *receivedItems, NSError *error) {
             if (receivedItems) {
                 //TODO:Remove NSLog
                 NSLog(@"%@", receivedItems);

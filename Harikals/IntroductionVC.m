@@ -14,6 +14,9 @@
 
 @interface IntroductionVC () <UIScrollViewDelegate> {
     
+    
+    __weak IBOutlet NSLayoutConstraint *contentWidth;
+    
     __weak IBOutlet UIPageControl *pageControl;
     __weak IBOutlet UIScrollView *mainScrollView;
     __weak IBOutlet UIButton *nextButton;
@@ -24,6 +27,9 @@
     NSInteger pageWidth;
     
     NSArray *topTexts;
+    
+    
+    NSArray *attributedLines;
     
     __weak IBOutlet NSLayoutConstraint *topTextSpace;
     CGFloat adjustingValue;
@@ -41,9 +47,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([PFUser currentUser][@"linkedInUser"] && [[PFUser currentUser][@"username"] length]) {
-        [self performSegueWithIdentifier:@"noAnim" sender:nil];
-    }
+//    if ([PFUser currentUser][@"linkedInUser"] && [[PFUser currentUser][@"username"] length]) {
+//        [self performSegueWithIdentifier:@"noAnim" sender:nil];
+//    }
     
     adjustingValue = 24.0;
     mainScrollView.pagingEnabled = YES;
@@ -57,18 +63,22 @@
         topLabel.font  = [UIFont fontWithName:@"OpenSans" size:13.0];
     }
 
-    topTexts = @[@"Harikaiş'te bir CV hazırlamıyorsunuz!\nYapmanız gereken tek şey; Linkedin\nhesabınızla giriş yapmak ve bir açık\npozisyon önermemizi beklemek.",
+    topTexts = @[@"Harikaiş’te CV oluşturmak çok kolay!\nSonrasında yapmanız gereken tek şey\nsize bir pozisyon önermemizi beklemek.\nAktif arayışta olmasanız dahi fark etmez.\n“Belki de iyi bir teklif gelir…”",
+                 
                  @"Teklif ettiğimiz pozisyona hemen\nbaşvurabilir ve başvurunuzun\ndurumunu uygulama içerisinden takip\nedebilirsiniz.",
+                 
                  @"Başvurunuz, yüzlerce adayın arasında\nkaybolmayacak! Çünkü, eşsiz eşleştirme\nmotorumuz ile pozisyonları sadece en\nuygun adaylara yönlendiriyoruz.",
-                 @"Eğer isterseniz başvurunuz öncesinde,\naçık pozisyonun İK sorumlusu ile anonim\nolarak mesajlaşabilir ve aklınızdaki tüm\nsoruları sorabilirsiniz.",
-                 @"Çalıştığınız işyerinin hiç bir şeyden haberi\nolmayacak... İş başvurularınızi yaptığınız\nfirma hariç hiç kimse buraya üye\nolduğunuzu dahi bilemez."];
+                 
+                 @"Eğer isterseniz başvurunuz öncesinde,\naçık pozisyonun İK sorumlusu ile\nkimliğiniz gizli olarak mesajlaşabilir ve\naklınızdaki tüm soruları sorabilirsiniz.",
+                 
+                 @"Çalıştığınız işyerinin hiç bir şeyden haberi\nolmayacak... İş başvurularınızi yaptığınız\nfirma hariç hiç kimse buraya üye\nolduğunuzu bilemez."];
+    
+    
+    attributedLines = @[@"CV oluşturmak çok kolay", @"başvurunuzun", @"durumunu", @"sadece en", @"uygun adaylara", @"kimliğiniz gizli olarak",@"kimse buraya üye", @"olduğunuzu bilemez"];
     
 }
 
 - (void)addImages {
-    
-
-    
     UIImageView *imageview1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"screen-image-1"]];
     UIImageView *imageview2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"screen-image-2"]];
     UIImageView *imageview3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"screen-image-3"]];
@@ -92,7 +102,8 @@
     
     imagesContainer.frameWidth = (imageview1.frameWidth + adjustingValue) * 5;
     imagesContainer.frameHeight = imageview1.frameHeight;
-    mainScrollView.contentSize = CGSizeMake((imageview1.frameWidth + adjustingValue) * 5, imageview1.frameHeight - 100);
+    mainScrollView.contentSize = CGSizeMake((imageview1.frameWidth + adjustingValue) * 5, 0);
+    contentWidth.constant = (imageview1.frameWidth + adjustingValue) * 5;
 }
 
 
@@ -109,7 +120,21 @@
     pageControl.currentPage = page;
     currentPage = page;
     [self changeButtonStyle:page == 4];
-    [topLabel setText:topTexts[page]];
+    
+    if (page < topTexts.count) {
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:topTexts[page]];
+        [attr addAttribute:NSFontAttributeName value:topLabel.font range:NSMakeRange(0, attr.length)];
+        UIColor *redColor = [UIColor colorWithRed:237.0 / 255.0 green:113.0 / 255.0 blue:97.0 / 255.0 alpha:1.0];
+        UIFont *boldFont =  [UIFont fontWithName:@"OpenSans-Bold" size:15];
+        for (NSString *bolded in attributedLines) {
+            NSRange range = [topTexts[page] rangeOfString:bolded];
+            if (range.length) {
+                [attr addAttribute:NSFontAttributeName value:boldFont range:range];
+                [attr addAttribute:NSForegroundColorAttributeName value:redColor range:range];
+            }
+        }
+        topLabel.attributedText = attr;
+    }
 }
 
 
@@ -142,9 +167,10 @@
 
 - (IBAction)nextPressed:(UIButton *)sender {
     if (currentPage >= 4) {
-        [self performSegueWithIdentifier:@"loginSegue" sender:self];
+        [self performSegueWithIdentifier:@"openCV" sender:self];
     } else {
-        [mainScrollView scrollRectToVisible:CGRectMake(pageWidth * (currentPage + 1), 0, pageWidth, 10) animated:YES];
+        [mainScrollView setContentOffset:CGPointMake(pageWidth * (currentPage + 1), 0) animated:YES];
+//        [mainScrollView scrollRectToVisible:CGRectMake(pageWidth * (currentPage + 1), 0, pageWidth, 10) animated:YES];
     }
 }
 

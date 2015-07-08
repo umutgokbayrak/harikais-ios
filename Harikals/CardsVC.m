@@ -25,6 +25,10 @@
     
     __weak IBOutlet UIImageView *downloadIcon;
     
+    __weak IBOutlet UIButton *applicationsButton;
+    
+    __weak IBOutlet UIView *counterView;
+    NSNumber *unreadCount;
 }
 
 @property (nonatomic, assign) BOOL wrap;
@@ -84,6 +88,11 @@
     roundedView.image = [roundedView.image resizableImageWithCapInsets:UIEdgeInsetsMake(40, 40, 40, 40)];
 
     
+    [applicationsButton addTarget:self action:@selector(openApplications) forControlEvents:UIControlEventTouchUpInside];
+    counterView.hidden = YES;
+    counterView.alpha = 0.0;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUnreadCount) name:@"updateUnreadCount" object:nil];
     
     if ([UIScreen mainScreen].bounds.size.height == 480) {
         roundedView.frameY = 43;
@@ -108,26 +117,58 @@
     }
 
     [self loadJobs];
+//    [self updateUnreadCount];
+    
 }
+
+
+
 
 -(void)detailPressed {
     NSInteger index = carousel.currentItemIndex;
-    NSNumber *item = (self.items)[(NSUInteger)index];
-    NSLog(@"Tapped view number: %@", item);
     
     [self performSegueWithIdentifier:@"detail" sender:self.items[index]];
 }
 
 
+- (void)openApplications {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"presentApplications" object:nil];
+}
+
 - (IBAction)openChat:(id)sender {
-    [self performSegueWithIdentifier:@"openChat" sender:nil];
+//    [self performSegueWithIdentifier:@"openChat" sender:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"presentMessages" object:nil];
+}
+
+- (void)updateUnreadCount {
+    unreadCount = Server.unreadCount;
+    [self configureCounterView];
+//    messagesButton
+}
+
+- (void)configureCounterView {
+    UILabel *countLabel = counterView.subviews[0];
+    countLabel.text = [NSString stringWithFormat:@"%d", unreadCount.integerValue];
+    [countLabel sizeToFit];
+    counterView.frameWidth = 14 + countLabel.frameWidth;
+    countLabel.center = CGPointMake(counterView.frameWidth / 2.0, counterView.frameHeight / 2.0);
+    messagesButton.hidden = !self.items.count;
+    
+    counterView.hidden = !(unreadCount.integerValue && !messagesButton.hidden);
+    
+    if (self.view.frameWidth - 8 < counterView.frameRight) {
+        counterView.frameRight = self.view.frameWidth - 3;
+    }
 }
 
 
-
-
 - (void)loadJobs {
-    [Server callFunctionInBackground:@"jobs" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
+    messagesButton.hidden = !self.items.count;
+    counterView.hidden = !self.items.count;
+    emptyHolderView.hidden = YES;
+    applicationsButton.hidden = YES;
+    [Server callFunctionInBackground:@"jobs" withParameters:@{@"userId" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [self.items removeAllObjects];
             [self.items addObjectsFromArray:receivedItems];
@@ -135,8 +176,11 @@
             //TODO:Remove NSLog
             NSLog(@"JOBS ERROR %@", error);
         }
-        
+
+        [self updateUnreadCount];
         [carousel reloadData];
+        emptyHolderView.hidden = NO;
+        applicationsButton.hidden = NO;
     }];
 }
 
@@ -149,7 +193,16 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.navigationController setNavigationBarHidden:YES animated:animated];
+//        [Server.firstNavVC setNavigationBarHidden:YES animated:YES];
+//    });
+}
+
+-(void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+
+
 }
 
 - (void)viewDidUnload
@@ -256,7 +309,8 @@
     } else {
         //5-5s
         view.frameWidth = 267;
-        view.frameHeight = 450;
+        view.frameY -= 3;
+        view.frameHeight = 456;
     }
     
     view.photoImageView.frameHeight = view.photoImageView.frameWidth / 1.62;
@@ -346,7 +400,14 @@
 - (void)carouselDidScroll:(iCarousel *)_carousel {
     CGFloat alpha = self.items.count - _carousel.scrollOffset;
     emptyHolderView.alpha = 1 - alpha;
+    applicationsButton.alpha  = 1 - alpha;
     messagesButton.alpha = alpha;
+    counterView.alpha = alpha;
+    if (!alpha) {
+        [self.view bringSubviewToFront:applicationsButton];
+    } else {
+        [self.view insertSubview:applicationsButton aboveSubview:emptyHolderView];
+    }
 }
 
 //- (void)carousel:(__unused iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
@@ -360,7 +421,7 @@
     NSLog(@"Index: %@", @(self.carousel.currentItemIndex));
     
     if (self.carousel.currentItemIndex >= 0) {
-        [Server callFunctionInBackground:@"markJobAsSeen" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : self.items[self.carousel.currentItemIndex][@"id"]
+        [Server callFunctionInBackground:@"markJobAsSeen" withParameters:@{@"userId" : @"123", @"jobId" : self.items[self.carousel.currentItemIndex][@"id"]
        } block:^(NSArray *receivedItems, NSError *error) {
            if (receivedItems) {
                //TODO:Remove NSLog

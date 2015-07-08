@@ -20,9 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([PFUser currentUser][@"linkedInUser"] && [[PFUser currentUser][@"username"] length]) {
-        [self performSegueWithIdentifier:@"noAnim" sender:nil];
-    }
+//    if ([PFUser currentUser][@"linkedInUser"] && [[PFUser currentUser][@"username"] length]) {
+//        [self performSegueWithIdentifier:@"noAnim" sender:nil];
+//    }
 //noAnim
 }
 

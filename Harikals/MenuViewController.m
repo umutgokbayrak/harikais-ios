@@ -31,6 +31,8 @@
     self.scaleBackgroundImageView = NO;
     self.fadeMenuView = NO;
     self.contentViewScaleValue = 0.87;
+    self.parallaxEnabled = NO;
+    
     
     if ([UIScreen mainScreen].bounds.size.height == 480) {
         self.contentViewInPortraitOffsetCenterX = 80;

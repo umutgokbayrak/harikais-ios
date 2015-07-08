@@ -760,7 +760,7 @@
     [self.menuViewContainer addSubview:self.leftMenuViewController.view];
     [self.leftMenuViewController didMoveToParentViewController:self];
     
-    [self addMenuViewControllerMotionEffects];
+//    [self addMenuViewControllerMotionEffects];
     [self.view bringSubviewToFront:self.contentViewContainer];
 }
 
@@ -779,7 +779,7 @@
     [self.menuViewContainer addSubview:self.rightMenuViewController.view];
     [self.rightMenuViewController didMoveToParentViewController:self];
     
-    [self addMenuViewControllerMotionEffects];
+//    [self addMenuViewControllerMotionEffects];
     [self.view bringSubviewToFront:self.contentViewContainer];
 }
 

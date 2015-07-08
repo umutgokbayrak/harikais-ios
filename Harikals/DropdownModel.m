@@ -32,4 +32,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([_delegate respondsToSelector:@selector(didSelectOption:optionsArray:)]) {
+        [_delegate didSelectOption:self.dataArray[indexPath.row] optionsArray:self.dataArray];
+    }
+}
+
 @end

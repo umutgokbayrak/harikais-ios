@@ -92,7 +92,7 @@
 
 - (void)loadFavourites {
     [spinner startAnimating];
-    [Server callFunctionInBackground:@"favorites" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"favorites" withParameters:@{@"userId" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [dataArray removeAllObjects];
             [dataArray addObjectsFromArray:receivedItems];
@@ -107,7 +107,7 @@
 
 - (void)loadChats {
     [spinner startAnimating];
-    [Server callFunctionInBackground:@"chats" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId]} block:^(NSArray *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"chats" withParameters:@{@"userId" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [dataArray removeAllObjects];
             [dataArray addObjectsFromArray:receivedItems];
@@ -119,6 +119,13 @@
         [mainTableView reloadData];
     }];
 }
+
+- (void)configureCounterForCell:(FavourCell *)cell  count:(NSInteger)count {
+    UILabel *countLabel = cell.counterView.subviews[0];
+    countLabel.text = [NSString stringWithFormat:@"%d", count];
+    cell.counterView.hidden = !count;
+}
+
 
 //-------------------------------------------------------------------------------------------------------------
 #pragma mark - UITableView Data Source Methods
@@ -140,7 +147,7 @@
     return dataArray.count;
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     topBorder.frame = CGRectMake(0.0f, 0, 1000, 1.5);
     return footer;
 }
@@ -154,6 +161,7 @@
     
     if (_isMessageVC) {
         [cell configureChat:dataArray[indexPath.row]];
+        [self configureCounterForCell:cell count:[dataArray[indexPath.row][@"unreadCount"] integerValue]];
     } else {
         [cell configureFavourite:dataArray[indexPath.row]];
     }
@@ -185,7 +193,7 @@
 
 
 - (void)removeFavouriteWithData:(NSDictionary *)data {
-    [Server callFunctionInBackground:@"deleteFavorite" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"favoriteId"]
+    [Server callFunctionInBackground:@"deleteFavorite" withParameters:@{@"userId" : @"123", @"jobId" : data[@"favoriteId"]
                                                                         } block:^(NSArray *receivedItems, NSError *error) {
                                                                             if (receivedItems) {
                                                                                 //TODO:Remove NSLog
@@ -199,7 +207,7 @@
 }
 
 - (void)removeChatWithData:(NSDictionary *)data {
-    [Server callFunctionInBackground:@"deleteChat" withParameters:@{@"userId" : [[PFUser currentUser][@"linkedInUser"] objectId], @"jobId" : data[@"companyId"]
+    [Server callFunctionInBackground:@"deleteChat" withParameters:@{@"userId" : @"123", @"jobId" : data[@"companyId"]
                                                                     } block:^(NSArray *receivedItems, NSError *error) {
                                                                         if (receivedItems) {
                                                                             //TODO:Remove NSLog
