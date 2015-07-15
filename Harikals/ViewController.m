@@ -24,6 +24,9 @@
 //        [self performSegueWithIdentifier:@"noAnim" sender:nil];
 //    }
 //noAnim
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"ShownWelcome"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)didReceiveMemoryWarning {

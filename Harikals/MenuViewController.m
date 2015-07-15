@@ -51,6 +51,23 @@
     self.delegate = self;
 }
 
+
+- (void)statusBarNeedsAppearanceUpdate {
+    UIStatusBarStyle statusBarStyle = UIStatusBarStyleDefault;
+    
+    if (((UIView *)[self valueForKey:@"contentViewContainer"]).frame.origin.y > 10) {
+        statusBarStyle = self.contentViewController.preferredStatusBarStyle;
+    } else {
+        
+        statusBarStyle = self.menuPreferredStatusBarStyle;
+    }
+
+    [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle];
+}
+
+
+
+
 #pragma mark -
 #pragma mark RESideMenu Delegate
 

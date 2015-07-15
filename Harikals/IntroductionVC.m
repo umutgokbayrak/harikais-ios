@@ -167,6 +167,8 @@
 
 - (IBAction)nextPressed:(UIButton *)sender {
     if (currentPage >= 4) {
+        [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"ShownIntro"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [self performSegueWithIdentifier:@"openCV" sender:self];
     } else {
         [mainScrollView setContentOffset:CGPointMake(pageWidth * (currentPage + 1), 0) animated:YES];

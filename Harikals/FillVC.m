@@ -68,7 +68,7 @@
             secondField.text = self.receivedData[@"name"];
         }
         
-        isCurrentSwitch.on = [self.receivedData[@"isCurrent"] isEqualToString:@"thue"];
+        isCurrentSwitch.on = [self.receivedData[@"isCurrent"] isEqualToString:@"true"];
         date1 = [dateFormatter2 dateFromString:self.receivedData[@"dateEnter"]];
         date2 = [dateFormatter2 dateFromString:self.receivedData[@"dateExit"]];
         
@@ -88,9 +88,9 @@
 
 - (void)updateWithDataDict:(NSDictionary *)dataDict {
     if (self.view.tag == 0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateEdu" object:dataDict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateEdu" object:dataDict userInfo:@{@"index" : @(self.index)}];
     } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateCompany" object:dataDict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateCompany" object:dataDict userInfo:@{@"index" : @(self.index)}];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -128,6 +128,11 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
 }
 
 - (void)loadInputViews {

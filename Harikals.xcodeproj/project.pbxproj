@@ -35,6 +35,7 @@
 		95AA96851B4C141100FF0F81 /* UIMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AA96841B4C141100FF0F81 /* UIMonthYearPicker.m */; };
 		95AA96881B4C285000FF0F81 /* OHActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AA96871B4C285000FF0F81 /* OHActionSheet.m */; };
 		95AAB2AE1B4D34990092CA62 /* InitialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AAB2AD1B4D34990092CA62 /* InitialVC.m */; };
+		95AAB2B01B4D797E0092CA62 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95AAB2AF1B4D797E0092CA62 /* InfoPlist.strings */; };
 		95ADC6721B4954E400344BE9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95ADC6701B4954E400344BE9 /* Default@2x.png */; };
 		95ADC6731B4954E400344BE9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95ADC6711B4954E400344BE9 /* Default-568h@2x.png */; };
 		95AE071E1B25F38200184007 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE07191B25F38200184007 /* RECommonFunctions.m */; };
@@ -43,6 +44,7 @@
 		95AE07241B25F5BD00184007 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE07231B25F5BD00184007 /* MenuViewController.m */; };
 		95AE07271B25F8C600184007 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE07251B25F8C600184007 /* LeftMenuViewController.m */; };
 		95AE22211B4A8F76001B26D3 /* FjallaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95AE22201B4A8F71001B26D3 /* FjallaOne-Regular.ttf */; };
+		95B26D591B4FFA9E002A8220 /* ForgotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95B26D581B4FFA9E002A8220 /* ForgotView.xib */; };
 		95B645431B29FE86009F1696 /* DetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B645421B29FE86009F1696 /* DetailVC.m */; };
 		95B645451B2A05BA009F1696 /* ModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95B645441B2A05BA009F1696 /* ModalView.xib */; };
 		95B77BA31B25AB780081E694 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95B77B971B25AB780081E694 /* OpenSans-Bold.ttf */; };
@@ -133,6 +135,7 @@
 		95AA96871B4C285000FF0F81 /* OHActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHActionSheet.m; sourceTree = "<group>"; };
 		95AAB2AC1B4D34990092CA62 /* InitialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialVC.h; sourceTree = "<group>"; };
 		95AAB2AD1B4D34990092CA62 /* InitialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialVC.m; sourceTree = "<group>"; };
+		95AAB2AF1B4D797E0092CA62 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		95ADC6701B4954E400344BE9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		95ADC6711B4954E400344BE9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		95AE07181B25F38200184007 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 		95AE07251B25F8C600184007 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
 		95AE07281B25F8E800184007 /* LeftMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
 		95AE22201B4A8F71001B26D3 /* FjallaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FjallaOne-Regular.ttf"; sourceTree = "<group>"; };
+		95B26D551B4FF7FE002A8220 /* ForgotPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordView.h; sourceTree = "<group>"; };
+		95B26D581B4FFA9E002A8220 /* ForgotView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgotView.xib; sourceTree = "<group>"; };
 		95B645411B29FE86009F1696 /* DetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailVC.h; sourceTree = "<group>"; };
 		95B645421B29FE86009F1696 /* DetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailVC.m; sourceTree = "<group>"; };
 		95B645441B2A05BA009F1696 /* ModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModalView.xib; sourceTree = "<group>"; };
@@ -315,6 +320,7 @@
 				95D83BB41B419C03005530F4 /* Server API */,
 				95AAB2AC1B4D34990092CA62 /* InitialVC.h */,
 				95AAB2AD1B4D34990092CA62 /* InitialVC.m */,
+				95B26D551B4FF7FE002A8220 /* ForgotPasswordView.h */,
 			);
 			path = Harikals;
 			sourceTree = "<group>";
@@ -324,6 +330,7 @@
 			children = (
 				957B63911B247840003AA201 /* Info.plist */,
 				957B63921B247840003AA201 /* main.m */,
+				95AAB2AF1B4D797E0092CA62 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -400,6 +407,7 @@
 				95511E251B28758200AD40C6 /* ChatInputView.xib */,
 				95B645441B2A05BA009F1696 /* ModalView.xib */,
 				95D775411B2B58FB006D501F /* CardView.xib */,
+				95B26D581B4FFA9E002A8220 /* ForgotView.xib */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -587,6 +595,7 @@
 				95ADC6731B4954E400344BE9 /* Default-568h@2x.png in Resources */,
 				95B77BA81B25AB780081E694 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				95D775421B2B58FB006D501F /* CardView.xib in Resources */,
+				95AAB2B01B4D797E0092CA62 /* InfoPlist.strings in Resources */,
 				95B77BAB1B25AB780081E694 /* OpenSans-LightItalic.ttf in Resources */,
 				957B63A11B247840003AA201 /* LaunchScreen.xib in Resources */,
 				95B77BA91B25AB780081E694 /* OpenSans-Italic.ttf in Resources */,
@@ -596,6 +605,7 @@
 				95B77BA31B25AB780081E694 /* OpenSans-Bold.ttf in Resources */,
 				957B639E1B247840003AA201 /* Images.xcassets in Resources */,
 				95B77BA41B25AB780081E694 /* OpenSans-BoldItalic.ttf in Resources */,
+				95B26D591B4FFA9E002A8220 /* ForgotView.xib in Resources */,
 				95B77BAA1B25AB780081E694 /* OpenSans-Light.ttf in Resources */,
 				95B77BAC1B25AB780081E694 /* OpenSans-Regular.ttf in Resources */,
 				95B77BAD1B25AB780081E694 /* OpenSans-Semibold.ttf in Resources */,
@@ -743,7 +753,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Roman Savchuk (NFT7A9P537)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roman Savchuk (NFT7A9P537)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -763,7 +774,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "83b06efb-b0d5-4335-9700-fd4e5f522a2e";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -785,7 +796,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Roman Savchuk (NFT7A9P537)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roman Savchuk (NFT7A9P537)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -798,7 +810,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "83b06efb-b0d5-4335-9700-fd4e5f522a2e";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

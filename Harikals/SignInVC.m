@@ -8,6 +8,10 @@
 
 #import "SignInVC.h"
 #import "HKServer.h"
+#import "ForgotPasswordView.h"
+#import <UIView+Position.h>
+
+
 @interface SignInVC () <UITextFieldDelegate> {
     
     __weak IBOutlet UILabel *placeLabel3;
@@ -24,7 +28,23 @@
     CGFloat baseValue;
     
 
+    IBOutlet ForgotPasswordView *doneForgot;
+    IBOutlet ForgotPasswordView *redForgot;
+    IBOutlet ForgotPasswordView *greenForgot;
+
+    __weak IBOutlet HKTextField *greenField;
+    __weak IBOutlet UIButton *greenSend;
     
+    __weak IBOutlet HKTextField *redField;
+    
+    __weak IBOutlet UIButton *redSend;
+    
+    
+    __weak IBOutlet UIButton *doneButton;
+    
+    CGFloat baseTopGreen;
+    CGFloat baseTopRed;
+
 }
 
 @end
@@ -48,23 +68,38 @@
 
 - (void)keyboardWillChageFrame:(NSNotification *)notification {
     CGRect keyboardEndFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyboardStartFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
     CGFloat animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+
+    CGFloat delta = keyboardEndFrame.origin.y - keyboardStartFrame.origin.y;
     
-    [self.view layoutIfNeeded];
-    
-    verticalSpaceConstraint.constant = self.view.frame.size.height - keyboardEndFrame.origin.y + baseValue;
-    
+    if (!greenForgot.superview) {
+        [self.view layoutIfNeeded];
+        
+        verticalSpaceConstraint.constant = self.view.frame.size.height - keyboardEndFrame.origin.y + baseValue;
+    }
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
     
     [UIView animateWithDuration:animationDuration > 0 ? animationDuration : 0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 
+        [self adjustForgotWithDelta:delta];
+        
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
     }];
     
+    
 }
+
+- (void)adjustForgotWithDelta:(CGFloat)delta {
+    if (greenForgot) {
+        ((UIView *)greenForgot.subviews[1]).frameY = fabs(delta) > 100 && delta > 0 ? baseTopGreen : 30;
+        ((UIView *)redForgot.subviews[1]).frameY = fabs(delta) > 100 && delta > 0 ? baseTopRed : 30;
+    }
+}
+
 
 - (void)textFieldDidChange:(UITextField *)field {
     placeLabel1.hidden = emailTextField.text.length;
@@ -84,13 +119,68 @@
 }
 
 - (IBAction)forgotPassPressed:(id)sender {
+//    if (!greenForgot) {
+//        [self loadModalViews];
+//        
+//        greenForgot.frame = [UIScreen mainScreen].bounds;
+//        greenForgot.holderView.frameY = baseTopGreen;
+// 
+//        [self.navigationController.view addSubview:greenForgot];
+//    }
+    
 }
+
+- (void)showRedForgotView {
+    redForgot.frame = [UIScreen mainScreen].bounds;
+    redForgot.holderView.frameY = baseTopRed;
+    
+    [self.navigationController.view addSubview:redForgot];
+}
+
+- (void)showDoneView {
+    doneForgot.frame = [UIScreen mainScreen].bounds;
+    [self.navigationController.view addSubview:doneForgot];
+}
+
+- (void)sendForgot {
+    [self.view endEditing:YES];
+    [self hideModals];
+}
+
+- (void)hideModals {
+    [redForgot removeFromSuperview];
+    [greenForgot removeFromSuperview];
+    [doneForgot removeFromSuperview];
+}
+
+- (void)loadModalViews {
+//    greenForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][1];
+//    redForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][0];
+//    doneForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][2];
+
+    
+    [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil];
+    
+    for (HKTextField *view in @[greenField, redField]) {
+        view.layer.borderWidth = 0.5;
+        view.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
+    }
+    
+    [greenSend addTarget:self action:@selector(sendForgot) forControlEvents:UIControlEventTouchUpInside];
+    [redSend addTarget:self action:@selector(sendForgot) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton addTarget:self action:@selector(hideModals) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    baseTopRed= redForgot.holderView.frameY;
+    baseTopGreen= greenForgot.holderView.frameY;
+}
+
 
 - (IBAction)loginPressed:(UIButton *)sender {
         sender.userInteractionEnabled = NO;
     if (emailTextField.text.length && passTextField.text.length) {
         
-#warning remove it!
+#warning remove it when become working!
         
         //TODO:Remove NSLog
         [self updateUserInfo];
@@ -101,6 +191,7 @@
                 //TODO:Remove NSLog
                 NSLog(@"%@", receivedItems);
                 if ([receivedItems[@"result"] integerValue] == 0) {
+#warning uncomment when become working!
 //                    [self updateUserInfo];
                 } else {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:receivedItems[@"msg"] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];

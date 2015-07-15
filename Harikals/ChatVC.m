@@ -211,7 +211,7 @@
     dummyTextView.text = messagesArray[indexPath.row][@"msg"];
     BOOL isMine = [messagesArray[indexPath.row][@"direction"] integerValue] % 2 != 0 ;
     
-    dummyTextView.font = [UIFont fontWithName:@"OpenSans" size:isMine ? 16 : 15];
+    dummyTextView.font = [UIFont fontWithName:@"OpenSans" size:isMine ? 16 : 16];
     CGFloat resultHeight = [dummyTextView sizeThatFits:CGSizeMake(isMine ? myWidth : otherWidth, FLT_MAX)].height;
     return MAX((resultHeight + 33), 74);
 }

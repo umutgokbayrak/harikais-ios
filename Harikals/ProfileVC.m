@@ -26,6 +26,10 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 
 @interface ProfileVC () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DropMenuDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate> {
     
+    
+    __weak IBOutlet NSLayoutConstraint *scrollBottomSpace;
+    
+    
     UITapGestureRecognizer *tap;
     
     __weak IBOutlet NSLayoutConstraint *showingLinkedInConstraint;
@@ -58,20 +62,32 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     
     __weak IBOutlet NSLayoutConstraint *dropHeight1;
     __weak IBOutlet NSLayoutConstraint *dropHeight2;
+    __weak IBOutlet NSLayoutConstraint *dropHeight3;
 
     __weak IBOutlet UITableView *dropTable1;
     __weak IBOutlet UITableView *dropTable2;
+    __weak IBOutlet UITableView *dropTable3;
     
     NSMutableArray *dropOptions1;
     NSMutableArray *dropOptions2;
+    NSMutableArray *dropOptions3;
     
     DropdownModel *model1;
     DropdownModel *model2;
+    DropdownModel *model3;
+
     
+    ProfileCell *textInputCell;
+    
+    BOOL addingSkill;
+    
+    
+    __weak IBOutlet UITextField *firstTextField;
     __weak IBOutlet UITextField *neredeTextField;
+    __weak IBOutlet UITextField *thirdTextField;
+
     __weak IBOutlet UITextField *industryTextField;
-    
-    
+    __weak IBOutlet UIScrollView *mainScrollView;
     
 }
 
@@ -81,23 +97,31 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     model1 = [[DropdownModel alloc] init];
     model2 = [[DropdownModel alloc] init];
+    model3 = [[DropdownModel alloc] init];
     dropTable1.delegate = model1;
     dropTable1.dataSource = model1;
+    
 
     dropTable2.delegate = model2;
     dropTable2.dataSource = model2;
 
+    dropTable3.delegate = model3;
+    dropTable3.dataSource = model3;
+    
     dropOptions1 = [NSMutableArray array];
     dropOptions2 = [NSMutableArray array];
+    dropOptions3 = [NSMutableArray array];
     
     model1.dataArray = dropOptions1;
     model2.dataArray = dropOptions2;
+    model3.dataArray = dropOptions3;
     
     model1.delegate = self;
     model2.delegate = self;
+    model3.delegate = self;
     
     
     positionsArray = [NSMutableArray array];
@@ -119,13 +143,14 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     
     dropTable2.layer.borderWidth = 0.5;
     dropTable2.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
-    
+    dropTable3.layer.borderWidth = 0.5;
+    dropTable3.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateJobFunction:) name:@"updateJobFunction" object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEdu:) name:@"updateEdu" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCompany:) name:@"updateCompany" object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     tap.delegate = self;
@@ -133,13 +158,26 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     
     [neredeTextField addTarget:self   action:@selector(textFieldDidChange:)  forControlEvents:UIControlEventEditingChanged];
     [industryTextField addTarget:self   action:@selector(textFieldDidChange:)  forControlEvents:UIControlEventEditingChanged];
+    
+    textInputCell = [positionTableView dequeueReusableCellWithIdentifier:@"textFieldCell"];
+    textInputCell.inTextField.delegate = self;
+    [textInputCell.inTextField addTarget:self   action:@selector(textFieldDidChange:)  forControlEvents:UIControlEventEditingChanged];
     [self reloadTables];
     [self reloadDropMenu];
+    
+
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
     [self.navigationController setNavigationBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
 }
 
 - (void)hideLIButton {
@@ -148,16 +186,27 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     liButton.hidden = YES;
 }
 
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (textInputCell.inTextField != textField && textField != industryTextField) {
+        [mainScrollView setContentOffset:CGPointMake(0, textField.frameY + 50) animated:YES];
+    } else if (textField == industryTextField) {
+        [mainScrollView setContentOffset:CGPointMake(0, textField.superview.frameY - 40) animated:YES];
+    }
+    return YES;
+}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    addingSkill = NO;
+    [self reloadTables];
     [self hideKeyboard];
-    
+
     return NO;
 }
 
 - (void)hideKeyboard {
     [dropOptions1 removeAllObjects];
     [dropOptions2 removeAllObjects];
+    [dropOptions3 removeAllObjects];
     [self reloadDropMenu];
     [self.view endEditing:YES];
 }
@@ -168,8 +217,13 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         neredeTextField.text = optionString;
     } else if (array == dropOptions2) {
         industryTextField.text = optionString;
+    } else if (array == dropOptions3) {
+        [skillsArray addObject:optionString];
+        [skilsTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        industryTextField.text = @"";
     }
     [self.view endEditing:YES];
+    [self adjustHightsAnimated:YES];
     [self reloadDropMenu];
 }
 
@@ -189,14 +243,32 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 }
 
 
-
-
 - (void)reloadTables {
+    [positionTableView reloadData];
+    [eduTableView reloadData];
+    [skilsTableView reloadData];
+//    positionHeight.constant = kCELL_HEIGHT * (positionsArray.count) + kFIRST_CELL_HEIGHT - 2;
+//    eduHeight.constant = kCELL_HEIGHT * (edusArray.count) + kFIRST_CELL_HEIGHT - 2;
+//    skilsHeight.constant = kCELL_HEIGHT * (skillsArray.count) + kFIRST_CELL_HEIGHT - 2;
+    [self adjustHightsAnimated:NO];
+}
+
+- (void)adjustHightsAnimated:(BOOL)animated {
+
     positionHeight.constant = kCELL_HEIGHT * (positionsArray.count) + kFIRST_CELL_HEIGHT - 2;
     eduHeight.constant = kCELL_HEIGHT * (edusArray.count) + kFIRST_CELL_HEIGHT - 2;
-    skilsHeight.constant = kCELL_HEIGHT * (skillsArray.count) + kFIRST_CELL_HEIGHT - 2;
-
+    skilsHeight.constant = kFIRST_CELL_HEIGHT * (skillsArray.count) + kFIRST_CELL_HEIGHT - 2;
+    
+    if (animated) {
+        [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    
 }
+
 
 - (void)textFieldDidChange:(UITextField *)textField {
     NSMutableArray *options;
@@ -206,6 +278,8 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     } else if ([textField isEqual:industryTextField]) {
 
         options = dropOptions2;
+    } else if ([textField isEqual:textInputCell.inTextField]) {
+        options = dropOptions3;
     }
 
     [self auticompleteWithText:textField.text optionsArray:options field:textField];
@@ -220,6 +294,8 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         function = @"autocompleteLocation";
     } else if (options == dropOptions2) {
         function = @"autocompleteIndustries";
+    } else if (options == dropOptions3) {
+        function = @"autocompleteSkills";
     }
     NSString *savedtext = [text copy];
     if (!text.length) {
@@ -241,68 +317,114 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     }
 }
 
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField == textInputCell.inTextField) {
+        if (!textField.isFirstResponder) {
+            addingSkill = NO;
+            skilsHeight.constant = kFIRST_CELL_HEIGHT - 2;
+            [skilsTableView reloadData];
+        }
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     [Server.firstNavVC setNavigationBarHidden:YES animated:NO];
 }
 
 - (IBAction)save:(id)sender {
+    if (!firstTextField.text.length) {[self showErrorAlert:@"You should fill name field!"] ;return;}
+    if (!neredeTextField.text.length) {[self showErrorAlert:@"You should fill location field!"] ;return;}
+    if (!thirdTextField.text.length) {[self showErrorAlert:@"You should fill headline field!"] ;return;}
+    if (!aradiLabel.text.length) {[self showErrorAlert:@"You should fill job function field!"] ;return;}
+//    if (!firstTextField.text.length) {[self showErrorAlert:@"You should fill industry field!"] ;return;}
+
+
     [Server callFunctionInBackground:@"info" withParameters:@{@"userId" : @"123"} block:^(NSDictionary *receivedItems, NSError *error) {
         if (receivedItems) {
-            
-            
             Server.userInfoDictionary = receivedItems;
-//            [self.navigationController setNavigationBarHidden:YES animated:NO];
-//            [Server.firstNavVC setNavigationBarHidden:YES animated:NO];
             [self performSegueWithIdentifier:@"openMenu" sender:nil];
-
         } else {
             //TODO:Remove NSLog
             NSLog(@"%@", error);
         }
     }];
-    
+}
 
+
+- (void)showErrorAlert:(NSString *)text {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:text delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+    [alert show];
 }
 
 
 - (void)reloadDropMenu {
     [dropTable1 reloadData];
     [dropTable2 reloadData];
+    [dropTable3 reloadData];
     
     dropHeight1.constant = 35 * dropOptions1.count;
     dropTable1.hidden = !dropOptions1.count;
     
     dropHeight2.constant = MIN(35 * dropOptions2.count, 35 * 4 + 10);
-    dropTable2.scrollEnabled = dropHeight2.constant = 35 * 4 + 10;
+    dropTable2.scrollEnabled = dropHeight2.constant == 35 * 4 + 10;
     dropTable2.hidden = !dropOptions2.count;
  
+
+    dropHeight3.constant = MIN(35 * dropOptions3.count, 35 * 4 + 10);
+    dropTable3.scrollEnabled = dropHeight3.constant == 35 * 4 + 10;
+    dropTable3.hidden = !dropOptions3.count;
+    
+    
+    
 }
 
 
 - (void)updateJobFunction:(NSNotification *)notification {
     jobFunction = notification.object;
+    aradiLabel.text = jobFunction;
+    aradiLabel.textColor = [UIColor blackColor];
 }
 
 - (void)updateEdu:(NSNotification *)notification {
-    [edusArray addObject:notification.object];
+    
+    NSInteger index = [notification.userInfo[@"index"] integerValue];
+    
+    if (index) {
+
+        [edusArray replaceObjectAtIndex:index - 1 withObject:notification.object];
+    } else {
+        [edusArray addObject:notification.object];
+    }
+    
     [self reloadTables];
 }
 
 - (void)updateCompany:(NSNotification *)notification {
-    [positionsArray addObject:notification.object];
+    NSInteger index = [notification.userInfo[@"index"] integerValue];
+    if (index) {
+
+        [positionsArray replaceObjectAtIndex:index - 1 withObject:notification.object];
+    } else {
+        [positionsArray addObject:notification.object];
+    }
+
     [self reloadTables];
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
     if ([segue.identifier isEqualToString:@"eduPush"]) {
         FillVC *dest = segue.destinationViewController;
-        dest.receivedData = sender;
+        dest.receivedData = [sender[@"data"] count] ? sender[@"data"] : nil;
+        dest.index = [sender[@"index"] integerValue];
     } else if ([segue.identifier isEqualToString:@"expPush"]) {
         FillVC *dest = segue.destinationViewController;
-        dest.receivedData = sender;
+        dest.receivedData = [sender[@"data"] count] ? sender[@"data"] : nil;
+        dest.index = [sender[@"index"] integerValue];
     }
 }
 
@@ -357,6 +479,29 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     return image;
 }
 
+- (void)keyboardWillChageFrame:(NSNotification *)notification {
+    CGRect keyboardEndFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    CGFloat animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    scrollBottomSpace.constant = self.view.frame.size.height - keyboardEndFrame.origin.y;
+    
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+    
+    
+    [UIView animateWithDuration:animationDuration > 0 ? animationDuration : 0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        if (textInputCell.inTextField.isFirstResponder) {
+            [mainScrollView setContentOffset:CGPointMake(0, dropTable3.frameY - 100)];
+        }
+        
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+
 //-------------------------------------------------------------------------------------------------------------
 #pragma mark - UITableView Data Source Methods
 //-------------------------------------------------------------------------------------------------------------
@@ -370,13 +515,16 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     } else if ([tableView isEqual:eduTableView]) {
         return edusArray.count + 1;
     } else if ([tableView isEqual:skilsTableView]) {
-        return skillsArray.count + 1;
+        return skillsArray.count + 1 + addingSkill;
     }
     return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!indexPath.row) return kFIRST_CELL_HEIGHT;
+    if (tableView == skilsTableView) {
+        return kFIRST_CELL_HEIGHT;
+    }
     return kCELL_HEIGHT;
 }
 
@@ -396,17 +544,34 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([tableView isEqual:positionTableView]) {
-        NSArray *senderArray;
+        NSDictionary *senderArray = @{};
         if (indexPath.row) {
             senderArray = positionsArray[indexPath.row - 1];
         }
-        [self performSegueWithIdentifier:@"expPush" sender:senderArray];
+        [self performSegueWithIdentifier:@"expPush" sender:@{@"data" : senderArray, @"index" : @(indexPath.row)}];
     } else if ([tableView isEqual:eduTableView]) {
-        NSArray *senderArray;
+        NSDictionary *senderArray = @{};
         if (indexPath.row) {
             senderArray = edusArray[indexPath.row - 1];
         }
-        [self performSegueWithIdentifier:@"eduPush" sender:senderArray];
+        [self performSegueWithIdentifier:@"eduPush" sender:@{@"data" : senderArray, @"index" : @(indexPath.row)}];
+    } else {
+        if (!indexPath.row) {
+            if (!addingSkill) {
+                addingSkill = YES;
+                skilsHeight.constant = kFIRST_CELL_HEIGHT + kFIRST_CELL_HEIGHT + kFIRST_CELL_HEIGHT * skillsArray.count - 2;
+            } else {
+                [dropOptions3 removeAllObjects];
+                
+                [self reloadDropMenu];
+            }
+            [skilsTableView reloadData];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [textInputCell.inTextField becomeFirstResponder];
+                textInputCell.inTextField.text = @"";
+            });
+        }
     }
 }
 
@@ -443,10 +608,66 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         cell = [positionTableView dequeueReusableCellWithIdentifier:@"greenCell"];
         cell.greenTitleLabel.text = @"Beceri Ekle";
     } else {
-        cell = [positionTableView dequeueReusableCellWithIdentifier:@""];
-
+        if (addingSkill) {
+            if (indexPath.row == 1) {
+                cell = textInputCell;
+            } else {
+                cell = [positionTableView dequeueReusableCellWithIdentifier:@"skillCell"];
+            }
+        } else {
+            cell = [positionTableView dequeueReusableCellWithIdentifier:@"skillCell"];
+        }
+        
+        if (skillsArray.count) {
+            if (cell == textInputCell) return cell;
+            cell.nameLabel.text = skillsArray[indexPath.row - 1 - addingSkill];
+        }
     }
     return cell;
+}
+
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (eduTableView == tableView || tableView == positionTableView) {
+        if (indexPath.row) {
+            return YES;
+        }
+    } else if (skilsTableView == tableView) {
+        if (indexPath.row + addingSkill) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (eduTableView == tableView || tableView == positionTableView) {
+        if (indexPath.row) {
+            return @"   SİL         ";
+        }
+    } else if (skilsTableView == tableView) {
+        if (indexPath.row + addingSkill) {
+            return @"   SİL         ";
+        }
+    }
+    return nil;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!indexPath.row) return;
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        if (tableView == eduTableView) {
+            [edusArray removeObjectAtIndex:indexPath.row - 1];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        } else if (tableView == positionTableView) {
+            [positionsArray removeObjectAtIndex:indexPath.row - 1];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        } else if (tableView == skilsTableView) {
+            [skillsArray removeObjectAtIndex:indexPath.row - 1 - addingSkill];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        [self adjustHightsAnimated:YES];
+    }
 }
 
 @end

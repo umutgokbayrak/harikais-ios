@@ -15,4 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *subLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *chekImageView;
 
+@property (weak, nonatomic) IBOutlet UITextField *inTextField;
+
+
 @end

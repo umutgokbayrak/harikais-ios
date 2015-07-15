@@ -81,6 +81,12 @@
     [self refreshCounters];
 }
 
+//-(UIStatusBarStyle)preferredStatusBarStyle {
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//}
+
+
+
 - (void)getProfile {
 
 }
