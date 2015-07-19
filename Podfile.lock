@@ -31,11 +31,13 @@ PODS:
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
+  - SplunkMint-iOS (4.2)
   - UIViewPlusPosition (0.0.1)
 
 DEPENDENCIES:
   - PFLinkedInUtils
   - SDWebImage (~> 3.7)
+  - SplunkMint-iOS
   - UIViewPlusPosition (~> 0.0)
 
 SPEC CHECKSUMS:
@@ -45,6 +47,7 @@ SPEC CHECKSUMS:
   Parse: 6ca512c6e860b66739c95151b2f76ac4712b7842
   PFLinkedInUtils: 1b0506f1901072b46c0de4d496f81d82d33ba61d
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+  SplunkMint-iOS: 058e5297f7cc8d335aea3dcaa8111eeb0f657371
   UIViewPlusPosition: 56c99fd247aa0674b3a3fcfd1f5b92a1fa0d0d55
 
 COCOAPODS: 0.37.2

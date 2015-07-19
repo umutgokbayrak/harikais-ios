@@ -13,7 +13,7 @@
 #import "HKServer.h"
 #import "DropdownModel.h"
 #import "FillVC.h"
-
+#import <UIImageView+WebCache.h>
 
 #import <IOSLinkedInAPI/LIALinkedInApplication.h>
 #import <LIALinkedInHttpClient.h>
@@ -28,6 +28,9 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     
     
     __weak IBOutlet NSLayoutConstraint *scrollBottomSpace;
+    
+    __weak IBOutlet UIActivityIndicatorView *spinner1;
+    __weak IBOutlet UIActivityIndicatorView *spinner2;
     
     
     UITapGestureRecognizer *tap;
@@ -77,6 +80,8 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     DropdownModel *model3;
 
     
+    NSString *avatarUrl;
+    
     ProfileCell *textInputCell;
     
     BOOL addingSkill;
@@ -88,6 +93,12 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 
     __weak IBOutlet UITextField *industryTextField;
     __weak IBOutlet UIScrollView *mainScrollView;
+    
+    
+    
+    __weak IBOutlet UILabel *positionCountLabel;
+    
+    __weak IBOutlet UILabel *educationCountLabel;
     
 }
 
@@ -104,7 +115,6 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     dropTable1.delegate = model1;
     dropTable1.dataSource = model1;
     
-
     dropTable2.delegate = model2;
     dropTable2.dataSource = model2;
 
@@ -136,7 +146,8 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     positionTableView.dataSource = self;
     eduTableView.dataSource = self;
     skilsTableView.dataSource = self;
-    
+    avatarImageView.layer.cornerRadius = avatarImageView.frameWidth / 2.0;
+    avatarImageView.clipsToBounds = YES;
 
     dropTable1.layer.borderWidth = 0.5;
     dropTable1.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
@@ -162,10 +173,60 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     textInputCell = [positionTableView dequeueReusableCellWithIdentifier:@"textFieldCell"];
     textInputCell.inTextField.delegate = self;
     [textInputCell.inTextField addTarget:self   action:@selector(textFieldDidChange:)  forControlEvents:UIControlEventEditingChanged];
+    [self loadFromInputDictionary];
     [self reloadTables];
     [self reloadDropMenu];
-    
 
+    [spinner1 stopAnimating];
+    [spinner2 stopAnimating];
+    [textInputCell.spinner stopAnimating];
+    
+    
+    [Server callFunctionInBackground:@"info" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary * object, NSError *error) {
+        if (object) {
+
+            [self updateAvatarWithUrl:object[@"pictureUrl"]];
+            [[NSUserDefaults standardUserDefaults] setObject:object[@"pictureUrl"] forKey:@"imageUrl"];
+        }
+        
+    }];
+    
+}
+
+- (void)updateAvatarWithUrl:(NSString *)urlString {
+    [avatarImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"avatar"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        avatarImage = image;
+    }];
+}
+
+- (void)loadFromInputDictionary {
+    if (_inputAvatar) {
+        avatarImageView.image = _inputAvatar;
+    }
+    if (self.inputDictionary) {
+        NSArray *inputEducation = self.inputDictionary[@"education"];
+        if (inputEducation) {
+            [edusArray addObjectsFromArray:inputEducation];
+        }
+        
+        NSArray *inputExp = self.inputDictionary[@"experience"];
+        if (inputExp) {
+            [positionsArray addObjectsFromArray:inputExp];
+        }
+
+        NSArray *inputSkills = self.inputDictionary[@"skills"];
+        if (inputSkills) {
+            [skillsArray addObjectsFromArray:inputSkills];
+        }
+        
+        firstTextField.text = self.inputDictionary[@"fullname"];
+        industryTextField.text = self.inputDictionary[@"industry"];
+        neredeTextField.text = self.inputDictionary[@"location"];
+        thirdTextField.text = self.inputDictionary[@"headline"];
+        if (self.inputDictionary[@"functionality"]) {
+            aradiLabel.text = self.inputDictionary[@"functionality"];
+        }
+    }
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -175,7 +236,14 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setNeedsStatusBarAppearanceUpdate];
+    if (self.inputDictionary) {
+        [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0 / 255.0 green:50.0 / 255.0 blue:84.0 / 255.0 alpha:1.0]];
+        UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithTitle:@"Vazgeç" style:UIBarButtonItemStylePlain target:self action:@selector(closeWithoutSaving)];
+        self.navigationController.navigationItem.leftBarButtonItem = barItem;
+    } else {
     [self.navigationController setNavigationBarHidden:NO];
+    }
+
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
 }
@@ -186,7 +254,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     liButton.hidden = YES;
 }
 
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textInputCell.inTextField != textField && textField != industryTextField) {
         [mainScrollView setContentOffset:CGPointMake(0, textField.frameY + 50) animated:YES];
     } else if (textField == industryTextField) {
@@ -242,6 +310,10 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     
 }
 
+- (void)showAlertWithText:(NSString *)text {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:text delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
 
 - (void)reloadTables {
     [positionTableView reloadData];
@@ -287,19 +359,31 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 
 }
 
+- (void)closeWithoutSaving {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)auticompleteWithText:(NSString *)text optionsArray:(NSMutableArray *)options field:(UITextField *)field{
     NSString *function;
     if (options == dropOptions1) {
         function = @"autocompleteLocation";
+        if (!spinner1.isAnimating)
+        [spinner1 startAnimating];
     } else if (options == dropOptions2) {
         function = @"autocompleteIndustries";
+        if (!spinner2.isAnimating)
+        [spinner2 startAnimating];
     } else if (options == dropOptions3) {
         function = @"autocompleteSkills";
+        if (!textInputCell.spinner.isAnimating)
+        [textInputCell.spinner startAnimating];
     }
     NSString *savedtext = [text copy];
     if (!text.length) {
         [options removeAllObjects];
+        [spinner1 stopAnimating];
+        [spinner2 stopAnimating];
+        [textInputCell.spinner stopAnimating];
         [self reloadDropMenu];
     } else {
         [Server callFunctionInBackground:function withParameters:@{@"str" : savedtext} block:^(NSArray *receivedItems, NSError *error) {
@@ -313,6 +397,9 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
                 //TODO:Remove NSLog
                 NSLog(@"%@", error);
             }
+            [spinner1 stopAnimating];
+            [spinner2 stopAnimating];
+            [textInputCell.spinner stopAnimating];
         }];
     }
 }
@@ -336,22 +423,61 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 }
 
 - (IBAction)save:(id)sender {
-    if (!firstTextField.text.length) {[self showErrorAlert:@"You should fill name field!"] ;return;}
-    if (!neredeTextField.text.length) {[self showErrorAlert:@"You should fill location field!"] ;return;}
-    if (!thirdTextField.text.length) {[self showErrorAlert:@"You should fill headline field!"] ;return;}
-    if (!aradiLabel.text.length) {[self showErrorAlert:@"You should fill job function field!"] ;return;}
-//    if (!firstTextField.text.length) {[self showErrorAlert:@"You should fill industry field!"] ;return;}
+    NSString *cuttedName = [firstTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    if (!firstTextField.text.length || cuttedName.length < 3) {[self showErrorAlert:@"Lütfen adınız ve soyadınızı bizimle paylaşır mısınız?"] ;return;}
+    
+    NSString *cuttedNerede = [neredeTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (!neredeTextField.text.length || cuttedNerede.length < 3) {[self showErrorAlert:@"Lütfen nerede yaşadığınızı bizimle paylaşır mısınız?"] ;return;}
+    
+    NSString *cuttedthird = [thirdTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (!thirdTextField.text.length  || cuttedthird.length < 2) {[self showErrorAlert:@"Lütfen mesleki ünvanınızı bizimle paylaşır mısınız?"] ;return;}
+    
+    
+    if (!aradiLabel.text.length) {[self showErrorAlert:@"Lütfen kendinize çalışmak istediğiniz bir fonksiyon seçer misiniz?"] ;return;}
 
+    
+    if (!industryTextField.text.length) {[self showErrorAlert:@"Lütfen kendinize çalışmak istediğiniz bir endüstri seçer misiniz?"]; return;}
 
-    [Server callFunctionInBackground:@"info" withParameters:@{@"userId" : @"123"} block:^(NSDictionary *receivedItems, NSError *error) {
+    
+    if (!positionsArray.count) {[self showErrorAlert:@"Lütfen mesleki deneyiminizi bizimle paylaşır mısınız?"]; return;}
+    if (!edusArray.count) {[self showErrorAlert:@"Lütfen geçmiş eğitim bilgilerinizi bizimle paylaşır mısınız?"]; return;}
+    
+    if (skillsArray.count < 3) {[self showErrorAlert:@"Lütfen uzman olduğunuzu düşündüğünüz becerilerden en az 3 tane bizimle pay- laşır mısınız?"]; return;}
+    
+    
+    NSMutableDictionary *params = [@{@"userId" : Server.userInfoDictionary[@"userId"],
+                             @"fullname" : firstTextField.text,
+                             @"location" : neredeTextField.text,
+                             @"functionality" : aradiLabel.text,
+                             @"industry" : industryTextField.text,
+                             @"headline" : thirdTextField.text,
+                             @"experience" : positionsArray,
+                             @"education" : edusArray,
+                             @"skills" : skillsArray,
+                             } mutableCopy];
+    NSString *pictureUrl = [[NSUserDefaults standardUserDefaults] objectForKey:@"imageUrl"];
+    if (pictureUrl) {
+        [params setObject:pictureUrl forKey:@"avatarUrl"];
+    }
+    
+    [Server callFunctionInBackground:@"saveCv" withParameters:params block:^(NSDictionary *receivedItems, NSError *error) {
+        [[NSUserDefaults standardUserDefaults] setObject:@{@"fullname" : params[@"fullname"], @"headline" : params[@"headline"]} forKey:@"personal"];
         if (receivedItems) {
-            Server.userInfoDictionary = receivedItems;
-            [self performSegueWithIdentifier:@"openMenu" sender:nil];
+            if (!_inputDictionary) {
+                [self performSegueWithIdentifier:@"openMenu" sender:nil];
+            } else {
+                
+            }
         } else {
-            //TODO:Remove NSLog
             NSLog(@"%@", error);
         }
     }];
+    
+    
+    if (self.inputDictionary) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 
@@ -377,9 +503,6 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     dropHeight3.constant = MIN(35 * dropOptions3.count, 35 * 4 + 10);
     dropTable3.scrollEnabled = dropHeight3.constant == 35 * 4 + 10;
     dropTable3.hidden = !dropOptions3.count;
-    
-    
-    
 }
 
 
@@ -458,21 +581,22 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
     avatarImageView.layer.cornerRadius = avatarImageView.frameWidth /  2.0;
     avatarImageView.clipsToBounds = YES;
     avatarImageView.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     avatarImage = [self formatedImage:avatarImageView.image];
-
-    if (avatarImage) {
-        [Server serverUploadPicture:avatarImage userId:@"1234" success:^(NSDictionary *responseObject) {
-            
-        } failure:^(NSError *error) {
-            
-        }];
-    }
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (![[info objectForKey:@"UIImagePickerControllerOriginalImage"] isEqual:_inputAvatar]) {
+            if (avatarImage) {
+                [Server serverUploadPicture:avatarImage userId:Server.userInfoDictionary[@"userId"] success:^(NSDictionary *responseObject) {
+                    
+                } failure:^(NSError *error) {
+                    
+                }];
+            }
+        }
+    }];
 }
 
 - (UIImage *)formatedImage:(UIImage *)image {

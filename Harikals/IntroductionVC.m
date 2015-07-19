@@ -9,7 +9,7 @@
 #import "IntroductionVC.h"
 #import <UIView+Position.h>
 #import <Parse.h>
-
+#import "HKServer.h"
 @import QuartzCore;
 
 @interface IntroductionVC () <UIScrollViewDelegate> {
@@ -169,10 +169,13 @@
     if (currentPage >= 4) {
         [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"ShownIntro"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [self performSegueWithIdentifier:@"openCV" sender:self];
+        if ([Server.userInfoDictionary[@"cvComplete"] integerValue] > 0) {
+            [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"menuEmpty"] animated:YES];
+        } else {
+            [self performSegueWithIdentifier:@"openCV" sender:nil];
+        }
     } else {
         [mainScrollView setContentOffset:CGPointMake(pageWidth * (currentPage + 1), 0) animated:YES];
-//        [mainScrollView scrollRectToVisible:CGRectMake(pageWidth * (currentPage + 1), 0, pageWidth, 10) animated:YES];
     }
 }
 

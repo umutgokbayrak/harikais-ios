@@ -105,7 +105,7 @@ const NSInteger numberOfComponents = 2;
 
 - (void) setMinimumDate:(NSDate *)aMinimumDate{
 //    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:aMinimumDate];
-    minYear = 2010;
+    minYear = 1960;
     if (maxYear < minYear) {
         maxYear = minYear;
         maximumDate = aMinimumDate;

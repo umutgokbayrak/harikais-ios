@@ -10,6 +10,8 @@
 #import "HKServer.h"
 #import "ForgotPasswordView.h"
 #import <UIView+Position.h>
+#import "AppDelegate.h"
+#import "ForgotVC.h"
 
 
 @interface SignInVC () <UITextFieldDelegate> {
@@ -26,21 +28,7 @@
     
     __weak IBOutlet NSLayoutConstraint *verticalSpaceConstraint;
     CGFloat baseValue;
-    
 
-    IBOutlet ForgotPasswordView *doneForgot;
-    IBOutlet ForgotPasswordView *redForgot;
-    IBOutlet ForgotPasswordView *greenForgot;
-
-    __weak IBOutlet HKTextField *greenField;
-    __weak IBOutlet UIButton *greenSend;
-    
-    __weak IBOutlet HKTextField *redField;
-    
-    __weak IBOutlet UIButton *redSend;
-    
-    
-    __weak IBOutlet UIButton *doneButton;
     
     CGFloat baseTopGreen;
     CGFloat baseTopRed;
@@ -74,7 +62,7 @@
 
     CGFloat delta = keyboardEndFrame.origin.y - keyboardStartFrame.origin.y;
     
-    if (!greenForgot.superview) {
+    if ([self.view.window isKeyWindow]) {
         [self.view layoutIfNeeded];
         
         verticalSpaceConstraint.constant = self.view.frame.size.height - keyboardEndFrame.origin.y + baseValue;
@@ -84,7 +72,7 @@
     
     [UIView animateWithDuration:animationDuration > 0 ? animationDuration : 0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 
-        [self adjustForgotWithDelta:delta];
+//        [self adjustForgotWithDelta:delta];
         
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
@@ -93,12 +81,12 @@
     
 }
 
-- (void)adjustForgotWithDelta:(CGFloat)delta {
-    if (greenForgot) {
-        ((UIView *)greenForgot.subviews[1]).frameY = fabs(delta) > 100 && delta > 0 ? baseTopGreen : 30;
-        ((UIView *)redForgot.subviews[1]).frameY = fabs(delta) > 100 && delta > 0 ? baseTopRed : 30;
-    }
-}
+//- (void)adjustForgotWithDelta:(CGFloat)delta {
+//    if (greenForgot) {
+//        ((UIView *)greenForgot.subviews[1]).frameY = fabs(delta) > 100 && delta > 0 ? baseTopGreen : 30;
+//        ((UIView *)redForgot.subviews[1]).frameY = fabs(delta) > 100 && delta > 0 ? baseTopRed : 30;
+//    }
+//}
 
 
 - (void)textFieldDidChange:(UITextField *)field {
@@ -119,6 +107,13 @@
 }
 
 - (IBAction)forgotPassPressed:(id)sender {
+    [self.view endEditing:YES];
+    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [ (ForgotVC *)appdelegate.forgotPassWindow.rootViewController switchToGreen];
+    [appdelegate.forgotPassWindow makeKeyAndVisible];
+
+
+    
 //    if (!greenForgot) {
 //        [self loadModalViews];
 //        
@@ -130,72 +125,88 @@
     
 }
 
-- (void)showRedForgotView {
-    redForgot.frame = [UIScreen mainScreen].bounds;
-    redForgot.holderView.frameY = baseTopRed;
-    
-    [self.navigationController.view addSubview:redForgot];
-}
-
-- (void)showDoneView {
-    doneForgot.frame = [UIScreen mainScreen].bounds;
-    [self.navigationController.view addSubview:doneForgot];
-}
-
-- (void)sendForgot {
-    [self.view endEditing:YES];
-    [self hideModals];
-}
-
-- (void)hideModals {
-    [redForgot removeFromSuperview];
-    [greenForgot removeFromSuperview];
-    [doneForgot removeFromSuperview];
-}
-
-- (void)loadModalViews {
-//    greenForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][1];
-//    redForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][0];
-//    doneForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][2];
-
-    
-    [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil];
-    
-    for (HKTextField *view in @[greenField, redField]) {
-        view.layer.borderWidth = 0.5;
-        view.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
-    }
-    
-    [greenSend addTarget:self action:@selector(sendForgot) forControlEvents:UIControlEventTouchUpInside];
-    [redSend addTarget:self action:@selector(sendForgot) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton addTarget:self action:@selector(hideModals) forControlEvents:UIControlEventTouchUpInside];
-
-    
-    baseTopRed= redForgot.holderView.frameY;
-    baseTopGreen= greenForgot.holderView.frameY;
-}
+//- (void)showRedForgotView {
+//    redForgot.frame = [UIScreen mainScreen].bounds;
+//    redForgot.holderView.frameY = baseTopRed;
+//    
+//    [self.navigationController.view addSubview:redForgot];
+//}
+//
+//- (void)showDoneView {
+//    doneForgot.frame = [UIScreen mainScreen].bounds;
+//    [self.navigationController.view addSubview:doneForgot];
+//}
+//
+//- (void)sendForgot {
+//    [self.view endEditing:YES];
+//    [self hideModals];
+//}
+//
+//- (void)hideModals {
+//    [redForgot removeFromSuperview];
+//    [greenForgot removeFromSuperview];
+//    [doneForgot removeFromSuperview];
+//}
+//
+//- (void)loadModalViews {
+////    greenForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][1];
+////    redForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][0];
+////    doneForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][2];
+//
+//    
+//    [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil];
+//    
+//    for (HKTextField *view in @[greenField, redField]) {
+//        view.layer.borderWidth = 0.5;
+//        view.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
+//    }
+//    
+//    [greenSend addTarget:self action:@selector(sendForgot) forControlEvents:UIControlEventTouchUpInside];
+//    [redSend addTarget:self action:@selector(sendForgot) forControlEvents:UIControlEventTouchUpInside];
+//        [doneButton addTarget:self action:@selector(hideModals) forControlEvents:UIControlEventTouchUpInside];
+//
+//    
+//    baseTopRed= redForgot.holderView.frameY;
+//    baseTopGreen= greenForgot.holderView.frameY;
+//}
 
 
 - (IBAction)loginPressed:(UIButton *)sender {
+    
+    
+    if (![emailTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length) {
+        [self showAlertWithText:@"Lütfen eposta adresinizi giriniz"];
+        return;
+    }
+    
+    if (![passTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length) {
+        [self showAlertWithText:@"Lütfen şifrenizi giriniz"];
+        return;
+    }
+    
+    
         sender.userInteractionEnabled = NO;
     if (emailTextField.text.length && passTextField.text.length) {
+        NSString *email = emailTextField.text;
         
-#warning remove it when become working!
-        
-        //TODO:Remove NSLog
-        [self updateUserInfo];
-        
-        
-        [Server callFunctionInBackground:@"login" withParameters:@{@"email" : emailTextField.text , @"password" : passTextField.text} block:^(NSDictionary *receivedItems, NSError *error) {
+        [Server callFunctionInBackground:@"login" withParameters:@{@"email" : email , @"password" : passTextField.text} block:^(NSDictionary *receivedItems, NSError *error) {
             if (receivedItems) {
                 //TODO:Remove NSLog
                 NSLog(@"%@", receivedItems);
+                
                 if ([receivedItems[@"result"] integerValue] == 0) {
-#warning uncomment when become working!
-//                    [self updateUserInfo];
-                } else {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:receivedItems[@"msg"] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
-                    [alert show];
+                    [[NSUserDefaults standardUserDefaults] setObject:@{@"authHash" : receivedItems[@"authHash"],
+                                                                       @"userId" : receivedItems[@"userId"],
+                                                                       @"cvComplete" : receivedItems[@"cvComplete"],
+                                                                       @"email" : email
+                                                                       } forKey:@"userData"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [self perfirmLoginAction];
+                } else if ([receivedItems[@"result"] integerValue] != 0) {
+                    if ([receivedItems[@"msg"] length]) {
+                        [self showAlertWithText:receivedItems[@"msg"]];
+                        sender.userInteractionEnabled = YES;
+                    }
                 }
             } else {
 
@@ -212,6 +223,10 @@
     }
 }
 
+- (void)showAlertWithText:(NSString *)text {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:text delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
 
 - (IBAction)switchToSignUp:(id)sender {
 //    [self performSegueWithIdentifier:@"signUp" sender:nil];
@@ -233,9 +248,11 @@
     
     if ( [[NSUserDefaults standardUserDefaults] objectForKey:@"ShownWelcome"]) {
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ShownIntro"]) {
-            
-            [self performSegueWithIdentifier:@"openCV" sender:nil];
-            
+            if ([Server.userInfoDictionary[@"cvComplete"] integerValue] > 0) {
+                [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"menuEmpty"] animated:YES];
+            } else {
+                [self performSegueWithIdentifier:@"openCV" sender:nil];
+            }
         } else {
             [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"intro"] animated:YES];
         }
@@ -243,27 +260,48 @@
         [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"merhaba"] animated:YES];
     }
     
-    
-    
-    
 //    [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"menuEmpty"] animated:YES];
 }
 
 - (IBAction)signUpPressed:(UIButton *)sender {
+    if (![emailTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length) {
+        [self showAlertWithText:@"Lütfen eposta adresinizi giriniz"];
+        return;
+    }
+    
+    if (![passTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length) {
+        [self showAlertWithText:@"Lütfen şifrenizi giriniz"];
+        return;
+    }
+
+    if (![passTextField.text isEqualToString:confirmPassTextField.text]) {
+        [self showAlertWithText:@"İki şifre bir- biri ile uyuşmuyor. Lütfen kontrol ediniz."];
+        return;
+    }
+    
+    
+    
     sender.userInteractionEnabled = NO;
     if ([self validateEmail:emailTextField.text]) {
         if (passTextField.text.length >= 6) {
             if ([passTextField.text isEqualToString:confirmPassTextField.text]) {
-                [Server callFunctionInBackground:@"createUser" withParameters:@{@"email" : emailTextField.text , @"password" : passTextField.text} block:^(NSDictionary *receivedItems, NSError *error) {
+                NSString *email = emailTextField.text;
+                [Server callFunctionInBackground:@"createUser" withParameters:@{@"email" : email , @"password" : passTextField.text} block:^(NSDictionary *receivedItems, NSError *error) {
                     if (receivedItems) {
-                        //TODO:Remove NSLog
-                        NSLog(@"%@", receivedItems);
+
                         if ([receivedItems[@"result"] integerValue] == 0) {
                             [[NSUserDefaults standardUserDefaults] setObject:@{@"authHash" : receivedItems[@"authHash"],
-                                                                               @"userId" : receivedItems[@"userId"]
+                                                                               @"userId" : receivedItems[@"userId"],
+                                                                               @"cvComplete" : @"0",
+                                                                               @"email" : email
                                                                                } forKey:@"userData"];
                             [[NSUserDefaults standardUserDefaults] synchronize];
                             [self perfirmLoginAction];
+                        } else if ([receivedItems[@"result"] integerValue] != 0) {
+                            if ([receivedItems[@"msg"] length]) {
+                                [self showAlertWithText:receivedItems[@"msg"]];
+                                sender.userInteractionEnabled = YES;
+                            }
                         }
                     } else {
                         //TODO:Remove NSLog
@@ -279,12 +317,11 @@
             }
         } else {
             sender.userInteractionEnabled = YES;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Şifreniz 6 karakterden kısa olmamalı" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Güvenliğiniz için şif- reniz 6 karakterdan daha kısa olamaz" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
             [alert show];
         }
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid e-mail" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
-        [alert show];
+        [self showAlertWithText:@"Lütfen eposta adresinizi kontrol ediniz"];
         sender.userInteractionEnabled = YES;
     }
 }

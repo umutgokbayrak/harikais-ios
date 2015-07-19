@@ -29,6 +29,10 @@
     
     __weak IBOutlet UIView *counterView;
     NSNumber *unreadCount;
+    
+    NSInteger finishedImages;
+    
+    __weak IBOutlet UIActivityIndicatorView *spinner;
 }
 
 @property (nonatomic, assign) BOOL wrap;
@@ -92,7 +96,12 @@
     counterView.hidden = YES;
     counterView.alpha = 0.0;
     
+    spinner.hidesWhenStopped = YES;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUnreadCount) name:@"updateUnreadCount" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkForShowing) name:@"checkForShowing" object:nil];
+    
     
     if ([UIScreen mainScreen].bounds.size.height == 480) {
         roundedView.frameY = 43;
@@ -117,14 +126,21 @@
     }
 
     [self loadJobs];
-//    [self updateUnreadCount];
-    
 }
 
+- (void)checkForShowing {
+    finishedImages ++;
+    NSLog(@"here");
+    if (finishedImages == 3) {
 
+            [spinner stopAnimating];
+            NSLog(@"show");
+            self.carousel.hidden = NO;
 
+    }
+}
 
--(void)detailPressed {
+- (void)detailPressed {
     NSInteger index = carousel.currentItemIndex;
     
     [self performSegueWithIdentifier:@"detail" sender:self.items[index]];
@@ -136,8 +152,6 @@
 }
 
 - (IBAction)openChat:(id)sender {
-//    [self performSegueWithIdentifier:@"openChat" sender:nil];
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"presentMessages" object:nil];
 }
 
@@ -164,14 +178,17 @@
 
 
 - (void)loadJobs {
+    [spinner startAnimating];
     messagesButton.hidden = !self.items.count;
     counterView.hidden = !self.items.count;
     emptyHolderView.hidden = YES;
     applicationsButton.hidden = YES;
-    [Server callFunctionInBackground:@"jobs" withParameters:@{@"userId" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
-        if (receivedItems.count && !error) {
+    self.carousel.hidden = YES;
+    [Server callFunctionInBackground:@"jobs" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
+        if (receivedItems.count) {
             [self.items removeAllObjects];
             [self.items addObjectsFromArray:receivedItems];
+            
         } else {
             //TODO:Remove NSLog
             NSLog(@"JOBS ERROR %@", error);
@@ -320,7 +337,7 @@
     view.lineView.frameHeight = 1.5;
     
     view.infoTextView.frameY = view.locationLabel.frameY + 20;
-    view.infoTextView.frameHeight = view.codeLabel.frameY  - view.infoTextView.frameY - 2;
+    view.infoTextView.frameHeight = view.codeLabel.frameBottom  - view.infoTextView.frameY;
     
     view.contentWebView.frame = view.infoTextView.frame;
     [view.infoTextView removeFromSuperview];
@@ -410,18 +427,18 @@
     }
 }
 
-//- (void)carousel:(__unused iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
-//    NSNumber *item = (self.items)[(NSUInteger)index];
-//    NSLog(@"Tapped view number: %@", item);
-//    
-//    [self performSegueWithIdentifier:@"detail" sender:self.items[index]];
-//}
+- (void)carousel:(__unused iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
+    NSNumber *item = (self.items)[(NSUInteger)index];
+    NSLog(@"Tapped view number: %@", item);
+    
+    [self performSegueWithIdentifier:@"detail" sender:self.items[index]];
+}
 
 - (void)carouselCurrentItemIndexDidChange:(__unused iCarousel *)carousel {
     NSLog(@"Index: %@", @(self.carousel.currentItemIndex));
     
     if (self.carousel.currentItemIndex >= 0) {
-        [Server callFunctionInBackground:@"markJobAsSeen" withParameters:@{@"userId" : @"123", @"jobId" : self.items[self.carousel.currentItemIndex][@"id"]
+        [Server callFunctionInBackground:@"markJobAsSeen" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : self.items[self.carousel.currentItemIndex][@"id"]
        } block:^(NSArray *receivedItems, NSError *error) {
            if (receivedItems) {
                //TODO:Remove NSLog

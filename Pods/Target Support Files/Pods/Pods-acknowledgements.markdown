@@ -131,6 +131,10 @@ THE SOFTWARE.
 
 
 
+## SplunkMint-iOS
+
+See https://mint.splunk.com/termsofuse
+
 ## UIViewPlusPosition
 
 Unspecified.

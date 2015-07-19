@@ -54,6 +54,7 @@
     
     CGFloat baseTop;
     
+    __weak IBOutlet UIButton *referFriendButton;
     
     __weak IBOutlet UILabel *messagePlaceholderLabel;
 }
@@ -77,10 +78,7 @@
     loveImage = [UIImage imageNamed:@"love-tab-icon"];
     loveImageSelected = [UIImage imageNamed:@"glowing-love"];
 
-    [barFavouriteButton setImage:isFavourite ? loveImageSelected : loveImage forState:UIControlStateNormal];
-    [barFavouriteButton setTitleEdgeInsets:!isFavourite ? UIEdgeInsetsMake(0,-15, -28, 0) : UIEdgeInsetsMake(0, -39, 0, 0)];
-    [barFavouriteButton setImageEdgeInsets:UIEdgeInsetsMake(-11, 0, 0, -69)];
-    
+        
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
@@ -92,7 +90,9 @@
     }
     
     [barFavouriteButton setImage:isFavourite ? loveImageSelected : loveImage forState:UIControlStateNormal];
+    [barFavouriteButton setTitle:isFavourite ? @"Favori Sil" : @"Favori Ekle" forState:UIControlStateNormal];
     [barFavouriteButton setTitleEdgeInsets:!isFavourite ? UIEdgeInsetsMake(0, -15, -28, 0) : UIEdgeInsetsMake(0, -40, -28, 0)];
+    [barFavouriteButton setImageEdgeInsets:!isFavourite ? UIEdgeInsetsMake(-10, 0, 0, -63) : UIEdgeInsetsMake(-11, 0, 0, -53)];
     
     [self setupContent];
 }
@@ -178,20 +178,17 @@
     barApplyButton.backgroundColor = [UIColor colorWithRed:196.0 / 255.0 green:196.0 / 255.0 blue:196.0 / 255.0 alpha:1.0];
     barApplyButton.userInteractionEnabled = NO;
     [barApplyButton setTitle:@"Başvuruldu" forState:UIControlStateNormal];
-//    [barFavouriteButton setImageEdgeInsets:!isFavourite ? UIEdgeInsetsMake(-10, 0, 0, -52) : UIEdgeInsetsMake(-11, 0, 0, -44)];
-    [barApplyButton setImageEdgeInsets:UIEdgeInsetsMake(-11, 0, 0, -50)];
+    [barApplyButton setImageEdgeInsets:UIEdgeInsetsMake(-11, 0, 0, -63)];
 }
 
 - (IBAction)applyToJob:(UIButton *)sender {
     sender.userInteractionEnabled = NO;
     NSString *message = messageTextView.text;
     [self hideModals];
-    [Server callFunctionInBackground:@"applyToJob" withParameters:@{@"userId" : @"123", @"jobId" : data[@"id"], @"message" : message} block:^(NSArray *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"applyToJob" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"id"], @"message" : message} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems) {
-            //TODO:Remove NSLog
-            NSLog(@"%@", receivedItems);
             [self setApplicationButtonDisabled];
-            
+            [Server showFavouriteAlertWithTitle:@"İşlem Tamam" text:@"Pozisyon için başvurunuz insan kaynaklarına iletilmiştir. Başvurunuzun durumunu ana menüden erişilen Başvu- rular adımında izleyebilirsiniz."];
         } else {
             sender.userInteractionEnabled = YES;
             //TODO:Remove NSLog
@@ -207,10 +204,10 @@
     if ([self validateEmail:message]) {
         [self hideModals];
         
-        [Server callFunctionInBackground:@"referFriend" withParameters:@{@"userId" : @"123", @"jobId" : data[@"id"], @"friend" : message} block:^(NSArray *receivedItems, NSError *error) {
+        [Server callFunctionInBackground:@"referFriend" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"id"], @"friend" : message} block:^(NSArray *receivedItems, NSError *error) {
             if (receivedItems) {
-                //TODO:Remove NSLog
-                NSLog(@"%@", receivedItems);
+
+                [Server showFavouriteAlertWithTitle:@"İşlem Başarılı" text:@"Arkadaşınız bu fırsattan haberdar edildi. Desteğiniz için teşekkür ederiz"];
             } else {
                 //TODO:Remove NSLog
                 NSLog(@"%@", error);
@@ -219,7 +216,7 @@
         }];
     } else {
         sender.userInteractionEnabled = YES;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid e-mail" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Lütfen arkadaşınızın eposta adresini kontrol ediniz" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
         [alert show];
     }
 }
@@ -235,14 +232,15 @@
     [barFavouriteButton setImage:isFavourite ? loveImageSelected : loveImage forState:UIControlStateNormal];
     [barFavouriteButton setTitle:isFavourite ? @"Favori Sil" : @"Favori Ekle" forState:UIControlStateNormal];
     [barFavouriteButton setTitleEdgeInsets:!isFavourite ? UIEdgeInsetsMake(0, -15, -28, 0) : UIEdgeInsetsMake(0, -40, -28, 0)];
-    [barFavouriteButton setImageEdgeInsets:!isFavourite ? UIEdgeInsetsMake(-10, 0, 0, -52) : UIEdgeInsetsMake(-11, 0, 0, -44)];
+    [barFavouriteButton setImageEdgeInsets:!isFavourite ? UIEdgeInsetsMake(-10, 0, 0, -63) : UIEdgeInsetsMake(-11, 0, 0, -53)];
     barFavouriteButton.userInteractionEnabled = NO;
     if (isFavourite) {
-        [Server callFunctionInBackground:@"addFavorite" withParameters:@{@"userId" : @"123", @"jobId" : data[@"id"]
+        [Server callFunctionInBackground:@"addFavorite" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"id"]
                                                                            } block:^(NSArray *receivedItems, NSError *error) {
                                                                                if (receivedItems) {
-                                                                                   //TODO:Remove NSLog
-                                                                                   NSLog(@"%@", receivedItems);
+                                                                                   [Server showFavouriteAlertWithTitle:@"İşlem tamam" text:@"Fırsat favorileriniz arasına eklenmiştir."];
+                                                                                   
+                                                                                   
                                                                                } else {
                                                                                    //TODO:Remove NSLog
                                                                                    NSLog(@"%@", error);
@@ -250,7 +248,7 @@
                                                                                barFavouriteButton.userInteractionEnabled = YES;
                                                                            }];
     } else {
-        [Server callFunctionInBackground:@"removeFavorite" withParameters:@{@"userId" : @"123", @"jobId" : data[@"id"]} block:^(NSArray *receivedItems, NSError *error) {
+        [Server callFunctionInBackground:@"removeFavorite" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"id"]} block:^(NSArray *receivedItems, NSError *error) {
             if (receivedItems) {
                 //TODO:Remove NSLog
                 NSLog(@"%@", receivedItems);
@@ -277,6 +275,7 @@
 - (void)showFriendModal {
     emailHolderView.frameY = baseTop;
     emailTextField.text = @"";
+    [referFriendButton setBackgroundColor:[UIColor colorWithRed:237.0 / 255.0 green:113.0 / 255.0 blue:97.0 / 255.0 alpha:1.0]];
     [self.navigationController.view addSubview:emailModalView];
     [[[[UIApplication sharedApplication] delegate] window] setWindowLevel:UIWindowLevelStatusBar+1];
 }
@@ -351,6 +350,8 @@
     messageTextView.layer.borderWidth = 0.5;
     messageTextView.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
     emailTextField.delegate = self;
+    
+    [emailTextField addTarget:self action:@selector(emailChanged:) forControlEvents:UIControlEventEditingChanged];
     messageTextView.delegate = self;
     baseTop = messageHolderView.frameY;
 }
@@ -369,6 +370,10 @@
 
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0 / 255.0 green:50.0 / 255.0 blue:84.0 / 255.0 alpha:1.0]];
+}
+
+- (void)emailChanged:(UITextField *)textField {
+    [referFriendButton setBackgroundColor:[self validateEmail:textField.text] ? [UIColor colorWithRed:237.0 / 255.0 green:113.0 / 255.0 blue:97.0 / 255.0 alpha:1.0] :[UIColor colorWithRed:196.0 / 255.0 green:196.0 / 255.0 blue:196.0 / 255.0 alpha:1.0] ];
 }
 
 

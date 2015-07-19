@@ -28,9 +28,9 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
                   withParameters:(NSDictionary *)parameters
                            block:(CompletionBlock)block;
 
-
+- (void)showWebAlertWithText:(NSString *)text;
 - (void)serverUploadPicture:(UIImage *)picture userId:(NSString *)userId success:(void(^)(NSDictionary *responseObject))success failure:(void(^)(NSError *error))failure;
 
-
-
+- (void)showAlertWithText:(NSString *)text closeButton:(NSString *)closeButton;
+- (void)showFavouriteAlertWithTitle:(NSString *)title text:(NSString *)text;
 @end

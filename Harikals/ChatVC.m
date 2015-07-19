@@ -32,6 +32,7 @@
 
     CGRect keyboardEndFrame;
     
+    __weak IBOutlet UIActivityIndicatorView *spinner;
     NSMutableArray *messagesArray;
     
     BOOL loaded;
@@ -62,7 +63,7 @@
     
     mainTableView.delegate = self;
     mainTableView.dataSource = self;
-
+    spinner.hidesWhenStopped = YES;
     mainTableView.contentInset = UIEdgeInsetsMake(5, 0, 10, 0);
     
     
@@ -85,19 +86,33 @@
 }
 
 - (void)loadMessages {
-    [Server callFunctionInBackground:@"chatLog" withParameters:@{@"userId" : @"123",
-                                                                 @"jobId" : dataDictionary[@"companyId"] ? dataDictionary[@"companyId"] : dataDictionary[@"id"]} block:^(NSDictionary *receivedItems, NSError *error) {
+    [spinner startAnimating];
+    [Server callFunctionInBackground:@"chatLog" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : dataDictionary[@"companyId"] ? dataDictionary[@"companyId"] : dataDictionary[@"id"]} block:^(NSDictionary *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [messagesArray removeAllObjects];
             direction1ImagePath = receivedItems[@"images"][@"direction1"];
             direction2ImagePath = receivedItems[@"images"][@"direction2"];
-            [messagesArray addObjectsFromArray:receivedItems[@"messages"]];
+            [messagesArray insertObjects:receivedItems[@"messages"] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [receivedItems[@"messages"] count])]];
         } else {
-
+            
         }
+        [spinner stopAnimating];
 
         [mainTableView reloadData];
+        if ([messagesArray count]) {
+            [mainTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messagesArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        }
     }];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"chatAlertShown"]) {
+        [Server showFavouriteAlertWithTitle:@"Bilgi" text:@"Bu ekranda yaptığınız yazışmalar gizlidir. Firma yetkilisi sizin isminizi ve diğer profil bilgilerinizi göremeyecektir."];
+        [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"chatAlertShown"];
+    } else {
+
+    }
 }
 
 - (void)loadDummyTextView {
@@ -171,28 +186,28 @@
 - (IBAction)sendPressed:(id)sender {
     NSString *text = inputTextView.text;
     inputTextView.text = @"";
-    
-    
-    [Server callFunctionInBackground:@"sendMessage"
-                      withParameters:@{@"userId" : @"123",
-                                       @"jobId" : dataDictionary[@"companyId"],
-                                       @"msg" : text}
-                               block:^(NSDictionary *receivedItems, NSError *error) {
-       if (receivedItems.count && !error) {
-           [messagesArray addObject:@{@"direction" : @1,
-                                      @"msg" : text,
-                                      @"from" : @"You",
-                                      @"date" : [formatter stringFromDate:[NSDate date]]
-                                      }];
-           NSIndexPath *indexpath = [NSIndexPath indexPathForRow:messagesArray.count - 1 inSection:0];
-           [self textViewDidChange:inputTextView];
-           [mainTableView insertRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationBottom];
-           [mainTableView scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-       } else {
-           //TODO:Remove NSLog
-           NSLog(@"failed to send message %@", error);
-       }
-    }];
+    if ([text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length) {
+        [Server callFunctionInBackground:@"sendMessage"
+                          withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"],
+                                           @"jobId" : dataDictionary[@"companyId"],
+                                           @"msg" : text}
+                                   block:^(NSDictionary *receivedItems, NSError *error) {
+                                       if (receivedItems.count && !error) {
+                                           [messagesArray addObject:@{@"direction" : @1,
+                                                                      @"msg" : text,
+                                                                      @"from" : @"You",
+                                                                      @"date" : [formatter stringFromDate:[NSDate date]]
+                                                                      }];
+                                           NSIndexPath *indexpath = [NSIndexPath indexPathForRow:messagesArray.count - 1 inSection:0];
+                                           [self textViewDidChange:inputTextView];
+                                           [mainTableView insertRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationBottom];
+                                           [mainTableView scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                                       } else {
+                                           //TODO:Remove NSLog
+                                           NSLog(@"failed to send message %@", error);
+                                       }
+                                   }];
+    }
 }
 
 - (IBAction)goBack:(id)sender {

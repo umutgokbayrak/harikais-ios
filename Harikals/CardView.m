@@ -56,6 +56,7 @@
             if ([job isEqual:jobDictionary]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     photoImageView.image = image;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"checkForShowing" object:nil];
                 });
                 
             }

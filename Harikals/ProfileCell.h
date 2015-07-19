@@ -17,5 +17,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *inTextField;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 @end

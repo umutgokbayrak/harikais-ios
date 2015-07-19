@@ -6,21 +6,36 @@
 //  Copyright (c) 2015 tabunchenko. All rights reserved.
 //
 
+@import SystemConfiguration;
+
+#import "Reachability.h"
+#import "lelib.h"
 #import "HKServer.h"
 #import <AFNetworking.h>
 #import <IOSLinkedInAPI/LIALinkedInApplication.h>
 #import <LIALinkedInHttpClient.h>
+#import "AppDelegate.h"
+#import "AlertVC.h"
+
 #define BASE_SARVER_URL @"https://api.parse.com/1/functions/"
 
 static HKServer *sharedServer = nil;
 
-@interface HKServer ()
+@interface HKServer () {
+    LELog* log;
+        Reachability *reachability;
+    BOOL justShown;
+}
 @end
 
 @implementation HKServer {
     AFHTTPRequestOperationManager *manager;
     dispatch_queue_t background;
     NSUserDefaults *userDefaults;
+}
+
+- (NSDictionary *)userInfoDictionary {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"userData"];
 }
 
 //-------------------------------------------------------------------------------------------------------------
@@ -35,6 +50,46 @@ static HKServer *sharedServer = nil;
     return sharedServer;
 }
 
+- (void)showAlertWithText:(NSString *)text closeButton:(NSString *)closeButton {
+    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AlertVC *alertVC = (AlertVC *)appdelegate.alertWindow.rootViewController;
+    alertVC.mainLabel.text = text;
+    alertVC.webHolder.hidden = YES;
+    alertVC.mainAlertHolder.hidden = NO;
+    alertVC.favouriteAlertHolder.hidden =YES;
+    [alertVC.closeButton setTitle:closeButton forState:UIControlStateNormal];
+    
+    [appdelegate.alertWindow makeKeyAndVisible];
+
+}
+
+- (void)showFavouriteAlertWithTitle:(NSString *)title text:(NSString *)text {
+    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AlertVC *alertVC = (AlertVC *)appdelegate.alertWindow.rootViewController;
+    alertVC.view.hidden = NO;
+    alertVC.webHolder.hidden = YES;
+    alertVC.secondaryText.text = text;
+    alertVC.titleLabel.text = title;
+    alertVC.mainAlertHolder.hidden = YES;
+    alertVC.favouriteAlertHolder.hidden = NO;
+    appdelegate.alertWindow.windowLevel = UIWindowLevelAlert;
+    [appdelegate.alertWindow makeKeyAndVisible];
+}
+
+
+- (void)showWebAlertWithText:(NSString *)text {
+    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AlertVC *alertVC = (AlertVC *)appdelegate.alertWindow.rootViewController;
+    alertVC.view.hidden = NO;
+    alertVC.webHolder.hidden = NO;
+    [alertVC.webView loadHTMLString:text baseURL:nil];
+    alertVC.mainAlertHolder.hidden = YES;
+    alertVC.favouriteAlertHolder.hidden = YES;
+    appdelegate.alertWindow.windowLevel = UIWindowLevelAlert;
+    [appdelegate.alertWindow makeKeyAndVisible];
+}
+
+
 - (instancetype)initUniqueInstance {
     if (self = [super init]) {
         background = dispatch_queue_create("com.harikais.serverbackground", NULL);
@@ -43,39 +98,83 @@ static HKServer *sharedServer = nil;
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         [manager setCompletionQueue:background];
         [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
         [manager.requestSerializer setValue:@"7EqNvrRwIHC2CP34qAgVJTCCmmReT5gnZdZM5zYP" forHTTPHeaderField:@"X-Parse-Application-Id"];
         [manager.requestSerializer setValue:@"f8LCXQKaAEzbsStXURKlbIWaPS8yj43Gx7uNgCsq" forHTTPHeaderField:@"X-Parse-REST-API-Key"];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNetworkChange:) name:kReachabilityChangedNotification object:nil];
+        
+        reachability = [Reachability reachabilityForInternetConnection];
+        [reachability startNotifier];
+        log = [LELog sharedInstance];
+        log.token = @"956a19d4-3057-44ab-9608-1245bfff6db5";
+        
+
     }
     
     return self;
 }
 
+- (void) handleNetworkChange:(NSNotification *)notice {
+    
+    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
+    
+    if(remoteHostStatus == NotReachable) {NSLog(@"no");}
+    else if (remoteHostStatus == ReachableViaWiFi) {NSLog(@"wifi"); }
+    else if (remoteHostStatus == ReachableViaWWAN) {NSLog(@"cell"); }
+}
+
+- (void)showNoInternetAlert {
+    if (!justShown) {
+        justShown = YES;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Connection error." message:@"You should check your internet connection" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        [alertView show];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            justShown = NO;
+        });
+    }
+}
 
 - (void)callFunctionInBackground:(NSString *)function  withParameters:(NSDictionary *)parameters block:(CompletionBlock)block {
     NSString *serverRequestString = BASE_SARVER_URL;
     NSString *finalString  = [NSString stringWithFormat:@"%@%@", serverRequestString, function];
-    [manager POST:finalString parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        if (responseObject[@"result"]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (block) block(responseObject[@"result"], nil);
-            });
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (block) block(nil, error);
-    }];
+    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
+    if ([function isEqualToString:@"autocompleteLocation"] ||
+        [function isEqualToString:@"autocompleteIndustries"] ||
+        [function isEqualToString:@"autocompleteSkills"]) {
+        manager.requestSerializer.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    } else {
+        manager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
+    }
+    
+    if (remoteHostStatus == NotReachable) {
+        [self showNoInternetAlert];
+        if (block) block(nil, [[NSError alloc] init]);
+    } else {
+        [manager POST:finalString parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+            if (responseObject[@"result"]) {
+                if (responseObject[@"result"][@"result"] && [responseObject[@"result"][@"result"] integerValue] == 1) {
+                    [log log:[NSString stringWithFormat:@"Function: %@, error msg: %@", function, responseObject[@"result"][@"msg"]]];
+                }
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (block) block(responseObject[@"result"], nil);
+                    });
+
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (block) block(nil, error);
+        }];
+    }
     
 }
 
 - (void)serverUploadPicture:(UIImage *)picture userId:(NSString *)userId success:(void(^)(NSDictionary *responseObject))success failure:(void(^)(NSError *error))failure {
     UIImage *photo = picture;
-//    NSData *imageData = UIImagePNGRepresentation(photo);
     
     NSString *finalString  = [NSString stringWithFormat:@"%@%@", BASE_SARVER_URL, @"uploadPhoto"];
     NSMutableURLRequest *request = [manager.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:finalString parameters:@{@"userId" : userId} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSData *imageData = UIImageJPEGRepresentation(photo, 1.0);
-        [formData appendPartWithFileData:imageData name:@"file" fileName:@"file.jpg" mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imageData name:@"file" fileName:@"file" mimeType:@"image/jpeg"];
     } error:nil];
 
     

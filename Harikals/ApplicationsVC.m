@@ -87,7 +87,7 @@
 
 - (void)loadApplications {
     [spinner startAnimating];
-    [Server callFunctionInBackground:@"applications" withParameters:@{@"userId" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"applications" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [dataArray removeAllObjects];
             [dataArray addObjectsFromArray:receivedItems];

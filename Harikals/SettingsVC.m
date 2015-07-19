@@ -17,6 +17,7 @@
 
 @interface SettingsVC ()  <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>{
     
+    __weak IBOutlet UIActivityIndicatorView *spinner;
     __weak IBOutlet UIView *lastHolder;
     __weak IBOutlet UITableView *mainTableView;
     __weak IBOutlet UITextField *priceTextField;
@@ -29,6 +30,7 @@
     
     DropdownModel *dropdownModel;
     
+    __weak IBOutlet UIActivityIndicatorView *spinnerAutocomplete;
     NSMutableArray *selectedLocations;
     UITapGestureRecognizer *tap;
     
@@ -53,11 +55,24 @@
     selectedLocations = [NSMutableArray array];
     dropMenuOptions = [NSMutableArray array];
     
-    if (Server.userInfoDictionary) {
-        [selectedLocations addObjectsFromArray:Server.userInfoDictionary[@"locations"]];
-        notificationsSwitch.on = [Server.userInfoDictionary[@"notifications"] integerValue];
-        priceTextField.text = [NSString stringWithFormat:@"%@",  Server.userInfoDictionary[@"minimumSalary"] ? Server.userInfoDictionary[@"minimumSalary"] : @""];
-    }
+    spinner.hidesWhenStopped = YES;
+    mainScrollView.hidden = YES;
+    [Server callFunctionInBackground:@"settings" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary *receivedItems, NSError *error) {
+        if (receivedItems) {
+            [selectedLocations addObjectsFromArray:receivedItems[@"locations"]];
+            notificationsSwitch.on = [Server.userInfoDictionary[@"notifications"] integerValue];
+            priceTextField.text = [NSString stringWithFormat:@"%@",  Server.userInfoDictionary[@"minimumSalary"] ? Server.userInfoDictionary[@"minimumSalary"] : @""];
+            if ([priceTextField.text isEqualToString:@"0"]) {
+                priceTextField.text = @"";
+            }
+            [mainTableView reloadData];
+            mainScrollView.hidden = NO;
+
+        } else {
+
+        }
+        [spinner stopAnimating];
+    }];
     
     dropdownModel = [[DropdownModel alloc] init];
     dropdownTableView.delegate = dropdownModel;
@@ -92,10 +107,11 @@
     tap.delegate = self;
     [self.view addGestureRecognizer:tap];
     [self reloadDropMenu];
+    [spinnerAutocomplete stopAnimating];
 }
 
 - (void)changeNotifs:(UISwitch *)notifsSwitch {
-    [Server callFunctionInBackground:@"updateNotification" withParameters:@{@"userId" : @"123", @"notification" : notificationsSwitch.on ? @"true" : @"false"} block:^(NSArray *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"updateNotification" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"notification" : notificationsSwitch.on ? @"true" : @"false"} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems) {
             //TODO:Remove NSLog
             NSLog(@"%@", receivedItems);
@@ -121,7 +137,11 @@
     if (!text.length) {
         [dropMenuOptions removeAllObjects];
         [self reloadDropMenu];
+        [spinnerAutocomplete stopAnimating];
     } else {
+        if (!spinnerAutocomplete.isAnimating) {
+            [spinnerAutocomplete startAnimating];
+        }
         [Server callFunctionInBackground:@"autocompleteLocation" withParameters:@{@"str" : savedtext} block:^(NSArray *receivedItems, NSError *error) {
             if (receivedItems) {
                 [dropMenuOptions removeAllObjects];
@@ -136,7 +156,7 @@
                 //TODO:Remove NSLog
                 NSLog(@"%@", error);
             }
-            
+            [spinnerAutocomplete stopAnimating];
         }];
     }
 }
@@ -227,8 +247,19 @@
     [self auticompleteLocationWithText:textField.text];
 }
 
+
+- (NSInteger)lengthOfTrimmedString:(NSString *)string {
+    return  [string stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length;
+}
 - (IBAction)addPressed:(id)sender {
-    if (searchTextField.text.length) {
+    if ([self lengthOfTrimmedString:searchTextField.text] < 3) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Lütfen çalışmak isteyebile-ceğiniz yerin ismini kontrol ediniz" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+        
+    } else if ([searchTextField.text integerValue] > 500000) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Aylık net bu maaşı beklediğinizden emin misiniz? Size uygun pozisyon bulmamız biraz zor olabilir :)" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+    } else {
         searchTextField.text = @"";
         NSIndexPath *selectedIndexPath = [dropdownTableView indexPathForSelectedRow];
         if (selectedIndexPath) {
@@ -246,8 +277,9 @@
                 
             }];
         }
+        [self hideKeyboard];
     }
-    [self hideKeyboard];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -12,6 +12,7 @@
 
 @interface OptionsVC () <UITableViewDelegate, UITableViewDataSource> {
     
+    __weak IBOutlet UIActivityIndicatorView *spinner;
     __weak IBOutlet UITableView *mainTableView;
 }
 
@@ -24,20 +25,23 @@
     
     mainTableView.dataSource = self;
     mainTableView.delegate = self;
-    
+    spinner.hidesWhenStopped = YES;
     self.title = @"Fonksiyon";
     [self loadOptions];
 }
 
 - (void)loadOptions {
+    [spinner startAnimating];
+    mainTableView.hidden = YES;
     [Server callFunctionInBackground:@"functionNames" withParameters:@{} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             _dataArray = receivedItems;
+            mainTableView.hidden = NO;
         } else {
             //TODO:Remove NSLog
             NSLog(@"opport ERROR %@", error);
         }
-        
+        [spinner stopAnimating];
         [mainTableView reloadData];
     }];
 }
@@ -54,9 +58,16 @@
 - (IBAction)save:(id)sender {
     if ([mainTableView indexPathForSelectedRow]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"updateJobFunction" object:_dataArray[[mainTableView indexPathForSelectedRow].row]];
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self showErrorAlert:@"Lütfen kendinize çalışmak istediğiniz bir fonksiyon seçer misi- niz?"];
     }
 
-    [self.navigationController popViewControllerAnimated:YES];
+ 
+}
+- (void)showErrorAlert:(NSString *)text {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:text delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+    [alert show];
 }
 
 //-------------------------------------------------------------------------------------------------------------

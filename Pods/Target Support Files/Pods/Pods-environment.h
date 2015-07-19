@@ -84,6 +84,12 @@
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 7
 #define COCOAPODS_VERSION_PATCH_SDWebImage_Core 2
 
+// SplunkMint-iOS
+#define COCOAPODS_POD_AVAILABLE_SplunkMint_iOS
+#define COCOAPODS_VERSION_MAJOR_SplunkMint_iOS 4
+#define COCOAPODS_VERSION_MINOR_SplunkMint_iOS 2
+#define COCOAPODS_VERSION_PATCH_SplunkMint_iOS 0
+
 // UIViewPlusPosition
 #define COCOAPODS_POD_AVAILABLE_UIViewPlusPosition
 #define COCOAPODS_VERSION_MAJOR_UIViewPlusPosition 0

@@ -92,7 +92,7 @@
 
 - (void)loadFavourites {
     [spinner startAnimating];
-    [Server callFunctionInBackground:@"favorites" withParameters:@{@"userId" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"favorites" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [dataArray removeAllObjects];
             [dataArray addObjectsFromArray:receivedItems];
@@ -107,7 +107,7 @@
 
 - (void)loadChats {
     [spinner startAnimating];
-    [Server callFunctionInBackground:@"chats" withParameters:@{@"userId" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"chats" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [dataArray removeAllObjects];
             [dataArray addObjectsFromArray:receivedItems];
@@ -193,7 +193,7 @@
 
 
 - (void)removeFavouriteWithData:(NSDictionary *)data {
-    [Server callFunctionInBackground:@"deleteFavorite" withParameters:@{@"userId" : @"123", @"jobId" : data[@"favoriteId"]
+    [Server callFunctionInBackground:@"deleteFavorite" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"favoriteId"]
                                                                         } block:^(NSArray *receivedItems, NSError *error) {
                                                                             if (receivedItems) {
                                                                                 //TODO:Remove NSLog
@@ -207,7 +207,7 @@
 }
 
 - (void)removeChatWithData:(NSDictionary *)data {
-    [Server callFunctionInBackground:@"deleteChat" withParameters:@{@"userId" : @"123", @"jobId" : data[@"companyId"]
+    [Server callFunctionInBackground:@"deleteChat" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"companyId"]
                                                                     } block:^(NSArray *receivedItems, NSError *error) {
                                                                         if (receivedItems) {
                                                                             //TODO:Remove NSLog

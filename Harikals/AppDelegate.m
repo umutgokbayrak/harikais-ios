@@ -10,8 +10,15 @@
 #import <PFLinkedInUtils.h>
 #import "HKServer.h"
 #import <IOSLinkedInAPI/LIALinkedInApplication.h>
+#import "ForgotVC.h"
+#import "AlertVC.h"
+#import <SplunkMint-iOS/SplunkMint-iOS.h>
 
-@interface AppDelegate ()
+
+
+@interface AppDelegate () {
+    
+}
 
 @end
 
@@ -19,6 +26,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.forgotPassWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.forgotPassWindow.rootViewController  = [[ForgotVC alloc] initWithNibName:@"ForgotView" bundle:nil];
+    self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.alertWindow.rootViewController = [[AlertVC alloc] initWithNibName:@"AlertVCView" bundle:nil];
+    
+    [[Mint sharedInstance] initAndStartSession:@"95271da7"];
     [Parse setApplicationId:@"7EqNvrRwIHC2CP34qAgVJTCCmmReT5gnZdZM5zYP" clientKey:@"z7OlXSHBV5KJXdkPbx9xh9XDGrcsWOkj3V0sn9xn"];
 //    [PFLinkedInUtils initializeWithRedirectURL:@"http://www.rundewoo.com" clientId:@"77p3qgyayt2mjo" clientSecret:@"ZQ2HHMY2AdU1JmaX" state:@"aaaabbbbccccdddd" grantedAccess:@[@"r_emailaddress", @"r_basicprofile"] presentingViewController:nil];
 
@@ -26,7 +39,7 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Semibold" size:17.0]}];
     
     
-    
+    [[NSUserDefaults standardUserDefaults] setObject:@1.1 forKey:@"ver"];
     
     return YES;
 }

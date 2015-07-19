@@ -26,6 +26,7 @@
                 <outlet property="messageModalView" destination="iN0-l3-epB" id="GSr-8l-Ht6"/>
                 <outlet property="messagePlaceholderLabel" destination="FHc-OZ-KtI" id="2p3-Ct-I4B"/>
                 <outlet property="messageTextView" destination="7Hh-oV-wZJ" id="4Xq-cS-sEE"/>
+                <outlet property="referFriendButton" destination="EZw-uW-q9h" id="vm2-WK-7ML"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -147,7 +148,7 @@ bu fırsattan haberdar edebilirsiniz.</string>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Arkadaşınızın e-posta adresi" minimumFontSize="17" id="5aM-vC-G3D" customClass="HKTextField">
-                            <rect key="frame" x="8" y="128" width="263" height="39"/>
+                            <rect key="frame" x="14" y="128" width="263" height="39"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>

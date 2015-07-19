@@ -15,6 +15,8 @@
 #import <PFLinkedInUtils.h>
 #import "HKServer.h"
 #import <UIView+Position.h>
+#import "ProfileVC.h"
+
 
 @interface LeftMenuViewController () {
     
@@ -59,36 +61,42 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMessages) name:@"presentMessages" object:nil];
     
+    NSDictionary *personal  = [[NSUserDefaults standardUserDefaults] objectForKey:@"personal"];
+    nameLabel.text = personal[@"fullname"];
+    positionLabel.text = personal[@"headline"];
     
-
-    if (Server.userInfoDictionary) {
-        if ([Server.userInfoDictionary[@"pictureUrl"] length]) {
-            avatarImageView.layer.cornerRadius = avatarImageView.frameWidth / 2.0;
-            avatarImageView.clipsToBounds = YES;
-            [avatarImageView sd_setImageWithURL:[NSURL URLWithString:Server.userInfoDictionary[@"pictureUrl"]] placeholderImage:[UIImage imageNamed:@"avatar"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                
-            }];
-            
-        }
-        nameLabel.text = Server.userInfoDictionary[@"fullname"];
-    } else {
-        nameLabel.text = @"";
+    NSString *pictureUrl = [[NSUserDefaults standardUserDefaults] objectForKey:@"imageUrl"];
+    if (pictureUrl) {
+        [self updateAvatarWithUrl:pictureUrl];
     }
     
-        positionLabel.text = @"";
+    [Server callFunctionInBackground:@"info" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary * object, NSError *error) {
+        if (object) {
+            nameLabel.text = object[@"fullname"];
+            [self updateAvatarWithUrl:object[@"pictureUrl"]];
+            [[NSUserDefaults standardUserDefaults] setObject:object[@"pictureUrl"] forKey:@"imageUrl"];
+        }
+
+    }];
+
+    avatarImageView.layer.cornerRadius = avatarImageView.frameWidth / 2.0;
+    avatarImageView.clipsToBounds = YES;
+    
+    positionLabel.text = @"";
 
     [mainTableView reloadData];
     [self refreshCounters];
 }
 
-//-(UIStatusBarStyle)preferredStatusBarStyle {
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-//}
 
-
+- (void)updateAvatarWithUrl:(NSString *)urlString {
+    [avatarImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"avatar"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
+}
 
 - (void)getProfile {
-
+    
 }
 
 - (void)configureCounterForCell:(MenuCell *)cell  count:(NSInteger)count {
@@ -99,7 +107,24 @@
 
 
 - (IBAction)profileButtonPressed:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat: @"https://touch.www.linkedin.com/#you"]]];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat: @"https://touch.www.linkedin.com/#you"]]];
+    
+    
+    [Server callFunctionInBackground:@"profile" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary *receivedItems, NSError *error) {
+        if (receivedItems.count && !error) {
+            ProfileVC *profileVC = [self.storyboard instantiateViewControllerWithIdentifier:@"profile"];
+            profileVC.inputDictionary = receivedItems;
+            [self presentViewController:[[UINavigationController alloc] initWithRootViewController: profileVC] animated:YES completion:^{
+                
+            }];
+        } else {
+            
+        }
+        
+    }];
+    
+    
+    
 }
 
 - (void)presentCards {
@@ -170,7 +195,7 @@
 }
 
 - (void)refreshCounters {
-    [Server callFunctionInBackground:@"unreadOpportCount" withParameters:@{@"userId" : @"123"} block:^(NSDictionary *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"unreadOpportCount" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             firstalarNumber = receivedItems[@"count"];
             [self configureCounterForCell:firstalarCell count:firstalarNumber.integerValue];
@@ -182,7 +207,7 @@
         [mainTableView reloadData];
     }];
     
-    [Server callFunctionInBackground:@"unreadMsgCount" withParameters:@{@"userId" : @"123"} block:^(NSDictionary *receivedItems, NSError *error) {
+    [Server callFunctionInBackground:@"unreadMsgCount" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             messagesNumber = receivedItems[@"count"];
             Server.unreadCount = messagesNumber;
@@ -229,6 +254,12 @@
         [self configureCounterForCell:messageCell count:messagesNumber.integerValue];
     }
     return cell;
+}
+
+- (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController {
+    if (menuViewController) {
+        [self refreshCounters];
+    }
 }
 
 @end
