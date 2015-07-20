@@ -130,13 +130,10 @@
 
 - (void)checkForShowing {
     finishedImages ++;
-    NSLog(@"here");
-    if (finishedImages == 3) {
-
+    if (finishedImages == MIN(3, self.items.count)) {
             [spinner stopAnimating];
             NSLog(@"show");
             self.carousel.hidden = NO;
-
     }
 }
 

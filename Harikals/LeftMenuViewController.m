@@ -60,6 +60,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentApplications) name:@"presentApplications" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMessages) name:@"presentMessages" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAvatarPicked:) name:@"userAvatarPicked" object:nil];
+    
     
     NSDictionary *personal  = [[NSUserDefaults standardUserDefaults] objectForKey:@"personal"];
     nameLabel.text = personal[@"fullname"];
@@ -86,6 +88,13 @@
 
     [mainTableView reloadData];
     [self refreshCounters];
+}
+
+- (void)userAvatarPicked:(NSNotification *)notification {
+    UIImage *image = notification.object;
+    if (image) {
+        avatarImageView.image = image;
+    }
 }
 
 

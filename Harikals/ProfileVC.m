@@ -100,6 +100,10 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     
     __weak IBOutlet UILabel *educationCountLabel;
     
+    
+    __weak IBOutlet UIBarButtonItem *leftBarButtonItem;
+    __weak IBOutlet UIButton *closeButton;
+    
 }
 
 @end
@@ -182,6 +186,11 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     [textInputCell.spinner stopAnimating];
     
     
+    if (self.inputDictionary) {
+        [closeButton setTitle:@"Vazgeç" forState:UIControlStateNormal];
+        [closeButton addTarget:self action:@selector(closeWithoutSaving) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     [Server callFunctionInBackground:@"info" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary * object, NSError *error) {
         if (object) {
 
@@ -238,10 +247,10 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     [self setNeedsStatusBarAppearanceUpdate];
     if (self.inputDictionary) {
         [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0 / 255.0 green:50.0 / 255.0 blue:84.0 / 255.0 alpha:1.0]];
-        UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithTitle:@"Vazgeç" style:UIBarButtonItemStylePlain target:self action:@selector(closeWithoutSaving)];
-        self.navigationController.navigationItem.leftBarButtonItem = barItem;
+        
+        self.automaticallyAdjustsScrollViewInsets = NO;
     } else {
-    [self.navigationController setNavigationBarHidden:NO];
+        [self.navigationController setNavigationBarHidden:NO];
     }
 
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -467,7 +476,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
             if (!_inputDictionary) {
                 [self performSegueWithIdentifier:@"openMenu" sender:nil];
             } else {
-                
+                [self closeWithoutSaving];
             }
         } else {
             NSLog(@"%@", error);
@@ -585,6 +594,9 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     avatarImageView.clipsToBounds = YES;
     avatarImageView.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     avatarImage = [self formatedImage:avatarImageView.image];
+    if (avatarImage) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"userAvatarPicked" object:avatarImage];
+    }
     
     [self dismissViewControllerAnimated:YES completion:^{
         if (![[info objectForKey:@"UIImagePickerControllerOriginalImage"] isEqual:_inputAvatar]) {

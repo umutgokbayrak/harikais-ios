@@ -1189,6 +1189,7 @@ size kısaca anlatalım. </string>
                                 <rect key="frame" x="-23" y="-15" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -1213,6 +1214,7 @@ size kısaca anlatalım. </string>
                     <connections>
                         <outlet property="aradiLabel" destination="h83-IK-AI9" id="fSr-zM-LsV"/>
                         <outlet property="avatarImageView" destination="F4U-UF-htf" id="xlN-w9-BcZ"/>
+                        <outlet property="closeButton" destination="bQM-gk-Qf1" id="meo-io-r3A"/>
                         <outlet property="dropHeight1" destination="03i-z5-cLp" id="wwN-V8-eQ4"/>
                         <outlet property="dropHeight2" destination="Uya-jA-QEE" id="Z7B-AC-Hrm"/>
                         <outlet property="dropHeight3" destination="gnJ-iS-Gfw" id="ExV-qi-ij3"/>
@@ -1224,6 +1226,7 @@ size kısaca anlatalım. </string>
                         <outlet property="educationCountLabel" destination="xmx-7j-bAT" id="4mV-HS-Ezq"/>
                         <outlet property="firstTextField" destination="8Lq-oH-RTW" id="tgk-CN-ISi"/>
                         <outlet property="industryTextField" destination="WSC-OL-XYV" id="Mlw-8H-da5"/>
+                        <outlet property="leftBarButtonItem" destination="4Wv-eU-3pz" id="hoN-FF-2fL"/>
                         <outlet property="liButton" destination="4kO-Sm-rgG" id="cnU-j7-aMc"/>
                         <outlet property="liLabel" destination="991-5F-wid" id="kAk-cD-JyW"/>
                         <outlet property="mainScrollView" destination="rUC-O8-bNF" id="XP8-EP-M7i"/>
@@ -1876,7 +1879,7 @@ size kısaca anlatalım. </string>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
                                         <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-28"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="-11" maxX="-63" maxY="0.0"/>
-                                        <state key="normal" title="Favori Ekle" image="9DAEC6AE-0A43-436B-87D1-35752AE29890">
+                                        <state key="normal" title="Favori Ekle" image="34303598-165D-46AD-8CEC-0FF89F7E233B">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2003,13 +2006,13 @@ size kısaca anlatalım. </string>
                                             <action selector="profileButtonPressed:" destination="ld3-1S-QDT" eventType="touchUpInside" id="cwZ-pm-OSw"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Umut Gökbayrak" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eum-vY-Fig">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eum-vY-Fig">
                                         <rect key="frame" x="96" y="37" width="142" height="25"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                         <color key="textColor" red="0.21960784310000001" green="0.27058823529999998" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chief Technology Officer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWU-uX-NmL">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWU-uX-NmL">
                                         <rect key="frame" x="96" y="64" width="114" height="14"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                         <color key="textColor" red="0.21960784310000001" green="0.27058823529999998" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2051,7 +2054,7 @@ size kısaca anlatalım. </string>
                                                     <color key="textColor" red="0.2196078431372549" green="0.27058823529411763" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODp-Y9-eCh">
+                                                <view hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODp-Y9-eCh">
                                                     <rect key="frame" x="111" y="16" width="20" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfc-vV-hb2">
@@ -2146,7 +2149,7 @@ size kısaca anlatalım. </string>
                                                     <color key="textColor" red="0.21960784310000001" green="0.27058823529999998" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdr-Ce-Nwb">
+                                                <view hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdr-Ce-Nwb">
                                                     <rect key="frame" x="114" y="16" width="20" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hew-9K-43N">
@@ -3379,7 +3382,7 @@ yapmadınız. </string>
         </scene>
     </scenes>
     <resources>
-        <image name="9DAEC6AE-0A43-436B-87D1-35752AE29890" width="16" height="13">
+        <image name="34303598-165D-46AD-8CEC-0FF89F7E233B" width="16" height="13">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

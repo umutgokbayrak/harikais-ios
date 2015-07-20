@@ -60,7 +60,6 @@
     UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
     CGFloat animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
 
-    CGFloat delta = keyboardEndFrame.origin.y - keyboardStartFrame.origin.y;
     
     if ([self.view.window isKeyWindow]) {
         [self.view layoutIfNeeded];

@@ -152,10 +152,12 @@ static HKServer *sharedServer = nil;
     } else {
         [manager POST:finalString parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
             if (responseObject[@"result"]) {
-                if (responseObject[@"result"][@"result"] && [responseObject[@"result"][@"result"] integerValue] == 1) {
-                    [log log:[NSString stringWithFormat:@"Function: %@, error msg: %@", function, responseObject[@"result"][@"msg"]]];
+                if ([responseObject[@"result"] isKindOfClass:[NSDictionary class]] && responseObject[@"result"][@"result"] && [responseObject[@"result"][@"result"] isKindOfClass:[NSNumber class]]) {
+                    if ([responseObject[@"result"][@"result"] integerValue] > 0) {
+                        [log log:[NSString stringWithFormat:@"Function: %@, error msg: %@", function, responseObject[@"result"][@"msg"]]];
+                    }
                 }
-                    
+                
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (block) block(responseObject[@"result"], nil);
                     });

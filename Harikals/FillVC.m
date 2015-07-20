@@ -66,6 +66,7 @@
     isCurrentSwitch.on = NO;
 
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [isCurrentSwitch addTarget:self action:@selector(adjustForCurrent) forControlEvents:UIControlEventValueChanged];
     
     startPeriodField.delegate = self;

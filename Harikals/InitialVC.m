@@ -31,9 +31,7 @@
             Server.configDictionary = receivedItems;
             Server.linkedInHttpClient =
             [LIALinkedInHttpClient
-             clientForApplication:[LIALinkedInApplication applicationWithRedirectURL:receivedItems[@"redirect"][@"ios"]
-                                                                            clientId:receivedItems[@"linkedin"][@"clientId"] clientSecret:receivedItems[@"linkedin"][@"clientSecret"]
-                                                                               state:@"DCEEFWF45453sdffef424111234" grantedAccess:receivedItems[@"linkedin"][@"permissions"]]];
+             clientForApplication:[LIALinkedInApplication applicationWithRedirectURL:receivedItems[@"redirect"][@"ios"] clientId:receivedItems[@"linkedin"][@"clientId"] clientSecret:receivedItems[@"linkedin"][@"clientSecret"]                                                                               state:@"DCEEFWF45453sdffef424111234" grantedAccess:receivedItems[@"linkedin"][@"permissions"]]];
             
             
         } else {
