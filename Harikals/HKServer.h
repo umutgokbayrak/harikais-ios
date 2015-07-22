@@ -33,4 +33,6 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 
 - (void)showAlertWithText:(NSString *)text closeButton:(NSString *)closeButton;
 - (void)showFavouriteAlertWithTitle:(NSString *)title text:(NSString *)text;
+- (void)getProfileIDWithAccessToken:(NSString *)accessToken block:(PFStringResultBlock)block;
+
 @end

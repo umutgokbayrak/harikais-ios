@@ -56,7 +56,7 @@
 
 - (void)keyboardWillChageFrame:(NSNotification *)notification {
     CGRect keyboardEndFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect keyboardStartFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+
     UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
     CGFloat animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
 
@@ -70,8 +70,6 @@
     [UIView setAnimationCurve:animationCurve];
     
     [UIView animateWithDuration:animationDuration > 0 ? animationDuration : 0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-
-//        [self adjustForgotWithDelta:delta];
         
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
@@ -79,13 +77,6 @@
     
     
 }
-
-//- (void)adjustForgotWithDelta:(CGFloat)delta {
-//    if (greenForgot) {
-//        ((UIView *)greenForgot.subviews[1]).frameY = fabs(delta) > 100 && delta > 0 ? baseTopGreen : 30;
-//        ((UIView *)redForgot.subviews[1]).frameY = fabs(delta) > 100 && delta > 0 ? baseTopRed : 30;
-//    }
-//}
 
 
 - (void)textFieldDidChange:(UITextField *)field {
@@ -110,65 +101,7 @@
     AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ (ForgotVC *)appdelegate.forgotPassWindow.rootViewController switchToGreen];
     [appdelegate.forgotPassWindow makeKeyAndVisible];
-
-
-    
-//    if (!greenForgot) {
-//        [self loadModalViews];
-//        
-//        greenForgot.frame = [UIScreen mainScreen].bounds;
-//        greenForgot.holderView.frameY = baseTopGreen;
-// 
-//        [self.navigationController.view addSubview:greenForgot];
-//    }
-    
 }
-
-//- (void)showRedForgotView {
-//    redForgot.frame = [UIScreen mainScreen].bounds;
-//    redForgot.holderView.frameY = baseTopRed;
-//    
-//    [self.navigationController.view addSubview:redForgot];
-//}
-//
-//- (void)showDoneView {
-//    doneForgot.frame = [UIScreen mainScreen].bounds;
-//    [self.navigationController.view addSubview:doneForgot];
-//}
-//
-//- (void)sendForgot {
-//    [self.view endEditing:YES];
-//    [self hideModals];
-//}
-//
-//- (void)hideModals {
-//    [redForgot removeFromSuperview];
-//    [greenForgot removeFromSuperview];
-//    [doneForgot removeFromSuperview];
-//}
-//
-//- (void)loadModalViews {
-////    greenForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][1];
-////    redForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][0];
-////    doneForgot = [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil][2];
-//
-//    
-//    [[NSBundle mainBundle] loadNibNamed:@"ForgotView" owner:nil options:nil];
-//    
-//    for (HKTextField *view in @[greenField, redField]) {
-//        view.layer.borderWidth = 0.5;
-//        view.layer.borderColor = [UIColor colorWithRed:151.0 / 255.0 green:151.0 / 255.0 blue:151.0 / 255.0 alpha:1.0].CGColor;
-//    }
-//    
-//    [greenSend addTarget:self action:@selector(sendForgot) forControlEvents:UIControlEventTouchUpInside];
-//    [redSend addTarget:self action:@selector(sendForgot) forControlEvents:UIControlEventTouchUpInside];
-//        [doneButton addTarget:self action:@selector(hideModals) forControlEvents:UIControlEventTouchUpInside];
-//
-//    
-//    baseTopRed= redForgot.holderView.frameY;
-//    baseTopGreen= greenForgot.holderView.frameY;
-//}
-
 
 - (IBAction)loginPressed:(UIButton *)sender {
     

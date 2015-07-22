@@ -59,8 +59,13 @@ static HKServer *sharedServer = nil;
     alertVC.favouriteAlertHolder.hidden =YES;
     [alertVC.closeButton setTitle:closeButton forState:UIControlStateNormal];
     
+    
     [appdelegate.alertWindow makeKeyAndVisible];
 
+}
+
+- (void)registerForPush {
+    
 }
 
 - (void)showFavouriteAlertWithTitle:(NSString *)title text:(NSString *)text {
@@ -193,36 +198,33 @@ static HKServer *sharedServer = nil;
 
 - (void)getProfileIDWithAccessToken:(NSString *)accessToken block:(PFStringResultBlock)block {
     [(LIALinkedInHttpClient *)self.linkedInHttpClient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *profileID = nil;
-        NSString *profileURL = responseObject[@"siteStandardProfileRequest"][@"url"];
-        if (profileURL)
-        {
-            NSString *params = [[profileURL componentsSeparatedByString:@"?"] lastObject];
-            if (params)
-            {
-                for (NSString *param in [params componentsSeparatedByString:@"&"])
-                {
-                    NSArray *keyVal = [param componentsSeparatedByString:@"="];
-                    if (keyVal.count > 1)
-                    {
-                        if ([keyVal[0] isEqualToString:@"id"])
-                        {
-                            profileID = keyVal[1];
-                            break;
-                        }
-                    }
-                }
+//        NSString *profileID = nil;
+        NSString *profile = responseObject;
+//        if (profileURL)
+//        {
+//            NSString *params = [[profileURL componentsSeparatedByString:@"?"] lastObject];
+//            if (params)
+//            {
+//                for (NSString *param in [params componentsSeparatedByString:@"&"])
+//                {
+//                    NSArray *keyVal = [param componentsSeparatedByString:@"="];
+//                    if (keyVal.count > 1)
+//                    {
+//                        if ([keyVal[0] isEqualToString:@"id"])
+//                        {
+//                            profileID = keyVal[1];
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        if (profile) {
+            if (block) {
+                block(profile, nil);
             }
         }
-        if (profileID)
-        {
-            if (block)
-            {
-                block(profileID, nil);
-            }
-        }
-        else if (block)
-        {
+        else if (block) {
             //TODO:Remove NSLog
             NSLog(@"%@", @"LinkedIn Id Missing");
             block(nil, nil);

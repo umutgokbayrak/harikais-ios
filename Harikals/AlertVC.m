@@ -22,6 +22,11 @@
 
 - (IBAction)hideSelf:(id)sender {
     self.view.window.hidden = YES;
+    if ([_closeButton.titleLabel.text isEqualToString:@"OK"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"registerAppForNotifications" object:nil];
+        [_closeButton setTitle:@"Close" forState:UIControlStateNormal];
+    }
+    
 }
 
 @end

@@ -142,6 +142,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     edusArray = [NSMutableArray array];
     skillsArray = [NSMutableArray array];
     
+    [self configFetched];
     
     positionTableView.delegate = self;
     eduTableView.delegate = self;
@@ -166,6 +167,9 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEdu:) name:@"updateEdu" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCompany:) name:@"updateCompany" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configFetched) name:@"configFetched" object:nil];
+
     
     tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     tap.delegate = self;
@@ -200,6 +204,14 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         
     }];
     
+}
+
+- (void)configFetched {
+    if (Server.configDictionary) {
+        if (![Server.configDictionary[@"linkedin"][@"enabled"] isEqualToNumber:@1]) {
+            [self hideLIButton];
+        }
+    }
 }
 
 - (void)updateAvatarWithUrl:(NSString *)urlString {
@@ -304,19 +316,52 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     [self reloadDropMenu];
 }
 
-- (IBAction)connectLinkedIn:(id)sender {
+- (void)refreshTOkens {
     [(LIALinkedInHttpClient *)Server.linkedInHttpClient getAuthorizationCode:^(NSString *authorizationCode) {
         [(LIALinkedInHttpClient *)Server.linkedInHttpClient getAccessToken:authorizationCode success:^(NSDictionary *accessTokenDictionary) {
-
+            [[NSUserDefaults standardUserDefaults] setObject:accessTokenDictionary forKey:@"temporary"];
+            [Server getProfileIDWithAccessToken:accessTokenDictionary[@"access_token"] block:^(NSString *object, NSError *error) {
+                
+                if (!error && object) {
+                    [self processLIData:(NSDictionary *)object];
+                } else {
+                    
+                }
+            }];
+            
         } failure:^(NSError *accessTokenError) {
-
+            
         }];
     } cancel:^{
-
+        [self showAlertWithText:@"Arzu ederseniz bu ekranda profilinizi kendiniz de yarata-bilirsiniz"];
     } failure:^(NSError *authorizationCodeError) {
-
+        
     }];
+}
+
+- (IBAction)connectLinkedIn:(id)sender {
+
+    [Server getProfileIDWithAccessToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"temporary"][@"access_token"] block:^(NSString *object, NSError *error) {
+        if (!error && object) {
+            [self processLIData:(NSDictionary *)object];
+        } else {
+            [self refreshTOkens];
+        }
+    }];
+}
+
+- (void)processLIData:(NSDictionary *)responceDict {
+    firstTextField.text = [NSString stringWithFormat:@"%@ %@", responceDict[@"firstName"], responceDict[@"lastName"]];
+    thirdTextField.text = responceDict[@"headline"];
     
+    if (responceDict[@"industry"]) {
+        industryTextField.text = responceDict[@"industry"];
+    }
+
+    if (responceDict[@"location"] && responceDict[@"location"][@"name"]) {
+        neredeTextField.text = responceDict[@"location"][@"name"];
+    }
+
 }
 
 - (void)showAlertWithText:(NSString *)text {
@@ -479,6 +524,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
                 [self closeWithoutSaving];
             }
         } else {
+            [self showAlertWithText:error.description];
             NSLog(@"%@", error);
         }
     }];

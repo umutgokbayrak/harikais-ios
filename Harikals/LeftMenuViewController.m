@@ -53,6 +53,17 @@
         bottomLogo.hidden = YES;
     }
     
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"menuFirstShown"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"menuFirstShown"];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [Server showAlertWithText:@"Harika İş size iş fırsatlarını bildirim mesajları ile iletecektir. Bir sonraki ekranda sizden izin isteyeceğiz." closeButton:@"OK"];
+            
+        });
+    }
+    
+    
+    
     mainTableView.dataSource = self;
     mainTableView.delegate = self;
     

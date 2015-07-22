@@ -41,7 +41,31 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:@1.1 forKey:@"ver"];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerAppForNotifications) name:@"registerAppForNotifications" object:nil];
+    
     return YES;
+}
+
+-(void)registerAppForNotifications{
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    } else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    }
+    
+}
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    if (Server.userInfoDictionary) {
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        [currentInstallation setDeviceTokenFromData:deviceToken];
+        [currentInstallation setChannels: [NSArray arrayWithObjects:Server.userInfoDictionary[@"userId"], nil]];
+        
+        [currentInstallation saveInBackground];
+        
+    }
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
