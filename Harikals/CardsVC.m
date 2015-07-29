@@ -182,15 +182,16 @@
     applicationsButton.hidden = YES;
     self.carousel.hidden = YES;
     [Server callFunctionInBackground:@"jobs" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
+//    [Server callFunctionInBackground:@"test-data" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
+
         if (receivedItems.count) {
             [self.items removeAllObjects];
             [self.items addObjectsFromArray:receivedItems];
             
         } else {
-            //TODO:Remove NSLog
-            NSLog(@"JOBS ERROR %@", error);
+            [self carouselDidScroll:carousel];
         }
-
+        [spinner stopAnimating];
         [self updateUnreadCount];
         [carousel reloadData];
         emptyHolderView.hidden = NO;
@@ -413,6 +414,7 @@
 
 - (void)carouselDidScroll:(iCarousel *)_carousel {
     CGFloat alpha = self.items.count - _carousel.scrollOffset;
+    if (!self.items.count) alpha = 0;
     emptyHolderView.alpha = 1 - alpha;
     applicationsButton.alpha  = 1 - alpha;
     messagesButton.alpha = alpha;

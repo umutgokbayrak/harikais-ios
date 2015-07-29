@@ -17,7 +17,7 @@
 #import "AppDelegate.h"
 #import "AlertVC.h"
 
-#define BASE_SARVER_URL @"https://api.parse.com/1/functions/"
+#define BASE_SERVER_URL @"http://test.harikais.com:8080/"
 
 static HKServer *sharedServer = nil;
 
@@ -64,9 +64,7 @@ static HKServer *sharedServer = nil;
 
 }
 
-- (void)registerForPush {
-    
-}
+
 
 - (void)showFavouriteAlertWithTitle:(NSString *)title text:(NSString *)text {
     AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -140,7 +138,7 @@ static HKServer *sharedServer = nil;
 }
 
 - (void)callFunctionInBackground:(NSString *)function  withParameters:(NSDictionary *)parameters block:(CompletionBlock)block {
-    NSString *serverRequestString = BASE_SARVER_URL;
+    NSString *serverRequestString = BASE_SERVER_URL;
     NSString *finalString  = [NSString stringWithFormat:@"%@%@", serverRequestString, function];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     if ([function isEqualToString:@"autocompleteLocation"] ||
@@ -178,47 +176,29 @@ static HKServer *sharedServer = nil;
 - (void)serverUploadPicture:(UIImage *)picture userId:(NSString *)userId success:(void(^)(NSDictionary *responseObject))success failure:(void(^)(NSError *error))failure {
     UIImage *photo = picture;
     
-    NSString *finalString  = [NSString stringWithFormat:@"%@%@", BASE_SARVER_URL, @"uploadPhoto"];
+    NSString *finalString  = [NSString stringWithFormat:@"%@%@", BASE_SERVER_URL, @"uploadPhoto"];
     NSMutableURLRequest *request = [manager.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:finalString parameters:@{@"userId" : userId} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSData *imageData = UIImageJPEGRepresentation(photo, 1.0);
         [formData appendPartWithFileData:imageData name:@"file" fileName:@"file" mimeType:@"image/jpeg"];
     } error:nil];
 
-    
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+
+    
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         success(responseObject);
-        NSLog(@"upload ok");
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [log log:[NSString stringWithFormat:@"Function: uploadPhoto, error description: %@", error.description]];
+        
         failure(error);
-        NSLog(@"%@", error);
     }];
     [operation start];
 }
 
 - (void)getProfileIDWithAccessToken:(NSString *)accessToken block:(PFStringResultBlock)block {
-    [(LIALinkedInHttpClient *)self.linkedInHttpClient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSString *profileID = nil;
+    [(LIALinkedInHttpClient *)self.linkedInHttpClient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~:(id,num-connections,picture-url,firstName,lastName,headline)?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *profile = responseObject;
-//        if (profileURL)
-//        {
-//            NSString *params = [[profileURL componentsSeparatedByString:@"?"] lastObject];
-//            if (params)
-//            {
-//                for (NSString *param in [params componentsSeparatedByString:@"&"])
-//                {
-//                    NSArray *keyVal = [param componentsSeparatedByString:@"="];
-//                    if (keyVal.count > 1)
-//                    {
-//                        if ([keyVal[0] isEqualToString:@"id"])
-//                        {
-//                            profileID = keyVal[1];
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
-//        }
         if (profile) {
             if (block) {
                 block(profile, nil);
@@ -227,6 +207,27 @@ static HKServer *sharedServer = nil;
         else if (block) {
             //TODO:Remove NSLog
             NSLog(@"%@", @"LinkedIn Id Missing");
+            block(nil, nil);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block)
+        {
+            block(nil, error);
+        }
+    }];
+}
+
+
+- (void)getAvaURL:(NSString *)userID token:(NSString *)accessToken block:(PFStringResultBlock)block {
+    [(LIALinkedInHttpClient *)self.linkedInHttpClient GET:[NSString stringWithFormat:@"http://api.linkedin.com/v1/people/~:(picture-url)?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *profile = responseObject;
+        if (profile) {
+            if (block) {
+                block(profile, nil);
+            }
+        } else if (block) {
+            //TODO:Remove NSLog
+            NSLog(@"%@", @"Ava url Missing");
             block(nil, nil);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

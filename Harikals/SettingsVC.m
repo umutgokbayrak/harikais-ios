@@ -8,14 +8,13 @@
 
 #import "SettingsVC.h"
 #import "DropdownModel.h"
-#import "DropdownModel.h"
 #import "HKServer.h"
 #import <Parse.h>
 #import "SettingsCell.h"
 #import <UIView+Position.h>
 
 
-@interface SettingsVC ()  <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>{
+@interface SettingsVC ()  <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate,DropMenuDelegate>{
     
     __weak IBOutlet UIActivityIndicatorView *spinner;
     __weak IBOutlet UIView *lastHolder;
@@ -79,6 +78,8 @@
     dropdownTableView.dataSource = dropdownModel;
     dropdownModel.dataArray = dropMenuOptions;
     
+    dropdownModel.delegate = self;
+    
     middleHolder.layer.cornerRadius =  3;
     topHolder.layer.cornerRadius =  3;
     lastHolder.layer.cornerRadius =  3;
@@ -121,6 +122,10 @@
         }
         
     }];
+}
+
+- (void)didSelectOption:(NSString *)optionString optionsArray:(NSMutableArray *)array {
+    searchTextField.text = optionString;
 }
 
 - (void)reloadDropMenu {
@@ -218,7 +223,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if ([textField isEqual:priceTextField]) {
-        [Server callFunctionInBackground:@"updateSalary" withParameters:@{@"salary" : textField.text, @"userID" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
+        [Server callFunctionInBackground:@"updateSalary" withParameters:@{@"salary" : textField.text, @"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
             if (receivedItems) {
                 NSLog(@"salary %@", receivedItems);
                 
@@ -265,7 +270,7 @@
         if (selectedIndexPath) {
             NSString *location = dropMenuOptions[selectedIndexPath.row];
             
-            [Server callFunctionInBackground:@"addNewLocation" withParameters:@{@"location" : location, @"userID" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
+            [Server callFunctionInBackground:@"addNewLocation" withParameters:@{@"location" : location, @"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
                 if (receivedItems) {
                     [selectedLocations addObject:location];
                     [mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:selectedLocations.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -343,7 +348,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSString *location = selectedLocations[indexPath.row];
         [self removeRowAtIndexPath:indexPath];
-        [Server callFunctionInBackground:@"deleteLocation" withParameters:@{@"location" : location, @"userID" : @"123"} block:^(NSArray *receivedItems, NSError *error) {
+        [Server callFunctionInBackground:@"deleteLocation" withParameters:@{@"location" : location, @"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
             if (receivedItems) {
 
                 

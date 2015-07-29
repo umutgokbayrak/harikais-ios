@@ -244,7 +244,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         industryTextField.text = self.inputDictionary[@"industry"];
         neredeTextField.text = self.inputDictionary[@"location"];
         thirdTextField.text = self.inputDictionary[@"headline"];
-        if (self.inputDictionary[@"functionality"]) {
+        if (self.inputDictionary[@"functionality"] && [self.inputDictionary[@"functionality"] length]) {
             aradiLabel.text = self.inputDictionary[@"functionality"];
         }
     }
@@ -309,7 +309,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     } else if (array == dropOptions3) {
         [skillsArray addObject:optionString];
         [skilsTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-        industryTextField.text = @"";
+        textInputCell.inTextField.text = @"";
     }
     [self.view endEditing:YES];
     [self adjustHightsAnimated:YES];
@@ -362,6 +362,16 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         neredeTextField.text = responceDict[@"location"][@"name"];
     }
 
+    if (responceDict[@"pictureUrl"] && [responceDict[@"pictureUrl"] length]) {
+        NSString *imagePath = responceDict[@"pictureUrl"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:imagePath forKey:@"imageUrl"];
+        
+        [avatarImageView sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"avatar"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            avatarImage = image;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"userAvatarPicked" object:avatarImage];
+        }];
+    }
 }
 
 - (void)showAlertWithText:(NSString *)text {
@@ -518,10 +528,15 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     [Server callFunctionInBackground:@"saveCv" withParameters:params block:^(NSDictionary *receivedItems, NSError *error) {
         [[NSUserDefaults standardUserDefaults] setObject:@{@"fullname" : params[@"fullname"], @"headline" : params[@"headline"]} forKey:@"personal"];
         if (receivedItems) {
-            if (!_inputDictionary) {
-                [self performSegueWithIdentifier:@"openMenu" sender:nil];
+            if ([receivedItems[@"result"] integerValue] == 0) {
+                
+                if (!_inputDictionary) {
+                    [self performSegueWithIdentifier:@"openMenu" sender:nil];
+                } else {
+                    [self closeWithoutSaving];
+                }
             } else {
-                [self closeWithoutSaving];
+                [self showAlertWithText:receivedItems[@"msg"]];
             }
         } else {
             [self showAlertWithText:error.description];
@@ -627,8 +642,13 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     
-
-    picker.sourceType = isCamera ?UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    if (isCamera) {
+        if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            return;
+        }
+    }
+    
+    picker.sourceType = isCamera ? UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     
     [self presentViewController:picker animated:YES completion:^{
         
@@ -648,7 +668,8 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         if (![[info objectForKey:@"UIImagePickerControllerOriginalImage"] isEqual:_inputAvatar]) {
             if (avatarImage) {
                 [Server serverUploadPicture:avatarImage userId:Server.userInfoDictionary[@"userId"] success:^(NSDictionary *responseObject) {
-                    
+                    NSString *respString = [[NSString alloc] initWithData:(NSData *)responseObject encoding:NSUTF8StringEncoding];
+                    NSLog(@"Upload result: %@" ,respString);
                 } failure:^(NSError *error) {
                     
                 }];

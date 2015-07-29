@@ -73,6 +73,8 @@
                 } else {
                     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userData"];
                     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"temporary"];
+                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"imageUrl"];
+                    
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     [self goToLoginView];
                 }
