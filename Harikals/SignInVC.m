@@ -104,7 +104,11 @@
 }
 
 - (IBAction)loginPressed:(UIButton *)sender {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userData"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"temporary"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"imageUrl"];
     
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     if (![emailTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length) {
         [self showAlertWithText:@"Lütfen eposta adresinizi giriniz"];
@@ -196,6 +200,13 @@
 }
 
 - (IBAction)signUpPressed:(UIButton *)sender {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userData"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"temporary"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"imageUrl"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
     if (![emailTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length) {
         [self showAlertWithText:@"Lütfen eposta adresinizi giriniz"];
         return;
