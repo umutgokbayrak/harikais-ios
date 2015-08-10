@@ -540,8 +540,8 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     if (!industryTextField.text.length) {[self showErrorAlert:@"Lütfen kendinize çalışmak istediğiniz bir endüstri seçer misiniz?"]; return;}
 
     
-    if (!positionsArray.count) {[self showErrorAlert:@"Lütfen mesleki deneyiminizi bizimle paylaşır mısınız?"]; return;}
-    if (!edusArray.count) {[self showErrorAlert:@"Lütfen geçmiş eğitim bilgilerinizi bizimle paylaşır mısınız?"]; return;}
+    if (!positionsArray.count) {[self showErrorAlert:@"Lütfen geçmiş eğitim bilgilerinizi bizimle paylaşır mısınız?"]; return;}
+    if (!edusArray.count) {[self showErrorAlert:@"Lütfen mesleki deneyiminizi bizimle paylaşır mısınız?"]; return;}
     
     if (skillsArray.count < 3) {[self showErrorAlert:@"Lütfen uzman olduğunuzu düşündüğünüz becerilerden en az 3 tane bizimle pay- laşır mısınız?"]; return;}
     
