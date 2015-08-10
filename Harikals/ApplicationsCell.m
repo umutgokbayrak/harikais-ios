@@ -8,7 +8,7 @@
 
 #import "ApplicationsCell.h"
 #import <UIImageView+WebCache.h>
-
+#import <UIView+Position.h>
 
 @interface ApplicationsCell () {
     
@@ -28,6 +28,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    avatarImageView.layer.cornerRadius = avatarImageView.frameWidth / 2.0;
+    avatarImageView.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -44,12 +46,10 @@
 }
 
 - (void)loadAvatarWithLink:(NSString *)link {
-    if (!avaImage) {
         [avatarImageView sd_setImageWithURL:[NSURL URLWithString:link] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             avaImage = image;
         }];
-    }
 }
 
 @end

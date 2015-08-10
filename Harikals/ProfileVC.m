@@ -15,6 +15,7 @@
 #import "FillVC.h"
 #import <UIImageView+WebCache.h>
 
+#import "AppDelegate.h"
 #import <IOSLinkedInAPI/LIALinkedInApplication.h>
 #import <LIALinkedInHttpClient.h>
 
@@ -246,6 +247,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         thirdTextField.text = self.inputDictionary[@"headline"];
         if (self.inputDictionary[@"functionality"] && [self.inputDictionary[@"functionality"] length]) {
             aradiLabel.text = self.inputDictionary[@"functionality"];
+            aradiLabel.textColor = [UIColor blackColor];
         }
     }
 }
@@ -261,6 +263,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0 / 255.0 green:50.0 / 255.0 blue:84.0 / 255.0 alpha:1.0]];
         
         self.automaticallyAdjustsScrollViewInsets = NO;
+        [self.navigationController setNavigationBarHidden:NO];
     } else {
         [self.navigationController setNavigationBarHidden:NO];
     }
@@ -317,6 +320,9 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 }
 
 - (void)refreshTOkens {
+//    [((AppDelegate *)[UIApplication sharedApplication].delegate).window makeKeyWindow];
+    [Server.linkedInHttpClient setValue:self.navigationController forKey:@"presentingViewController"];
+    
     [(LIALinkedInHttpClient *)Server.linkedInHttpClient getAuthorizationCode:^(NSString *authorizationCode) {
         [(LIALinkedInHttpClient *)Server.linkedInHttpClient getAccessToken:authorizationCode success:^(NSDictionary *accessTokenDictionary) {
             [[NSUserDefaults standardUserDefaults] setObject:accessTokenDictionary forKey:@"temporary"];
@@ -332,6 +338,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         } failure:^(NSError *accessTokenError) {
             
         }];
+    
     } cancel:^{
         [self showAlertWithText:@"Arzu ederseniz bu ekranda profilinizi kendiniz de yarata-bilirsiniz"];
     } failure:^(NSError *authorizationCodeError) {
@@ -371,6 +378,35 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
             avatarImage = image;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"userAvatarPicked" object:avatarImage];
         }];
+    }
+    
+    if (responceDict[@"positions"]) {
+        NSArray *liPositions = responceDict[@"positions"][@"values"];
+        if (liPositions) {
+            for (NSDictionary *dict in liPositions) {
+                if ([dict[@"isCurrent"] integerValue] > 0) {
+                    {
+                        NSDictionary *validPosition = @{@"name" : dict[@"company"][@"name"],
+                                                        @"title": dict[@"title"],
+                                                        @"isCurrent" : @1,
+                                                        @"dateExit" : @"",
+                                                        @"dateEnter" : [NSString stringWithFormat:@"%@-%@", dict[@"startDate"][@"year"],dict[@"startDate"][@"month"]]
+                                                        };
+                        BOOL contains = NO;
+                        for (NSDictionary *savedPosition in positionsArray) {
+                            if ([savedPosition isEqualToDictionary:validPosition]) {
+                                contains = YES;
+                                break;
+                            }
+                        }
+                        if (!contains) {
+                            [positionsArray addObject:validPosition];
+                        }
+                    }
+                }
+            }
+        }
+        [self reloadTables];
     }
 }
 

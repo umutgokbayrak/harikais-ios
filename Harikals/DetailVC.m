@@ -179,16 +179,19 @@
     barApplyButton.userInteractionEnabled = NO;
     [barApplyButton setTitle:@"Başvuruldu" forState:UIControlStateNormal];
     [barApplyButton setImageEdgeInsets:UIEdgeInsetsMake(-11, 0, 0, -63)];
+    isApplied = YES;
 }
 
 - (IBAction)applyToJob:(UIButton *)sender {
     sender.userInteractionEnabled = NO;
     NSString *message = messageTextView.text;
     [self hideModals];
-    [Server callFunctionInBackground:@"applyToJob" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"id"], @"message" : message} block:^(NSArray *receivedItems, NSError *error) {
+    NSDictionary *params  = @{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"id"], @"message" : message};
+    [Server callFunctionInBackground:@"applyToJob" withParameters:params block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems) {
             [self setApplicationButtonDisabled];
             [Server showFavouriteAlertWithTitle:@"İşlem Tamam" text:@"Pozisyon için başvurunuz insan kaynaklarına iletilmiştir. Başvurunuzun durumunu ana menüden erişilen Başvu- rular adımında izleyebilirsiniz."];
+            [self updateFlags];
         } else {
             sender.userInteractionEnabled = YES;
             //TODO:Remove NSLog
@@ -203,8 +206,8 @@
     NSString *message = emailTextField.text;
     if ([self validateEmail:message]) {
         [self hideModals];
-        
-        [Server callFunctionInBackground:@"referFriend" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"id"], @"friend" : message} block:^(NSArray *receivedItems, NSError *error) {
+        NSDictionary *params = @{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"id"], @"friend" : message};
+        [Server callFunctionInBackground:@"referFriend" withParameters:params block:^(NSArray *receivedItems, NSError *error) {
             if (receivedItems) {
 
                 [Server showFavouriteAlertWithTitle:@"İşlem Başarılı" text:@"Arkadaşınız bu fırsattan haberdar edildi. Desteğiniz için teşekkür ederiz"];
@@ -227,6 +230,10 @@
     return [emailTest evaluateWithObject:tempMail];
 }
 
+- (void)updateFlags {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateFlags" object:@{@"favorited" : @(isFavourite), @"applied" : @(isApplied)} userInfo:@{@"id" : data[@"id"]}];
+}
+
 - (void)markAsFavourite {
     isFavourite = !isFavourite;
     [barFavouriteButton setImage:isFavourite ? loveImageSelected : loveImage forState:UIControlStateNormal];
@@ -240,7 +247,7 @@
                                                                                if (receivedItems) {
                                                                                    [Server showFavouriteAlertWithTitle:@"İşlem tamam" text:@"Fırsat favorileriniz arasına eklenmiştir."];
                                                                                    
-                                                                                   
+                                                                                   [self updateFlags];
                                                                                } else {
                                                                                    //TODO:Remove NSLog
                                                                                    NSLog(@"%@", error);
@@ -252,6 +259,7 @@
             if (receivedItems) {
                 //TODO:Remove NSLog
                 NSLog(@"%@", receivedItems);
+                [self updateFlags];
             } else {
                 //TODO:Remove NSLog
                 NSLog(@"%@", error);

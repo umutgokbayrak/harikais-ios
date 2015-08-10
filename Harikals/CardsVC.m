@@ -24,7 +24,7 @@
     __weak DetailVC *presentedDetail;
     
     __weak IBOutlet UIImageView *downloadIcon;
-    
+    NSInteger totalImagesCount;
     __weak IBOutlet UIButton *applicationsButton;
     
     __weak IBOutlet UIView *counterView;
@@ -91,6 +91,8 @@
     UIImageView *roundedView = emptyHolderView.subviews[0];
     roundedView.image = [roundedView.image resizableImageWithCapInsets:UIEdgeInsetsMake(40, 40, 40, 40)];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFlags:) name:@"updateFlags" object:nil];
+    
     
     [applicationsButton addTarget:self action:@selector(openApplications) forControlEvents:UIControlEventTouchUpInside];
     counterView.hidden = YES;
@@ -128,12 +130,29 @@
     [self loadJobs];
 }
 
+- (void)updateFlags:(NSNotification *)notification {
+    NSDictionary *flags = notification.object;
+    NSString *jobId = notification.userInfo[@"id"];
+    NSMutableArray *mutableItems = [self.items mutableCopy];
+    for (NSInteger i = 0; i < mutableItems.count; i++) {
+        NSMutableDictionary *dict = [mutableItems[i] mutableCopy];
+        if ([dict[@"id"] isEqualToString:jobId]) {
+            dict[@"flags"] = flags;
+            [mutableItems replaceObjectAtIndex:i withObject:dict];
+            self.items = mutableItems;
+            break;
+        }
+    }
+    
+}
+
 - (void)checkForShowing {
     finishedImages ++;
-    if (finishedImages == MIN(3, self.items.count)) {
-            [spinner stopAnimating];
-            NSLog(@"show");
-            self.carousel.hidden = NO;
+    if (finishedImages == MIN(3, totalImagesCount)) {
+        [spinner stopAnimating];
+        NSLog(@"show");
+        self.carousel.hidden = NO;
+        finishedImages = 0;
     }
 }
 
@@ -182,20 +201,29 @@
     applicationsButton.hidden = YES;
     self.carousel.hidden = YES;
     [Server callFunctionInBackground:@"jobs" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
-//    [Server callFunctionInBackground:@"test-data" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
-
         if (receivedItems.count) {
             [self.items removeAllObjects];
             [self.items addObjectsFromArray:receivedItems];
             
+            totalImagesCount = 0;
+                for (NSDictionary *dict in self.items) {
+                    if ([dict[@"company"][@"photoUrl"] length]) {
+                        totalImagesCount ++;
+                    }
+                }
+        
+            
         } else {
             [self carouselDidScroll:carousel];
         }
-        [spinner stopAnimating];
-        [self updateUnreadCount];
-        [carousel reloadData];
-        emptyHolderView.hidden = NO;
-        applicationsButton.hidden = NO;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [spinner stopAnimating];
+            [self updateUnreadCount];
+            [carousel reloadData];
+            emptyHolderView.hidden = NO;
+            applicationsButton.hidden = NO;
+        });
+
     }];
 }
 

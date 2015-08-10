@@ -53,10 +53,11 @@ static HKServer *sharedServer = nil;
 - (void)showAlertWithText:(NSString *)text closeButton:(NSString *)closeButton {
     AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     AlertVC *alertVC = (AlertVC *)appdelegate.alertWindow.rootViewController;
-    alertVC.mainLabel.text = text;
+    alertVC.view.hidden = NO;
     alertVC.webHolder.hidden = YES;
     alertVC.mainAlertHolder.hidden = NO;
     alertVC.favouriteAlertHolder.hidden =YES;
+    alertVC.mainLabel.text = text;
     [alertVC.closeButton setTitle:closeButton forState:UIControlStateNormal];
     
     
@@ -197,7 +198,7 @@ static HKServer *sharedServer = nil;
 }
 
 - (void)getProfileIDWithAccessToken:(NSString *)accessToken block:(PFStringResultBlock)block {
-    [(LIALinkedInHttpClient *)self.linkedInHttpClient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~:(id,num-connections,picture-url,firstName,lastName,headline)?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [(LIALinkedInHttpClient *)self.linkedInHttpClient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline,location,industry,num-connections-capped,num-connections,picture-url,specialties,positions,public-profile-url,summary)?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *profile = responseObject;
         if (profile) {
             if (block) {

@@ -58,9 +58,10 @@
     mainScrollView.hidden = YES;
     [Server callFunctionInBackground:@"settings" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary *receivedItems, NSError *error) {
         if (receivedItems) {
+            
             [selectedLocations addObjectsFromArray:receivedItems[@"locations"]];
-            notificationsSwitch.on = [Server.userInfoDictionary[@"notifications"] integerValue];
-            priceTextField.text = [NSString stringWithFormat:@"%@",  Server.userInfoDictionary[@"minimumSalary"] ? Server.userInfoDictionary[@"minimumSalary"] : @""];
+            notificationsSwitch.on = [receivedItems[@"notifications"] integerValue];
+            priceTextField.text = [NSString stringWithFormat:@"%@",  receivedItems[@"salary"] ? receivedItems[@"salary"] : @""];
             if ([priceTextField.text isEqualToString:@"0"]) {
                 priceTextField.text = @"";
             }

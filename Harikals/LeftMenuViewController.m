@@ -88,6 +88,7 @@
             nameLabel.text = object[@"fullname"];
             [self updateAvatarWithUrl:object[@"pictureUrl"]];
             [[NSUserDefaults standardUserDefaults] setObject:object[@"pictureUrl"] forKey:@"imageUrl"];
+            [[NSUserDefaults standardUserDefaults] setObject:object forKey:@"personal"];
         }
 
     }];

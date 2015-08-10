@@ -56,6 +56,7 @@
     }
     
 }
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     if (Server.userInfoDictionary) {
         PFInstallation *currentInstallation = [PFInstallation currentInstallation];
@@ -65,6 +66,10 @@
         [currentInstallation saveInBackground];
         
     }
+    
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     
 }
 

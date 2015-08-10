@@ -46,7 +46,7 @@
     [self.view addSubview:spinner];
     
     mainTableView.delegate = self;
-    
+
     
     emptyDescriptionLabel.text = @"Başvurularınızla ilgili sormak\nistediğiniz bir konu olduğunda\nbizimle iletişime geçiniz.";
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:emptyDescriptionLabel.text];
@@ -71,7 +71,14 @@
     [firstalaButton addTarget:self action:@selector(presentCards) forControlEvents:UIControlEventTouchUpInside];
     [self.view bringSubviewToFront:firstalaButton];
 
-    
+    NSString *pictureUrl = [[NSUserDefaults standardUserDefaults] objectForKey:@"imageUrl"];
+    if (pictureUrl) {
+        [self updateAvatarWithUrl:pictureUrl];
+    }
+}
+
+- (void)updateAvatarWithUrl:(NSString *)urlString {
+    [profileCell loadAvatarWithLink:urlString];
 }
 
 - (void)presentCards {

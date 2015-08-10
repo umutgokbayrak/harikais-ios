@@ -42,13 +42,15 @@
     }];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
-    NSDictionary *userData =  [[NSUserDefaults standardUserDefaults] objectForKey:@"userData"];
+    NSMutableDictionary *userData =  [[[NSUserDefaults standardUserDefaults] objectForKey:@"userData"] mutableCopy];
     
     if (userData) {
         [Server callFunctionInBackground:@"autoLogin" withParameters:@{@"email" : userData[@"email"] , @"userId" : userData[@"userId"], @"authHash" : userData[@"authHash"]} block:^(NSDictionary *receivedItems, NSError *error) {
             if (receivedItems) {
                 if ([receivedItems[@"result"] integerValue] == 0) {
                     
+                    [userData setObject:receivedItems[@"cvComplete"] forKey:@"cvComplete"];
+                    [[NSUserDefaults standardUserDefaults] setObject:userData forKey:@"userData"];
                     {{
                         if ( [[NSUserDefaults standardUserDefaults] objectForKey:@"ShownWelcome"]) {
                             if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ShownIntro"]) {

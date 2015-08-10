@@ -36,6 +36,7 @@
 
 - (void)configureViewWithJob:(NSDictionary *)jobDictionary {
     if (job != jobDictionary) {
+        job = jobDictionary;
         self.hidden = YES;
         NSDictionary *jobInfo = jobDictionary[@"job"];
         NSDictionary *companyInfo = jobDictionary[@"company"];
@@ -65,7 +66,7 @@
             }
 
         }];
-        job = jobDictionary;
+
     }
 
 }
