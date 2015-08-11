@@ -189,7 +189,7 @@
     if ([text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length) {
         
         NSDictionary *params = @{@"userId" : Server.userInfoDictionary[@"userId"],
-                                 @"jobId" : dataDictionary[@"idf"],
+                                 @"jobId" : dataDictionary[@"id"],
                                  @"msg" : text};
         [Server callFunctionInBackground:@"sendMessage"
                           withParameters:params

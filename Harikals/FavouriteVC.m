@@ -11,7 +11,7 @@
 #import <Parse.h>
 #import "ChatVC.h"
 #import "HKServer.h"
-
+#import "DetailVC.h"
 
 @interface FavouriteVC () <UITableViewDelegate, UITableViewDataSource> {
     
@@ -224,7 +224,23 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_isMessageVC) {
         [self performSegueWithIdentifier:@"openChat" sender:dataArray[indexPath.row]];
+    } else {
+        [self openDetailVCWithIndex:indexPath.row];
     }
+}
+
+- (void)openDetailVCWithIndex:(NSInteger)index {
+    [Server callFunctionInBackground:@"getJobById" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : dataArray[index][@"jobId"]} block:^(NSArray *receivedItems, NSError *error) {
+        if (receivedItems.count) {
+            [self performSegueWithIdentifier:@"detail" sender:receivedItems];
+        } else {
+
+        }
+        
+    }];
+    
+    
+//
 }
 
 
@@ -232,6 +248,11 @@
     if ([segue.identifier isEqualToString:@"openChat"]) {
         ChatVC *chatVC = segue.destinationViewController;
         chatVC.dataDictionary = sender;
+    } else if ([segue.identifier isEqualToString:@"detail"]) {
+        DetailVC *detailVC = ((UINavigationController *)segue.destinationViewController).viewControllers[0];
+//        presentedDetail = detailVC;
+//        [presentedDetail updateImage:photoDictionary[sender[@"id"]]];
+        [detailVC setData:sender];
     }
 }
 
