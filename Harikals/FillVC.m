@@ -74,12 +74,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [self loadInputViews];
     
-            if (self.view.tag == 0 ) {
-                baseHight = 315;
-                secondField.inputView = eduPickerView;
-            } else {
+//            if (self.view.tag == 0 ) {
+//                baseHight = 315;
+//                secondField.inputView = eduPickerView;
+//            } else {
                 baseHight = 264;
-            }
+//            }
     
     [self fillFields];
 }
@@ -89,7 +89,7 @@
         if (self.view.tag == 0 ) {
             
             firstField.text = self.receivedData[@"school"];
-            secondField.text = self.receivedData[@"degree"];
+//            secondField.text = self.receivedData[@"degree"];
             thirdField.text = self.receivedData[@"fieldOfStudy"];
 
             
@@ -142,7 +142,7 @@
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (pickerView == eduPickerView) {
-        secondField.text = eduOptions[row];
+//        secondField.text = eduOptions[row];
     }
 }
 
@@ -171,9 +171,8 @@
 - (IBAction)save:(id)sender {
     
     if (self.view.tag == 1) {
-        
         if ([self lengthOfTrimmedString:firstField.text] < 3) {
-            [self showErrorAlert:@"Lütfen eklemek istediğiniz okulun adını paylaşır mısınız?"];
+            [self showErrorAlert:@"Lütfen bu şirkette çalışırken taşıdığınız ünvanı paylaşır mısınız?"];
             return;
         }
         
@@ -184,14 +183,14 @@
     } else {
         
         if ([self lengthOfTrimmedString:firstField.text] < 3) {
-            [self showErrorAlert:@"Lütfen bu şirkette çalışırken taşıdığınız ünvanı paylaşır mısınız?"];
+            [self showErrorAlert:@"Lütfen eklemek istediğiniz okulun adını paylaşır mısınız?"];
             return;
         }
         
-        if ([self lengthOfTrimmedString:secondField.text] == 0 || ![eduOptions containsObject:secondField.text]) {
-            [self showErrorAlert:@"Bu okulda hangi dereceyi okudunuz/okuyor-sunuz?"];
-            return;
-        }
+//        if ([self lengthOfTrimmedString:secondField.text] == 0 || ![eduOptions containsObject:secondField.text]) {
+//            [self showErrorAlert:@"Bu okulda hangi dereceyi okudunuz/okuyor-sunuz?"];
+//            return;
+//        }
         
         if ([self lengthOfTrimmedString:thirdField.text] < 3) {
             [self showErrorAlert:@"Lütfen okulun bölümünü paylaşır mısınız?"];
@@ -218,9 +217,8 @@
             [self updateWithDataDict:data];
         }
     } else {
-        if (firstField.text.length && secondField.text.length && thirdField.text.length && startPeriodField.text.length) {
+        if (firstField.text.length && thirdField.text.length && startPeriodField.text.length) {
             NSMutableDictionary *data = [@{@"school" : firstField.text,
-                                   @"degree" : secondField.text,
                                    @"fieldOfStudy" : thirdField.text,
                                    @"isCurrent" : isCurrentSwitch.on ? @"true" : @"false",
                                    @"dateEnter" : [dateFormatter2 stringFromDate:date1]

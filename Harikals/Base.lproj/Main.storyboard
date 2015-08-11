@@ -570,8 +570,8 @@ size kısaca anlatalım. </string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rUC-O8-bNF">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1436"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x44-Uz-RlW">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1403"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x44-Uz-RlW">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1529"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4kO-Sm-rgG">
                                                 <rect key="frame" x="23" y="18" width="275" height="50"/>
@@ -593,13 +593,13 @@ size kısaca anlatalım. </string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HAKKINIZDA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6s-mY-AbB">
-                                                <rect key="frame" x="11" y="112" width="88" height="20"/>
+                                                <rect key="frame" x="11" y="112" width="87.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" red="0.32941176470588235" green="0.41176470588235292" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SA7-wZ-xUp" userLabel="first container">
-                                                <rect key="frame" x="8" y="135" width="305" height="233"/>
+                                                <rect key="frame" x="8" y="134.5" width="305" height="233"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="F4U-UF-htf">
                                                         <rect key="frame" x="126" y="12" width="52" height="52"/>
@@ -719,16 +719,16 @@ size kısaca anlatalım. </string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARADIĞINIZ FONKSİYON" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJ9-J2-tDz">
-                                                <rect key="frame" x="11" y="393" width="169" height="20"/>
+                                                <rect key="frame" x="11" y="392.5" width="169" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HBw-do-YGw">
-                                                <rect key="frame" x="8" y="415" width="305" height="52"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HBw-do-YGw">
+                                                <rect key="frame" x="8" y="414" width="305" height="52"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bir fonksiyon seçiniz" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h83-IK-AI9">
-                                                        <rect key="frame" x="18" y="15" width="157" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bir fonksiyon seçiniz" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h83-IK-AI9">
+                                                        <rect key="frame" x="18" y="16" width="138" height="19.5"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                                         <color key="textColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -736,8 +736,8 @@ size kısaca anlatalım. </string>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow-Right-Icon" translatesAutoresizingMaskIntoConstraints="NO" id="TA3-wi-fcf">
                                                         <rect key="frame" x="289" y="19" width="8" height="14"/>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GmZ-iw-p8L">
-                                                        <rect key="frame" x="0.0" y="0.0" width="305" height="53"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GmZ-iw-p8L">
+                                                        <rect key="frame" x="0.0" y="0.0" width="305" height="52"/>
                                                         <state key="normal">
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
@@ -764,14 +764,14 @@ size kısaca anlatalım. </string>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ENDÜSTRİ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOs-5w-src">
-                                                <rect key="frame" x="11" y="492" width="70" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ENDÜSTRİ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOs-5w-src">
+                                                <rect key="frame" x="11" y="491" width="70" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6So-7y-0QN">
-                                                <rect key="frame" x="8" y="514" width="305" height="52"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6So-7y-0QN">
+                                                <rect key="frame" x="8" y="512.5" width="305" height="52"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Bir endüstri seçiniz" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WSC-OL-XYV">
                                                         <rect key="frame" x="17" y="7" width="278" height="38"/>
@@ -804,20 +804,20 @@ size kısaca anlatalım. </string>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DENEYİMİNİZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTJ-6t-CoI">
-                                                <rect key="frame" x="11" y="591" width="93" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DENEYİMİNİZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTJ-6t-CoI">
+                                                <rect key="frame" x="11" y="718" width="93" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(en az 1 tane)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4T-IP-z6c">
-                                                <rect key="frame" x="237" y="594" width="71" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(en az 1 tane)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4T-IP-z6c">
+                                                <rect key="frame" x="237" y="720.5" width="71" height="15"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
                                                 <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eL1-jg-x4V">
-                                                <rect key="frame" x="8" y="616" width="304" height="279"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eL1-jg-x4V">
+                                                <rect key="frame" x="8" y="742.5" width="304" height="279"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="279" id="2XD-Wt-pzH"/>
@@ -860,13 +860,13 @@ size kısaca anlatalım. </string>
                                                                     <rect key="frame" x="288" y="26" width="8" height="14"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chief Executive Officer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeU-2G-FnF">
-                                                                    <rect key="frame" x="14" y="13" width="266" height="20"/>
+                                                                    <rect key="frame" x="14" y="13" width="266" height="19.5"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                                                     <color key="textColor" red="0.13333333333333333" green="0.10980392156862745" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trivia Software Bund AG, Sep 2012 - Se" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2C-TD-Vwg">
-                                                                    <rect key="frame" x="14" y="36" width="266" height="20"/>
+                                                                    <rect key="frame" x="14" y="35" width="266" height="19.5"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                                                     <color key="textColor" red="0.4823529411764706" green="0.47058823529411764" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -895,7 +895,7 @@ size kısaca anlatalım. </string>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chief Executive Officer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOr-xS-QKq">
-                                                                    <rect key="frame" x="15" y="14" width="281" height="20"/>
+                                                                    <rect key="frame" x="15" y="14" width="281" height="20.5"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
                                                                     <color key="textColor" red="0.1333333333" green="0.10980392160000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -947,20 +947,20 @@ size kısaca anlatalım. </string>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </tableView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="EĞİTİMİNİZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYp-gj-lmU">
-                                                <rect key="frame" x="11" y="920" width="78" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EĞİTİMİNİZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYp-gj-lmU">
+                                                <rect key="frame" x="11" y="1046.5" width="77.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(en az 1 tane)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmx-7j-bAT">
-                                                <rect key="frame" x="237" y="923" width="71" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(en az 1 tane)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmx-7j-bAT">
+                                                <rect key="frame" x="237" y="1049.5" width="71" height="15"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
                                                 <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bcr-nl-ZyM">
-                                                <rect key="frame" x="8" y="945" width="304" height="79"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bcr-nl-ZyM">
+                                                <rect key="frame" x="8" y="1071" width="304" height="79"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="79" id="ihu-Pe-ner"/>
@@ -980,20 +980,20 @@ size kısaca anlatalım. </string>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </tableView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BECERİLERİNİZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97f-fA-bbg">
-                                                <rect key="frame" x="11" y="1049" width="102" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BECERİLERİNİZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97f-fA-bbg">
+                                                <rect key="frame" x="11" y="589.5" width="102" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(en az 3 tane)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAN-kw-LY4">
-                                                <rect key="frame" x="237" y="1052" width="71" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(en az 3 tane)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAN-kw-LY4">
+                                                <rect key="frame" x="237" y="592.5" width="71" height="15"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
                                                 <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QqO-LM-I8o">
-                                                <rect key="frame" x="8" y="1074" width="304" height="79"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QqO-LM-I8o" userLabel="Skills Table">
+                                                <rect key="frame" x="8" y="614" width="304" height="79"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="79" id="A0b-QY-bzI"/>
@@ -1014,7 +1014,7 @@ size kısaca anlatalım. </string>
                                                 </userDefinedRuntimeAttributes>
                                             </tableView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Naj-Xx-vTm" userLabel="drop1">
-                                                <rect key="frame" x="8" y="319" width="304" height="136"/>
+                                                <rect key="frame" x="8" y="318.5" width="304" height="136"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="136" id="03i-z5-cLp"/>
@@ -1027,7 +1027,7 @@ size kısaca anlatalım. </string>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="drop menu option" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4W3-vS-Fpi">
-                                                                    <rect key="frame" x="21" y="6" width="137" height="21"/>
+                                                                    <rect key="frame" x="21" y="6" width="137" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1042,8 +1042,8 @@ size kısaca anlatalım. </string>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Eq4-Lc-cDE" userLabel="drop2">
-                                                <rect key="frame" x="8" y="561" width="304" height="136"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Eq4-Lc-cDE" userLabel="drop2">
+                                                <rect key="frame" x="8" y="559.5" width="304" height="136"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="136" id="Uya-jA-QEE"/>
@@ -1056,7 +1056,7 @@ size kısaca anlatalım. </string>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="drop menu option" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rm3-Ku-W5q">
-                                                                    <rect key="frame" x="21" y="6" width="137" height="21"/>
+                                                                    <rect key="frame" x="21" y="6" width="137" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1071,8 +1071,8 @@ size kısaca anlatalım. </string>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SUm-Hd-41l" userLabel="drop3">
-                                                <rect key="frame" x="8" y="1169" width="304" height="136"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SUm-Hd-41l" userLabel="drop3">
+                                                <rect key="frame" x="8" y="709" width="304" height="136"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="136" id="gnJ-iS-Gfw"/>
@@ -1085,7 +1085,7 @@ size kısaca anlatalım. </string>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="drop menu option" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfh-4C-bmv">
-                                                                    <rect key="frame" x="21" y="6" width="137" height="21"/>
+                                                                    <rect key="frame" x="21" y="6" width="137" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1105,16 +1105,15 @@ size kısaca anlatalım. </string>
                                         <constraints>
                                             <constraint firstItem="eTJ-6t-CoI" firstAttribute="leading" secondItem="x44-Uz-RlW" secondAttribute="leading" constant="11" id="0pw-mP-N69"/>
                                             <constraint firstAttribute="trailing" secondItem="SA7-wZ-xUp" secondAttribute="trailing" constant="7" id="26T-A0-sm0"/>
-                                            <constraint firstAttribute="bottom" secondItem="SUm-Hd-41l" secondAttribute="bottom" priority="750" constant="80" id="4C1-cu-7fM"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QqO-LM-I8o" secondAttribute="bottom" constant="250" id="4CZ-nj-U9b"/>
                                             <constraint firstItem="IYp-gj-lmU" firstAttribute="leading" secondItem="x44-Uz-RlW" secondAttribute="leading" constant="11" id="4Uw-oE-jci"/>
-                                            <constraint firstItem="97f-fA-bbg" firstAttribute="top" secondItem="bcr-nl-ZyM" secondAttribute="bottom" constant="25" id="6Ai-2s-6tt"/>
                                             <constraint firstItem="97f-fA-bbg" firstAttribute="leading" secondItem="x44-Uz-RlW" secondAttribute="leading" constant="11" id="6ar-io-Jj5"/>
                                             <constraint firstItem="e6s-mY-AbB" firstAttribute="top" secondItem="991-5F-wid" secondAttribute="bottom" constant="18" id="7h2-dP-FvZ"/>
+                                            <constraint firstItem="97f-fA-bbg" firstAttribute="top" secondItem="6So-7y-0QN" secondAttribute="bottom" constant="25" id="AAk-VM-q88"/>
                                             <constraint firstItem="SUm-Hd-41l" firstAttribute="top" secondItem="97f-fA-bbg" secondAttribute="bottom" constant="100" id="AQv-CJ-0Ex"/>
                                             <constraint firstItem="991-5F-wid" firstAttribute="top" secondItem="4kO-Sm-rgG" secondAttribute="bottom" constant="8" id="Aro-eI-iRg"/>
                                             <constraint firstItem="HBw-do-YGw" firstAttribute="leading" secondItem="x44-Uz-RlW" secondAttribute="leading" constant="8" id="Gtt-YR-Dof"/>
                                             <constraint firstItem="Naj-Xx-vTm" firstAttribute="top" secondItem="9w2-JZ-HcF" secondAttribute="bottom" constant="-1" id="I5C-9o-XHh"/>
+                                            <constraint firstItem="eTJ-6t-CoI" firstAttribute="top" secondItem="QqO-LM-I8o" secondAttribute="bottom" constant="25" id="IQa-fH-PQE"/>
                                             <constraint firstAttribute="trailing" secondItem="s4T-IP-z6c" secondAttribute="trailing" constant="12" id="IxG-OO-4Dj"/>
                                             <constraint firstAttribute="trailing" secondItem="6So-7y-0QN" secondAttribute="trailing" constant="7" id="KIa-OL-Z2L"/>
                                             <constraint firstItem="bcr-nl-ZyM" firstAttribute="top" secondItem="IYp-gj-lmU" secondAttribute="bottom" constant="5" id="KMO-cv-Rmm"/>
@@ -1123,6 +1122,7 @@ size kısaca anlatalım. </string>
                                             <constraint firstItem="eL1-jg-x4V" firstAttribute="leading" secondItem="x44-Uz-RlW" secondAttribute="leading" constant="8" id="Ni7-X9-9We"/>
                                             <constraint firstItem="s4T-IP-z6c" firstAttribute="centerY" secondItem="eTJ-6t-CoI" secondAttribute="centerY" id="QnP-G0-0tD"/>
                                             <constraint firstItem="9w2-JZ-HcF" firstAttribute="leading" secondItem="Naj-Xx-vTm" secondAttribute="leading" constant="15" id="Ra6-YC-IRY"/>
+                                            <constraint firstAttribute="bottom" secondItem="bcr-nl-ZyM" secondAttribute="bottom" constant="379" id="Sni-NC-UBn"/>
                                             <constraint firstItem="SUm-Hd-41l" firstAttribute="leading" secondItem="x44-Uz-RlW" secondAttribute="leading" constant="8" id="U4A-RQ-Kcb"/>
                                             <constraint firstItem="HBw-do-YGw" firstAttribute="top" secondItem="nJ9-J2-tDz" secondAttribute="bottom" constant="2" id="XLI-KM-z1T"/>
                                             <constraint firstItem="e6s-mY-AbB" firstAttribute="top" secondItem="x44-Uz-RlW" secondAttribute="top" constant="112" id="XPX-36-ra1"/>
@@ -1137,12 +1137,11 @@ size kısaca anlatalım. </string>
                                             <constraint firstAttribute="trailing" secondItem="eL1-jg-x4V" secondAttribute="trailing" constant="8" id="gOl-Ka-9pJ"/>
                                             <constraint firstItem="bcr-nl-ZyM" firstAttribute="leading" secondItem="x44-Uz-RlW" secondAttribute="leading" constant="8" id="hfj-xT-Ebt"/>
                                             <constraint firstItem="QqO-LM-I8o" firstAttribute="top" secondItem="97f-fA-bbg" secondAttribute="bottom" constant="5" id="htp-9C-YcE"/>
-                                            <constraint firstItem="eTJ-6t-CoI" firstAttribute="top" secondItem="6So-7y-0QN" secondAttribute="bottom" constant="25" id="kpw-Rm-mru"/>
+                                            <constraint firstItem="eL1-jg-x4V" firstAttribute="top" secondItem="eTJ-6t-CoI" secondAttribute="bottom" constant="5" id="kqz-aL-8zs"/>
                                             <constraint firstItem="9w2-JZ-HcF" firstAttribute="trailing" secondItem="Naj-Xx-vTm" secondAttribute="trailing" constant="5" id="lsB-Xf-ry5"/>
                                             <constraint firstItem="6So-7y-0QN" firstAttribute="top" secondItem="ZOs-5w-src" secondAttribute="bottom" constant="2" id="mRe-1a-rgG"/>
                                             <constraint firstItem="ZOs-5w-src" firstAttribute="top" secondItem="HBw-do-YGw" secondAttribute="bottom" constant="25" id="mla-pF-bFK"/>
                                             <constraint firstItem="xmx-7j-bAT" firstAttribute="centerY" secondItem="IYp-gj-lmU" secondAttribute="centerY" id="n4a-SG-f1B"/>
-                                            <constraint firstItem="eL1-jg-x4V" firstAttribute="top" secondItem="eTJ-6t-CoI" secondAttribute="bottom" constant="5" id="nI0-75-Ne4"/>
                                             <constraint firstItem="nJ9-J2-tDz" firstAttribute="top" secondItem="SA7-wZ-xUp" secondAttribute="bottom" constant="25" id="nLU-KC-QI0"/>
                                             <constraint firstItem="ZOs-5w-src" firstAttribute="leading" secondItem="x44-Uz-RlW" secondAttribute="leading" constant="11" id="pIY-ms-6zQ"/>
                                             <constraint firstItem="nJ9-J2-tDz" firstAttribute="leading" secondItem="e6s-mY-AbB" secondAttribute="leading" id="qWF-EP-cYh"/>
@@ -1386,7 +1385,7 @@ size kısaca anlatalım. </string>
                                             <constraint firstItem="A1o-7B-bZx" firstAttribute="top" secondItem="RMS-w9-zkF" secondAttribute="bottom" constant="51" id="wHC-Eu-LOG"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornarRadius">
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="3"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
@@ -1880,7 +1879,7 @@ size kısaca anlatalım. </string>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
                                         <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-28"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="-11" maxX="-63" maxY="0.0"/>
-                                        <state key="normal" title="Favori Ekle" image="B361B7E8-8E44-4991-88A7-C4625EE337CE">
+                                        <state key="normal" title="Favori Ekle" image="520D4FB6-D444-4C07-B668-6A0E8070B9DD">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2271,37 +2270,37 @@ size kısaca anlatalım. </string>
                                                     <constraint firstAttribute="height" constant="1" id="EV1-v8-87i"/>
                                                 </constraints>
                                             </view>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Derece" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QQc-Ug-U9q">
-                                                <rect key="frame" x="20" y="51" width="278" height="54"/>
+                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Derece" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QQc-Ug-U9q">
+                                                <rect key="frame" x="20" y="51" width="278" height="0.0"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="54" id="kh6-78-SoW"/>
+                                                    <constraint firstAttribute="height" id="kh6-78-SoW"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.1333333333" green="0.10980392160000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ygq-kB-Afd">
-                                                <rect key="frame" x="12" y="104" width="294" height="1"/>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ygq-kB-Afd">
+                                                <rect key="frame" x="12" y="50" width="294" height="1"/>
                                                 <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="MXh-Od-VqJ"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Devam ediyorum" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmf-Tp-Idn">
-                                                <rect key="frame" x="20" y="173" width="116" height="20"/>
+                                                <rect key="frame" x="20" y="119" width="116" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" red="0.1333333333" green="0.10980392160000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ygv-qU-jKQ">
-                                                <rect key="frame" x="12" y="207" width="294" height="1"/>
+                                                <rect key="frame" x="12" y="153" width="294" height="1"/>
                                                 <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="NGv-Ic-74e"/>
                                                 </constraints>
                                             </view>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Başlangıç Tarihi" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hzC-FG-dxo">
-                                                <rect key="frame" x="20" y="207" width="278" height="52"/>
+                                                <rect key="frame" x="20" y="153" width="278" height="52"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="52" id="gIb-ca-mpe"/>
                                                 </constraints>
@@ -2310,14 +2309,14 @@ size kısaca anlatalım. </string>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOo-Fb-ZUe">
-                                                <rect key="frame" x="12" y="258" width="294" height="1"/>
+                                                <rect key="frame" x="12" y="207" width="294" height="1"/>
                                                 <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="st9-ix-AfZ"/>
                                                 </constraints>
                                             </view>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Bitiş Tarihi" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PhX-Sq-eb9">
-                                                <rect key="frame" x="20" y="258" width="278" height="57"/>
+                                                <rect key="frame" x="20" y="208" width="278" height="57"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="57" id="79G-nJ-6sS"/>
                                                 </constraints>
@@ -2326,17 +2325,17 @@ size kısaca anlatalım. </string>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4kh-ow-UXj">
-                                                <rect key="frame" x="12" y="154" width="294" height="1"/>
+                                                <rect key="frame" x="12" y="100" width="294" height="1"/>
                                                 <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Anx-KS-lYF"/>
                                                 </constraints>
                                             </view>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hUi-rg-g5q">
-                                                <rect key="frame" x="169" y="167" width="51" height="31"/>
+                                                <rect key="frame" x="169" y="113" width="51" height="31"/>
                                             </switch>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Bölüm" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D4N-KZ-cMP">
-                                                <rect key="frame" x="20" y="103" width="278" height="54"/>
+                                                <rect key="frame" x="20" y="49" width="278" height="54"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="54" id="7wO-qk-QtE"/>
                                                 </constraints>
@@ -2358,7 +2357,7 @@ size kısaca anlatalım. </string>
                                             <constraint firstAttribute="trailing" secondItem="hzC-FG-dxo" secondAttribute="trailing" constant="8" id="Df8-Ph-nOo"/>
                                             <constraint firstItem="cPu-qZ-KTT" firstAttribute="top" secondItem="0ZW-nz-x7b" secondAttribute="bottom" constant="-1" id="DhU-2H-Ixu"/>
                                             <constraint firstItem="gOo-Fb-ZUe" firstAttribute="leading" secondItem="4kh-ow-UXj" secondAttribute="leading" id="Edv-C5-YG4"/>
-                                            <constraint firstItem="4kh-ow-UXj" firstAttribute="top" secondItem="PhX-Sq-eb9" secondAttribute="bottom" constant="-161" id="Iq7-qO-olx"/>
+                                            <constraint firstItem="4kh-ow-UXj" firstAttribute="top" secondItem="PhX-Sq-eb9" secondAttribute="bottom" constant="-165" id="Iq7-qO-olx"/>
                                             <constraint firstItem="ygq-kB-Afd" firstAttribute="top" secondItem="QQc-Ug-U9q" secondAttribute="bottom" constant="-1" id="K0C-vv-b74"/>
                                             <constraint firstAttribute="trailing" secondItem="Ygv-qU-jKQ" secondAttribute="trailing" id="Kzw-Fw-LV8"/>
                                             <constraint firstItem="QQc-Ug-U9q" firstAttribute="top" secondItem="cPu-qZ-KTT" secondAttribute="bottom" constant="-1" id="MPC-Pm-agK"/>
@@ -2368,10 +2367,10 @@ size kısaca anlatalım. </string>
                                             <constraint firstItem="D4N-KZ-cMP" firstAttribute="top" secondItem="ygq-kB-Afd" secondAttribute="bottom" constant="-2" id="WcK-8x-ima"/>
                                             <constraint firstAttribute="trailing" secondItem="4kh-ow-UXj" secondAttribute="trailing" id="agY-TD-Kn0"/>
                                             <constraint firstItem="0ZW-nz-x7b" firstAttribute="leading" secondItem="iAl-fL-h6k" secondAttribute="leading" constant="20" id="caI-cZ-vQY"/>
-                                            <constraint firstItem="gOo-Fb-ZUe" firstAttribute="top" secondItem="hzC-FG-dxo" secondAttribute="bottom" constant="-1" id="eCj-eU-1G6"/>
+                                            <constraint firstItem="gOo-Fb-ZUe" firstAttribute="top" secondItem="hzC-FG-dxo" secondAttribute="bottom" constant="2" id="eCj-eU-1G6"/>
                                             <constraint firstItem="Ygv-qU-jKQ" firstAttribute="top" secondItem="ygq-kB-Afd" secondAttribute="bottom" constant="102" id="gSV-Jo-Hck"/>
                                             <constraint firstItem="gmf-Tp-Idn" firstAttribute="top" secondItem="ygq-kB-Afd" secondAttribute="bottom" constant="68" id="hdf-5p-toO"/>
-                                            <constraint firstItem="PhX-Sq-eb9" firstAttribute="top" secondItem="gOo-Fb-ZUe" secondAttribute="bottom" constant="-1" id="jVj-PU-j6R"/>
+                                            <constraint firstItem="PhX-Sq-eb9" firstAttribute="top" secondItem="gOo-Fb-ZUe" secondAttribute="bottom" id="jVj-PU-j6R"/>
                                             <constraint firstItem="cPu-qZ-KTT" firstAttribute="leading" secondItem="iAl-fL-h6k" secondAttribute="leading" constant="12" id="l1U-VA-e4V"/>
                                             <constraint firstItem="QQc-Ug-U9q" firstAttribute="leading" secondItem="iAl-fL-h6k" secondAttribute="leading" constant="20" id="lob-Fp-zkd"/>
                                             <constraint firstAttribute="trailing" secondItem="cPu-qZ-KTT" secondAttribute="trailing" id="pJ5-06-gW7"/>
@@ -2384,7 +2383,7 @@ size kısaca anlatalım. </string>
                                             <constraint firstAttribute="trailing" secondItem="0ZW-nz-x7b" secondAttribute="trailing" constant="8" id="zZ4-wp-Wuo"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornarRadius">
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="3"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
@@ -3383,8 +3382,7 @@ yapmadınız. </string>
         </scene>
     </scenes>
     <resources>
-        <image name="Arrow-Right-Icon" width="8" height="14"/>
-        <image name="B361B7E8-8E44-4991-88A7-C4625EE337CE" width="16" height="13">
+        <image name="520D4FB6-D444-4C07-B668-6A0E8070B9DD" width="16" height="13">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3449,6 +3447,7 @@ Dg0VDR0NKg0vDTENMw04DUANQw1IDVANUw1lDWgNbQAAAAAAAAIBAAAAAAAAAEIAAAAAAAAAAAAAAAAA
 AA1vA
 </mutableData>
         </image>
+        <image name="Arrow-Right-Icon" width="8" height="14"/>
         <image name="Checked-Circle-Icon" width="15" height="15"/>
         <image name="Log-In-with-Linkedin" width="275" height="50"/>
         <image name="Menu-icon-details" width="15" height="11"/>

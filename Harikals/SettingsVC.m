@@ -59,13 +59,19 @@
     [Server callFunctionInBackground:@"settings" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary *receivedItems, NSError *error) {
         if (receivedItems) {
             
-            [selectedLocations addObjectsFromArray:receivedItems[@"locations"]];
-            notificationsSwitch.on = [receivedItems[@"notifications"] integerValue];
+            [selectedLocations addObjectsFromArray:receivedItems[@"places"]];
+            if ([receivedItems[@"notifications"] isKindOfClass:[NSNull class]]) {
+                notificationsSwitch.on = NO;
+            } else {
+                notificationsSwitch.on = [receivedItems[@"notifications"] integerValue];
+            }
+
             priceTextField.text = [NSString stringWithFormat:@"%@",  receivedItems[@"salary"] ? receivedItems[@"salary"] : @""];
             if ([priceTextField.text isEqualToString:@"0"]) {
                 priceTextField.text = @"";
             }
             [mainTableView reloadData];
+            [self updateTableViewHeight];
             mainScrollView.hidden = NO;
 
         } else {
@@ -224,6 +230,13 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if ([textField isEqual:priceTextField]) {
+        
+    if ([textField.text integerValue] > 500000) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Aylık net bu maaşı beklediğinizden emin misiniz? Size uygun pozisyon bulmamız biraz zor olabilir :)" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+        [textField becomeFirstResponder];
+        return;
+    }
         [Server callFunctionInBackground:@"updateSalary" withParameters:@{@"salary" : textField.text, @"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
             if (receivedItems) {
                 NSLog(@"salary %@", receivedItems);
@@ -260,10 +273,6 @@
 - (IBAction)addPressed:(id)sender {
     if ([self lengthOfTrimmedString:searchTextField.text] < 3) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Lütfen çalışmak isteyebile-ceğiniz yerin ismini kontrol ediniz" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
-        [alert show];
-        
-    } else if ([searchTextField.text integerValue] > 500000) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Aylık net bu maaşı beklediğinizden emin misiniz? Size uygun pozisyon bulmamız biraz zor olabilir :)" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
         [alert show];
     } else {
         searchTextField.text = @"";

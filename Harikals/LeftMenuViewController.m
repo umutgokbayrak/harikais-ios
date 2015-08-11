@@ -88,15 +88,17 @@
             nameLabel.text = object[@"fullname"];
             [self updateAvatarWithUrl:object[@"pictureUrl"]];
             [[NSUserDefaults standardUserDefaults] setObject:object[@"pictureUrl"] forKey:@"imageUrl"];
-            [[NSUserDefaults standardUserDefaults] setObject:object forKey:@"personal"];
+            NSMutableDictionary *mutableObject = [object mutableCopy];
+            if ([mutableObject[@"notifications"] isKindOfClass:[NSNull class]]) {
+                mutableObject[@"notifications"] = @0;
+            }
+            [[NSUserDefaults standardUserDefaults] setObject:mutableObject forKey:@"personal"];
         }
 
     }];
 
     avatarImageView.layer.cornerRadius = avatarImageView.frameWidth / 2.0;
     avatarImageView.clipsToBounds = YES;
-    
-    positionLabel.text = @"";
 
     [mainTableView reloadData];
     [self refreshCounters];

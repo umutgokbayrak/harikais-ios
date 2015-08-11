@@ -187,10 +187,12 @@
     NSString *text = inputTextView.text;
     inputTextView.text = @"";
     if ([text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length) {
+        
+        NSDictionary *params = @{@"userId" : Server.userInfoDictionary[@"userId"],
+                                 @"jobId" : dataDictionary[@"idf"],
+                                 @"msg" : text};
         [Server callFunctionInBackground:@"sendMessage"
-                          withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"],
-                                           @"jobId" : dataDictionary[@"companyId"],
-                                           @"msg" : text}
+                          withParameters:params
                                    block:^(NSDictionary *receivedItems, NSError *error) {
                                        if (receivedItems.count && !error) {
                                            [messagesArray addObject:@{@"direction" : @1,

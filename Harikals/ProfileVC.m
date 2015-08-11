@@ -380,6 +380,10 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         }];
     }
     
+    
+    [[NSUserDefaults standardUserDefaults] setObject:responceDict forKey:@"litemp"];
+    
+    
     if (responceDict[@"positions"]) {
         NSArray *liPositions = responceDict[@"positions"][@"values"];
         if (liPositions) {
@@ -540,8 +544,8 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     if (!industryTextField.text.length) {[self showErrorAlert:@"Lütfen kendinize çalışmak istediğiniz bir endüstri seçer misiniz?"]; return;}
 
     
-    if (!positionsArray.count) {[self showErrorAlert:@"Lütfen geçmiş eğitim bilgilerinizi bizimle paylaşır mısınız?"]; return;}
-    if (!edusArray.count) {[self showErrorAlert:@"Lütfen mesleki deneyiminizi bizimle paylaşır mısınız?"]; return;}
+    if (!positionsArray.count) {[self showErrorAlert:@"Lütfen mesleki deneyiminizi bizimle paylaşır mısınız?"]; return;}
+    if (!edusArray.count) {[self showErrorAlert:@"Lütfen geçmiş eğitim bilgilerinizi bizimle paylaşır mısınız?"]; return;}
     
     if (skillsArray.count < 3) {[self showErrorAlert:@"Lütfen uzman olduğunuzu düşündüğünüz becerilerden en az 3 tane bizimle pay- laşır mısınız?"]; return;}
     
@@ -560,6 +564,13 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     if (pictureUrl) {
         [params setObject:pictureUrl forKey:@"avatarUrl"];
     }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"temporary"]) {
+        [params setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"temporary"][@"access_token"] forKey:@"accessToken"];
+    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"litemp"]) {
+        [params setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"litemp"] forKey:@"linkedinData"];
+    }
+    
     
     [Server callFunctionInBackground:@"saveCv" withParameters:params block:^(NSDictionary *receivedItems, NSError *error) {
         [[NSUserDefaults standardUserDefaults] setObject:@{@"fullname" : params[@"fullname"], @"headline" : params[@"headline"]} forKey:@"personal"];
@@ -836,7 +847,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     } else {
         cell = [positionTableView dequeueReusableCellWithIdentifier:@"infoCell"];
         cell.nameLabel.text = edusArray[indexPath.row - 1][@"school"];
-        cell.subLabel.text = edusArray[indexPath.row - 1][@"degree"];
+        cell.subLabel.text = edusArray[indexPath.row - 1][@"fieldOfStudy"];
     }
     return cell;
 }
