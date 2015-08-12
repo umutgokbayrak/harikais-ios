@@ -237,7 +237,11 @@
         [textField becomeFirstResponder];
         return;
     }
-        [Server callFunctionInBackground:@"updateSalary" withParameters:@{@"salary" : textField.text, @"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
+        NSString *salaryValue = textField.text;
+        if (!salaryValue.length) {
+            salaryValue = @"0";
+        }
+        [Server callFunctionInBackground:@"updateSalary" withParameters:@{@"salary" : salaryValue, @"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSArray *receivedItems, NSError *error) {
             if (receivedItems) {
                 NSLog(@"salary %@", receivedItems);
                 

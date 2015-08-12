@@ -12,6 +12,9 @@
 #import <Parse.h>
 #import <UIImageView+WebCache.h>
 
+
+#define CHAT_REFRESH_PERIOD 5
+
 @interface ChatVC () <UITextViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     __weak IBOutlet UITextField *inputTextField;
     __weak IBOutlet UITextView *inputTextView;
@@ -40,6 +43,8 @@
     NSDateFormatter *formatter;
     NSString *direction1ImagePath;
     NSString *direction2ImagePath;
+    
+    NSTimer *fetchTimer;
 }
 
 @end
@@ -58,7 +63,7 @@
     inputTextView.delegate = self;
     inputTextView.contentInset = UIEdgeInsetsMake(3, 0, 3, 0);
     self.inputAccessoryView = inputVuew;
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     mainTableView.delegate = self;
@@ -83,16 +88,57 @@
     
     [self loadMessages];
     
+    
+    fetchTimer = [NSTimer scheduledTimerWithTimeInterval:CHAT_REFRESH_PERIOD target:self selector:@selector(loadNext) userInfo:nil repeats:YES];
 }
 
-- (void)loadMessages {
-    [spinner startAnimating];
-    [Server callFunctionInBackground:@"chatLog" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : dataDictionary[@"companyId"] ? dataDictionary[@"companyId"] : dataDictionary[@"id"]} block:^(NSDictionary *receivedItems, NSError *error) {
+- (void)loadNext {
+    NSMutableDictionary *params = [@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : dataDictionary[@"companyId"] ? dataDictionary[@"companyId"] : dataDictionary[@"id"]} mutableCopy];
+    
+    if ([dataDictionary[@"chatId"] length]) {
+        params [@"chatId"]  = dataDictionary[@"chatId"];
+    }
+    NSInteger prevCount = messagesArray.count;
+    [Server callFunctionInBackground:@"chatLog" withParameters:params block:^(NSDictionary *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             [messagesArray removeAllObjects];
             direction1ImagePath = receivedItems[@"images"][@"direction1"];
             direction2ImagePath = receivedItems[@"images"][@"direction2"];
             [messagesArray insertObjects:receivedItems[@"messages"] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [receivedItems[@"messages"] count])]];
+//            NSInteger difference = receivedItems.count - prevCount;
+            NSMutableArray *indexPathes = [NSMutableArray array];
+            for (NSInteger i = prevCount; i < [receivedItems[@"messages"] count]; i ++) {
+                [indexPathes addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            }
+            if (indexPathes.count) {
+                [mainTableView insertRowsAtIndexPaths:indexPathes withRowAnimation:UITableViewRowAnimationNone];
+                if (messagesArray.count) {
+                    [mainTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messagesArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                }
+            }
+        } else {
+            
+        }
+    }];
+}
+
+
+- (void)loadMessages {
+    [spinner startAnimating];
+    NSMutableDictionary *params = [@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : dataDictionary[@"companyId"] ? dataDictionary[@"companyId"] : dataDictionary[@"id"]} mutableCopy];
+    
+    if ([dataDictionary[@"chatId"] length]) {
+        params [@"chatId"]  = dataDictionary[@"chatId"];
+    }
+
+    [Server callFunctionInBackground:@"chatLog" withParameters:params block:^(NSDictionary *receivedItems, NSError *error) {
+        if (receivedItems.count && !error) {
+            [messagesArray removeAllObjects];
+            direction1ImagePath = receivedItems[@"images"][@"direction1"];
+            direction2ImagePath = receivedItems[@"images"][@"direction2"];
+            [messagesArray insertObjects:receivedItems[@"messages"] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [receivedItems[@"messages"] count])]];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCounters" object:nil];
         } else {
             
         }
@@ -107,6 +153,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [fetchTimer invalidate];
+    fetchTimer = [NSTimer scheduledTimerWithTimeInterval:CHAT_REFRESH_PERIOD target:self selector:@selector(loadNext) userInfo:nil repeats:YES];
+    
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"chatAlertShown"]) {
         [Server showFavouriteAlertWithTitle:@"Bilgi" text:@"Bu ekranda yaptığınız yazışmalar gizlidir. Firma yetkilisi sizin isminizi ve diğer profil bilgilerinizi göremeyecektir."];
         [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"chatAlertShown"];
@@ -115,9 +164,18 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [fetchTimer invalidate];
+}
+
 - (void)loadDummyTextView {
     dummyTextView = [[UITextView alloc] init];
     dummyTextView.font = [UIFont fontWithName:@"OpenSans" size:16.0];
+}
+
+-(void)dealloc {
+    [fetchTimer invalidate];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -190,14 +248,14 @@
         
         NSDictionary *params = @{@"userId" : Server.userInfoDictionary[@"userId"],
                                  @"jobId" : dataDictionary[@"id"],
-                                 @"msg" : text};
+                                 @"message" : text};
         [Server callFunctionInBackground:@"sendMessage"
                           withParameters:params
                                    block:^(NSDictionary *receivedItems, NSError *error) {
                                        if (receivedItems.count && !error) {
                                            [messagesArray addObject:@{@"direction" : @1,
                                                                       @"msg" : text,
-                                                                      @"from" : @"You",
+                                                                      @"from" : @"Siz",
                                                                       @"date" : [formatter stringFromDate:[NSDate date]]
                                                                       }];
                                            NSIndexPath *indexpath = [NSIndexPath indexPathForRow:messagesArray.count - 1 inSection:0];
@@ -243,7 +301,12 @@
     cell.messageTextView.text = messagesArray[indexPath.row][@"msg"];
     cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.size.width / 2.0;
 
-    cell.dateLabel.text = [NSString stringWithFormat:@"%@, %@", messagesArray[indexPath.row][@"from"], messagesArray[indexPath.row][@"date"]];
+    
+    NSString *fromString = messagesArray[indexPath.row][@"from"];
+    if ([fromString isEqualToString:@"You"]) {
+        fromString = @"Siz";
+    }
+    cell.dateLabel.text = [NSString stringWithFormat:@"%@, %@", fromString, messagesArray[indexPath.row][@"date"]];
     
     
     [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:direction == 1 ? direction1ImagePath : direction2ImagePath]

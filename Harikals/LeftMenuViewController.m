@@ -53,6 +53,8 @@
         bottomLogo.hidden = YES;
     }
     
+//    [self.sideMenuViewController setValue:self forKey:@"delegate"];
+    
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"menuFirstShown"]) {
         [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"menuFirstShown"];
         
@@ -73,6 +75,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMessages) name:@"presentMessages" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAvatarPicked:) name:@"userAvatarPicked" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateInfo) name:@"updateInfo" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMessagesCount) name:@"refreshCounters" object:nil];
+    
+    
+
     
     NSDictionary *personal  = [[NSUserDefaults standardUserDefaults] objectForKey:@"personal"];
     nameLabel.text = personal[@"fullname"];
@@ -83,9 +91,23 @@
         [self updateAvatarWithUrl:pictureUrl];
     }
     
+    [self updateInfo];
+
+    avatarImageView.layer.cornerRadius = avatarImageView.frameWidth / 2.0;
+    avatarImageView.clipsToBounds = YES;
+
+    [mainTableView reloadData];
+    [self refreshCounters];
+    
+    
+    [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(refreshCounters) userInfo:nil repeats:YES];
+}
+
+- (void)updateInfo {
     [Server callFunctionInBackground:@"info" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary * object, NSError *error) {
         if (object) {
             nameLabel.text = object[@"fullname"];
+            positionLabel.text = object[@"headline"];
             [self updateAvatarWithUrl:object[@"pictureUrl"]];
             [[NSUserDefaults standardUserDefaults] setObject:object[@"pictureUrl"] forKey:@"imageUrl"];
             NSMutableDictionary *mutableObject = [object mutableCopy];
@@ -94,14 +116,8 @@
             }
             [[NSUserDefaults standardUserDefaults] setObject:mutableObject forKey:@"personal"];
         }
-
+        
     }];
-
-    avatarImageView.layer.cornerRadius = avatarImageView.frameWidth / 2.0;
-    avatarImageView.clipsToBounds = YES;
-
-    [mainTableView reloadData];
-    [self refreshCounters];
 }
 
 - (void)userAvatarPicked:(NSNotification *)notification {
@@ -217,19 +233,7 @@
     }
 }
 
-- (void)refreshCounters {
-    [Server callFunctionInBackground:@"unreadOpportCount" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary *receivedItems, NSError *error) {
-        if (receivedItems.count && !error) {
-            firstalarNumber = receivedItems[@"count"];
-            [self configureCounterForCell:firstalarCell count:firstalarNumber.integerValue];
-        } else {
-            //TODO:Remove NSLog
-            NSLog(@"opport ERROR %@", error);
-        }
-
-        [mainTableView reloadData];
-    }];
-    
+- (void)refreshMessagesCount {
     [Server callFunctionInBackground:@"unreadMsgCount" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary *receivedItems, NSError *error) {
         if (receivedItems.count && !error) {
             messagesNumber = receivedItems[@"count"];
@@ -243,6 +247,27 @@
         
         [mainTableView reloadData];
     }];
+    
+}
+
+- (void)refreshOpportCount {
+    [Server callFunctionInBackground:@"unreadOpportCount" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"]} block:^(NSDictionary *receivedItems, NSError *error) {
+        if (receivedItems.count && !error) {
+            firstalarNumber = receivedItems[@"count"];
+            [self configureCounterForCell:firstalarCell count:firstalarNumber.integerValue];
+        } else {
+            //TODO:Remove NSLog
+            NSLog(@"opport ERROR %@", error);
+        }
+        
+        [mainTableView reloadData];
+    }];
+}
+
+- (void)refreshCounters {
+    [self refreshOpportCount];
+    
+    [self refreshMessagesCount];
     
 }
 
@@ -279,10 +304,5 @@
     return cell;
 }
 
-- (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController {
-    if (menuViewController) {
-        [self refreshCounters];
-    }
-}
 
 @end

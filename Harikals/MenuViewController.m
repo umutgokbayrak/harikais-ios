@@ -74,6 +74,9 @@
 - (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
 {
     NSLog(@"willShowMenuViewController: %@", NSStringFromClass([menuViewController class]));
+    if (menuViewController) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCounters" object:nil];
+    }
 }
 
 - (void)sideMenu:(RESideMenu *)sideMenu didShowMenuViewController:(UIViewController *)menuViewController

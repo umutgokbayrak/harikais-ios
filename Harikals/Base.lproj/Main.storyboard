@@ -1879,7 +1879,7 @@ size kısaca anlatalım. </string>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
                                         <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-28"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="-11" maxX="-63" maxY="0.0"/>
-                                        <state key="normal" title="Favori Ekle" image="94F21AB7-82CB-485D-8D1A-F924676F71EC">
+                                        <state key="normal" title="Favori Ekle" image="77A3D1A5-94A4-4CDC-ADAF-AD723C3E6BBA">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -3383,7 +3383,7 @@ yapmadınız. </string>
         </scene>
     </scenes>
     <resources>
-        <image name="94F21AB7-82CB-485D-8D1A-F924676F71EC" width="16" height="13">
+        <image name="77A3D1A5-94A4-4CDC-ADAF-AD723C3E6BBA" width="16" height="13">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

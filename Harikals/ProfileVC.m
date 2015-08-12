@@ -576,12 +576,14 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
         [[NSUserDefaults standardUserDefaults] setObject:@{@"fullname" : params[@"fullname"], @"headline" : params[@"headline"]} forKey:@"personal"];
         if (receivedItems) {
             if ([receivedItems[@"result"] integerValue] == 0) {
-                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"updateInfo" object:nil];
                 if (!_inputDictionary) {
                     [self performSegueWithIdentifier:@"openMenu" sender:nil];
                 } else {
                     [self closeWithoutSaving];
                 }
+                
+                
             } else {
                 [self showAlertWithText:receivedItems[@"msg"]];
             }

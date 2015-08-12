@@ -207,17 +207,16 @@
 }
 
 - (void)removeChatWithData:(NSDictionary *)data {
-    [Server callFunctionInBackground:@"deleteChat" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"companyId"]
-                                                                    } block:^(NSArray *receivedItems, NSError *error) {
-                                                                        if (receivedItems) {
-                                                                            //TODO:Remove NSLog
-                                                                            NSLog(@"%@", receivedItems);
-                                                                        } else {
-                                                                            //TODO:Remove NSLog
-                                                                            NSLog(@"%@", error);
-                                                                        }
-                                                                        
-                                                                    }];
+    [Server callFunctionInBackground:@"deleteChat" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"jobId"]                                                                    } block:^(NSArray *receivedItems, NSError *error) {
+        if (receivedItems) {
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCounters" object:nil];
+        } else {
+            //TODO:Remove NSLog
+            NSLog(@"%@", error);
+        }
+        
+    }];
 }
 
 
