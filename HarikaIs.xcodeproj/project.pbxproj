@@ -127,7 +127,7 @@
 		95511E251B28758200AD40C6 /* ChatInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatInputView.xib; sourceTree = "<group>"; };
 		95790DAE1B32C3140024EA3E /* PushNoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNoAnimationSegue.h; sourceTree = "<group>"; };
 		95790DAF1B32C3140024EA3E /* PushNoAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNoAnimationSegue.m; sourceTree = "<group>"; };
-		957B638D1B247840003AA201 /* Harikals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Harikals.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		957B638D1B247840003AA201 /* HarikaIs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarikaIs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		957B63911B247840003AA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957B63921B247840003AA201 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		957B63941B247840003AA201 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 		957B639B1B247840003AA201 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		957B639D1B247840003AA201 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		957B63A01B247840003AA201 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		957B63A61B247840003AA201 /* HarikalsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarikalsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		957B63A61B247840003AA201 /* HarikaIss.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarikaIss.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		957B63AB1B247840003AA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957B63AC1B247840003AA201 /* HarikalsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HarikalsTests.m; sourceTree = "<group>"; };
 		959890E51B3C0E3400551F60 /* DropdownModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropdownModel.h; sourceTree = "<group>"; };
@@ -344,8 +344,8 @@
 		957B638E1B247840003AA201 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				957B638D1B247840003AA201 /* Harikals.app */,
-				957B63A61B247840003AA201 /* HarikalsTests.xctest */,
+				957B638D1B247840003AA201 /* HarikaIs.app */,
+				957B63A61B247840003AA201 /* HarikaIss.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -567,9 +567,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		957B638C1B247840003AA201 /* Harikals */ = {
+		957B638C1B247840003AA201 /* HarikaIs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 957B63B01B247840003AA201 /* Build configuration list for PBXNativeTarget "Harikals" */;
+			buildConfigurationList = 957B63B01B247840003AA201 /* Build configuration list for PBXNativeTarget "HarikaIs" */;
 			buildPhases = (
 				D4AB7482A9A406DC2EFE93D0 /* Check Pods Manifest.lock */,
 				957B63891B247840003AA201 /* Sources */,
@@ -581,14 +581,14 @@
 			);
 			dependencies = (
 			);
-			name = Harikals;
+			name = HarikaIs;
 			productName = Harikals;
-			productReference = 957B638D1B247840003AA201 /* Harikals.app */;
+			productReference = 957B638D1B247840003AA201 /* HarikaIs.app */;
 			productType = "com.apple.product-type.application";
 		};
-		957B63A51B247840003AA201 /* HarikalsTests */ = {
+		957B63A51B247840003AA201 /* HarikaIss */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 957B63B31B247840003AA201 /* Build configuration list for PBXNativeTarget "HarikalsTests" */;
+			buildConfigurationList = 957B63B31B247840003AA201 /* Build configuration list for PBXNativeTarget "HarikaIss" */;
 			buildPhases = (
 				957B63A21B247840003AA201 /* Sources */,
 				957B63A31B247840003AA201 /* Frameworks */,
@@ -599,9 +599,9 @@
 			dependencies = (
 				957B63A81B247840003AA201 /* PBXTargetDependency */,
 			);
-			name = HarikalsTests;
+			name = HarikaIss;
 			productName = HarikalsTests;
-			productReference = 957B63A61B247840003AA201 /* HarikalsTests.xctest */;
+			productReference = 957B63A61B247840003AA201 /* HarikaIss.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -615,6 +615,7 @@
 				TargetAttributes = {
 					957B638C1B247840003AA201 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 6M7MHKS4XJ;
 					};
 					957B63A51B247840003AA201 = {
 						CreatedOnToolsVersion = 6.2;
@@ -622,7 +623,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 957B63881B247840003AA201 /* Build configuration list for PBXProject "Harikals" */;
+			buildConfigurationList = 957B63881B247840003AA201 /* Build configuration list for PBXProject "HarikaIs" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -635,8 +636,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				957B638C1B247840003AA201 /* Harikals */,
-				957B63A51B247840003AA201 /* HarikalsTests */,
+				957B638C1B247840003AA201 /* HarikaIs */,
+				957B63A51B247840003AA201 /* HarikaIss */,
 			);
 		};
 /* End PBXProject section */
@@ -781,7 +782,7 @@
 /* Begin PBXTargetDependency section */
 		957B63A81B247840003AA201 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 957B638C1B247840003AA201 /* Harikals */;
+			target = 957B638C1B247840003AA201 /* HarikaIs */;
 			targetProxy = 957B63A71B247840003AA201 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -823,8 +824,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Roman Savchuk (NFT7A9P537)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roman Savchuk (NFT7A9P537)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -844,7 +845,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "83b06efb-b0d5-4335-9700-fd4e5f522a2e";
+				PROVISIONING_PROFILE = "0ba64475-912d-4474-b6a1-f2fc58d76e96";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -866,8 +867,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Roman Savchuk (NFT7A9P537)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roman Savchuk (NFT7A9P537)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -880,7 +881,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "83b06efb-b0d5-4335-9700-fd4e5f522a2e";
+				PROVISIONING_PROFILE = "0ba64475-912d-4474-b6a1-f2fc58d76e96";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -891,10 +892,13 @@
 			baseConfigurationReference = 29486ABA066670FC3B9C5709 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
 				INFOPLIST_FILE = Harikals/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HarikaIs;
+				PROVISIONING_PROFILE = "72d5ac23-101e-4610-bdae-f12037e0e61f";
 			};
 			name = Debug;
 		};
@@ -903,17 +907,19 @@
 			baseConfigurationReference = 504BA634EB605968241D5616 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
 				INFOPLIST_FILE = Harikals/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HarikaIs;
+				PROVISIONING_PROFILE = "72d5ac23-101e-4610-bdae-f12037e0e61f";
 			};
 			name = Release;
 		};
 		957B63B41B247840003AA201 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -924,30 +930,31 @@
 				);
 				INFOPLIST_FILE = HarikalsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Harikals.app/Harikals";
+				PRODUCT_NAME = HarikaIss;
+				PROVISIONING_PROFILE = "72d5ac23-101e-4610-bdae-f12037e0e61f";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HarikaIs.app/HarikaIs";
 			};
 			name = Debug;
 		};
 		957B63B51B247840003AA201 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = HarikalsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Harikals.app/Harikals";
+				PRODUCT_NAME = HarikaIss;
+				PROVISIONING_PROFILE = "72d5ac23-101e-4610-bdae-f12037e0e61f";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HarikaIs.app/HarikaIs";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		957B63881B247840003AA201 /* Build configuration list for PBXProject "Harikals" */ = {
+		957B63881B247840003AA201 /* Build configuration list for PBXProject "HarikaIs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				957B63AE1B247840003AA201 /* Debug */,
@@ -956,7 +963,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		957B63B01B247840003AA201 /* Build configuration list for PBXNativeTarget "Harikals" */ = {
+		957B63B01B247840003AA201 /* Build configuration list for PBXNativeTarget "HarikaIs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				957B63B11B247840003AA201 /* Debug */,
@@ -965,7 +972,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		957B63B31B247840003AA201 /* Build configuration list for PBXNativeTarget "HarikalsTests" */ = {
+		957B63B31B247840003AA201 /* Build configuration list for PBXNativeTarget "HarikaIss" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				957B63B41B247840003AA201 /* Debug */,
