@@ -33,7 +33,6 @@
     
     [[Mint sharedInstance] initAndStartSession:@"95271da7"];
     [Parse setApplicationId:@"7EqNvrRwIHC2CP34qAgVJTCCmmReT5gnZdZM5zYP" clientKey:@"z7OlXSHBV5KJXdkPbx9xh9XDGrcsWOkj3V0sn9xn"];
-//    [PFLinkedInUtils initializeWithRedirectURL:@"http://www.rundewoo.com" clientId:@"77p3qgyayt2mjo" clientSecret:@"ZQ2HHMY2AdU1JmaX" state:@"aaaabbbbccccdddd" grantedAccess:@[@"r_emailaddress", @"r_basicprofile"] presentingViewController:nil];
 
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Semibold" size:17.0]}];
