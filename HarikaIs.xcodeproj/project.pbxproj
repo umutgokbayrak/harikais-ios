@@ -892,7 +892,6 @@
 			baseConfigurationReference = 29486ABA066670FC3B9C5709 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD:HarikaIs.xcodeproj/project.pbxproj
 				CODE_SIGN_IDENTITY = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
 				INFOPLIST_FILE = Harikals/Info.plist;
@@ -900,14 +899,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = HarikaIs;
 				PROVISIONING_PROFILE = "72d5ac23-101e-4610-bdae-f12037e0e61f";
-=======
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = Harikals/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
->>>>>>> c0cdd412c287d4861f56c0626298499c51596c62:Harikals.xcodeproj/project.pbxproj
 			};
 			name = Debug;
 		};
@@ -916,7 +907,6 @@
 			baseConfigurationReference = 504BA634EB605968241D5616 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD:HarikaIs.xcodeproj/project.pbxproj
 				CODE_SIGN_IDENTITY = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Seryal Gokbayrak (C3KA86FVRJ)";
 				INFOPLIST_FILE = Harikals/Info.plist;
@@ -924,14 +914,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = HarikaIs;
 				PROVISIONING_PROFILE = "72d5ac23-101e-4610-bdae-f12037e0e61f";
-=======
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = Harikals/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
->>>>>>> c0cdd412c287d4861f56c0626298499c51596c62:Harikals.xcodeproj/project.pbxproj
 			};
 			name = Release;
 		};
