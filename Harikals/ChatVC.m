@@ -45,6 +45,8 @@
     NSString *direction2ImagePath;
     
     NSTimer *fetchTimer;
+    
+    NSString *jobId;
 }
 
 @end
@@ -71,6 +73,10 @@
     spinner.hidesWhenStopped = YES;
     mainTableView.contentInset = UIEdgeInsetsMake(5, 0, 10, 0);
     
+    jobId = dataDictionary[@"id"];
+    if ([dataDictionary[@"jobId"] length]) {
+        jobId = dataDictionary[@"jobId"];
+    }
     
     if ([UIScreen mainScreen].bounds.size.height == 480) {
         myWidth = 199;
@@ -93,7 +99,7 @@
 }
 
 - (void)loadNext {
-    NSMutableDictionary *params = [@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : dataDictionary[@"companyId"] ? dataDictionary[@"companyId"] : dataDictionary[@"id"]} mutableCopy];
+    NSMutableDictionary *params = [@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : jobId} mutableCopy];
     
     if ([dataDictionary[@"chatId"] length]) {
         params [@"chatId"]  = dataDictionary[@"chatId"];
@@ -125,7 +131,7 @@
 
 - (void)loadMessages {
     [spinner startAnimating];
-    NSMutableDictionary *params = [@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : dataDictionary[@"companyId"] ? dataDictionary[@"companyId"] : dataDictionary[@"id"]} mutableCopy];
+    NSMutableDictionary *params = [@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : jobId} mutableCopy];
     
     if ([dataDictionary[@"chatId"] length]) {
         params [@"chatId"]  = dataDictionary[@"chatId"];
@@ -247,7 +253,7 @@
     if ([text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length) {
         
         NSDictionary *params = @{@"userId" : Server.userInfoDictionary[@"userId"],
-                                 @"jobId" : dataDictionary[@"id"],
+                                 @"jobId" : jobId,
                                  @"message" : text};
         [Server callFunctionInBackground:@"sendMessage"
                           withParameters:params
