@@ -7,11 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-<<<<<<< HEAD
-	<string>com.harikaistest.$(PRODUCT_NAME:rfc1034identifier)</string>
-=======
 	<string>com.harikaistest.HarikaIs</string>
->>>>>>> c0cdd412c287d4861f56c0626298499c51596c62
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
