@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "905F21001773D22EBCE21919"
+               BlueprintIdentifier = "BF1CD0E9F70D808D712ACC80"
                BuildableName = "libPods-UIViewPlusPosition.a"
                BlueprintName = "Pods-UIViewPlusPosition"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -39,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "905F21001773D22EBCE21919"
-            BuildableName = "libPods-UIViewPlusPosition.a"
-            BlueprintName = "Pods-UIViewPlusPosition"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -57,15 +48,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "905F21001773D22EBCE21919"
-            BuildableName = "libPods-UIViewPlusPosition.a"
-            BlueprintName = "Pods-UIViewPlusPosition"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

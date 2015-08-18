@@ -97,7 +97,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     redirectString = responce[@"redirect"][@"ios"];
     if ([[userDefaults objectForKey:@"ver"] floatValue] < [responce[@"minVersion"] floatValue]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Bu uygulamanın yeni version mevcuttur. İndirmek ister misiniz?" delegate:self cancelButtonTitle:@"App Store" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Bu uygulamanın yeni bir versiyonu mevcuttur. İndirmek ister misiniz?" delegate:self cancelButtonTitle:@"App Store" otherButtonTitles:nil];
         alert.tag = 1;
         [alert show];
     } else {

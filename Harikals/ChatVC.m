@@ -308,7 +308,7 @@
     cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.size.width / 2.0;
 
     
-    NSString *fromString = messagesArray[indexPath.row][@"from"];
+    NSString *fromString = direction % 2 != 0 ? @"Siz" : dataDictionary[@"company"][@"name"];
     if ([fromString isEqualToString:@"You"]) {
         fromString = @"Siz";
     }

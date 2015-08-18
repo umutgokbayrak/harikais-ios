@@ -1879,7 +1879,7 @@ size kısaca anlatalım. </string>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
                                         <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-28"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="-11" maxX="-63" maxY="0.0"/>
-                                        <state key="normal" title="Favori Ekle" image="81E824FB-77F8-4FEA-B156-4CB9E964834D">
+                                        <state key="normal" title="Favori Ekle" image="6E2D1F90-2748-40F9-8281-081E6EB4983C">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1954,6 +1954,7 @@ size kısaca anlatalım. </string>
                         <outlet property="locationLabel" destination="nxh-Hh-nLw" id="8zc-dz-FsK"/>
                         <outlet property="mainScrollView" destination="poV-Oo-VgA" id="Mqj-1W-b5B"/>
                         <outlet property="mainTextView" destination="44M-EQ-w4D" id="c1k-a4-KDe"/>
+                        <outlet property="moneyBagIcon" destination="NDE-5Q-gCf" id="DAb-jX-8Sq"/>
                         <outlet property="positionLabel" destination="qGc-f8-HCO" id="dfy-Ez-mEj"/>
                         <outlet property="pricingLabel" destination="Vw4-kZ-lUq" id="NXG-P5-263"/>
                         <outlet property="textHeightContraint" destination="A1A-qP-1l1" id="1k6-LO-x0a"/>
@@ -3188,13 +3189,13 @@ yapmadınız. </string>
                         <viewControllerLayoutGuide type="bottom" id="nn1-SP-nz1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HVI-St-z2P">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kGL-Gk-4Im">
-                                <rect key="frame" x="197" y="326" width="20" height="20"/>
+                                <rect key="frame" x="197" y="358" width="20" height="20"/>
                             </activityIndicatorView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="108" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="y2D-mt-jvt">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="108" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="y2D-mt-jvt">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="614"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -3256,8 +3257,8 @@ yapmadınız. </string>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gyz-6q-CIi" id="g1Z-r3-vgS">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Kate Price, 03/14/2014" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ta0-go-M8Y">
-                                                    <rect key="frame" x="264" y="4" width="130" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kate Price, 03/14/2014" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ta0-go-M8Y">
+                                                    <rect key="frame" x="65" y="4" width="130" height="17"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Italic" family="Open Sans" pointSize="13"/>
                                                     <color key="textColor" red="0.68627450980000004" green="0.68627450980000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -3289,7 +3290,7 @@ yapmadınız. </string>
                                                 <constraint firstItem="O4J-bt-A2j" firstAttribute="top" secondItem="Ta0-go-M8Y" secondAttribute="bottom" constant="6" id="SW2-S3-CHs"/>
                                                 <constraint firstItem="iTK-y8-wLc" firstAttribute="trailing" secondItem="O4J-bt-A2j" secondAttribute="trailing" id="dVx-x4-6b1"/>
                                                 <constraint firstAttribute="trailing" secondItem="O4J-bt-A2j" secondAttribute="trailing" constant="20" id="icW-pX-bKc"/>
-                                                <constraint firstAttribute="trailing" secondItem="Ta0-go-M8Y" secondAttribute="trailing" constant="20" id="ndx-RX-QAU"/>
+                                                <constraint firstItem="Ta0-go-M8Y" firstAttribute="leading" secondItem="q08-WS-Dv6" secondAttribute="trailing" constant="12" id="qDe-gA-S3g"/>
                                                 <constraint firstItem="Ta0-go-M8Y" firstAttribute="top" secondItem="g1Z-r3-vgS" secondAttribute="top" constant="4" id="wcT-x7-dKU"/>
                                                 <constraint firstItem="O4J-bt-A2j" firstAttribute="leading" secondItem="q08-WS-Dv6" secondAttribute="trailing" constant="2" id="xGb-e5-0Qy"/>
                                                 <constraint firstItem="iTK-y8-wLc" firstAttribute="leading" secondItem="O4J-bt-A2j" secondAttribute="leading" constant="16" id="xwC-6R-qbV"/>
@@ -3383,7 +3384,7 @@ yapmadınız. </string>
         </scene>
     </scenes>
     <resources>
-        <image name="81E824FB-77F8-4FEA-B156-4CB9E964834D" width="16" height="13">
+        <image name="6E2D1F90-2748-40F9-8281-081E6EB4983C" width="16" height="13">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3499,11 +3500,11 @@ AA1vA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1J2-9l-RUh"/>
         <segue reference="dFy-gq-o27"/>
-        <segue reference="m9A-iD-PME"/>
-        <segue reference="Nrd-hb-qQr"/>
+        <segue reference="1J2-9l-RUh"/>
+        <segue reference="5yt-Ho-V5F"/>
         <segue reference="8ap-PZ-oEp"/>
+        <segue reference="Nrd-hb-qQr"/>
         <segue reference="msW-QM-sXF"/>
     </inferredMetricsTieBreakers>
 </document>

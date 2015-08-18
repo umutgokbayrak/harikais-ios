@@ -276,7 +276,7 @@
 }
 - (IBAction)addPressed:(id)sender {
     if ([self lengthOfTrimmedString:searchTextField.text] < 3) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Lütfen çalışmak isteyebile-ceğiniz yerin ismini kontrol ediniz" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Lütfen çalışmak isteyebileceğiniz yerin ismini kontrol ediniz" message:nil delegate:nil cancelButtonTitle:@"Kapat" otherButtonTitles: nil];
         [alert show];
     } else {
         searchTextField.text = @"";

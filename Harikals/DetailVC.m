@@ -28,6 +28,7 @@
     __weak IBOutlet UIButton *barFriendButton;
     __weak IBOutlet UIButton *barFavouriteButton;
     
+    __weak IBOutlet UIImageView *moneyBagIcon;
     UIImage *mainImage;
 
     BOOL isFavourite;
@@ -101,8 +102,25 @@
     NSDictionary *jobInfo = data[@"job"];
     NSDictionary *companyInfo = data[@"company"];
     
-    pricingLabel.text = [NSString stringWithFormat:@"Ücret Skalası: %@%@", jobInfo[@"salaryBegin"], jobInfo[@"salaryEnd"] ? [NSString stringWithFormat:@" - %@", jobInfo[@"salaryEnd"]]  : @""];
     
+    NSString *resultSalary = @"";
+    
+    NSString *minSalary = jobInfo[@"salaryBegin"];
+    NSString *maxSalary = jobInfo[@"salaryEnd"];
+    
+    if (minSalary.integerValue == 0 && maxSalary.integerValue != 0) {
+        resultSalary = [NSString stringWithFormat:@"Ücret Skalası: %@ TL'ye kadar", maxSalary];
+    } else if (minSalary.integerValue != 0 && maxSalary.integerValue == 0) {
+        resultSalary = [NSString stringWithFormat:@"Ücret Skalası: %@ TL'den fazla", minSalary];
+    } else if (minSalary.integerValue == 0 && maxSalary.integerValue == 0) {
+        pricingLabel.text = resultSalary;
+        moneyBagIcon.hidden = YES;
+    } else {
+        pricingLabel.text = [NSString stringWithFormat:@"Ücret Skalası: %@%@", jobInfo[@"salaryBegin"], jobInfo[@"salaryEnd"] ? [NSString stringWithFormat:@" - %@", jobInfo[@"salaryEnd"]]  : @""];
+    }
+
+
+
     positionLabel.text = jobInfo[@"position"];
     companyNameLabel.text = companyInfo[@"name"];
     locationLabel.text = companyInfo[@"location"];
@@ -190,7 +208,7 @@
     [Server callFunctionInBackground:@"applyToJob" withParameters:params block:^(NSArray *receivedItems, NSError *error) {
         if (receivedItems) {
             [self setApplicationButtonDisabled];
-            [Server showFavouriteAlertWithTitle:@"İşlem Tamam" text:@"Pozisyon için başvurunuz insan kaynaklarına iletilmiştir. Başvurunuzun durumunu ana menüden erişilen Başvu- rular adımında izleyebilirsiniz."];
+            [Server showFavouriteAlertWithTitle:@"İşlem Tamam" text:@"Pozisyon için başvurunuz insan kaynaklarına iletilmiştir. Başvurunuzun durumunu ana menüden erişilen Başvurular adımından izleyebilirsiniz."];
             [self updateFlags];
         } else {
             sender.userInteractionEnabled = YES;

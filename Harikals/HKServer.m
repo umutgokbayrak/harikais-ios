@@ -130,7 +130,7 @@ static HKServer *sharedServer = nil;
 - (void)showNoInternetAlert {
     if (!justShown) {
         justShown = YES;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Connection error." message:@"You should check your internet connection" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Bağlantı hatası." message:@"Lütfen Internet bağlantınızı kontrol ediniz" delegate:nil cancelButtonTitle:@"Kapat" otherButtonTitles:nil];
         [alertView show];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             justShown = NO;
@@ -157,15 +157,15 @@ static HKServer *sharedServer = nil;
         [manager POST:finalString parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
             if (responseObject[@"result"]) {
                 if ([responseObject[@"result"] isKindOfClass:[NSDictionary class]] && responseObject[@"result"][@"result"] && [responseObject[@"result"][@"result"] isKindOfClass:[NSNumber class]]) {
-                    if ([responseObject[@"result"][@"result"] integerValue] > 0) {
+                    if ([responseObject[@"result"][@"result"] integerValue] != 0) {
                         [log log:[NSString stringWithFormat:@"Function: %@, error msg: %@", function, responseObject[@"result"][@"msg"]]];
                     }
                 }
                 
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (block) block(responseObject[@"result"], nil);
-                    });
-
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (block) block(responseObject[@"result"], nil);
+                });
+                
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             if (block) block(nil, error);

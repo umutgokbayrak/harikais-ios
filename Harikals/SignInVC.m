@@ -218,7 +218,7 @@
     }
 
     if (![passTextField.text isEqualToString:confirmPassTextField.text]) {
-        [self showAlertWithText:@"İki şifre bir- biri ile uyuşmuyor. Lütfen kontrol ediniz."];
+        [self showAlertWithText:@"İki şifre birbiri ile uyuşmuyor. Lütfen kontrol ediniz."];
         return;
     }
     
@@ -260,7 +260,7 @@
             }
         } else {
             sender.userInteractionEnabled = YES;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Güvenliğiniz için şif- reniz 6 karakterdan daha kısa olamaz" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Güvenliğiniz için şifreniz 6 karakterdan daha kısa olamaz" message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
             [alert show];
         }
     } else {

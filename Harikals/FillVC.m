@@ -151,7 +151,7 @@
 }
 
 - (void)showAlert {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Not all fields are filled!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Tüm alanları doldurunuz." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];
 }
 

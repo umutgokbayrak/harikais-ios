@@ -66,7 +66,7 @@
  
 }
 - (void)showErrorAlert:(NSString *)text {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:text delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:text delegate:nil cancelButtonTitle:@"Kapat" otherButtonTitles:nil];
     [alert show];
 }
 

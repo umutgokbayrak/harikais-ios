@@ -415,7 +415,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 }
 
 - (void)showAlertWithText:(NSString *)text {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:text delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:text delegate:nil cancelButtonTitle:@"Kapat" otherButtonTitles: nil];
     [alert show];
 }
 
@@ -601,7 +601,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 
 
 - (void)showErrorAlert:(NSString *)text {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:text delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:text delegate:nil cancelButtonTitle:@"Kapat" otherButtonTitles:nil];
     [alert show];
 }
 

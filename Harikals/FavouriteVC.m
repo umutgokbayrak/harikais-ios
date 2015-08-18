@@ -193,7 +193,7 @@
 
 
 - (void)removeFavouriteWithData:(NSDictionary *)data {
-    [Server callFunctionInBackground:@"deleteFavorite" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"favoriteId"]
+    [Server callFunctionInBackground:@"deleteFavorite" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"favoriteId" : data[@"favoriteId"]
                                                                         } block:^(NSArray *receivedItems, NSError *error) {
                                                                             if (receivedItems) {
                                                                                 //TODO:Remove NSLog

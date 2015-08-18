@@ -60,10 +60,9 @@
     if (Server.userInfoDictionary) {
         PFInstallation *currentInstallation = [PFInstallation currentInstallation];
         [currentInstallation setDeviceTokenFromData:deviceToken];
-        [currentInstallation setChannels: [NSArray arrayWithObjects:Server.userInfoDictionary[@"userId"], nil]];
+        [currentInstallation addUniqueObject:Server.userInfoDictionary[@"userId"] forKey:@"channels"];
         
         [currentInstallation saveInBackground];
-        
     }
     
 }
