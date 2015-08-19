@@ -60,9 +60,15 @@
     if (Server.userInfoDictionary) {
         PFInstallation *currentInstallation = [PFInstallation currentInstallation];
         [currentInstallation setDeviceTokenFromData:deviceToken];
-        [currentInstallation addUniqueObject:Server.userInfoDictionary[@"userId"] forKey:@"channels"];
-        
-        [currentInstallation saveInBackground];
+        [currentInstallation addUniqueObject:[NSString stringWithFormat:@"%@%@", @"CHN-", Server.userInfoDictionary[@"userId"]] forKey:@"channels"];
+//        [currentInstallation saveInBackground];
+        [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if(!error){
+                NSLog(@"subsribed user to channel");
+            } else {
+                NSLog(@"error subscribing user to channel: %@", error);
+            }
+        }];
     }
     
 }
