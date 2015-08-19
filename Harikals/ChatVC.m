@@ -306,9 +306,12 @@
     ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:direction % 2 != 0 ? @"myChatCell" : @"otherChatCell"];
     cell.messageTextView.text = messagesArray[indexPath.row][@"msg"];
     cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.size.width / 2.0;
-
     
-    NSString *fromString = direction % 2 != 0 ? @"Siz" : dataDictionary[@"company"][@"name"];
+    NSObject *companyObj = dataDictionary[@"company"];
+
+    NSString *companyName = (companyObj != nil && [companyObj isKindOfClass:[NSString class]]) ? dataDictionary[@"company"] : dataDictionary[@"company"][@"name"];
+    
+    NSString *fromString = direction % 2 != 0 ? @"Siz" : companyName;
     if ([fromString isEqualToString:@"You"]) {
         fromString = @"Siz";
     }
