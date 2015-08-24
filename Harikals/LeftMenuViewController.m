@@ -53,6 +53,8 @@
         bottomLogo.hidden = YES;
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCounters) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
 //    [self.sideMenuViewController setValue:self forKey:@"delegate"];
     
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"menuFirstShown"]) {

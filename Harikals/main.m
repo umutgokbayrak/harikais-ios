@@ -13,10 +13,6 @@
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        
-        le_init();
-        le_set_token("956a19d4-3057-44ab-9608-1245bfff6db5");
-        
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 }

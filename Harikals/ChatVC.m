@@ -68,6 +68,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadNext) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
     mainTableView.delegate = self;
     mainTableView.dataSource = self;
     spinner.hidesWhenStopped = YES;
@@ -307,8 +309,8 @@
     cell.messageTextView.text = messagesArray[indexPath.row][@"msg"];
     cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.size.width / 2.0;
 
-    
-    NSString *fromString = direction % 2 != 0 ? @"Siz" : dataDictionary[@"company"][@"name"];
+    NSString *companyName = [dataDictionary[@"company"] isKindOfClass:[NSString class]] ? dataDictionary[@"company"] : dataDictionary[@"company"][@"name"];
+    NSString *fromString = direction % 2 != 0 ? @"Siz" : companyName;
     if ([fromString isEqualToString:@"You"]) {
         fromString = @"Siz";
     }

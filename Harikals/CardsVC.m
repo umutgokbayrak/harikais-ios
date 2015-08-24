@@ -93,6 +93,8 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFlags:) name:@"updateFlags" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadJobs) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
     
     [applicationsButton addTarget:self action:@selector(openApplications) forControlEvents:UIControlEventTouchUpInside];
     counterView.hidden = YES;
