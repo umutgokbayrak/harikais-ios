@@ -8,7 +8,7 @@
 
 #import "LoginVC.h"
 #import <PFLinkedInUtils.h>
-
+#import "HKServer.h"
 
 @interface LoginVC () {
     __weak IBOutlet NSLayoutConstraint *tipVerticalSpacing;
@@ -55,6 +55,10 @@
     }];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"LoginVC";
+}
 
 - (void)animateTip {
     [self.view layoutIfNeeded];

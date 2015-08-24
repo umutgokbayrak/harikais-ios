@@ -8,6 +8,8 @@
 
 #import "FillVC.h"
 #import "UIMonthYearPicker.h"
+#import "HKServer.h"    
+
 
 @interface FillVC () <UITextFieldDelegate, UIMonthYearPickerDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
     
@@ -242,6 +244,7 @@
     [super viewWillAppear:animated];
     [self adjustForCurrent];
     [self.navigationController setNavigationBarHidden:NO];
+    self.screenName = @"FillVC";
 }
 
 -(void)viewWillDisappear:(BOOL)animated {

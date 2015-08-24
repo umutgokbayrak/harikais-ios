@@ -242,6 +242,8 @@
         [self.navigationController setNavigationBarHidden:YES animated:animated];
 //        [Server.firstNavVC setNavigationBarHidden:YES animated:YES];
 //    });
+    
+    self.screenName = @"CardsVC";
 }
 
 -(void)viewWillLayoutSubviews {
@@ -470,8 +472,7 @@
         [Server callFunctionInBackground:@"markJobAsSeen" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : self.items[self.carousel.currentItemIndex][@"id"]
        } block:^(NSArray *receivedItems, NSError *error) {
            if (receivedItems) {
-               //TODO:Remove NSLog
-               NSLog(@"%@", receivedItems);
+
            } else {
                //TODO:Remove NSLog
                NSLog(@"%@", error);

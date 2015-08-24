@@ -110,6 +110,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [mainScrollView scrollRectToVisible:CGRectMake(0, 0, pageWidth, 10) animated:NO];
+    self.screenName = @"IntroductionVC";
 }
 
 

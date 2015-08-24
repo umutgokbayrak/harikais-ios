@@ -210,6 +210,7 @@
             [self setApplicationButtonDisabled];
             [Server showFavouriteAlertWithTitle:@"İşlem Tamam" text:@"Pozisyon için başvurunuz insan kaynaklarına iletilmiştir. Başvurunuzun durumunu ana menüden erişilen Başvurular adımından izleyebilirsiniz."];
             [self updateFlags];
+            [Server sendEventNamed:@"Apply to job"];
         } else {
             sender.userInteractionEnabled = YES;
             //TODO:Remove NSLog
@@ -229,6 +230,7 @@
             if (receivedItems) {
 
                 [Server showFavouriteAlertWithTitle:@"İşlem Başarılı" text:@"Arkadaşınız bu fırsattan haberdar edildi. Desteğiniz için teşekkür ederiz"];
+                [Server sendEventNamed:@"Friend recomended"];
             } else {
                 //TODO:Remove NSLog
                 NSLog(@"%@", error);
@@ -260,23 +262,21 @@
     [barFavouriteButton setImageEdgeInsets:!isFavourite ? UIEdgeInsetsMake(-10, 0, 0, -63) : UIEdgeInsetsMake(-11, 0, 0, -53)];
     barFavouriteButton.userInteractionEnabled = NO;
     if (isFavourite) {
-        [Server callFunctionInBackground:@"addFavorite" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"id"]
-                                                                           } block:^(NSArray *receivedItems, NSError *error) {
-                                                                               if (receivedItems) {
-                                                                                   [Server showFavouriteAlertWithTitle:@"İşlem tamam" text:@"Fırsat favorileriniz arasına eklenmiştir."];
-                                                                                   
-                                                                                   [self updateFlags];
-                                                                               } else {
-                                                                                   //TODO:Remove NSLog
-                                                                                   NSLog(@"%@", error);
-                                                                               }
-                                                                               barFavouriteButton.userInteractionEnabled = YES;
+        [Server callFunctionInBackground:@"addFavorite" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"id"]                                                                           } block:^(NSArray *receivedItems, NSError *error) {
+            if (receivedItems) {
+                [Server showFavouriteAlertWithTitle:@"İşlem tamam" text:@"Fırsat favorileriniz arasına eklenmiştir."];
+                
+                [self updateFlags];
+                [Server sendEventNamed:@"Added to favorites"];
+            } else {
+                //TODO:Remove NSLog
+                NSLog(@"%@", error);
+            }
+            barFavouriteButton.userInteractionEnabled = YES;
                                                                            }];
     } else {
         [Server callFunctionInBackground:@"removeFavorite" withParameters:@{@"userId" : Server.userInfoDictionary[@"userId"], @"jobId" : data[@"id"]} block:^(NSArray *receivedItems, NSError *error) {
             if (receivedItems) {
-                //TODO:Remove NSLog
-                NSLog(@"%@", receivedItems);
                 [self updateFlags];
             } else {
                 //TODO:Remove NSLog
@@ -307,6 +307,7 @@
 }
 
 - (void)openDialog {
+    [Server sendEventNamed:@"Chat started"];
     [self performSegueWithIdentifier:@"openChat" sender:nil];
 }
 
@@ -396,6 +397,7 @@
 
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0 / 255.0 green:50.0 / 255.0 blue:84.0 / 255.0 alpha:1.0]];
+    self.screenName = @"DetailVC";
 }
 
 - (void)emailChanged:(UITextField *)textField {

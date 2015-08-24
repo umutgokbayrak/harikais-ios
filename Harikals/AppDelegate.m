@@ -13,7 +13,7 @@
 #import "ForgotVC.h"
 #import "AlertVC.h"
 #import <SplunkMint-iOS/SplunkMint-iOS.h>
-
+#import <Google/Analytics.h>
 
 
 @interface AppDelegate () {
@@ -33,6 +33,14 @@
     
     [[Mint sharedInstance] initAndStartSession:@"95271da7"];
     [Parse setApplicationId:@"7EqNvrRwIHC2CP34qAgVJTCCmmReT5gnZdZM5zYP" clientKey:@"z7OlXSHBV5KJXdkPbx9xh9XDGrcsWOkj3V0sn9xn"];
+
+
+    NSError *configureError;
+    [[GGLContext sharedInstance] configureWithError:&configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+    
+    GAI *gai = [GAI sharedInstance];
+    gai.trackUncaughtExceptions = YES;
 
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Semibold" size:17.0]}];

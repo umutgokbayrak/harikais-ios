@@ -16,6 +16,7 @@
 #import <LIALinkedInHttpClient.h>
 #import "AppDelegate.h"
 #import "AlertVC.h"
+#import <Google/Analytics.h>
 
 #define BASE_SERVER_URL @"http://test.harikais.com:8080/"
 
@@ -238,6 +239,30 @@ static HKServer *sharedServer = nil;
     }];
 }
 
-
+- (void)sendEventNamed:(NSString *)eventName {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"iOS Event"
+                                                          action:@"User Action"
+                                                           label:eventName
+                                                           value:nil] build]];
+}
 
 @end
+
+@implementation UIViewController (GAScreen)
+
+-(void)setScreenName:(NSString *)screenName {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:screenName];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+}
+
+
+- (NSString *)screenName {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    return [tracker get:kGAIScreenName];
+}
+
+@end
+
+

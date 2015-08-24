@@ -122,6 +122,11 @@
     }];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"LeftMenuViewController";
+}
+
 - (void)userAvatarPicked:(NSNotification *)notification {
     UIImage *image = notification.object;
     if (image) {

@@ -36,4 +36,14 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 - (void)getProfileIDWithAccessToken:(NSString *)accessToken block:(PFStringResultBlock)block;
 - (void)getAvaURL:(NSString *)userID token:(NSString *)accessToken block:(PFStringResultBlock)block;
 
+
+- (void)sendEventNamed:(NSString *)eventName;
 @end
+
+
+@interface UIViewController (GAScreen)
+@property (nonatomic, strong) NSString *screenName;
+
+@end
+
+

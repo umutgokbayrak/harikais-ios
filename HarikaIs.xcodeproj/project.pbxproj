@@ -13,6 +13,8 @@
 		846711FE1B5C53A00055B9FD /* LeNetworkStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 846711F61B5C53A00055B9FD /* LeNetworkStatus.m */; };
 		846711FF1B5C53A00055B9FD /* LogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 846711F81B5C53A00055B9FD /* LogFile.m */; };
 		846712001B5C53A00055B9FD /* LogFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 846711FA1B5C53A00055B9FD /* LogFiles.m */; };
+		84798B411B8B594A000EFBF7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84798B3F1B8B58F9000EFBF7 /* GoogleService-Info.plist */; };
+		84798B421B8B594B000EFBF7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84798B3F1B8B58F9000EFBF7 /* GoogleService-Info.plist */; };
 		950EF4E433AE1F1D57358545 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4A32F333D1D7CF497CE895 /* libPods.a */; };
 		951795CA1B4BC8EC00523D65 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 951795C91B4BC8EC00523D65 /* ProfileVC.m */; };
 		951795CE1B4BC91D00523D65 /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 951795CD1B4BC91D00523D65 /* ProfileCell.m */; };
@@ -108,6 +110,8 @@
 		846711F81B5C53A00055B9FD /* LogFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogFile.m; sourceTree = "<group>"; };
 		846711F91B5C53A00055B9FD /* LogFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogFiles.h; sourceTree = "<group>"; };
 		846711FA1B5C53A00055B9FD /* LogFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogFiles.m; sourceTree = "<group>"; };
+		84798B3C1B8B4EAE000EFBF7 /* Release -GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Release -GoogleService-Info.plist"; sourceTree = "<group>"; };
+		84798B3F1B8B58F9000EFBF7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		951795C81B4BC8EC00523D65 /* ProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileVC.h; sourceTree = "<group>"; };
 		951795C91B4BC8EC00523D65 /* ProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileVC.m; sourceTree = "<group>"; };
 		951795CC1B4BC91D00523D65 /* ProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileCell.h; sourceTree = "<group>"; };
@@ -385,6 +389,8 @@
 		957B63901B247840003AA201 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				84798B3F1B8B58F9000EFBF7 /* GoogleService-Info.plist */,
+				84798B3C1B8B4EAE000EFBF7 /* Release -GoogleService-Info.plist */,
 				957B63911B247840003AA201 /* Info.plist */,
 				957B63921B247840003AA201 /* main.m */,
 				95AAB2AF1B4D797E0092CA62 /* InfoPlist.strings */,
@@ -660,6 +666,7 @@
 				95B77BAB1B25AB780081E694 /* OpenSans-LightItalic.ttf in Resources */,
 				95AF15311B5BDF7C003B75CC /* AlertVCView.xib in Resources */,
 				957B63A11B247840003AA201 /* LaunchScreen.xib in Resources */,
+				84798B411B8B594A000EFBF7 /* GoogleService-Info.plist in Resources */,
 				95B77BA91B25AB780081E694 /* OpenSans-Italic.ttf in Resources */,
 				95B77BA51B25AB780081E694 /* OpenSans-CondLight.ttf in Resources */,
 				95B77BA71B25AB780081E694 /* OpenSans-ExtraBold.ttf in Resources */,
@@ -679,6 +686,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84798B421B8B594B000EFBF7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

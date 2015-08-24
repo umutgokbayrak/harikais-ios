@@ -269,7 +269,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
     }
 
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
+    self.screenName = @"ProfileVC";
 }
 
 - (void)hideLIButton {
@@ -358,6 +358,8 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 }
 
 - (void)processLIData:(NSDictionary *)responceDict {
+    [Server sendEventNamed:@"Imported from LinkedIn"];
+    
     firstTextField.text = [NSString stringWithFormat:@"%@ %@", responceDict[@"firstName"], responceDict[@"lastName"]];
     thirdTextField.text = responceDict[@"headline"];
     
@@ -464,6 +466,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 }
 
 - (void)closeWithoutSaving {
+    [Server sendEventNamed:@"Canceling the profile screen"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -527,6 +530,7 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 }
 
 - (IBAction)save:(id)sender {
+    [Server sendEventNamed:@"Profile save clicked"];
     NSString *cuttedName = [firstTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     if (!firstTextField.text.length || cuttedName.length < 3) {[self showErrorAlert:@"Lütfen adınız ve soyadınızı bizimle paylaşır mısınız?"] ;return;}
