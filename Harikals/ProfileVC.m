@@ -320,7 +320,6 @@ typedef void (^PFStringResultBlock)(NSString * string, NSError * error);
 }
 
 - (void)refreshTOkens {
-//    [((AppDelegate *)[UIApplication sharedApplication].delegate).window makeKeyWindow];
     [Server.linkedInHttpClient setValue:self.navigationController forKey:@"presentingViewController"];
     
     [(LIALinkedInHttpClient *)Server.linkedInHttpClient getAuthorizationCode:^(NSString *authorizationCode) {

@@ -23,12 +23,15 @@
     
     __weak IBOutlet UILabel *emptylabel;
     __weak IBOutlet UIButton *firstalaButton;
-    
+    NSMutableDictionary *photoDictionary;
+
     UIActivityIndicatorView *spinner;
     
     __weak IBOutlet UIImageView *downloadIconImageView;
     
     __weak IBOutlet UILabel *emptyDescriptionLabel;
+    __weak DetailVC *presentedDetail;
+    
     
 }
 
@@ -39,7 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     dataArray = [NSMutableArray array];
-
+    photoDictionary = [NSMutableDictionary dictionary];
     mainTableView.separatorColor = [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0];
     
     footer = [mainTableView dequeueReusableCellWithIdentifier:@"footer"];
@@ -166,7 +169,7 @@
     } else {
         [cell configureFavourite:dataArray[indexPath.row]];
     }
-    
+    cell.delegate = (id<FavCellDelegate>)self;
     return cell;
 }
 
@@ -248,10 +251,17 @@
         chatVC.dataDictionary = sender;
     } else if ([segue.identifier isEqualToString:@"detail"]) {
         DetailVC *detailVC = ((UINavigationController *)segue.destinationViewController).viewControllers[0];
-//        presentedDetail = detailVC;
-//        [presentedDetail updateImage:photoDictionary[sender[@"id"]]];
+        presentedDetail = detailVC;
+        [detailVC updateImage:photoDictionary[sender[@"id"]]];
         [detailVC setData:sender];
     }
+}
+
+- (void)updateImage:(UIImage *)image forJobId:(NSString *)jobId {
+    if (image) {
+        photoDictionary[jobId] = image;
+    }
+    [presentedDetail updateImage:photoDictionary[jobId]];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

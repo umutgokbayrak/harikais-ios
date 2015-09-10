@@ -73,6 +73,9 @@
         if ([dataDict isEqual:favouriteObject]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 avatarImageView.image = image;
+                if ([self.delegate respondsToSelector:@selector(updateImage:forJobId:)]) {
+                    [self.delegate updateImage:image forJobId:favouriteObject[@"jobId"]];
+                }
             });
         }
     }];
